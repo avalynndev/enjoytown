@@ -37,8 +37,8 @@ const Genre = ({ params }: any) => {
       <Suspense>
         {isLoading ? (
           <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {Array.from({ length: 10 }, () => (
-              <Card className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
+            {Array.from({ length: 10 }, (_, index) => (
+              <Card key={index} className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
                 <CardHeader>
                   <CardTitle className="text-xs h-6">
                     <Skeleton className="rounded-md text-tiny text-center h-4" />
