@@ -13,7 +13,6 @@ const Genre = () => {
     try {
       const genre = await axios.get(url.genre + "/" + "list");
       setGenres(genre.data);
-      console.log(genre);
     } catch (error) {
       console.error("Error fetching details:", error);
     } finally {

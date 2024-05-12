@@ -1,24 +1,21 @@
-import Link from "next/link";
-import RecentDramas from '@/components/kdrama/card/recent'
-import PopularDramas from "@/components/kdrama/card/popular";
-import { siteConfig } from "@/config/site";
-import { buttonVariants } from "@/components/ui/button";
+import PopularMovies from "@/components/movie/card/popular";
+import TrendingMovies from "@/components/movie/card/trending";
 
-export default function IndexPage() {
+export default async function Home() {
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex justify-center mb-4 mt-8">
         <h1 className="text-3xl font-mono leading-tight tracking-tighter md:text-4xl">
-          POPULAR DRAMAS
+          POPULAR MOVIES
         </h1>
       </div>
-      <PopularDramas />
+      <PopularMovies />
       <div className="flex justify-center mb-4 mt-8">
         <h1 className="text-3xl font-mono leading-tight tracking-tighter md:text-4xl">
-          RECENT DRAMAS
+          TRENDING MOVIES
         </h1>
       </div>
-      <RecentDramas />
+      <TrendingMovies />
     </section>
   );
 }

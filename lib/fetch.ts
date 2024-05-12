@@ -1,5 +1,20 @@
 "use server";
 
+import { getInfoURL } from "@/config/url";
+
+export const FetchMovieInfo = async (data: any) => {
+  try {
+    const fetchPromises = data.results.map(async (element: any) => {
+      const link = `${getInfoURL(element.id)}`;
+      await fetch(link, { next: { revalidate: 21600 } });
+    });
+
+    await Promise.all(fetchPromises);
+  } catch (error) {
+    console.error("Error occurred while pre-fetching video links:", error);
+  }
+};
+
 export async function getDramaInfo(id: any) {
   const res = await fetch(
     `https://consumet-jade.vercel.app/movies/dramacool/info?id=${id}`,

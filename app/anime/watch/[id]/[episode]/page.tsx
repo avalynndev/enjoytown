@@ -27,7 +27,6 @@ import { EpisodeDetails, WatchDataSources, WatchData } from "@/types";
 
 const Watch = ({ params }: any) => {
   const { id, episode } = params;
-  console.log(id + episode);
   const [isLoading, setIsLoading] = useState(true);
   const [watchData, setWatchData] = useState<WatchData | null>(null);
   const [episodeDetails, setEpisodeDetails] = useState<EpisodeDetails | null>(
