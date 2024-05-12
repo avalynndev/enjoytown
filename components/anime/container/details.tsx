@@ -44,7 +44,6 @@ const DetailsContainer = ({ data }: any) => {
                 >
                   <Button
                     size="sm"
-                    className="text-white"
                   >
                     {genre.trim()}
                   </Button>

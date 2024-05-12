@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/anime/anime-nav";
+import { NextUIProvider } from "@nextui-org/react";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,9 @@ export default function RootLayout({
   return (
     <div className="relative flex min-h-screen flex-col">
       <SiteHeader />
-      <div className="flex-1">{children}</div>
+      <NextUIProvider>
+        <div className="flex-1">{children}</div>
+      </NextUIProvider>
     </div>
   );
 }
