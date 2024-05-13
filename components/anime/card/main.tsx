@@ -20,11 +20,12 @@ export default function AnimeCard({ anime }: any) {
         </CardHeader>
         <CardContent className="overflow-visible py-2 h-[230px]">
           <Image
-            alt="Card background"
             className="object-cover rounded-xl w-auto object-cover transition-all aspect-[3/4] rounded-md"
             src={anime.image}
             width={160}
             height={160}
+            className="h-2/4 w-full object-cover transition-all aspect-[3/4] rounded-md"
+            alt="Anime Poster"
           />
         </CardContent>
       </Card>
