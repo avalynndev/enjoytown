@@ -58,7 +58,7 @@ export default function Home() {
 
         <div className="lg:pt-56 md:pt-16 pt-14 grid text-center sm:pt-16 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
           <button
-            onClick={() => router.push("/anime")}
+            onClick={() => router.push("/movie")}
             className="text-left group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
             rel="noopener noreferrer"
           >
