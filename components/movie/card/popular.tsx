@@ -15,7 +15,7 @@ export default async function Popular() {
           {data &&
             data.results.slice(0, 18).map((item: any, index: any) => (
               <Link
-                href={`/movie/info/${encodeURIComponent(item.id)}`}
+                href={`/movie/${encodeURIComponent(item.id)}`}
                 key={index}
               >
                 <Card className="text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">

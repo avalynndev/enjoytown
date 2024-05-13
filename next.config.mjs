@@ -36,6 +36,12 @@ const nextConfig = {
 				hostname: "image.tmdb.org",
 			},
 		],
-	},};
+	},
+	experimental: {
+		serverActions: {
+			allowedOrigins: ["localhost:3000"],
+	},
+	},
+};
 
 export default nextConfig;
