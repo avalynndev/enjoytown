@@ -18,9 +18,9 @@ export default function AnimeCard({ anime }: any) {
         <CardHeader>
           <CardTitle className="text-xs h-6">{truncatedTitle}</CardTitle>
         </CardHeader>
-        <CardContent className="overflow-visible py-2 h-[230px]">
+        <CardContent>
           <Image
-            className="h-2/4 w-full object-cover transition-all aspect-[3/4] rounded-md"
+            className="object-cover rounded-xl w-auto object-cover transition-all aspect-[3/4] rounded-md"
             src={anime.image}
             width={160}
             height={160}
