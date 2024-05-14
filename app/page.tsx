@@ -1,7 +1,4 @@
 "use client";
-import { siteConfig } from "@/config/site";
-import { buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
 import Image from "next/image";
 import { SiteHeader } from "@/components/navbar/site-header";
 import { useRouter } from "next/navigation";
