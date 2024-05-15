@@ -17,7 +17,7 @@ const AnimeHistoryItem = ({ animeHistory }: any) => {
     <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
       {animeHistory.map((item: any, index: any) => (
         <div key={index}>
-          <Link shallow href={`/anime/watch/${item.id}/${item.episode_number}`}>
+          <Link shallow href={`/anime/watch/${item.id}/${item.episode_number.toString().replace(/\./g, "-")}`}>
             <Card className="text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
               <span className="absolute top-3 right-4 px-2 py-1 bg-black text-foreground-400 rounded-xl text-xs">
                 EP: {item.episode_number}
