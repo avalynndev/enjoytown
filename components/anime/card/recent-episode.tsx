@@ -13,7 +13,7 @@ export default function AnimeCard({ anime }: any) {
   const truncatedTitle =
     anime.title.length > 24 ? anime.title.slice(0, 20) + "..." : anime.title;
   return (
-    <Link shallow href={`/anime/watch/${anime.id}/${anime.episodeNumber}`}>
+    <Link shallow href={`/anime/watch/${anime.id}/${anime.episodeNumber.toString() .replace(/\./g, "-")}`}>
       <Card className="text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
         <span className="absolute top-3 right-4 px-2 py-1 bg-background text-foreground-400 rounded-xl text-xs">
           EP: {anime.episodeNumber}
