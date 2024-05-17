@@ -20,7 +20,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="lg:pt-16 md:pt-16 pt-16 grid text-center sm:pt-16 lg:w-full lg:max-w-7xl lg:grid-cols-4 lg:text-left lg:gap-8">
+        <div className="lg:pt-16 md:pt-16 pt-16 grid text-center sm:pt-16">
           <button
             onClick={() => router.push("/movie")}
             className="text-left group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
