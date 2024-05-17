@@ -19,31 +19,30 @@ export const mobileConfig: MobileConfig = {
       title: "Manga",
       href: "/manga",
     },
-  ],
-  sidebarNav: [
     {
       title: "K-drama",
       href: "/kdrama",
-      items: [
-        {
-          title: "Search",
-          href: "/kdrama/search",
-          items: [],
-        },
-      ],
     },
-    
     {
       title: "Movie",
       href: "/movie",
+    },
+  ],
+  sidebarNav: [
+    {
+      title: "Search",
       items: [
         {
-          title: "Search",
+          title: "K-Drama Search",
+          href: "/kdrama/search",
+          items: [],
+        },
+        {
+          title: "Movie Search",
           href: "/movie/search",
           items: [],
         },
       ],
     },
-    
   ],
 };
