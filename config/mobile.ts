@@ -11,44 +11,37 @@ export const mobileConfig: MobileConfig = {
       title: "Home",
       href: "/",
     },
-    {
-      title: "Movie",
-      href: "/movie",
-    },
-    {
-      title: "Anime",
-      href: "/anime",
-    },
-    {
-      title: "Manga",
-      href: "/manga",
-    },
   ],
   sidebarNav: [
     {
       title: "K-drama",
+      href: "/kdrama",
       items: [
         {
           title: "Search",
           href: "/kdrama/search",
           items: [],
         },
+      ],
+    },
+    {
+      title: "Anime",
+      href: "/anime",
+    },
+    {
+      title: "Movie",
+      href: "/movie",
+      items: [
         {
-          title: "Installation",
-          href: "/docs/installation",
-          items: [],
-        },
-        {
-          title: "components.json",
-          href: "/docs/components-json",
-          items: [],
-        },
-        {
-          title: "Theming",
-          href: "/docs/theming",
+          title: "Search",
+          href: "/movie/search",
           items: [],
         },
       ],
+    },
+    {
+      title: "Manga",
+      href: "/manga",
     },
   ],
 };
