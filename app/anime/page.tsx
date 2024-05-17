@@ -29,7 +29,7 @@ const AnimeHistoryItem = ({ animeHistory }: any) => {
                     : item.title}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="overflow-visible py-2 h-[230px]">
+              <CardContent>
                 <Image
                   alt="Card background"
                   className="object-cover rounded-xl w-auto object-cover transition-all aspect-[3/4] rounded-md"
