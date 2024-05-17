@@ -11,6 +11,14 @@ export const mobileConfig: MobileConfig = {
       title: "Home",
       href: "/",
     },
+    {
+      title: "Anime",
+      href: "/anime",
+    },
+    {
+      title: "Manga",
+      href: "/manga",
+    },
   ],
   sidebarNav: [
     {
@@ -24,10 +32,7 @@ export const mobileConfig: MobileConfig = {
         },
       ],
     },
-    {
-      title: "Anime",
-      href: "/anime",
-    },
+    
     {
       title: "Movie",
       href: "/movie",
@@ -39,9 +44,6 @@ export const mobileConfig: MobileConfig = {
         },
       ],
     },
-    {
-      title: "Manga",
-      href: "/manga",
-    },
+    
   ],
 };
