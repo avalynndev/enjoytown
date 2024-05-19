@@ -22,7 +22,7 @@ export default function Search() {
   return (
     <main className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex w-full max-w-sm items-center space-x-2">
-        <FaSearch color="white" size={17} />
+        <FaSearch color="current" size={17} />
         <input
           placeholder="Search for movies"
           className={cn(
