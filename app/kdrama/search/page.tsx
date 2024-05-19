@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-
+import { FaSearch } from "react-icons/fa";
 import {
   Card,
   CardContent,
@@ -31,6 +31,7 @@ export default function DramaSearch() {
   return (
     <div className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex w-full max-w-sm items-center space-x-2">
+        <FaSearch color="current" size={17} />
         <input
           placeholder="Search for drama"
           className={cn(
