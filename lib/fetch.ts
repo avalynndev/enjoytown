@@ -1,5 +1,5 @@
 "use server";
-
+import { env } from "@/env.mjs";
 import { getInfoURL } from "@/config/url";
 
 export const FetchMovieInfo = async (data: any) => {
@@ -14,6 +14,14 @@ export const FetchMovieInfo = async (data: any) => {
     console.error("Error occurred while pre-fetching video links:", error);
   }
 };
+export async function getDramaDownload(episode: any) {
+  const res = await fetch(
+    `${env.DOWNLOAD_API_URL}/episode/${episode}`,
+    { next: { revalidate: 21600 } }
+  );
+  const data = await res.json();
+  return data;
+}
 
 export async function getDramaInfo(id: any) {
   const res = await fetch(

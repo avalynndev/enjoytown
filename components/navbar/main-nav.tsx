@@ -24,11 +24,8 @@ export function MainNav() {
           href="/"
           className={cn(
             "transition-colors hover:text-foreground/80 text-foreground/60",
-            pathname == "/"
-              ? "text-foreground"
-              : "text-foreground/60"
-          )
-          }
+            pathname == "/" ? "text-foreground" : "text-foreground/60"
+          )}
         >
           Home
         </Link>
@@ -64,6 +61,17 @@ export function MainNav() {
           )}
         >
           Kdrama
+        </Link>
+        <Link
+          href="/tv"
+          className={cn(
+            "transition-colors hover:text-foreground/80",
+            pathname?.startsWith("/tv")
+              ? "text-foreground"
+              : "text-foreground/60"
+          )}
+        >
+          TV
         </Link>
         <Link
           href="/manga"

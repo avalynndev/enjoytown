@@ -27,6 +27,10 @@ export const mobileConfig: MobileConfig = {
       title: "Movie",
       href: "/movie",
     },
+    {
+      title: "TV",
+      href: "/tv",
+    },
   ],
   sidebarNav: [
     {

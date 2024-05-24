@@ -21,6 +21,10 @@ export const siteConfig = {
       title: "Manga",
       href: "/manga",
     },
+    {
+      title: "TV",
+      href: "/tv",
+    },
   ],
   links: {
     twitter: "https://twitter.com/avalynndev",
