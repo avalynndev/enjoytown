@@ -11,10 +11,7 @@ export const env = createEnv({
   },
   server: {
     DOWNLOAD_API_URL: z.string().url(),
-    API_KEY: z.string().url(),
-  },
-  client: {
-    NEXT_PUBLIC_APP_URL: z.string().url(),
+    API_KEY: z.string(),
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
