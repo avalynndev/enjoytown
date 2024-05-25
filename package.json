@@ -23,7 +23,7 @@
     "@t3-oss/env-nextjs": "^0.10.1",
     "@vercel/analytics": "^1.2.2",
     "@vidstack/react": "^1.11.21",
-    "axios": "^1.6.8",
+    "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.378.0",
