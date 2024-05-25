@@ -10,7 +10,7 @@ export default function VideoPlayer({ id }:any) {
             <TabsTrigger value="vidsrc">VidSrc</TabsTrigger>
             <TabsTrigger value="vidsrcpro">Vid.Pro</TabsTrigger>
             <TabsTrigger value="vidsrcin">Vid.In</TabsTrigger>
-            <TabsTrigger value="blackvid">BlackVid</TabsTrigger>
+            <TabsTrigger value="superembed">SuperEmbed</TabsTrigger>
           </TabsList>
         </div>
         <TabsContent value="vidsrc">
@@ -47,9 +47,9 @@ export default function VideoPlayer({ id }:any) {
             className="max-w-3xl mx-auto px-4 pt-10"
           ></iframe>
         </TabsContent>
-        <TabsContent value="blackvid">
+        <TabsContent value="superembed">
           <iframe
-            src={`https://blackvid.space/embed/movie/${id}`}
+            src={`https://multiembed.mov/?video_id=${id}&tmdb=1`}
             referrerPolicy="origin"
             allowFullScreen
             width="100%"

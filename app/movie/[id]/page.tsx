@@ -1,16 +1,24 @@
 import { getInfoURL } from "@/config/url";
 import DetailsContainer from "@/components/movie/containers/details";
 import VideoPlayer from "@/components/movie/containers/videoplayer";
+import { Button } from "@/components/ui/button";
+import Link from 'next/link'
 
 export default async function Info({ params }:any) {
   const id = params.id;
   const data = await get_movie_info(id);
 
   return (
-    <main
-    >
-      <DetailsContainer data={data}/>
-      <VideoPlayer id={id}/>
+    <main>
+      <DetailsContainer data={data} />
+      <div className="pb-4">
+        <div className="flex flex-col text-center items-center justify-center">
+          <Link href={`https://dl.vidsrc.vip/movie/${id}`}>
+            <Button>Download Movie</Button>
+          </Link>
+        </div>
+      </div>
+      <VideoPlayer id={id} />
     </main>
   );
 }
