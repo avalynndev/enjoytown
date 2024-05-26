@@ -1,5 +1,4 @@
 "use server";
-import { env } from "@/env.mjs";
 import { getInfoURL } from "@/config/url";
 
 export const FetchMovieInfo = async (data: any) => {
