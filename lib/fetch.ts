@@ -16,7 +16,7 @@ export const FetchMovieInfo = async (data: any) => {
 };
 export async function getDramaDownload(episode: any) {
   const res = await fetch(
-    `${env.DOWNLOAD_API_URL}/episode/${episode}`,
+    `${process.env.DOWNLOAD_API_URL}/episode/${episode}`,
     { next: { revalidate: 21600 } }
   );
   const data = await res.json();
