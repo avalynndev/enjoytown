@@ -5,13 +5,13 @@ import { z } from "zod";
 export const env = createEnv({
   extends: [vercel()],
   shared: {
+    DOWNLOAD_API_URL: z.string().url(),
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),
   },
   server: {
-    DOWNLOAD_API_URL: z.string().url(),
-    API_KEY: z.string(),
+    TMDB_API_KEY: z.string(),
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
