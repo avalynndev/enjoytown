@@ -65,6 +65,10 @@ npm install
 ```
 
 ### Go to the 'config` folder and edit the values as per your requirement or leave them as it is
+Add a ENV FILE with:
+```env
+DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
+```
 
 ### 3. Run on development &/or production
 
