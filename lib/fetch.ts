@@ -1,4 +1,5 @@
 "use server";
+import { env } from "@/env.mjs";
 import { getInfoURL } from "@/config/url";
 
 export const FetchMovieInfo = async (data: any) => {
@@ -15,7 +16,7 @@ export const FetchMovieInfo = async (data: any) => {
 };
 export async function getDramaDownload(episode: any) {
   const res = await fetch(
-    `${process.env.DOWNLOAD_API_URL}/episode/${episode}`,
+    `${env.DOWNLOAD_API_URL}/episode/${episode}`,
     { next: { revalidate: 21600 } }
   );
   const data = await res.json();
