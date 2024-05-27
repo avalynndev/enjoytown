@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.4.0",
+    "@hookform/resolvers": "^3.4.2",
     "@nextui-org/react": "^2.3.6",
     "@nextui-org/theme": "^2.2.3",
     "@radix-ui/react-dialog": "^1.0.5",
