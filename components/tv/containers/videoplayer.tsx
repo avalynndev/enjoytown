@@ -39,6 +39,7 @@ export default function VideoPlayer({ id }: any) {
         <div className="flex flex-col items-center">
           <TabsList>
             <TabsTrigger value="vidsrc">VidSrc</TabsTrigger>
+            <TabsTrigger value="vidsrcvip">VidSrc.Vip</TabsTrigger>
             <TabsTrigger value="vidsrcpro">Vid.Pro</TabsTrigger>
             <TabsTrigger value="vidsrcin">Vid.In</TabsTrigger>
             <TabsTrigger value="superembed">SuberEmbed</TabsTrigger>
@@ -55,7 +56,17 @@ export default function VideoPlayer({ id }: any) {
             className="max-w-3xl mx-auto px-4 pt-10"
           ></iframe>
         </TabsContent>
-
+        <TabsContent value="vidsrcvip">
+          <iframe
+            src={`https://vidsrc.vip/embed/tv/${id}/${season}/${episode}`}
+            referrerPolicy="origin"
+            allowFullScreen
+            width="100%"
+            height="450"
+            scrolling="no"
+            className="max-w-3xl mx-auto px-4 pt-10"
+          ></iframe>
+        </TabsContent>
         <TabsContent value="vidsrcpro">
           <iframe
             src={`https://vidsrc.pro/embed/tv/${id}/${season}/${episode}`}
