@@ -32,7 +32,6 @@ export default async function MangaInfo({ params }: any) {
   return (
     <div>
       {data && (
-        <>
           <div className="py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto lg:flex">
               <div className="pb-10 pr-5">
@@ -65,7 +64,7 @@ export default async function MangaInfo({ params }: any) {
                   <div className="mt-2 gap-2 flex">
                     {data.genres &&
                       data.genres.map((item: any, index: any) => (
-                        <Button size="sm">{item}</Button>
+                        <Button size="sm" key={index}>{item}</Button>
                       ))}
                   </div>
                 </div>
@@ -133,7 +132,6 @@ export default async function MangaInfo({ params }: any) {
               </div>
             </div>
           </div>
-        </>
       )}
     </div>
   );
