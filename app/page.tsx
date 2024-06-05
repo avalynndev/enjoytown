@@ -109,7 +109,7 @@ export default function Home() {
                   ({ title, description, href }, index) => (
                     <Link
                       href={`${href}`}
-                      className="pointer-events-none flex flex-col bg-muted/25 justify-between gap-6 rounded-lg border p-6 transition-all hover:-mt-2 hover:mb-2"
+                      className="flex flex-col justify-between gap-6 rounded-lg border p-6 transition-all hover:-mt-2 hover:mb-2"
                       key={index}
                     >
                       <div className="grid gap-4">
