@@ -1,113 +1,134 @@
 "use client";
 import Image from "next/image";
+import { Pattern } from "@/components/pattern";
 import { SiteHeader } from "@/components/navbar/site-header";
 import { useRouter } from "next/navigation";
+// Layout
+import * as Craft from "@/components/craft";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+// Icons
+import { Coins, ArrowRight } from "lucide-react";
+import { Icons } from "@/components/icons";
+
+type FeatureText = {
+  title: string;
+  description: string;
+  href?: string;
+};
+
+const featureText: FeatureText[] = [
+  {
+    title: "Movie",
+    href: "/movie",
+    description: "Explore Movie Marvels: Spectacles Await You!",
+  },
+  {
+    title: "Anime",
+    href: "/anime",
+    description: "Dive into Anime Worlds: Adventures Await!",
+  },
+  {
+    title: "K-drama",
+    href: "/kdrama",
+    description: "Indulge in K Drama: Emotions Await!",
+  },
+  {
+    title: "Tv Shows",
+    href: "/tv",
+    description:
+      "Live on TV Shows: Addiction await ≥",
+  },
+];
+const singleFeatureText: FeatureText[] = [
+  {
+    title: "Manga",
+    href: "/manga",
+    description: "Unleash Manga Magic: Stories Await!",
+  },
+];
 
 export default function Home() {
   const router = useRouter();
   return (
     <>
+      <Pattern variant="checkered" />
       <SiteHeader />
-      <main className="flex flex-col items-center justify-between pt-8">
-        <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-          <Image
-            className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-            src="/safari-pinned-tab.svg"
-            alt="Logo"
-            width={180}
-            height={37}
-            priority
-          />
-        </div>
-
-        <div className="lg:pt-16 md:pt-16 pt-16 grid text-center sm:pt-16">
-          <button
-            onClick={() => router.push("/movie")}
-            className="text-left group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            rel="noopener noreferrer"
-          >
-            <h2 className="mb-3 text-2xl font-semibold">
-              Movie{" "}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              Explore Movie Marvels: Spectacles Await You!
+      <div className="mx-auto max-w-4xl p-4">
+        <section className="flex h-[75vh] items-center md:h-[50vh]">
+          <div className="mx-auto flex w-4/5 flex-col items-center justify-center space-y-4 text-center">
+            <h1 className="text-6xl font-bold">
+              Explore movies, tv series, and animes!
+            </h1>
+            <p className="text-sm leading-6 text-muted-foreground">
+              Enjoytown is a streaming platform for lazy people who like to
+              <br />
+              watch millions of movies, series and animes for free.
             </p>
-          </button>
-
-          <button
-            onClick={() => router.push("/anime")}
-            className="text-left group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            rel="noopener noreferrer"
-          >
-            <h2 className="mb-3 text-2xl font-semibold">
-              Anime{" "}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              Dive into Anime Worlds: Adventures Await!
-            </p>
-          </button>
-
-          <button
-            onClick={() => router.push("/kdrama")}
-            className="text-left group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            rel="noopener noreferrer"
-          >
-            <h2 className="mb-3 text-2xl font-semibold">
-              K-Drama{" "}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              Indulge in K Drama:
-            </p>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              Emotions Await!
-            </p>
-          </button>
-          
-          <button
-            onClick={() => router.push("/tv")}
-            className="text-left group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            rel="noopener noreferrer"
-          >
-            <h2 className="mb-3 text-2xl font-semibold">
-              TV shows{" "}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              Live on TV Shows:
-            </p>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              Addiction await ≥
-            </p>
-          </button>
-
-          <button
-            onClick={() => router.push("/manga")}
-            className="text-left group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            rel="noopener noreferrer"
-          >
-            <h2 className="mb-3 text-2xl font-semibold">
-              Manga{" "}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
-            <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-              Unleash Manga Magic: Stories Await!
-            </p>
-          </button>
-        </div>
-      </main>
+            <div className="flex gap-2">
+              <Link href={`/a`}>
+                <Button variant="default" disabled>
+                  Explore
+                </Button>
+              </Link>
+              <Link href={`/a`}>
+                <Button variant="outline" disabled>
+                  Create Account
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section className="space-y-8">
+        <Craft.Section className="">
+          <Craft.Container className="">
+            <div className="flex flex-col gap-6">
+              <div className=" grid gap-6 md:grid-cols-2">
+                {featureText.map(({ title, description, href }, index) => (
+                  <Link
+                    href={`${href}`}
+                    className="flex flex-col justify-between gap-6 rounded-lg border p-6 transition-all hover:-mt-2 hover:mb-2"
+                    key={index}
+                  >
+                    <div className="grid gap-4">
+                      <h4 className="text-primary text-xl">
+                        {title}{" "}
+                        <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                          -&gt;
+                        </span>
+                      </h4>
+                      <p className="text-base opacity-75">{description}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <div>
+                {singleFeatureText.map(
+                  ({ title, description, href }, index) => (
+                    <Link
+                      href={`${href}`}
+                      className="pointer-events-none flex flex-col bg-muted/25 justify-between gap-6 rounded-lg border p-6 transition-all hover:-mt-2 hover:mb-2"
+                      key={index}
+                    >
+                      <div className="grid gap-4">
+                        <h4 className="text-primary text-xl">
+                          {title}{" "}
+                          <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                            -&gt;
+                          </span>
+                        </h4>
+                        <p className="text-base opacity-75">{description}</p>
+                      </div>
+                    </Link>
+                  )
+                )}
+              </div>
+            </div>
+          </Craft.Container>
+        </Craft.Section>
+      </section>
     </>
   );
 }
