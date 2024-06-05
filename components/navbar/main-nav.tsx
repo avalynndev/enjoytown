@@ -10,6 +10,7 @@ import {
   Play,
   Sparkles,
   Star,
+  Book,
   Tv,
 } from "lucide-react";
 import * as React from "react";
@@ -38,35 +39,51 @@ export function MainNav() {
             <NavigationMenuItem>
               <Link href="/" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Icons.home className="h-4 w-4" />
+                  <Home className="h-4 w-4" />
                   <div className="px-2"> Home </div>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <Link href="/movie" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                <Clapperboard className="h-4 w-4" />
-                <div className="px-2"> Movie </div>
-              </NavigationMenuLink>
-            </Link>
-            <Link href="/anime" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                <JapaneseYen className="h-4 w-4" />
-                <div className="px-2"> Anime </div>
-              </NavigationMenuLink>
-            </Link>
-            <Link href="/tv" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                <Tv className="h-4 w-4" />
-                <div className="px-2"> Tv Shows </div>
-              </NavigationMenuLink>
-            </Link>
-            <Link href="/kdrama" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                <Sparkles className="h-4 w-4" />
-                <div className="px-2"> K-Drama </div>
-              </NavigationMenuLink>
-            </Link>
+            <NavigationMenuItem>
+              <Link href="/movie" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Clapperboard className="h-4 w-4" />
+                  <div className="px-2"> Movie </div>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/anime" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <JapaneseYen className="h-4 w-4" />
+                  <div className="px-2"> Anime </div>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/tv" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Tv className="h-4 w-4" />
+                  <div className="px-2"> Tv Shows </div>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/kdrama" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Sparkles className="h-4 w-4" />
+                  <div className="px-2"> K-Drama </div>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/manga" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Book className="h-4 w-4" />
+                  <div className="px-2"> Manga </div>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
             {/** 
             <NavigationMenuItem>
               <NavigationMenuTrigger>Movie</NavigationMenuTrigger>
@@ -212,13 +229,6 @@ export function MainNav() {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>*/}
-            <NavigationMenuItem className="pointer-events-none">
-              <Link href="/manga" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Manga
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </nav>

@@ -7,7 +7,6 @@ import {
   PawPrint,
   CircleCheckBig,
   type Icon as LucideIcon,
-  Home,
 } from "lucide-react";
 
 export type Icon = typeof LucideIcon;
@@ -19,7 +18,6 @@ export const Icons = {
   search: Search,
   paw: PawPrint,
   check: CircleCheckBig,
-  home: Home,
   blank: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

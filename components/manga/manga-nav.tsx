@@ -6,8 +6,8 @@ import { Icons } from "@/components/icons";
 import { MainNav } from "@/components/navbar/main-nav";
 import { MobileNav } from "@/components/navbar/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
+import SearchBar from "@/components/manga/search";
 
 export function SiteHeader() {
   return (
@@ -16,20 +16,7 @@ export function SiteHeader() {
         <MainNav />
         <MobileNav />
         <div className="flex w-full items-center justify-end space-x-10">
-          <Link href={"/manga/search"}>
-            <Button
-              variant="outline"
-              className={cn(
-                "relative h-8 w-full justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64"
-              )}
-            >
-              <span className="hidden lg:inline-flex">Search for manga...</span>
-              <span className="inline-flex lg:hidden">Search</span>
-              <div className="pointer-events-none absolute right-[0.3rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-                <Icons.search className="h-6 w-5" />
-              </div>
-            </Button>
-          </Link>
+          <SearchBar/>
         </div>
         <div className="flex flex-1 items-center space-x-2 justify-end">
           <nav className="flex items-center">
