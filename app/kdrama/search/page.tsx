@@ -1,12 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { FaSearch } from "react-icons/fa";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { Icons } from "@/components/icons";
 import { FetchSearchTitle } from "@/lib/fetch";
@@ -68,8 +63,11 @@ export default function DramaSearch() {
       <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {infoTitle != null &&
           infoTitle.map((item, index) => (
-            <Link href={`/kdrama/info/${encodeURIComponent(item.id)}`} key={index}>
-              <Card className="text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
+            <Link
+              href={`/kdrama/info/${encodeURIComponent(item.id)}`}
+              key={index}
+            >
+              <Card className="text-center items-center hover:scale-105 transition-all duration-300">
                 <CardHeader>
                   <CardTitle className="text-xs">
                     {item.title.length > 24

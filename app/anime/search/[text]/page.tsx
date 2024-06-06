@@ -36,7 +36,7 @@ const Search = ({ params }: any) => {
                 {Array.from({ length: 12 }, (_, index) => (
                   <Card
                     key={index}
-                    className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900"
+                    className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300"
                   >
                     <CardHeader>
                       <CardTitle className="text-xs h-6">

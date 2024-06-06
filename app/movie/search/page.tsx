@@ -48,7 +48,7 @@ export default function Search() {
                     href={`/movie/${encodeURIComponent(item.id)}`}
                     key={index}
                   >
-                    <Card className="text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
+                    <Card className="text-center items-center hover:scale-105 transition-all duration-300">
                       <CardHeader>
                         <CardTitle className="text-xs">
                           {item.title || item.original_title}

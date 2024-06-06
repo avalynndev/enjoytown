@@ -14,11 +14,8 @@ export default async function Popular() {
         <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {data &&
             data.results.slice(0, 18).map((item: any, index: any) => (
-              <Link
-                href={`/movie/${encodeURIComponent(item.id)}`}
-                key={index}
-              >
-                <Card className="text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
+              <Link href={`/movie/${encodeURIComponent(item.id)}`} key={index}>
+                <Card className="text-center items-center hover:scale-105 transition-all duration-300">
                   <CardHeader>
                     <CardTitle className="text-xs h-6">
                       {item.title.length > 24

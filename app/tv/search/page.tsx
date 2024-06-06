@@ -44,11 +44,8 @@ export default function Search() {
             result.results.map((item: any, index: any) => {
               if (item.poster_path) {
                 return (
-                  <Link
-                    href={`/tv/${encodeURIComponent(item.id)}`}
-                    key={index}
-                  >
-                    <Card className="text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
+                  <Link href={`/tv/${encodeURIComponent(item.id)}`} key={index}>
+                    <Card className="text-center items-center hover:scale-105 transition-all duration-300">
                       <CardHeader>
                         <CardTitle className="text-xs">
                           {item.name || `" "`}

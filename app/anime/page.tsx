@@ -17,8 +17,13 @@ const AnimeHistoryItem = ({ animeHistory }: any) => {
     <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
       {animeHistory.map((item: any, index: any) => (
         <div key={index}>
-          <Link shallow href={`/anime/watch/${item.id}/${item.episode_number.toString().replace(/\./g, "-")}`}>
-            <Card className="text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
+          <Link
+            shallow
+            href={`/anime/watch/${item.id}/${item.episode_number
+              .toString()
+              .replace(/\./g, "-")}`}
+          >
+            <Card className="text-center items-center hover:scale-105 transition-all duration-300">
               <span className="absolute top-3 right-4 px-2 py-1 bg-black text-foreground-400 rounded-xl text-xs">
                 EP: {item.episode_number}
               </span>
@@ -138,7 +143,7 @@ const Main = () => {
               {Array.from({ length: 10 }, (_, index) => (
                 <Card
                   key={index}
-                  className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900"
+                  className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300"
                 >
                   <CardHeader>
                     <CardTitle className="text-xs h-6">
@@ -166,7 +171,7 @@ const Main = () => {
               {Array.from({ length: 18 }, (_, index) => (
                 <Card
                   key={index}
-                  className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900"
+                  className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300"
                 >
                   <CardHeader>
                     <CardTitle className="text-xs h-6">
@@ -194,7 +199,7 @@ const Main = () => {
               {Array.from({ length: 20 }, (_, index) => (
                 <Card
                   key={index}
-                  className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900"
+                  className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300"
                 >
                   <CardHeader>
                     <CardTitle className="text-xs h-6">
