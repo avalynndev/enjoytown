@@ -44,9 +44,8 @@ export default async function Read({ params }:any) {
                   data.chapters.map((item: any, index: any) => {
                     if (item.pages !== 0) {
                       return (
-                        <div className="py-1">
+                        <div className="py-1" key={index}>
                           <Link
-                            key={index}
                             href={{
                               pathname: `/manga/read/${id}/${item.id}`,
                             }}
