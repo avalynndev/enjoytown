@@ -1,5 +1,3 @@
-import { env } from "@/env.mjs";
-
 export const url = {
   popular: "https://animetize-api.vercel.app/popular",
   top_airing: "https://animetize-api.vercel.app/top-airing",
@@ -12,7 +10,7 @@ export const url = {
   genre: "https://animetize-api.vercel.app/genre",
 };
 
-const API_KEY = env.TMDB_API_KEY;
+const API_KEY = "171fe27dbfecc58e2a18fbced644cda9";
 export const PROXY = "https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=";
 export const Movie_Trending = `${PROXY}https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`;
 export const Tv_Trending = `${PROXY}https://api.themoviedb.org/3/trending/tv/day?api_key=${API_KEY}`;
