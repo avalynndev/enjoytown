@@ -6,6 +6,8 @@ export const env = createEnv({
   extends: [vercel()],
   shared: {
     DOWNLOAD_API_URL: z.string().url(),
+    CONSUMET_API_KEY: z.string().url(),
+    TMDB_API_KEY: z.string().url(),
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),
