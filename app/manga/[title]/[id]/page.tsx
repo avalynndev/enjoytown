@@ -118,7 +118,7 @@ export default async function MangaInfo({ params }: any) {
                           <Link
                             key={index}
                             href={{
-                              pathname: `/manga/read/${item.id}`,
+                              pathname: `/manga/read/${id}/${item.id}`,
                             }}
                           >
                             <Button key={index}>

@@ -60,7 +60,7 @@ export default async function MangaInfo({ params }: any) {
                     </CardHeader>
                     <CardContent>
                       <Image
-                        className="object-cover rounded-xl w-auto object-cover transition-all aspect-[3/4] rounded-md"
+                        className="h-2/4 w-full object-cover rounded-xl object-cover transition-all aspect-[3/4] rounded-md"
                         src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
                         width={160}
                         height={160}

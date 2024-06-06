@@ -13,9 +13,9 @@ export default async function RecentDramas() {
         {recent &&
           recent.results.map((item: any, index: any) => (
             <Link href={`/kdrama/info/${encodeURIComponent(item.id)}`} key={index}>
-              <Card className="text-center items-center hover:scale-105 transition-all duration-300 hover:shadow-md dark:hover:shadow-blue-700 hover:shadow-zinc-900">
+              <Card className="text-center items-center hover:scale-105 transition-all duration-300">
                 <CardHeader>
-                  <CardTitle className="text-xs h-6">
+                  <CardTitle className="text-sm h-6">
                     {item.title.length > 24
                       ? item.title.slice(0, 20) + "..."
                       : item.title.replace(/\s*\((\d{4})\)$/, "")}

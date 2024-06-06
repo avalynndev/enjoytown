@@ -29,7 +29,7 @@ import {
 
 export function MainNav() {
   return (
-    <div className="mr-4 hidden md:flex">
+    <div className="mr-4 hidden xl:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">
         <Icons.orbit className="h-6 w-6" />
       </Link>
