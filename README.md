@@ -62,6 +62,7 @@ npm install
 Add a ENV FILE with:
 ```env
 DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
+CONSUMET_API_URL=https://consumet_api_url (dont end with slash)
 ```
 
 ### 3. Run on development &/or production
