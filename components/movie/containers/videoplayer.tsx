@@ -38,7 +38,7 @@ export default function VideoPlayer({ id }:any) {
         </TabsContent>
         <TabsContent value="vidsrcpro">
           <iframe
-            src={`https://vidsrc.pro/embed/movie/${id}`}
+            src={`https://vidsrc.pro/embed/movie/${id}?player=new`}
             referrerPolicy="origin"
             allowFullScreen
             width="100%"
