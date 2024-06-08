@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Pattern } from "@/components/pattern";
 import { SiteHeader } from "@/components/navbar/site-header";
 import { useRouter } from "next/navigation";
-// Layout
 import * as Craft from "@/components/craft";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -37,10 +36,10 @@ const featureText: FeatureText[] = [
   {
     title: "Tv Shows",
     href: "/tv",
-    description:
-      "Live on TV Shows: Addiction await ≥",
+    description: "Live on TV Shows: Addiction await ≥",
   },
 ];
+
 const singleFeatureText: FeatureText[] = [
   {
     title: "Manga",
@@ -49,8 +48,28 @@ const singleFeatureText: FeatureText[] = [
   },
 ];
 
+// Mock data for blog posts
+const blogPosts = [
+  {
+    title: "Add text here",
+    slug: "page.tsx",
+    excerpt: "page",
+  },
+  {
+    title: "Another Blog Post",
+    slug: "another-blog-post",
+    excerpt: "Another blog post ",
+  },
+  {
+    title: "New Blog Post",
+    slug: "new-blog-post",
+    excerpt: "New blog post",
+  },
+];
+
 export default function Home() {
   const router = useRouter();
+
   return (
     <>
       <Pattern variant="checkered" />
@@ -77,6 +96,11 @@ export default function Home() {
                   Create Account
                 </Button>
               </Link>
+              <Link href={`/changelog`}>
+                <Button variant="outline">
+                  Changelog
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -85,7 +109,7 @@ export default function Home() {
         <Craft.Section className="">
           <Craft.Container className="">
             <div className="flex flex-col gap-6">
-              <div className=" grid gap-6 md:grid-cols-2">
+              <div className="grid gap-6 md:grid-cols-2">
                 {featureText.map(({ title, description, href }, index) => (
                   <Link
                     href={`${href}`}
@@ -128,6 +152,33 @@ export default function Home() {
             </div>
           </Craft.Container>
         </Craft.Section>
+      </section>
+      {/* Blog section */}
+      <section className="container mx-auto py-8">
+        <h2 className="text-3xl font-bold mb-4">Latest Blog Posts</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {blogPosts.map((post, index) => (
+            <Link href={`/blog/${post.slug}`} key={index}>
+              <div className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer">
+                <div className="h-48 overflow-hidden">
+                  {/* You can replace this with an actual image */}
+                  <img
+                    src="https://via.placeholder.com/500x300"
+                    alt="Blog Post"
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                  <p className="text-gray-600">{post.excerpt}</p>
+                  <span className="text-blue-500 hover:text-blue-700 mt-2 block">
+                    Read more
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
     </>
   );
