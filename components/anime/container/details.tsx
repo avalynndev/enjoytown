@@ -52,7 +52,7 @@ const DetailsContainer = ({ data }: any) => {
             </div>
           </p>
           <p className="mt-4">
-            <strong>Total Episodes:</strong> {data.totalEpisodes}
+            <strong>Episodes:</strong> {data.totalEpisodes}
           </p>
           <p className="mt-2">
             <strong>Release Date:</strong> {data.releaseDate}, {data.status}
