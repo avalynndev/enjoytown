@@ -38,7 +38,7 @@ export default function VideoPlayer({ id }:any) {
         </TabsContent>
         <TabsContent value="autoembed">
           <iframe
-            src={`https://utoembed.cc/embed/movie/${id}`}
+            src={`https://autoembed.cc/embed/movie/${id}`}
             referrerPolicy="origin"
             allowFullScreen
             width="100%"
