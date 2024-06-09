@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { Pattern } from "@/components/pattern";
 import { SiteHeader } from "@/components/navbar/site-header";
 import { useRouter } from "next/navigation";
@@ -17,7 +16,6 @@ type BlogPost = {
   content: React.ReactNode;
   author: string;
   date: string;
-  image: string;
 };
 
 const blogPosts: BlogPost[] = [
@@ -26,7 +24,7 @@ const blogPosts: BlogPost[] = [
     content: (
       <>
         <p>
-          Hey EnjoyTown fans! We&apos;ve got some thrilling news to share with you. Get ready for some major upgrades coming your way:
+          Hey EnjoyTown fans! We've got some thrilling news to share with you. Get ready for some major upgrades coming your way:
         </p>
         <ul>
           <li>- A fresh new UI design for a more immersive experience</li>
@@ -34,23 +32,22 @@ const blogPosts: BlogPost[] = [
           <li>- Expanded library with even more movies, series, and animes</li>
         </ul>
         <p>
-          Stay tuned for these exciting updates and more! We can&apos;t wait to enhance your streaming experience on EnjoyTown.
+          Stay tuned for these exciting updates and more! We can't wait to enhance your streaming experience on EnjoyTown.
         </p>
       </>
     ),
     author: "EnjoyTown Team",
     date: "2024-08-05",
-    image: "/blog/updates.jpg",
   },
   {
     title: "Hindi Dubbed Movies Added!",
     content: (
       <>
         <p>
-          We&apos;re excited to announce that we&apos;ve added a new collection of Hindi dubbed movies to our website. Now you can enjoy your favorite movies in Hindi too!
+          We're excited to announce that we've added a new collection of Hindi dubbed movies to our website. Now you can enjoy your favorite movies in Hindi too!
         </p>
         <p>
-          Our Hindi dubbed collection includes a wide range of genres, from action-packed blockbusters to heartwarming dramas. Whether you prefer Bollywood classics or Hollywood hits, we&apos;ve got you covered.
+          Our Hindi dubbed collection includes a wide range of genres, from action-packed blockbusters to heartwarming dramas. Whether you prefer Bollywood classics or Hollywood hits, we've got you covered.
         </p>
         <p>
           Explore our Hindi dubbed movie section and immerse yourself in the world of cinema. Happy streaming!
@@ -59,7 +56,6 @@ const blogPosts: BlogPost[] = [
     ),
     author: "Enjoy Team",
     date: "2024-08-06",
-    image: "/blog/hindi-dubbed.jpg",
   },
 ];
 
@@ -82,7 +78,6 @@ export default function BlogPage() {
           {blogPosts.map((post, index) => (
             <div key={index} className="bg-black rounded-lg text-white shadow-md p-6">
               <div className="flex items-center mb-4">
-                <Image src={post.image} alt={post.title} width={200} height={200} className="rounded-lg mr-4" />
                 <div>
                   <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
                   <p className="text-sm text-gray-400">
