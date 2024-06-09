@@ -51,20 +51,15 @@ const singleFeatureText: FeatureText[] = [
 type Post = {
   title: string;
   content: React.ReactNode;
-  author: string;
   date: string;
   link: string;
 };
 
 const posts: Post[] = [
   {
-    title: "Exciting Updates Ahead!",
+    title: "📌 Exciting Updates Ahead!",
     content: (
       <>
-        <div className="flex items-center mb-2">
-          <Pin size={24} className="mr-2" />
-          <h3 className="text-xl font-bold">Exciting Updates Ahead!</h3>
-        </div>
         <div>
           Hey EnjoyTown fans! We&apos;ve got some thrilling news to share with you. Get ready for some major upgrades coming your way:
           <br />
@@ -72,26 +67,20 @@ const posts: Post[] = [
         </div>
       </>
     ),
-    author: "EnjoyTown Team",
     date: "2024-08-05",
-    link: "/blog/exciting-updates-ahead"
+    link: "/blog/"
   },
   {
-    title: "Hindi Dubbed Movie Added!",
+    title: "📌 Hindi Dubbed Movie Added!",
     content: (
       <>
-        <div className="flex items-center mb-2">
-          <Pin size={24} className="mr-2" />
-          <h3 className="text-xl font-bold">Hindi Dubbed Movie Added!</h3>
-        </div>
         <div>
           We&apos;re excited to announce that we&apos;ve added a new collection of Hindi dubbed movies to our website. Now you can enjoy your favorite movies in Hindi too!
         </div>
       </>
     ),
-    author: "Enjoy Team",
     date: "2024-08-06",
-    link: "/blog/hindi-dubbed-movie-added"
+    link: "/blog/"
   },
 ];
 
@@ -181,31 +170,33 @@ export default function Home() {
         </Craft.Section>
       </section>
       <section className="space-y-8">
-        <Craft.Section className="">
-          <Craft.Container className="">
-            <h2 className="text-3xl font-bold mb-4">Latest Posts</h2>
-            {posts.map((post, index) => (
-              <div
-                key={index}
-                className="bg-black rounded-lg text-white shadow-md p-6 mb-8 transition-transform hover:scale-105"
-              >
-                <h3 className="text-xl font-bold mb-2">{post.title}</h3>
-                <p className="text-gray-300">{post.content}</p>
-                <p className="text-sm text-gray-400 mt-2">
-                  By {post.author} on {post.date}
-                </p>
-                <div className="mt-4">
-                  <Link href={post.link}>
-                    <Button variant="outline" className="text-white border-white hover:bg-white hover:text-black">
-                      Read More
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </Craft.Container>
-        </Craft.Section>
-      </section>
+  <Craft.Section className="">
+    <Craft.Container className="">
+      <h2 className="text-3xl font-bold mb-4">Latest Posts</h2>
+      {posts.map((post, index) => (
+        <div
+          key={index}
+          className="bg-black rounded-lg text-white shadow-md p-6 mb-8 transition-transform hover:scale-105"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-bold">{post.title}</h3>
+            <p className="text-sm text-gray-400">
+              {post.date}
+            </p>
+          </div>
+          <p className="text-gray-300">{post.content}</p>
+          <div className="mt-4">
+            <Link href={post.link} prefetch={false}>
+              <Button variant="outline" className="text-white border-white hover:bg-white hover:text-black">
+                Read More
+              </Button>
+            </Link>
+          </div>
+        </div>
+      ))}
+    </Craft.Container>
+  </Craft.Section>
+</section>
       <footer className="bg-transparent text-white py-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center space-y-4">
