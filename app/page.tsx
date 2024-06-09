@@ -26,7 +26,7 @@ const featureText: FeatureText[] = [
   },
   {
     title: "Anime",
-    href: "/Anime",
+    href: "/anime",
     description: "Dive into Anime Worlds: Adventures Await!",
   },
   {
