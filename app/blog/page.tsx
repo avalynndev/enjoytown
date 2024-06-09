@@ -26,7 +26,7 @@ const blogPosts: BlogPost[] = [
     content: (
       <>
         <p>
-          Hey EnjoyTown fans! We've got some thrilling news to share with you. Get ready for some major upgrades coming your way:
+          Hey EnjoyTown fans! We&apos;ve got some thrilling news to share with you. Get ready for some major upgrades coming your way:
         </p>
         <ul>
           <li>- A fresh new UI design for a more immersive experience</li>
@@ -34,7 +34,7 @@ const blogPosts: BlogPost[] = [
           <li>- Expanded library with even more movies, series, and animes</li>
         </ul>
         <p>
-          Stay tuned for these exciting updates and more! We can't wait to enhance your streaming experience on EnjoyTown.
+          Stay tuned for these exciting updates and more! We can&apos;t wait to enhance your streaming experience on EnjoyTown.
         </p>
       </>
     ),
@@ -47,10 +47,10 @@ const blogPosts: BlogPost[] = [
     content: (
       <>
         <p>
-          We're excited to announce that we've added a new collection of Hindi dubbed movies to our website. Now you can enjoy your favorite movies in Hindi too!
+          We&apos;re excited to announce that we&apos;ve added a new collection of Hindi dubbed movies to our website. Now you can enjoy your favorite movies in Hindi too!
         </p>
         <p>
-          Our Hindi dubbed collection includes a wide range of genres, from action-packed blockbusters to heartwarming dramas. Whether you prefer Bollywood classics or Hollywood hits, we've got you covered.
+          Our Hindi dubbed collection includes a wide range of genres, from action-packed blockbusters to heartwarming dramas. Whether you prefer Bollywood classics or Hollywood hits, we&apos;ve got you covered.
         </p>
         <p>
           Explore our Hindi dubbed movie section and immerse yourself in the world of cinema. Happy streaming!
