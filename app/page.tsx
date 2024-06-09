@@ -94,7 +94,7 @@ export default function Home() {
         <section className="flex h-[75vh] items-center md:h-[50vh]">
           <div className="mx-auto flex w-4/5 flex-col items-center justify-center space-y-4 text-center">
             <h1 className="text-6xl font-bold">
-              Umm..
+              EnjoyTown
             </h1>
             <p className="text-sm leading-6 text-muted-foreground">
               EnjoyTown is a streaming platform for lazy people who like to
