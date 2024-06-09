@@ -129,7 +129,7 @@ export default function Home() {
                 {featureText.map(({ title, description, href }, index) => (
                   <Link
                     href={`${href}`}
-                    className="flex flex-col justify-between gap-6 rounded-lg border p-6"
+                    className="flex flex-col justify-between gap-6 rounded-lg border p-6 transition-all hover:-mt-2 hover:mb-2"
                     key={index}
                   >
                     <div className="grid gap-4">
@@ -149,7 +149,7 @@ export default function Home() {
                   ({ title, description, href }, index) => (
                     <Link
                       href={`${href}`}
-                      className="flex flex-col justify-between gap-6 rounded-lg border p-6"
+                      className="flex flex-col justify-between gap-6 rounded-lg border p-6 transition-all hover:-mt-2 hover:mb-2"
                       key={index}
                     >
                       <div className="grid gap-4">
@@ -176,7 +176,7 @@ export default function Home() {
       {posts.map((post, index) => (
         <div
           key={index}
-          className="bg-black rounded-lg text-white shadow-md p-6 mb-8 transition-transform hover:scale-105"
+          className="rounded-lg text-white shadow-md p-6 mb-8 transition-transform hover:scale-105"
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold">{post.title}</h3>
