@@ -1,3 +1,5 @@
+### Note: 
+This website is getting a rewamp. That means you can still use it, but it is getting better than what is already is, for more deatils check [#17](https://github.com/avalynndev/enjoytown/issues/17)
 
 <h1 align="center">
 <a href="https://enjoytown.netlify.app">
