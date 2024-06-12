@@ -197,18 +197,6 @@ export default function Home() {
     </Craft.Container>
   </Craft.Section>
 </section>
-      <footer className="bg-transparent text-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center space-y-4">
-            <p className="text-sm">
-              © 2024 EnjoyTown. All rights reserved.
-            </p>
-            <p className="text-sm">
-              Made with ❤️ by the EnjoyTown Team.
-            </p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

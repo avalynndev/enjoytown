@@ -2,14 +2,12 @@
 import { Pattern } from "@/components/pattern";
 import { SiteHeader } from "@/components/navbar/site-header";
 import { useRouter } from "next/navigation";
-// Layout
 import * as Craft from "@/components/craft";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-// Icons
 import { Coins, ArrowRight, Pin } from "lucide-react";
 import { Icons } from "@/components/icons";
+import { useEffect, useRef, useState } from "react";
 
 type BlogPost = {
   title: string;
@@ -24,7 +22,7 @@ const blogPosts: BlogPost[] = [
     content: (
       <>
         <p>
-          Hey EnjoyTown fans! We&apos;ve got some thrilling news to share with you. Get ready for some major upgrades coming your way:
+          Hey EnjoyTown fans! We've got some thrilling news to share with you. Get ready for some major upgrades coming your way:
         </p>
         <ul>
           <li>- A fresh new UI design for a more immersive experience</li>
@@ -32,7 +30,7 @@ const blogPosts: BlogPost[] = [
           <li>- Expanded library with even more movies, series, and animes</li>
         </ul>
         <p>
-          Stay tuned for these exciting updates and more! We can&apos;t wait to enhance your streaming experience on EnjoyTown.
+          Stay tuned for these exciting updates and more! We can't wait to enhance your streaming experience on EnjoyTown.
         </p>
       </>
     ),
@@ -44,10 +42,10 @@ const blogPosts: BlogPost[] = [
     content: (
       <>
         <p>
-          We&apos;re excited to announce that we&apos;ve added a new collection of Hindi dubbed movies to our website. Now you can enjoy your favorite movies in Hindi too!
+          We're excited to announce that we've added a new collection of Hindi dubbed movies to our website. Now you can enjoy your favorite movies in Hindi too!
         </p>
         <p>
-          Our Hindi dubbed collection includes a wide range of genres, from action-packed blockbusters to heartwarming dramas. Whether you prefer Bollywood classics or Hollywood hits, we&apos;ve got you covered.
+          Our Hindi dubbed collection includes a wide range of genres, from action-packed blockbusters to heartwarming dramas. Whether you prefer Bollywood classics or Hollywood hits, we've got you covered.
         </p>
         <p>
           Explore our Hindi dubbed movie section and immerse yourself in the world of cinema. Happy streaming!
@@ -61,12 +59,44 @@ const blogPosts: BlogPost[] = [
 
 export default function BlogPage() {
   const router = useRouter();
+  const [isVisible, setIsVisible] = useState(false);
+  const headerRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(headerRef.current);
+    cardsRef.current.forEach((card) => observer.observe(card));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <Pattern variant="checkered" />
       <SiteHeader />
       <div className="mx-auto max-w-4xl p-4">
-        <section className="flex items-center justify-center py-16">
+        <section
+          ref={headerRef}
+          className="flex items-center justify-center py-16"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.6s, transform 0.6s",
+          }}
+        >
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">EnjoyTown Blog</h1>
             <p className="text-lg text-muted-foreground">
@@ -76,32 +106,39 @@ export default function BlogPage() {
         </section>
         <section className="space-y-8">
           {blogPosts.map((post, index) => (
-            <div key={index} className="bg-black rounded-lg text-white shadow-md p-6">
-              <div className="flex items-center mb-4">
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
-                  <p className="text-sm text-gray-400">
-                    By {post.author} on {post.date}
-                  </p>
-                </div>
+            <article
+              key={index}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="bg-black rounded-lg text-white shadow-md p-6 md:p-8 lg:p-10"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible
+                  ? "translateY(0)"
+                  : "translateY(20px)",
+                transition: `opacity 0.6s ${index * 0.1}s, transform 0.6s ${
+                  index * 0.1
+                }s`,
+              }}
+            >
+              <div className="mb-4">
+                <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
+                <p className="text-sm text-gray-400">
+                  By {post.author} on {post.date}
+                </p>
               </div>
-              <div className="text-gray-300">{post.content}</div>
-            </div>
+              <div className="text-gray-300 mb-6">{post.content}</div>
+              <div className="flex justify-end">
+                <Button
+                  variant="outline"
+                  className="text-sm transition-all duration-300 hover:scale-105 active:scale-95"
+                >
+                  Read More <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </article>
           ))}
         </section>
       </div>
-      <footer className="bg-transparent text-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center space-y-4">
-            <p className="text-sm">
-              © 2024 EnjoyTown. All rights reserved.
-            </p>
-            <p className="text-sm">
-              Made with ❤️ by the EnjoyTown Team.
-            </p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }
