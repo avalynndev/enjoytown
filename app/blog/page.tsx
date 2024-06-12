@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Coins, ArrowRight, Pin } from "lucide-react";
 import { Icons } from "@/components/icons";
+import { useEffect, useRef, useState } from "react";
 
 type BlogPost = {
   title: string;
@@ -58,12 +59,44 @@ const blogPosts: BlogPost[] = [
 
 export default function BlogPage() {
   const router = useRouter();
+  const [isVisible, setIsVisible] = useState(false);
+  const headerRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(headerRef.current);
+    cardsRef.current.forEach((card) => observer.observe(card));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <Pattern variant="checkered" />
       <SiteHeader />
       <div className="mx-auto max-w-4xl p-4">
-        <section className="flex items-center justify-center py-16">
+        <section
+          ref={headerRef}
+          className="flex items-center justify-center py-16"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.6s, transform 0.6s",
+          }}
+        >
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">EnjoyTown Blog</h1>
             <p className="text-lg text-muted-foreground">
@@ -75,7 +108,17 @@ export default function BlogPage() {
           {blogPosts.map((post, index) => (
             <article
               key={index}
+              ref={(el) => (cardsRef.current[index] = el)}
               className="bg-black rounded-lg text-white shadow-md p-6 md:p-8 lg:p-10"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible
+                  ? "translateY(0)"
+                  : "translateY(20px)",
+                transition: `opacity 0.6s ${index * 0.1}s, transform 0.6s ${
+                  index * 0.1
+                }s`,
+              }}
             >
               <div className="mb-4">
                 <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
@@ -85,7 +128,10 @@ export default function BlogPage() {
               </div>
               <div className="text-gray-300 mb-6">{post.content}</div>
               <div className="flex justify-end">
-                <Button variant="outline" className="text-sm">
+                <Button
+                  variant="outline"
+                  className="text-sm transition-all duration-300 hover:scale-105 active:scale-95"
+                >
                   Read More <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
