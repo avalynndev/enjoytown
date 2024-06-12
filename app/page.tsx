@@ -26,7 +26,7 @@ const featureText: FeatureText[] = [
   },
   {
     title: "Anime",
-    href: "https://anime.enjoytown.site/",
+    href: "/anime",
     description: "Dive into Anime Worlds: Adventures Await!",
   },
   {
@@ -94,7 +94,7 @@ export default function Home() {
         <section className="flex h-[75vh] items-center md:h-[50vh]">
           <div className="mx-auto flex w-4/5 flex-col items-center justify-center space-y-4 text-center">
             <h1 className="text-6xl font-bold">
-              Umm..
+              EnjoyTown
             </h1>
             <p className="text-sm leading-6 text-muted-foreground">
               EnjoyTown is a streaming platform for lazy people who like to
@@ -176,7 +176,7 @@ export default function Home() {
       {posts.map((post, index) => (
         <div
           key={index}
-           className="rounded-lg text-white shadow-md p-6 mb-8 transition-transform hover:scale-105"
+          className="rounded-lg text-white shadow-md p-6 mb-8 transition-transform hover:scale-105"
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold">{post.title}</h3>
@@ -197,18 +197,6 @@ export default function Home() {
     </Craft.Container>
   </Craft.Section>
 </section>
-      <footer className="bg-transparent text-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center space-y-4">
-            <p className="text-sm">
-              © 2024 EnjoyTown. All rights reserved.
-            </p>
-            <p className="text-sm">
-              Made with ❤️ by the EnjoyTown Team.
-            </p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }
