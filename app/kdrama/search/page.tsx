@@ -2,26 +2,45 @@
 import { cn } from "@/lib/utils";
 import { FaSearch } from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Icons } from "@/components/icons";
-import { FetchSearchTitle } from "@/lib/fetch";
+import { FetchSearchTitle, FetchAnimeInfo } from "@/lib/fetch";
 import Image from "next/image";
 import Link from "next/link";
-import { FetchAnimeInfo } from "@/lib/fetch";
 import { Button } from "@/components/ui/button";
 
 export default function DramaSearch() {
   const [title, setTitle] = useState("");
   const [infoTitle, setInfoTitle] = useState<any[]>([]);
-  const [loadingText, setLoading] = useState<boolean>();
+  const [loadingText, setLoading] = useState<boolean>(false);
 
-  const handleSearch = async (title: any) => {
-    setLoading(true);
-    const data = await FetchSearchTitle(title);
-    FetchAnimeInfo(data);
-    setLoading(false);
-    setInfoTitle(data.results);
+  const handleSearch = async (title: string) => {
+    if (title) {
+      setLoading(true);
+      const data = await FetchSearchTitle(title);
+      FetchAnimeInfo(data);
+      setLoading(false);
+      setInfoTitle(data.results);
+    }
   };
+
+  // Debounce function to limit the rate of API calls
+  const debounce = (func: (...args: any[]) => void, delay: number) => {
+    let debounceTimer: NodeJS.Timeout;
+    return function (this: void, ...args: any[]) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => func(...args), delay);
+    };
+  };
+
+  const debouncedSearch = useCallback(debounce(handleSearch, 500), []);
+
+  // Effect to trigger search when title changes
+  useEffect(() => {
+    if (title) {
+      debouncedSearch(title);
+    }
+  }, [title, debouncedSearch]);
 
   return (
     <div className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
@@ -33,16 +52,11 @@ export default function DramaSearch() {
             "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
           )}
           onChange={(event) => setTitle(event.target.value)}
-          onKeyDown={async (e) => {
-            if ((e.key === "Enter" || e.code === "Enter") && title) {
-              await handleSearch(title.toString());
-            }
-          }}
         />
         <Button
           onClick={async () => {
             if (title) {
-              await handleSearch(title.toString());
+              await handleSearch(title);
             }
           }}
           variant="ghost"
@@ -61,7 +75,7 @@ export default function DramaSearch() {
       )}
 
       <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        {infoTitle != null &&
+        {infoTitle &&
           infoTitle.map((item, index) => (
             <Link
               href={`/kdrama/info/${encodeURIComponent(item.id)}`}
