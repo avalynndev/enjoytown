@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FaSearch } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { Movie_Search } from "@/config/url";
@@ -9,15 +9,41 @@ import { FetchMovieInfo } from "@/lib/fetch";
 import Image from "next/image";
 import Link from "next/link";
 
+type Result = {
+  results: Array<{
+    id: number;
+    title: string;
+    original_title: string;
+    poster_path: string;
+  }>;
+};
+
 export default function Search() {
   const [title, setTitle] = useState("");
-  const [result, setResults] = useState<any>(null);
+  const [result, setResults] = useState<Result | null>(null);
 
-  const fetch_results = async (title: any) => {
-    const data = await get_search_results(title);
-    FetchMovieInfo(data);
-    setResults(data);
+  const fetch_results = async (title: string) => {
+    if (title) {
+      const data = await get_search_results(title);
+      FetchMovieInfo(data);
+      setResults(data);
+    }
   };
+
+  // Debounce function to limit the rate of API calls
+  const debounce = (func: (...args: any[]) => void, delay: number) => {
+    let debounceTimer: NodeJS.Timeout;
+    return function(this: void, ...args: any[]) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => func(...args), delay);
+    };
+  };
+
+  // Effect to trigger search when title changes
+  useEffect(() => {
+    const debouncedFetch = debounce(fetch_results, 500);
+    debouncedFetch(title);
+  }, [title]);
 
   return (
     <main className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
@@ -29,11 +55,6 @@ export default function Search() {
             "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
           )}
           onChange={(event) => setTitle(event.target.value)}
-          onKeyDown={async (e) => {
-            if ((e.key === "Enter" || e.code === "Enter") && title) {
-              await fetch_results(title.toString());
-            }
-          }}
         />
       </div>
 
@@ -41,7 +62,7 @@ export default function Search() {
         <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {result &&
             result.results &&
-            result.results.map((item: any, index: any) => {
+            result.results.map((item, index) => {
               if (item.poster_path) {
                 return (
                   <Link
@@ -73,7 +94,8 @@ export default function Search() {
     </main>
   );
 }
-const get_search_results = async (title: any) => {
+
+const get_search_results = async (title: string) => {
   const res = await fetch(Movie_Search + title, {
     next: { revalidate: 21600 },
   });
