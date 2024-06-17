@@ -1,6 +1,23 @@
 "use server";
+import { API_KEY } from "@/config/url";
 import { env } from "@/env.mjs";
 import { getInfoURL } from "@/config/url";
+
+export async function fetchCarousalData(type: string) {
+  try {
+    const url = new URL(
+      `https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
+    );
+    const response = await fetch(url.toString(), {
+      next: { revalidate: 60 * 60 * 24 * 7 },
+    });
+    if (!response.ok) throw new Error("Failed to fetch data");
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function PreFetchChaterLinks(data: any) {
   try {
@@ -42,10 +59,9 @@ export const FetchMovieInfo = async (data: any) => {
   }
 };
 export async function getDramaDownload(episode: any) {
-  const res = await fetch(
-    `${env.DOWNLOAD_API_URL}/episode/${episode}`,
-    { next: { revalidate: 21600 } }
-  );
+  const res = await fetch(`${env.DOWNLOAD_API_URL}/episode/${episode}`, {
+    next: { revalidate: 21600 },
+  });
   const data = await res.json();
   return data;
 }
@@ -95,10 +111,9 @@ export async function FetchAnimeInfo(data: any) {
 }
 
 export async function FetchSearchTitle(title: any) {
-  const res = await fetch(
-    `${env.CONSUMET_API_URL}/movies/dramacool/${title}`,
-    { cache: "force-cache" }
-  );
+  const res = await fetch(`${env.CONSUMET_API_URL}/movies/dramacool/${title}`, {
+    cache: "force-cache",
+  });
   const data = await res.json();
   return data;
 }

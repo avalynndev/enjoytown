@@ -1,8 +1,5 @@
-import Link from "next/link";
 import RecentDramas from '@/components/kdrama/card/recent'
 import PopularDramas from "@/components/kdrama/card/popular";
-import { siteConfig } from "@/config/site";
-import { buttonVariants } from "@/components/ui/button";
 
 export default function IndexPage() {
   return (

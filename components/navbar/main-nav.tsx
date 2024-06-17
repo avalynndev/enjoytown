@@ -45,36 +45,26 @@ export function MainNav() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/movie" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Clapperboard className="h-4 w-4" />
-                  <div className="px-2"> Movie </div>
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/anime" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <JapaneseYen className="h-4 w-4" />
-                  <div className="px-2"> Anime </div>
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/tv" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Tv className="h-4 w-4" />
-                  <div className="px-2"> Tv Shows </div>
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/kdrama" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Sparkles className="h-4 w-4" />
-                  <div className="px-2"> K-Drama </div>
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuTrigger>
+                <Clapperboard className="h-4 w-4" />
+                <div className="px-2"> Watch </div>
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[400px]">
+                  <ListItem href="/movie" title="Movie">
+                    Explore Movie Marvels: Spectacles Await You!
+                  </ListItem>
+                  <ListItem href="/tv" title="Tv Shows">
+                    Live on TV Shows: Addiction await ≥
+                  </ListItem>
+                  <ListItem href="/kdrama" title="K-drama">
+                    Indulge in K Drama: Emotions Await!
+                  </ListItem>
+                  <ListItem href="/anime" title="Anime">
+                    Dive into Anime Worlds: Adventures Await!
+                  </ListItem>
+                </ul>
+              </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/manga" legacyBehavior passHref>
@@ -84,151 +74,6 @@ export function MainNav() {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            {/** 
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Movie</NavigationMenuTrigger>
-              <NavigationMenuContent className="pointer-events-none">
-                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  <li className="row-span-3">
-                    <NavigationMenuLink asChild>
-                      <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="/"
-                      >
-                        <Icons.orbit className="h-6 w-6" />
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          shadcn/ui
-                        </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          Beautifully designed components built with Radix UI
-                          and Tailwind CSS.
-                        </p>
-                      </a>
-                    </NavigationMenuLink>
-                  </li>
-                  <ListItem href="/docs" title="Introduction">
-                    Re-usable components built using Radix UI and Tailwind CSS.
-                  </ListItem>
-                  <ListItem href="/docs/installation" title="Installation">
-                    How to install dependencies and structure your app.
-                  </ListItem>
-                  <ListItem
-                    href="/docs/primitives/typography"
-                    title="Typography"
-                  >
-                    Styles for headings, paragraphs, lists...etc
-                  </ListItem>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Tv Shows</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  <li className="row-span-3">
-                    <NavigationMenuLink asChild>
-                      <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="/"
-                      >
-                        <Icons.orbit className="h-6 w-6" />
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          shadcn/ui
-                        </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          Beautifully designed components built with Radix UI
-                          and Tailwind CSS.
-                        </p>
-                      </a>
-                    </NavigationMenuLink>
-                  </li>
-                  <ListItem href="/docs" title="Introduction">
-                    Re-usable components built using Radix UI and Tailwind CSS.
-                  </ListItem>
-                  <ListItem href="/docs/installation" title="Installation">
-                    How to install dependencies and structure your app.
-                  </ListItem>
-                  <ListItem
-                    href="/docs/primitives/typography"
-                    title="Typography"
-                  >
-                    Styles for headings, paragraphs, lists...etc
-                  </ListItem>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>K Drama</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  <li className="row-span-3">
-                    <NavigationMenuLink asChild>
-                      <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="/"
-                      >
-                        <Icons.orbit className="h-6 w-6" />
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          shadcn/ui
-                        </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          Beautifully designed components built with Radix UI
-                          and Tailwind CSS.
-                        </p>
-                      </a>
-                    </NavigationMenuLink>
-                  </li>
-                  <ListItem href="/docs" title="Introduction">
-                    Re-usable components built using Radix UI and Tailwind CSS.
-                  </ListItem>
-                  <ListItem href="/docs/installation" title="Installation">
-                    How to install dependencies and structure your app.
-                  </ListItem>
-                  <ListItem
-                    href="/docs/primitives/typography"
-                    title="Typography"
-                  >
-                    Styles for headings, paragraphs, lists...etc
-                  </ListItem>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Anime</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  <li className="row-span-3">
-                    <NavigationMenuLink asChild>
-                      <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="/"
-                      >
-                        <Icons.orbit className="h-6 w-6" />
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          shadcn/ui
-                        </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          Beautifully designed components built with Radix UI
-                          and Tailwind CSS.
-                        </p>
-                      </a>
-                    </NavigationMenuLink>
-                  </li>
-                  <ListItem href="/docs" title="Introduction">
-                    Re-usable components built using Radix UI and Tailwind CSS.
-                  </ListItem>
-                  <ListItem href="/docs/installation" title="Installation">
-                    How to install dependencies and structure your app.
-                  </ListItem>
-                  <ListItem
-                    href="/docs/primitives/typography"
-                    title="Typography"
-                  >
-                    Styles for headings, paragraphs, lists...etc
-                  </ListItem>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>*/}
           </NavigationMenuList>
         </NavigationMenu>
       </nav>

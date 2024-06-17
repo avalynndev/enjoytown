@@ -1,6 +1,8 @@
 import { Movie_Popular } from "@/config/url";
 import { FetchMovieInfo } from "@/lib/fetch";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { ImageIcon } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -25,7 +27,7 @@ export default async function Popular() {
                   </CardHeader>
                   <CardContent>
                     <Image
-                      src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=https://image.tmdb.org/t/p/original${item.poster_path}`}
+                      src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`}
                       width={160}
                       height={160}
                       className="h-2/4 w-full object-cover transition-all aspect-[3/4] rounded-md"
