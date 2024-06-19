@@ -77,7 +77,6 @@ export default function CarousalCard(props: CarousalCardProps) {
                   <div className="flex my-2  gap-2">
                     <Link href={`/movie/${show.id}`}>
                       <Button
-                        iconPlacement="right"
                         variant={"ringHover"}
                         className="whitespace-nowrap w-full"
                       >
