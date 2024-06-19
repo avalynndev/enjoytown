@@ -12,6 +12,9 @@ export const url = {
 
 export const API_KEY = "171fe27dbfecc58e2a18fbced644cda9";
 export const PROXY = "https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=";
+export const Movie_TopRated = `${PROXY}https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`;
+export const Movie_Upcoming = `${PROXY}https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`;
+export const Movie_NowPlaying = `${PROXY}https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`;
 export const Movie_Trending = `${PROXY}https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`;
 export const Tv_Trending = `${PROXY}https://api.themoviedb.org/3/trending/tv/day?api_key=${API_KEY}`;
 export const Tv_Popular = `${PROXY}https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`;

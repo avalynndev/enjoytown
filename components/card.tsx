@@ -1,7 +1,8 @@
 import { Show } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
-/* eslint-disable @next/next/no-img-element */
+import { Button } from "@/components/ui/button";
+import Link from 'next/link'
 
 interface CarousalCardProps {
   isDetailsPage?: boolean;
@@ -72,6 +73,17 @@ export default function CarousalCard(props: CarousalCardProps) {
                   </div>
                   <div className="text-xs opacity-50 normal-case line-clamp-3">
                     {show?.overview}
+                  </div>
+                  <div className="flex my-2  gap-2">
+                    <Link href={`/movie/${show.id}`}>
+                      <Button
+                        iconPlacement="right"
+                        variant={"ringHover"}
+                        className="whitespace-nowrap w-full"
+                      >
+                        Go To Show
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
