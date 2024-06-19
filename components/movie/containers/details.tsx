@@ -38,7 +38,7 @@ const DetailsContainer = ({ data,id }: any) => {
 
         <div className="mx-auto my-8 max-w-4xl space-y-8 p-4 md:space-y-12 md:p-0 ">
           <main className="flex flex-col gap-4 md:flex-row">
-            <aside className="-mt-24 w-full space-y-2 md:-mt-32 md:w-1/3">
+            <aside className="-mt-24 w-full space-y-2 lg:-mt-32 md:w-1/2 lg:w-1/3">
               <Poster url={data.poster_path} alt={data.title} />
             </aside>
 
@@ -103,7 +103,9 @@ const DetailsContainer = ({ data,id }: any) => {
                 <TabsTrigger disabled value="images">
                   Images
                 </TabsTrigger>
-                <TabsTrigger disabled value="videos">Videos</TabsTrigger>
+                <TabsTrigger disabled value="videos">
+                  Videos
+                </TabsTrigger>
                 <TabsTrigger value="download">Download</TabsTrigger>
               </TabsList>
             </div>

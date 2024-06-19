@@ -12,14 +12,13 @@ export const Poster = ({ url, alt, className, ...props }: PosterProps) => {
   return (
     <div
       className={cn(
-        "relative flex aspect-poster h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-muted text-muted shadow",
+        "relative flex aspect-poster h-[45vh] w-[32vh] items-center justify-center overflow-hidden rounded-lg border bg-muted text-muted shadow",
         className
       )}
       {...props}
     >
       {url ? (
         <Image
-          
           fill
           priority
           sizes="100%"
