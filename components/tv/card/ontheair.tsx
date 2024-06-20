@@ -1,4 +1,4 @@
-import { Tv_Popular } from "@/config/url";
+import { Tv_OntheAir } from "@/config/url";
 import { FetchMovieInfo } from "@/lib/fetch";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 export default async function Popular() {
-  const data = await get_popular();
+  const data = await get_ontheair();
   FetchMovieInfo(data);
 
   return (
@@ -74,8 +74,8 @@ export default async function Popular() {
   );
 }
 
-const get_popular = async () => {
-  const res = await fetch(Tv_Popular, { next: { revalidate: 21600 } });
+const get_ontheair = async () => {
+  const res = await fetch(Tv_OntheAir, { next: { revalidate: 21600 } });
   const data = await res.json();
   return data;
 };

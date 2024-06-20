@@ -78,7 +78,7 @@ export default function DramaSearch() {
         {infoTitle &&
           infoTitle.map((item, index) => (
             <Link
-              href={`/kdrama/info/${encodeURIComponent(item.id)}`}
+              href={`/kdrama/${encodeURIComponent(item.id)}`}
               key={index}
             >
               <Card className="text-center items-center hover:scale-105 transition-all duration-300">

@@ -37,10 +37,10 @@ export function MainNav() {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
+              <Link href="/explore" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <Home className="h-4 w-4" />
-                  <div className="px-2"> Home </div>
+                  <div className="px-2"> Explore </div>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

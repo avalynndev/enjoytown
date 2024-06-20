@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FetchAnimeInfo } from "@/lib/fetch";
+import { Image as ImageIcon } from "lucide-react";
+
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
+import { FetchAnimeInfo } from "@/lib/fetch";
 
 export default async function Popular() {
   const popular = await getPopular();
@@ -14,31 +17,54 @@ export default async function Popular() {
 
   return (
     <div>
-      <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        {popular &&
-          popular.results.slice(0, 24).map((item: any, index: any) => (
-            <Link href={`/kdrama/info/${encodeURIComponent(item.id)}`} key={index}>
-              <Card className="text-center items-center hover:scale-105 transition-all duration-300">
-                <CardHeader>
-                  <CardTitle className="text-xs h-6">
-                    {item.title.length > 24
-                      ? item.title.slice(0, 20) + "..."
-                      : item.title.replace(/\s*\((\d{4})\)$/, "")}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Image
-                    src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
-                    width={160}
-                    height={160}
-                    className="h-2/4 w-full object-cover transition-all aspect-[3/4] rounded-md"
-                    alt="Drama Poster"
-                  />
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-      </div>
+        <div className="flex items-center justify-between">
+          <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
+            {popular &&
+              popular.results.slice(0, 18).map((item: any, index: any) => (
+                <Link
+                  href={`/kdrama/${encodeURIComponent(item.id)}`}
+                  key={index}
+                  className="w-full cursor-pointer space-y-2"
+                  data-testid="movie-card"
+                >
+                  <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
+                    {item.image ? (
+                      <Image
+                        fill
+                        className="object-cover"
+                        src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
+                        alt={item.title}
+                        sizes="100%"
+                      />
+                    ) : (
+                      <ImageIcon className="text-muted" />
+                    )}
+                  </div>
+                  <div className="space-y-1.5">
+                    <div className="flex items-start justify-between gap-1">
+                      <span className="">{item.title}</span>
+
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <Badge variant="outline">
+                              {item.vote_average
+                                ? item.vote_average.toFixed(1)
+                                : "🚧"}
+                            </Badge>
+                          </TooltipTrigger>
+
+                          <TooltipContent>
+                            <p>Under construction</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </div>
     </div>
   );
 }

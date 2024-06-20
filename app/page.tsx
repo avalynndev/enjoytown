@@ -65,8 +65,8 @@ export default function Home() {
               watch
             </p>
             <div className="flex gap-2">
-              <Link href={`/a`}>
-                <Button variant="default" disabled>
+              <Link href={`/explore`}>
+                <Button variant="default">
                   Explore
                 </Button>
               </Link>
@@ -83,7 +83,17 @@ export default function Home() {
         </section>
       </div>
       <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+        <div className="flex mb-4 mt-8">
+          <h1 className="text-3xl font-mono leading-tight tracking-tighter md:text-4xl">
+            POPULAR MOVIES
+          </h1>
+        </div>
         <Popular />
+        <div className="flex mb-4 mt-8">
+          <h1 className="text-3xl font-mono leading-tight tracking-tighter md:text-4xl">
+            RECENT DRAMAS
+          </h1>
+        </div>
         <RecentDramas />
       </section>
       <section className="space-y-8">
