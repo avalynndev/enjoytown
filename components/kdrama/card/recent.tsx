@@ -17,7 +17,7 @@ export default async function RecentDramas() {
 
   return (
     <div className="container grid items-center gap-6">
-      <div className="text-center max-w mx-auto px-6">
+      <div className="text-center mx-auto px-6">
         <div className="grid w-full grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
           {recent &&
             recent.results.slice(0, 18).map((item: any, index: any) => (
@@ -32,7 +32,7 @@ export default async function RecentDramas() {
                     <Image
                       width={160}
                       height={160}
-                      className="h-[230px] w-[270px] h-2/4 flex items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow"
+                      className="h-[230px] w-[270px] flex items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow"
                       src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
                       alt={item.title}
                     />
