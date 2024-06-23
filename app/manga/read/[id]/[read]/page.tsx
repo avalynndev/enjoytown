@@ -4,8 +4,9 @@ import Image from "next/image";
 import { PreFetchChaterLinks } from "@/lib/fetch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useNavigate } from "react-router-dom";
 
 export default function Read({ params }: any) {
   const chapterId = params.read;
@@ -14,23 +15,19 @@ export default function Read({ params }: any) {
   const [images, setImages] = useState<string[]>([]);
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [isChapterMenuOpen, setIsChapterMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const fetchedResults = await getPages(chapterId);
+      const id = params.id;
+      const fetchedData = await getMangaInfo(id);
+
+      PreFetchChaterLinks(fetchedData.chapters);
 
       if (fetchedResults && fetchedResults.chapter) {
         const image_base_url =
           fetchedResults.baseUrl + "/data/" + fetchedResults.chapter.hash;
-        const id = params.id;
-        const fetchedData = await getMangaInfo(id);
-
-        PreFetchChaterLinks(fetchedData.chapters);
-
-        if (fetchedResults.length === 0) {
-          return;
-        }
-
         const fetchedImages = fetchedResults.chapter.data.map((img: string) => {
           return image_base_url + "/" + img;
         });
@@ -46,11 +43,11 @@ export default function Read({ params }: any) {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }, [chapterId, params.id]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const handleNextPage = () => {
     if (currentPageIndex < images.length - 1) {
@@ -82,7 +79,7 @@ export default function Read({ params }: any) {
       newChapter = data.chapters[currentIndex + 1];
     }
     if (newChapter) {
-      window.location.href = `/manga/read/${params.id}/${newChapter.id}`;
+      navigate(`/manga/read/${params.id}/${newChapter.id}`);
     }
   };
 
@@ -203,19 +200,17 @@ export default function Read({ params }: any) {
   );
 }
 
-async function getPages(id: any) {
-  const res = await fetch(`https://api.mangadex.dev/at-home/server/${id}`, {
-    mode: "no-cors",
-  });
+const getPages = useCallback(async (id: any) => {
+  const res = await fetch(`https://api.mangadex.org/at-home/server/${id}`);
   const data = await res.json();
   return data;
-}
+}, []);
 
-async function getMangaInfo(id: any) {
+const getMangaInfo = useCallback(async (id:any) => {
   const res = await fetch(
     `https://consumet-jade.vercel.app/meta/anilist-manga/info/${id}?provider=mangadex`,
     { next: { revalidate: 21600 } }
   );
   const data = await res.json();
   return data;
-}
+}, []);
