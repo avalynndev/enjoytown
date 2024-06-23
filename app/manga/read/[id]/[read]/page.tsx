@@ -16,31 +16,35 @@ export default function Read({ params }: any) {
   const [isChapterMenuOpen, setIsChapterMenuOpen] = useState(false);
 
   const fetchData = async () => {
-    const fetchedResults = await getPages(chapterId);
+    try {
+      const fetchedResults = await getPages(chapterId);
 
-    if (fetchedResults && fetchedResults.chapter) {
-      const image_base_url =
-        fetchedResults.baseUrl + "/data/" + fetchedResults.chapter.hash;
-      const id = params.id;
-      const fetchedData = await getMangaInfo(id);
+      if (fetchedResults && fetchedResults.chapter) {
+        const image_base_url =
+          fetchedResults.baseUrl + "/data/" + fetchedResults.chapter.hash;
+        const id = params.id;
+        const fetchedData = await getMangaInfo(id);
 
-      PreFetchChaterLinks(fetchedData.chapters);
+        PreFetchChaterLinks(fetchedData.chapters);
 
-      if (fetchedResults.length === 0) {
-        return;
+        if (fetchedResults.length === 0) {
+          return;
+        }
+
+        const fetchedImages = fetchedResults.chapter.data.map((img: string) => {
+          return image_base_url + "/" + img;
+        });
+
+        setResults(fetchedResults);
+        setData(fetchedData);
+        setImages(fetchedImages);
+      } else {
+        console.error(
+          "Error: fetchedResults or fetchedResults.chapter is undefined"
+        );
       }
-
-      const fetchedImages = fetchedResults.chapter.data.map((img: string) => {
-        return image_base_url + "/" + img;
-      });
-
-      setResults(fetchedResults);
-      setData(fetchedData);
-      setImages(fetchedImages);
-    } else {
-      console.error(
-        "Error: fetchedResults or fetchedResults.chapter is undefined"
-      );
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -160,7 +164,7 @@ export default function Read({ params }: any) {
         </div>
         <div key={currentPageIndex}>
           <Image
-            src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${images[currentPageIndex]}&headers=https://mangadex.org`}
+            src={images[currentPageIndex]}
             alt="Pages"
             width={800}
             height={1000}
@@ -200,7 +204,9 @@ export default function Read({ params }: any) {
 }
 
 async function getPages(id: any) {
-  const res = await fetch(`https://api.mangadex.dev/at-home/server/${id}`);
+  const res = await fetch(`https://api.mangadex.dev/at-home/server/${id}`, {
+    mode: "cors",
+  });
   const data = await res.json();
   return data;
 }
@@ -208,7 +214,7 @@ async function getPages(id: any) {
 async function getMangaInfo(id: any) {
   const res = await fetch(
     `https://consumet-jade.vercel.app/meta/anilist-manga/info/${id}?provider=mangadex`,
-    { next: { revalidate: 21600 } }
+    { next: { revalidate: 21600 }, mode: "cors" }
   );
   const data = await res.json();
   return data;
