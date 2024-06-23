@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PreFetchChaterLinks, fetchManga } from "@/lib/fetch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Spinner } from "@/components/ui/spinner";
 import { useState, useEffect, useCallback } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from "next/navigation";
@@ -72,7 +73,12 @@ export default function Read({ params }: any) {
   if (!results || !data || images.length === 0) {
     return (
       <div>
-        <p>Loading...</p>
+        <div className="flex items-center justify-center h-screen">
+          <div className="py-8 px-4 sm:px-6 lg:px-8">
+            <Spinner>Loading...</Spinner>
+            <Spinner size="large"/>
+          </div>
+        </div>
       </div>
     );
   }
