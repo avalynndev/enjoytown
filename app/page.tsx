@@ -3,8 +3,6 @@ import { SiteHeader } from "@/components/navbar/site-header";
 import * as Craft from "@/components/craft";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import RecentDramas from "@/components/kdrama/card/recent";
-import Popular from "@/components/movie/card/popular";
 
 type Post = {
   title: string;
@@ -82,20 +80,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-      <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-        <div className="flex mb-4 mt-8">
-          <h1 className="text-3xl font-mono leading-tight tracking-tighter md:text-4xl">
-            POPULAR MOVIES
-          </h1>
-        </div>
-        <Popular />
-        <div className="flex mb-4 mt-8">
-          <h1 className="text-3xl font-mono leading-tight tracking-tighter md:text-4xl">
-            RECENT DRAMAS
-          </h1>
-        </div>
-        <RecentDramas />
-      </section>
       <section className="space-y-8">
         <Craft.Section>
           <Craft.Container>
