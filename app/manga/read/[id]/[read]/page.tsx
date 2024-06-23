@@ -173,7 +173,9 @@ export default function Read({ params }: any) {
 }
 
 async function getPages(id: any) {
-  const res = await fetch(`https://api.mangadex.org/at-home/server/${id}`);
+  const res = await fetch(`https://api.mangadex.org/at-home/server/${id}`, {
+    mode: "no-cors",
+  });
   const data = await res.json();
   return data;
 }
