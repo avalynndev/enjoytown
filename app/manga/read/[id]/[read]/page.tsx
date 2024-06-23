@@ -205,7 +205,7 @@ export default function Read({ params }: any) {
 
 async function getPages(id: any) {
   const res = await fetch(`https://api.mangadex.dev/at-home/server/${id}`, {
-    mode: "cors",
+    mode: "no-cors",
   });
   const data = await res.json();
   return data;
@@ -214,7 +214,7 @@ async function getPages(id: any) {
 async function getMangaInfo(id: any) {
   const res = await fetch(
     `https://consumet-jade.vercel.app/meta/anilist-manga/info/${id}?provider=mangadex`,
-    { next: { revalidate: 21600 }, mode: "cors" }
+    { next: { revalidate: 21600 } }
   );
   const data = await res.json();
   return data;
