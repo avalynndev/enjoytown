@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PreFetchChaterLinks } from "@/lib/fetch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from "next/navigation";
 
@@ -16,7 +16,7 @@ export default function Read({ params }: any) {
   const [isChapterMenuOpen, setIsChapterMenuOpen] = useState(false);
   const navigate = useRouter();
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const fetchedResults = await getPages(chapterId);
       const id = params.id;
@@ -42,7 +42,7 @@ export default function Read({ params }: any) {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }, [chapterId, params.id]);
 
   useEffect(() => {
     fetchData();
