@@ -6,16 +6,15 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 export default function Read({ params }: any) {
   const chapterId = params.read;
   const [results, setResults] = useState<any>(null);
   const [data, setData] = useState<any>(null);
   const [images, setImages] = useState<string[]>([]);
-  const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [isChapterMenuOpen, setIsChapterMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const fetchData = useCallback(async () => {
     try {
@@ -49,18 +48,6 @@ export default function Read({ params }: any) {
     fetchData();
   }, [fetchData]);
 
-  const handleNextPage = () => {
-    if (currentPageIndex < images.length - 1) {
-      setCurrentPageIndex(currentPageIndex + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPageIndex > 0) {
-      setCurrentPageIndex(currentPageIndex - 1);
-    }
-  };
-
   const toggleChapterMenu = () => {
     setIsChapterMenuOpen(!isChapterMenuOpen);
   };
@@ -79,7 +66,7 @@ export default function Read({ params }: any) {
       newChapter = data.chapters[currentIndex + 1];
     }
     if (newChapter) {
-      navigate(`/manga/read/${params.id}/${newChapter.id}`);
+      navigate.push(`/manga/read/${params.id}/${newChapter.id}`);
     }
   };
 
@@ -140,36 +127,6 @@ export default function Read({ params }: any) {
         </div>
       </aside>
       <div className="flex-1 items-center justify-center flex flex-col">
-        <div className="flex items-center mb-4 mt-8">
-          <Button
-            onClick={handlePrevPage}
-            disabled={currentPageIndex === 0}
-            className="text-white bg-black px-4 py-2 flex items-center mr-2"
-          >
-            &larr; Prev
-          </Button>
-          <span className="text-lg font-bold">{currentPageIndex + 1}</span>
-          <span className="mx-2">/</span>
-          <span className="text-lg font-bold">{images.length}</span>
-          <Button
-            onClick={handleNextPage}
-            disabled={currentPageIndex === images.length - 1}
-            className="text-white bg-black px-4 py-2 flex items-center ml-2"
-          >
-            Next &rarr;
-          </Button>
-        </div>
-        <div key={currentPageIndex}>
-          <Image
-            src={images[currentPageIndex]}
-            alt="Pages"
-            width={800}
-            height={1000}
-            priority
-            quality={100}
-            unoptimized
-          />
-        </div>
         <div className="flex items-center mb-4 mt-8 space-x-6 ">
           <Button
             onClick={() => navigateChapter("prev")}
@@ -195,6 +152,15 @@ export default function Read({ params }: any) {
             Next Ch &rarr;
           </Button>
         </div>
+        <Image
+          src={images[0]}
+          alt="Pages"
+          width={800}
+          height={1000}
+          priority
+          quality={100}
+          unoptimized
+        />
       </div>
     </div>
   );
@@ -206,7 +172,7 @@ const getPages = useCallback(async (id: any) => {
   return data;
 }, []);
 
-const getMangaInfo = useCallback(async (id:any) => {
+const getMangaInfo = useCallback(async (id: any) => {
   const res = await fetch(
     `https://consumet-jade.vercel.app/meta/anilist-manga/info/${id}?provider=mangadex`,
     { next: { revalidate: 21600 } }
