@@ -4,49 +4,61 @@ import Image from "next/image";
 import { PreFetchChaterLinks } from "@/lib/fetch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useRouter } from "next/navigation";
 
 export default function Read({ params }: any) {
   const chapterId = params.read;
   const [results, setResults] = useState<any>(null);
   const [data, setData] = useState<any>(null);
   const [images, setImages] = useState<string[]>([]);
+  const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [isChapterMenuOpen, setIsChapterMenuOpen] = useState(false);
-  const navigate = useRouter();
 
-  const fetchData = useCallback(async () => {
-    try {
-      const fetchedResults = await getPages(chapterId);
+  const fetchData = async () => {
+    const fetchedResults = await getPages(chapterId);
+
+    if (fetchedResults && fetchedResults.chapter) {
+      const image_base_url =
+        fetchedResults.baseUrl + "/data/" + fetchedResults.chapter.hash;
       const id = params.id;
       const fetchedData = await getMangaInfo(id);
 
       PreFetchChaterLinks(fetchedData.chapters);
 
-      if (fetchedResults && fetchedResults.chapter) {
-        const image_base_url =
-          fetchedResults.baseUrl + "/data/" + fetchedResults.chapter.hash;
-        const fetchedImages = fetchedResults.chapter.data.map((img: string) => {
-          return image_base_url + "/" + img;
-        });
-
-        setResults(fetchedResults);
-        setData(fetchedData);
-        setImages(fetchedImages);
-      } else {
-        console.error(
-          "Error: fetchedResults or fetchedResults.chapter is undefined"
-        );
+      if (fetchedResults.length === 0) {
+        return;
       }
-    } catch (error) {
-      console.error("Error fetching data:", error);
+
+      const fetchedImages = fetchedResults.chapter.data.map((img: string) => {
+        return image_base_url + "/" + img;
+      });
+
+      setResults(fetchedResults);
+      setData(fetchedData);
+      setImages(fetchedImages);
+    } else {
+      console.error(
+        "Error: fetchedResults or fetchedResults.chapter is undefined"
+      );
     }
-  }, [chapterId, params.id]);
+  };
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
+
+  const handleNextPage = () => {
+    if (currentPageIndex < images.length - 1) {
+      setCurrentPageIndex(currentPageIndex + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPageIndex > 0) {
+      setCurrentPageIndex(currentPageIndex - 1);
+    }
+  };
 
   const toggleChapterMenu = () => {
     setIsChapterMenuOpen(!isChapterMenuOpen);
@@ -66,7 +78,7 @@ export default function Read({ params }: any) {
       newChapter = data.chapters[currentIndex + 1];
     }
     if (newChapter) {
-      navigate.push(`/manga/read/${params.id}/${newChapter.id}`);
+      window.location.href = `/manga/read/${params.id}/${newChapter.id}`;
     }
   };
 
@@ -127,6 +139,36 @@ export default function Read({ params }: any) {
         </div>
       </aside>
       <div className="flex-1 items-center justify-center flex flex-col">
+        <div className="flex items-center mb-4 mt-8">
+          <Button
+            onClick={handlePrevPage}
+            disabled={currentPageIndex === 0}
+            className="text-white bg-black px-4 py-2 flex items-center mr-2"
+          >
+            &larr; Prev
+          </Button>
+          <span className="text-lg font-bold">{currentPageIndex + 1}</span>
+          <span className="mx-2">/</span>
+          <span className="text-lg font-bold">{images.length}</span>
+          <Button
+            onClick={handleNextPage}
+            disabled={currentPageIndex === images.length - 1}
+            className="text-white bg-black px-4 py-2 flex items-center ml-2"
+          >
+            Next &rarr;
+          </Button>
+        </div>
+        <div key={currentPageIndex}>
+          <Image
+            src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${images[currentPageIndex]}&headers=https://mangadex.org`}
+            alt="Pages"
+            width={800}
+            height={1000}
+            priority
+            quality={100}
+            unoptimized
+          />
+        </div>
         <div className="flex items-center mb-4 mt-8 space-x-6 ">
           <Button
             onClick={() => navigateChapter("prev")}
@@ -152,31 +194,28 @@ export default function Read({ params }: any) {
             Next Ch &rarr;
           </Button>
         </div>
-        <Image
-          src={images[0]}
-          alt="Pages"
-          width={800}
-          height={1000}
-          priority
-          quality={100}
-          unoptimized
-        />
       </div>
     </div>
   );
 }
 
-const getPages = useCallback(async (id: any) => {
-  const res = await fetch(`https://api.mangadex.org/at-home/server/${id}`);
+async function getPages(id: any) {
+  const proxyUrl = "https://sup-proxy.zephex0-f6c.workers.dev/api-content";
+  const targetUrl = `https://api.mangadex.org/at-home/server/${id}`;
+  const res = await fetch(
+    `${proxyUrl}?url=${encodeURIComponent(
+      targetUrl
+    )}&headers=https://mangadex.org`
+  );
   const data = await res.json();
   return data;
-}, []);
+}
 
-const getMangaInfo = useCallback(async (id: any) => {
+async function getMangaInfo(id: any) {
   const res = await fetch(
     `https://consumet-jade.vercel.app/meta/anilist-manga/info/${id}?provider=mangadex`,
     { next: { revalidate: 21600 } }
   );
   const data = await res.json();
   return data;
-}, []);
+}
