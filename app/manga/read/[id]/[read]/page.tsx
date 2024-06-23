@@ -17,8 +17,12 @@ export default function Read({ params }: any) {
   const navigate = useRouter();
 
   const fetchData = useCallback(async () => {
+    "use server"
     try {
-      const fetchedResults = await getPages(chapterId);
+      const data = await fetch(
+        `https://api.mangadex.dev/at-home/server/${chapterId}`
+      );
+      const fetchedResults = await data.json()
       const id = params.id;
       const fetchedData = await getMangaInfo(id);
 
@@ -170,14 +174,6 @@ export default function Read({ params }: any) {
       </div>
     </div>
   );
-}
-
-async function getPages(id: any) {
-  const res = await fetch(`https://api.mangadex.org/at-home/server/${id}`, {
-    mode: "no-cors",
-  });
-  const data = await res.json();
-  return data;
 }
 
 async function getMangaInfo(id: any) {
