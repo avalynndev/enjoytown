@@ -1,7 +1,6 @@
 "use client";
-
 import Image from "next/image";
-import { PreFetchChaterLinks } from "@/lib/fetch";
+import { PreFetchChaterLinks, fetchManga } from "@/lib/fetch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
@@ -18,10 +17,7 @@ export default function Read({ params }: any) {
 
   const fetchData = useCallback(async () => {
     try {
-      const data = await fetch(
-        `https://api.mangadex.dev/at-home/server/${chapterId}`
-      );
-      const fetchedResults = await data.json()
+      const fetchedResults = await fetchManga(chapterId);
       const id = params.id;
       const fetchedData = await getMangaInfo(id);
 

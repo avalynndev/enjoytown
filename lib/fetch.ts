@@ -19,6 +19,15 @@ export async function fetchCarousalData(type: string) {
   }
 }
 
+export async function fetchManga(id: any) {
+  const res = await fetch(
+     `https://api.mangadex.dev/at-home/server/${id}`,
+    { next: { revalidate: 21600 } }
+  );
+  const data = await res.json();
+  return data;
+}
+
 export async function PreFetchChaterLinks(data: any) {
   try {
     const fetchPromises = data.map(async (element: any) => {
