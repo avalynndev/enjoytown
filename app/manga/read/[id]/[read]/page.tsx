@@ -152,15 +152,21 @@ export default function Read({ params }: any) {
             Next Ch &rarr;
           </Button>
         </div>
-        <Image
-          src={images[0]}
-          alt="Pages"
-          width={800}
-          height={1000}
-          priority
-          quality={100}
-          unoptimized
-        />
+        {images &&
+          images.map((item, index) => (
+            <div key={index}>
+              <Image
+                src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item}&headers=https://mangadex.org`}
+                key={index}
+                alt="Pages"
+                width={800}
+                height={1000}
+                priority
+                quality={100}
+                unoptimized
+              />
+            </div>
+          ))}
       </div>
     </div>
   );
