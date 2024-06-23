@@ -167,13 +167,7 @@ export default function Read({ params }: any) {
 }
 
 async function getPages(id: any) {
-  const proxyUrl = "https://sup-proxy.zephex0-f6c.workers.dev/api-content";
-  const targetUrl = `https://api.mangadex.org/at-home/server/${id}`;
-  const res = await fetch(
-    `${proxyUrl}?url=${encodeURIComponent(
-      targetUrl
-    )}&headers=https://mangadex.org`
-  );
+  const res = await fetch(`https://api.mangadex.org/at-home/server/${id}`);
   const data = await res.json();
   return data;
 }

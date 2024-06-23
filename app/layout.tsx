@@ -2,7 +2,6 @@ import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { Footer } from "@/components/footer";
-import { Analytics } from "@vercel/analytics/react";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -70,7 +69,6 @@ export default function RootLayout({
             <div className="flex-1">{children}</div>
           </div>
           <Footer />
-          <Analytics />
           <TailwindIndicator />
         </ThemeProvider>
       </body>
