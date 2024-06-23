@@ -17,7 +17,6 @@ export default function Read({ params }: any) {
   const navigate = useRouter();
 
   const fetchData = useCallback(async () => {
-    "use server"
     try {
       const data = await fetch(
         `https://api.mangadex.dev/at-home/server/${chapterId}`
