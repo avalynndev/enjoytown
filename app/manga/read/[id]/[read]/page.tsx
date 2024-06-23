@@ -75,8 +75,7 @@ export default function Read({ params }: any) {
       <div>
         <div className="flex items-center justify-center h-screen">
           <div className="py-8 px-4 sm:px-6 lg:px-8">
-            <Spinner>Loading...</Spinner>
-            <Spinner size="large"/>
+            <Spinner size="large">Loading...</Spinner>
           </div>
         </div>
       </div>
