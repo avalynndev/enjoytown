@@ -6,12 +6,7 @@ export default async function Info({ params }: any) {
   const id = params.id;
   const data = await get_tv_info(id);
 
-  return (
-    <main>
-      <DetailsContainer data={data} />
-      <VideoPlayer id={id} />
-    </main>
-  );
+  return <DetailsContainer data={data} />;
 }
 
 const get_tv_info = async (id: any) => {

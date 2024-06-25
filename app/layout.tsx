@@ -1,7 +1,7 @@
 import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
-import { Footer } from "@/components/footer";
+import { Footer } from "@/components/navigation/footer";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 

@@ -19,6 +19,9 @@ const config = {
       },
     },
     extend: {
+      aspectRatio: {
+        poster: "2 / 3",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },

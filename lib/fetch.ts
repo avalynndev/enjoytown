@@ -3,6 +3,30 @@ import { API_KEY } from "@/config/url";
 import { env } from "@/env.mjs";
 import { getInfoURL } from "@/config/url";
 
+export async function GetSearchedAnime(title: any) {
+  const res = await fetch(
+    "https://consumet-jade.vercel.app/meta/anilist-manga/" + title
+  );
+  const data = await res.json();
+  return data;
+}
+
+export async function fetchTvCarousalData(type: string) {
+  try {
+    const url = new URL(
+      `https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://api.themoviedb.org/3/trending/tv/day?api_key=${API_KEY}`
+    );
+    const response = await fetch(url.toString(), {
+      next: { revalidate: 60 * 60 * 24 * 7 },
+    });
+    if (!response.ok) throw new Error("Failed to fetch data");
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function fetchCarousalData(type: string) {
   try {
     const url = new URL(

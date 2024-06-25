@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Icons } from "@/components/icons";
-import SaveToLocalStorage from "@/components/localstorage";
+import { Icons } from "@/components/common/icons";
+import SaveToLocalStorage from "@/components/anime/localstorage";
 
 import { Button } from "@/components/ui/button";
 import { SelectItem, Select } from "@nextui-org/react";
@@ -50,17 +50,17 @@ const EpisodeContainer = ({ data }: any) => {
   };
 
   const renderGroupDropdown = () => {
-		if (episodes.length > 100) {
-			const totalGroups = Math.ceil(episodes.length / 100);
-			const options = Array.from({ length: totalGroups }, (_, index) => ({
-				value: index,
-				label: `${index * 100 + 1}-${Math.min(
-					(index + 1) * 100,
-					episodes.length
-				)}`,
-			}));
+    if (episodes.length > 100) {
+      const totalGroups = Math.ceil(episodes.length / 100);
+      const options = Array.from({ length: totalGroups }, (_, index) => ({
+        value: index,
+        label: `${index * 100 + 1}-${Math.min(
+          (index + 1) * 100,
+          episodes.length
+        )}`,
+      }));
 
-			return (
+      return (
         <Select
           size="sm"
           placeholder="Select a Episode Group"
@@ -91,21 +91,21 @@ const EpisodeContainer = ({ data }: any) => {
           ))}
         </Select>
       );
-		}
-	};
+    }
+  };
 
-	return (
-		<div className="py-8 px-4 sm:px-6 lg:px-8">
-			<div className="max-w-4xl mx-auto ">
-				<div className="">
-					{renderGroupDropdown()}
-					<div className="flex flex-wrap gap-2 items-center pt-6">
-						{renderEpisodeButtons()}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div className="py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto ">
+        <div className="">
+          {renderGroupDropdown()}
+          <div className="flex flex-wrap gap-2 items-center pt-6">
+            {renderEpisodeButtons()}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const save_to_local = (

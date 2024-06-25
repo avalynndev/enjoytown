@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
-import { MainNav } from "@/components/navbar/main-nav";
-import { MobileNav } from "@/components/navbar/mobile-nav";
+import { Icons } from "@/components/common/icons";
+import { MainNav } from "@/components/navigation/main-nav";
+import { MobileNav } from "@/components/navigation/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";

@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
-import { MainNav } from "@/components/navbar/main-nav";
-import { MobileNav } from "@/components/navbar/mobile-nav";
+import { Icons } from "@/components/common/icons";
+import { MainNav } from "@/components/navigation/main-nav";
+import { MobileNav } from "@/components/navigation/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
@@ -23,7 +23,9 @@ export function SiteHeader() {
                 "relative h-8 w-full justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64"
               )}
             >
-              <span className="hidden lg:inline-flex">Search for movies...</span>
+              <span className="hidden lg:inline-flex">
+                Search for movies...
+              </span>
               <span className="inline-flex lg:hidden">Search</span>
               <div className="pointer-events-none absolute right-[0.3rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
                 <Icons.search className="h-6 w-5" />

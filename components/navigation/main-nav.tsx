@@ -16,7 +16,7 @@ import {
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/common/icons";
 import {
   NavigationMenu,
   NavigationMenuContent,

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Image as LucideImage } from "lucide-react";
+import { tmdbImage } from "@/utils/tmdb-image";
 import { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +13,7 @@ export const Poster = ({ url, alt, className, ...props }: PosterProps) => {
   return (
     <div
       className={cn(
-        "relative flex aspect-poster h-[45vh] w-[32vh] items-center justify-center overflow-hidden rounded-lg border bg-muted text-muted shadow",
+        "relative flex aspect-poster w-full items-center justify-center overflow-hidden rounded-lg border bg-muted text-muted shadow",
         className
       )}
       {...props}
@@ -20,10 +21,11 @@ export const Poster = ({ url, alt, className, ...props }: PosterProps) => {
       {url ? (
         <Image
           fill
-          priority
+          className="object-fill"
+          loading="lazy"
           sizes="100%"
           alt={alt}
-          src={`https://image.tmdb.org/t/p/original${url}`}
+          src={tmdbImage(url)}
         />
       ) : (
         <LucideImage size={24} />

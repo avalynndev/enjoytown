@@ -1,52 +1,127 @@
-import React from "react";
-import Image from "next/image";
+import { format } from "date-fns";
+import { Poster } from "@/components/common/poster";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import VideoPlayer from "@/components/tv/containers/videoplayer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
-const DetailsContainer = ({ data }: any) => {
+const DetailsContainer = ({ data, id, embed }: any) => {
   return (
-    <div className="py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto lg:flex">
-        <div className="pb-10 pr-5">
+    <div className="">
+      <div className={cn("mx-auto max-w-6xl", embed ? "p-0" : "md:pt-4")}>
+        <div
+          className={cn(
+            "h-[30dvh] w-full overflow-hidden border bg-muted shadow md:rounded-lg lg:h-[55dvh]",
+            embed ? "max-h-[20vh] md:max-h-[50vh]" : undefined
+          )}
+        >
           <div
-            className="rounded-lg overflow-hidden bg-white shadow-md"
-            style={{ width: "250px", height: "370px" }}
-          >
-            <div className="relative h-96">
-              <Image
-                src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=https://image.tmdb.org/t/p/original${data.poster_path}`}
-                fill
-                alt="Movie Poster"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                priority
-              ></Image>
-            </div>
-          </div>
+            style={{
+              backgroundImage: `url('https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=https://image.tmdb.org/t/p/original${data.backdrop_path}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="h-full w-full brightness-50"
+            data-testid="banner"
+          />
         </div>
-        <div className=" pr-4">
-          <h1 className="text-3xl font-semibold">{data.name || "No Title"}</h1>
-          <div className="mt-2 font-mono">
-            <strong>{data.tagline || "No Tagline"}</strong>
-          </div>
-          <div className="mt-2">
-            <strong>First Aired on: </strong>
-            {data.first_air_date || "Unknown"}
-          </div>
-          <div className="mt-2 gap-2">
-            <strong>Genres: </strong>
-            <div className="max-w-3xl mx-auto flex">
-              <div className="flex flex-wrap gap-2 items-center">
-                {data.genres.map((item: any) => (
-                  <Button key={item.id} size="sm">
-                    {item.name || "Not found"}
-                  </Button>
-                ))}
+
+        <div className="mx-auto my-8 max-w-4xl space-y-8 p-4 md:space-y-12 md:p-0 ">
+          <main className="flex flex-col gap-4 md:flex-row">
+            <aside className="-mt-24 w-full space-y-2  md:-mt-32 md:w-1/3">
+              <Poster url={data.poster_path} alt={data.title} />
+            </aside>
+
+            <article className="flex w-full flex-col gap-2 md:w-2/3">
+              {data.release_date && (
+                <span className="text-xs text-muted-foreground">
+                  {format(new Date(data.release_date), "PPP", {})}
+                </span>
+              )}
+
+              <h1 className="text-lg font-bold md:text-4xl">{data.name}</h1>
+
+              <div className="flex flex-wrap items-center gap-2">
+                {data.genres.length > 0 && (
+                  <>
+                    {data.genres.map((genre: any) => {
+                      return (
+                        <Badge
+                          key={genre.id}
+                          variant="outline"
+                          className="whitespace-nowrap"
+                        >
+                          {genre.name}
+                        </Badge>
+                      );
+                    })}
+
+                    <Separator orientation="vertical" className="h-6" />
+                  </>
+                )}
+
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Badge>{data.vote_average.toFixed(1)}</Badge>
+                    </TooltipTrigger>
+
+                    <TooltipContent>
+                      <p>{data.vote_count} votes</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
+
+              <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">
+                {data.overview}
+              </p>
+
+              {/**<div className="flex flex-wrap items-center gap-1">
+                Watch Providers
+              </div>/ */}
+            </article>
+          </main>
+
+          <Tabs defaultValue="watch">
+            <div className="scrollbar-hide">
+              <TabsList>
+                <TabsTrigger value="watch">Watch</TabsTrigger>
+                <TabsTrigger disabled value="credits">
+                  Credits
+                </TabsTrigger>
+                <TabsTrigger disabled value="images">
+                  Images
+                </TabsTrigger>
+                <TabsTrigger disabled value="videos">
+                  Videos
+                </TabsTrigger>
+              </TabsList>
             </div>
-          </div>
-          <div className="mt-2">
-            <strong>Overview:</strong>
-            <div className="flex">{data.overview || "Not found"}</div>
-          </div>
+            <TabsContent value="watch" className="mt-4">
+              <VideoPlayer id={id} />
+            </TabsContent>
+            <TabsContent value="credits" className="mt-4">
+              Credits
+            </TabsContent>
+
+            <TabsContent value="images" className="mt-4">
+              IMAges
+            </TabsContent>
+
+            <TabsContent value="videos" className="mt-4">
+              videos
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>

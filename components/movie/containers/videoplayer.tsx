@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 type VideoSourceKey =
   | "vidsrc"
-  | "vidsrcvip"
+  | "vidsrcicu"
   | "vidsrcpro"
   | "vidsrcin"
   | "superembed";
@@ -22,8 +22,8 @@ export default function VideoPlayer({ id }: any) {
   const [loading, setLoading] = useState(false)
 
   const videoSources: Record<VideoSourceKey, string> = {
-    vidsrc: `https://vidsrc.icu/embed/movie/${id}`,
-    vidsrcvip: `https://vidsrc.vip/embed/movie/${id}`,
+    vidsrc: `https://vidsrc.vip/embed/movie/${id}`,
+    vidsrcicu: `https://vidsrc.icu/embed/movie/${id}`,
     vidsrcpro: `https://vidsrc.pro/embed/movie/${id}`,
     vidsrcin: `https://vidsrc.in/embed/movie/${id}`,
     superembed: `https://multiembed.mov/?video_id=${id}&tmdb=1`,
@@ -46,7 +46,7 @@ export default function VideoPlayer({ id }: any) {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="vidsrc">VidSrc</SelectItem>
-            <SelectItem value="vidsrcvip">VidSrc.Vip</SelectItem>
+            <SelectItem value="vidsrcicu">VidSrc.icu</SelectItem>
             <SelectItem value="vidsrcpro">Vidsrc.pro</SelectItem>
             <SelectItem value="vidsrcin">Vid.In</SelectItem>
             <SelectItem value="superembed">SuperEmbed</SelectItem>

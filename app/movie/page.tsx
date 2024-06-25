@@ -5,13 +5,8 @@ import NowPlaying from "@/components/movie/card/nowplaying";
 import Upcoming from "@/components/movie/card/upcoming";
 import TopRated from "@/components/movie/card/toprated";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-const Carousal = dynamic(() => import("@/components/carousal"), {
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+const Carousal = dynamic(() => import("@/components/movie/carousal"), {
   ssr: false,
   loading: () => (
     <>

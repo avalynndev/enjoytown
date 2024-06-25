@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Poster } from "@/components/poster";
+import { Poster } from "@/components/common/poster";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import VideoPlayer from "@/components/movie/containers/videoplayer";
@@ -14,8 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { cn } from '@/lib/utils'
 
-const DetailsContainer = ({ data,id }: any) => {
-  const embed = false;
+const DetailsContainer = ({ data,id, embed }: any) => {
   return (
     <div className="">
       <div className={cn("mx-auto max-w-6xl", embed ? "p-0" : "md:pt-4")}>
@@ -38,7 +37,7 @@ const DetailsContainer = ({ data,id }: any) => {
 
         <div className="mx-auto my-8 max-w-4xl space-y-8 p-4 md:space-y-12 md:p-0 ">
           <main className="flex flex-col gap-4 md:flex-row">
-            <aside className="-mt-24 w-full space-y-2 lg:-mt-32 md:w-1/2 lg:w-1/3">
+            <aside className="-mt-24 w-full space-y-2  md:-mt-32 md:w-1/3">
               <Poster url={data.poster_path} alt={data.title} />
             </aside>
 
@@ -106,11 +105,17 @@ const DetailsContainer = ({ data,id }: any) => {
                 <TabsTrigger disabled value="videos">
                   Videos
                 </TabsTrigger>
-                <TabsTrigger value="download">Download</TabsTrigger>
               </TabsList>
             </div>
             <TabsContent value="watch" className="mt-4">
               <VideoPlayer id={id} />
+              <div className="pb-4">
+                <div className="flex flex-col text-center items-center justify-center">
+                  <Link href={`https://dl.vidsrc.vip/movie/${id}`}>
+                    <Button>Download Movie</Button>
+                  </Link>
+                </div>
+              </div>
             </TabsContent>
             <TabsContent value="credits" className="mt-4">
               Credits
@@ -122,15 +127,6 @@ const DetailsContainer = ({ data,id }: any) => {
 
             <TabsContent value="videos" className="mt-4">
               videos
-            </TabsContent>
-            <TabsContent value="download" className="mt-4">
-              <div className="pb-4">
-                <div className="flex flex-col text-center items-center justify-center">
-                  <Link href={`https://dl.vidsrc.vip/movie/${id}`}>
-                    <Button>Download Movie</Button>
-                  </Link>
-                </div>
-              </div>
             </TabsContent>
           </Tabs>
         </div>

@@ -6,6 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -20,7 +22,7 @@ export default function AnimeCard({ anime }: any) {
         </CardHeader>
         <CardContent>
           <Image
-            className="object-cover rounded-xl w-auto object-cover transition-all aspect-[3/4] rounded-md"
+            className="object-cover rounded-xl w-auto h-[230px] w-[270px] h-2/4 object-cover transition-all aspect-[3/4] rounded-md"
             src={anime.image}
             width={160}
             height={160}

@@ -6,7 +6,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Show } from "@/types";
-import CarousalCard from "@/components/card";
+import CarousalCard from "@/components/common/card";
 import { fetchCarousalData } from "@/lib/fetch";
 
 export default async function CarousalComponent() {
