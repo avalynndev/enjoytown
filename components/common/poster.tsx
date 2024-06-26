@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Image as LucideImage } from "lucide-react";
-import { tmdbImage } from "@/utils/tmdb-image";
 import { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +24,7 @@ export const Poster = ({ url, alt, className, ...props }: PosterProps) => {
           loading="lazy"
           sizes="100%"
           alt={alt}
-          src={tmdbImage(url)}
+          src={`https://image.tmdb.org/t/p/original${url}`}
         />
       ) : (
         <LucideImage size={24} />

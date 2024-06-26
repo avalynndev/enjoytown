@@ -14,7 +14,7 @@ const Carousal = dynamic(() => import("@/components/movie/carousal"), {
         <Skeleton className="absolute inset-0" />
       </div>
       <div className="relative h-[70vh] md:flex w-full hidden mx-auto">
-        <Skeleton className="object-cover rounded-xl transition-all w-[300vh] relative h-[70vh] container grid items-center gap-6 pb-8 pt-6 md:py-10" />
+        <Skeleton className="object-cover rounded-xl transition-all w-full relative h-[70vh] container grid items-center gap-6 pb-8 pt-6 md:py-10" />
       </div>
     </>
   ),

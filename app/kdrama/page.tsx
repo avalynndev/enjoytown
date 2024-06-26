@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { GlowingStarsBackgroundCard } from "@/components/ui/glowing-stars";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState, useEffect, useCallback } from "react";
 import { Icons } from "@/components/common/icons";
@@ -43,17 +44,14 @@ export default function DramaSearch() {
 
   return (
     <div className="container gap-6 pb-8 pt-6 md:py-10 flex items-center flex-col text-center">
-      <div className="my-8 mx-auto max-w-7xl h-[40vh] overflow-hidden border rounded-lg md:rounded-xl">
-        <img
-          className="h-full not-prose w-full object-cover object-bottom"
-          src={
-            "https://pooledink.com/wp-content/uploads/2022/04/kdrama-banner.png?w=920"
-          }
-          width={920}
-          height={80}
-          alt="hero image"
-        />
-      </div>
+      <GlowingStarsBackgroundCard/>
+        <div className="flex  flex-col  max-w-6xl w-full px-4 mx-auto  justify-center  items-center ">
+          <div className="flex justify-end flex-col">
+            <h2 className="mb-10  text-2xl text-center sm:text-4xl font-bold  ">
+              Search for k-dramas..
+            </h2>
+          </div>
+        </div>
       <div className="flex w-full max-w-sm items-center space-x-2">
         <input
           placeholder="Search for drama"

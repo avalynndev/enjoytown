@@ -122,7 +122,7 @@ const DetailsContainer = ({ data,id, embed }: any) => {
             </TabsContent>
 
             <TabsContent value="images" className="mt-4">
-              IMAges
+              Images
             </TabsContent>
 
             <TabsContent value="videos" className="mt-4">

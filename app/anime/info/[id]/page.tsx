@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 import DetailsContainer from "@/components/anime/container/details";
-import EpisodeContainer from "@/components/anime/container/episode";
 
 import { url } from "@/config/url";
 
@@ -45,7 +44,6 @@ const Info = ({ params }: any) => {
           ) : (
             <div>
               <DetailsContainer key={`details-${data?.id}`} data={data} />
-              <EpisodeContainer key={`episodes-${data?.id}`} data={data} />
             </div>
           )}
         </div>

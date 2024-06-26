@@ -28,7 +28,7 @@ export const siteConfig = {
   ],
   links: {
     twitter: "https://twitter.com/avalynndev",
-    github: "https://github.com/avalynndev/enjoytown-web",
+    github: "https://github.com/avalynndev/enjoytown",
     enjoytown: "/",
   },
 };

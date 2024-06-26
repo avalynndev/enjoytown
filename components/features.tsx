@@ -79,7 +79,7 @@ export const HomeFeatures = () => {
             icon={MessageSquare}
             title={"Reviews"}
             description={
-              "Write reviews about what you're watching and let the world know your opinion."
+              "Write reviews about what you are watching and let the world know your opinion."
             }
             className="col-span-1"
           >

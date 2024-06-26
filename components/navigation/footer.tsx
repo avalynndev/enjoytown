@@ -35,7 +35,7 @@ export const Footer = () => {
           <div className="space-y-1">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <Icons.orbit className="h-6 w-6" />
+                <Icons.clapperboard className="h-6 w-6" />
                 <h2 className="text-2xl font-bold">Enjoytown</h2>
               </div>
 

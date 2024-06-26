@@ -8,14 +8,5 @@ export default async function DramaInfo({ params }: any) {
   if (!info.episodes || info.episodes.length == 0) {
     console.log("No Data");
   }
-  return (
-    <div key={id}>
-      {info && (
-        <>
-          <DetailsContainer data={info} />
-          <EpisodeContainer data={info.episodes} id={id} />
-        </>
-      )}
-    </div>
-  );
+  return <div key={id}>{info && <DetailsContainer data={info} />}</div>;
 }

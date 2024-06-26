@@ -3,7 +3,7 @@ import {
   Moon,
   Search,
   SunMedium,
-  Orbit,
+  Clapperboard,
   PawPrint,
   CircleCheckBig,
   type Icon as LucideIcon,
@@ -14,7 +14,7 @@ export type Icon = typeof LucideIcon;
 export const Icons = {
   sun: SunMedium,
   moon: Moon,
-  orbit: Orbit,
+  clapperboard: Clapperboard,
   search: Search,
   paw: PawPrint,
   check: CircleCheckBig,
