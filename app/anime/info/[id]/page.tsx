@@ -10,10 +10,16 @@ const Info = ({ params }: any) => {
   const { id } = params;
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<any>();
+  const [watch_data, setWatchData] = useState<any>();
 
   const fetchDetails = useCallback(async () => {
     try {
-      const response = await axios.get(url.info + id);
+      const response = await axios.get(
+        "https://consumet-jade.vercel.app/meta/anilist/info" +
+          id +
+          "?provider=gogoanime"
+      );
+      setWatchData(response.data);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching details:", error);
@@ -36,16 +42,13 @@ const Info = ({ params }: any) => {
         </div>
       ) : (
         <div>
-          {!data ? (
-            <div className="flex flex-col items-center justify-center h-screen">
-              <div className="text-4xl font-bold mb-4">No Results Found</div>
-              <div className="text-gray-500">Took a wrong turn?</div>
-            </div>
-          ) : (
             <div>
-              <DetailsContainer key={`details-${data?.id}`} data={data} />
+              <DetailsContainer
+                key={`details-${data?.id}`}
+                data={data}
+                watch_data={watch_data}
+              />
             </div>
-          )}
         </div>
       )}
     </div>

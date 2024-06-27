@@ -10,8 +10,9 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-const DetailsContainer = ({ data, id, embed }: any) => {
+const DetailsContainer = ({ data, watch_data, id, embed }: any) => {
   if (!data) {
+    console.log(data)
     return <div>No Data!</div>;
   }
   return (
@@ -68,7 +69,7 @@ const DetailsContainer = ({ data, id, embed }: any) => {
                 <h1 className="text-lg font-bold md:text-4xl">{data.title}</h1>
 
                 <div className="flex flex-wrap items-center gap-2">
-                  {data.genres.length > 0 && (
+                  {data.genres && (
                     <>
                       {data.genres.map((genre: any) => {
                         return (
@@ -123,7 +124,7 @@ const DetailsContainer = ({ data, id, embed }: any) => {
                 </TabsList>
               </div>
               <TabsContent value="watch" className="mt-4">
-                <EpisodeContainer key={`episodes-${data?.id}`} data={data} />
+                
               </TabsContent>
               <TabsContent value="credits" className="mt-4">
                 Credits
