@@ -74,12 +74,9 @@ export default async function Home() {
               watch
             </p>
             <div className="flex gap-2">
-              <Link href={`/explore`}>
-                <Button variant="default">Explore</Button>
-              </Link>
-              <Link href={`/a`}>
-                <Button variant="outline" disabled>
-                  Create Account
+              <Link href={`/auth/register`}>
+                <Button disabled>
+                  Sign up
                 </Button>
               </Link>
               <Link href={`/changelog`}>
@@ -90,11 +87,11 @@ export default async function Home() {
         </section>
       </div>
       <section className="pb-12 py-8">
-        <ScrollArea className="mx-auto aspect-[9/16] w-full max-w-6xl overflow-y-auto rounded-md border bg-background shadow-lg dark:shadow-none md:aspect-[16/9]">
+        <div className="mx-auto aspect-[9/16] w-full max-w-6xl overflow-hidden rounded-md border bg-background shadow-lg dark:shadow-none md:aspect-[16/9]">
           <Suspense fallback={<Skeleton className="h-full w-full" />}>
             <DetailsContainer data={data} id={id} embed />
           </Suspense>
-        </ScrollArea>
+        </div>
       </section>
       <HomeFeatures />
       <section className="space-y-8">
