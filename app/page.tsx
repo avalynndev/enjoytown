@@ -1,10 +1,10 @@
 import { Pattern } from "@/components/ui/pattern";
-import { SiteHeader } from "@/components/navigation/site-header";
+import { SiteHeader } from "@/components/navbar/site-header";
 import * as Craft from "@/components/ui/craft";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getInfoURL } from "@/config/url";
-import DetailsContainer from "@/components/movie/containers/details";
+import DetailsContainer from "@/components/containers/movie/details";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -75,9 +75,7 @@ export default async function Home() {
             </p>
             <div className="flex gap-2">
               <Link href={`/auth/register`}>
-                <Button disabled>
-                  Sign up
-                </Button>
+                <Button disabled>Sign up</Button>
               </Link>
               <Link href={`/changelog`}>
                 <Button variant="outline">Changelog</Button>

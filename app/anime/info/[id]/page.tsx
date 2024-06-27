@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
-import DetailsContainer from "@/components/anime/container/details";
+import DetailsContainer from "@/components/containers/anime/details";
 
 import { url } from "@/config/url";
 

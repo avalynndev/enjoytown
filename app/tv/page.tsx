@@ -1,12 +1,12 @@
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
-import Popular from "@/components/tv/card/popular";
-import AiringToday from "@/components/tv/card/airingtoday";
-import OnTheAir from "@/components/tv/card/ontheair";
-import TopRated from "@/components/tv/card/toprated";
+import Popular from "@/components/sections/tv/popular";
+import AiringToday from "@/components/sections/tv/airingtoday";
+import OnTheAir from "@/components/sections/tv/ontheair";
+import TopRated from "@/components/sections/tv/toprated";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-const Carousal = dynamic(() => import("@/components/tv/carousal"), {
+const Carousal = dynamic(() => import("@/components/carousal/tv"), {
   ssr: false,
   loading: () => (
     <>

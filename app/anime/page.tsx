@@ -4,8 +4,8 @@ import axios from "axios";
 
 import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import RecentEpisodeCard from "@/components/anime/card/recent-episode";
-import AnimeCard from "@/components/anime/card/main";
+import RecentEpisodeCard from "@/components/anime-card/recent-episode";
+import AnimeCard from "@/components/anime-card/main";
 
 import Image from "next/image";
 import Link from "next/link";

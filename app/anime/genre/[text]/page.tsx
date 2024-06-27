@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback, Suspense } from "react";
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { url } from "@/config/url";
-import AnimeCard from "@/components/anime/card/main";
+import AnimeCard from "@/components/anime-card/main";
 import axios from "axios";
 import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
 import Link from "next/link";

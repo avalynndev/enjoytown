@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/movie/movie-nav";
+import { SiteHeader } from "@/components/navbar/movie-nav";
 
 export default function RootLayout({
   children,

@@ -1,11 +1,11 @@
 import { getTVInfoURL } from "@/config/url";
-import DetailsContainer from "@/components/tv/containers/details";
+import DetailsContainer from "@/components/containers/tv/details";
 
 export default async function Info({ params }: any) {
   const id = params.id;
   const data = await get_tv_info(id);
 
-  return <DetailsContainer data={data} id={id}/>;
+  return <DetailsContainer data={data} id={id} />;
 }
 
 const get_tv_info = async (id: any) => {

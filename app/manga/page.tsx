@@ -4,7 +4,7 @@ import { GlowingStarsBackgroundCard } from "@/components/ui/glowing-stars";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState, useEffect, useCallback } from "react";
 import { Icons } from "@/components/common/icons";
-import { GetSearchedAnime, PreFetchMangaInfo } from "@/lib/fetch";
+import { GetSearchedAnime, PreFetchMangaInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

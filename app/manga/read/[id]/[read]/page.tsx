@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { PreFetchChaterLinks, fetchManga } from "@/lib/fetch";
+import { PreFetchChaterLinks, fetchManga } from "@/fetch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Spinner } from "@/components/ui/spinner";

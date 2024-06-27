@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Pattern } from "@/components/ui/pattern";
-import { SiteHeader } from "@/components/navigation/site-header";
+import { SiteHeader } from "@/components/navbar/site-header";
 import * as Craft from "@/components/ui/craft";
 import Link from "next/link";
 import { Button } from "@/components/ui/button"; // Add this import statement

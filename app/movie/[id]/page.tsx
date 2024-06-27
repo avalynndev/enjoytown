@@ -1,5 +1,5 @@
 import { getInfoURL } from "@/config/url";
-import DetailsContainer from "@/components/movie/containers/details";
+import DetailsContainer from "@/components/containers/movie/details";
 
 export default async function Info({ params }: any) {
   const id = params.id;

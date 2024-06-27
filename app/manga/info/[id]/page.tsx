@@ -1,7 +1,8 @@
 import { format } from "date-fns";
-import Image from 'next/image'
+import Image from "next/image";
 import { Image as ImageIcon } from "lucide-react";
-import { Image as LucideImage } from "lucide-react";import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Image as LucideImage } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
@@ -13,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
-import { PreFetchChaterLinks } from "@/lib/fetch";
+import { PreFetchChaterLinks } from "@/fetch";
 import Link from "next/link";
 import {
   Card,
@@ -40,7 +41,7 @@ export default async function MangaInfo({ params }: any) {
   }
 
   PreFetchChaterLinks(data.chapters);
-  const embed=false
+  const embed = false;
 
   return (
     <div>

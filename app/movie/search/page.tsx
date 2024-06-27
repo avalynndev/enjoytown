@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import { FaSearch } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { Movie_Search } from "@/config/url";
-import { FetchMovieInfo } from "@/lib/fetch";
+import { FetchMovieInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ export default function Search() {
   // Debounce function to limit the rate of API calls
   const debounce = (func: (...args: any[]) => void, delay: number) => {
     let debounceTimer: NodeJS.Timeout;
-    return function(this: void, ...args: any[]) {
+    return function (this: void, ...args: any[]) {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => func(...args), delay);
     };

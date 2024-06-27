@@ -4,7 +4,7 @@ import { GlowingStarsBackgroundCard } from "@/components/ui/glowing-stars";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState, useEffect, useCallback } from "react";
 import { Icons } from "@/components/common/icons";
-import { FetchSearchTitle, FetchAnimeInfo } from "@/lib/fetch";
+import { FetchSearchTitle, FetchAnimeInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -44,14 +44,14 @@ export default function DramaSearch() {
 
   return (
     <div className="container gap-6 pb-8 pt-6 md:py-10 flex items-center flex-col text-center">
-      <GlowingStarsBackgroundCard/>
-        <div className="flex  flex-col  max-w-6xl w-full px-4 mx-auto  justify-center  items-center ">
-          <div className="flex justify-end flex-col">
-            <h2 className="mb-10  text-2xl text-center sm:text-4xl font-bold  ">
-              Search for k-dramas..
-            </h2>
-          </div>
+      <GlowingStarsBackgroundCard />
+      <div className="flex  flex-col  max-w-6xl w-full px-4 mx-auto  justify-center  items-center ">
+        <div className="flex justify-end flex-col">
+          <h2 className="mb-10  text-2xl text-center sm:text-4xl font-bold  ">
+            Search for k-dramas..
+          </h2>
         </div>
+      </div>
       <div className="flex w-full max-w-sm items-center space-x-2">
         <input
           placeholder="Search for drama"

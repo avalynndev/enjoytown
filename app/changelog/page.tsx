@@ -1,6 +1,6 @@
 "use client";
 import { Pattern } from "@/components/ui/pattern";
-import { SiteHeader } from "@/components/navigation/site-header";
+import { SiteHeader } from "@/components/navbar/site-header";
 import { useRouter } from "next/navigation";
 import * as Craft from "@/components/ui/craft";
 

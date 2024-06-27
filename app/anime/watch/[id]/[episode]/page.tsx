@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
-import EpisodeContainer from "@/components/anime/container/episode";
+import EpisodeContainer from "@/components/containers/anime/episode";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Breadcrumb,
@@ -68,27 +68,27 @@ const Watch = ({ params }: any) => {
             <div className="text-gray-500">Took a wrong turn?</div>
           </div>
         )}
-          <div className="pb-4">
-            <div className="flex flex-col text-center items-center justify-center">
-              <div className="flex flex-col flex-wrap pb-2">
-                <Breadcrumb>
-                  <BreadcrumbList>
-                    <BreadcrumbItem>
-                      <BreadcrumbLink href={`/anime/info/${id}`}>
-                        {id.charAt(0).toUpperCase() + id.slice(1)}
-                      </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                      <BreadcrumbPage>{episode}</BreadcrumbPage>
-                    </BreadcrumbItem>
-                  </BreadcrumbList>
-                </Breadcrumb>
-              </div>
+        <div className="pb-4">
+          <div className="flex flex-col text-center items-center justify-center">
+            <div className="flex flex-col flex-wrap pb-2">
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href={`/anime/info/${id}`}>
+                      {id.charAt(0).toUpperCase() + id.slice(1)}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>{episode}</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
             </div>
           </div>
-          <Skeleton className="mx-auto px-4 pt-10 w-full h-[500px]" />
         </div>
+        <Skeleton className="mx-auto px-4 pt-10 w-full h-[500px]" />
+      </div>
     );
   }
   const defaultSourceUrl = watchData.sources

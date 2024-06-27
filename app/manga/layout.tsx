@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/manga/manga-nav";
+import { SiteHeader } from "@/components/navbar/manga-nav";
 
 export default function RootLayout({
   children,

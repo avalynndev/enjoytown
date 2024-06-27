@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/kdrama/kdrama-nav";
+import { SiteHeader } from "@/components/navbar/kdrama-nav";
 
 export default function RootLayout({
   children,

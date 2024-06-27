@@ -1,6 +1,6 @@
-import DetailsContainer from "@/components/kdrama/containers/details";
-import EpisodeContainer from "@/components/kdrama/containers/episode";
-import { getDramaInfo } from "@/lib/fetch";
+import DetailsContainer from "@/components/containers/kdrama/details";
+import EpisodeContainer from "@/components/containers/kdrama/episode";
+import { getDramaInfo } from "@/fetch";
 
 export default async function DramaInfo({ params }: any) {
   const id = decodeURIComponent(params.id);
