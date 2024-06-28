@@ -27,7 +27,7 @@ const DetailsContainer = ({ data }: any) => {
           >
             <div
               style={{
-                backgroundImage: `url('')`,
+                backgroundImage: `url('${data.cover}')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -50,7 +50,7 @@ const DetailsContainer = ({ data }: any) => {
                       className="object-fill"
                       loading="lazy"
                       sizes="100%"
-                      alt={data.title}
+                      alt={data.title["english"] || data.title["romanji"]}
                       src={data.image}
                     />
                   ) : (
@@ -66,7 +66,9 @@ const DetailsContainer = ({ data }: any) => {
                   </span>
                 )}
 
-                <h1 className="text-lg font-bold md:text-4xl">{data.title}</h1>
+                <h1 className="text-lg font-bold md:text-4xl">
+                  {data.title["english"] || data.title["romanji"]}
+                </h1>
 
                 <div className="flex flex-wrap items-center gap-2">
                   {data.genres && (
@@ -123,9 +125,7 @@ const DetailsContainer = ({ data }: any) => {
                   </TabsTrigger>
                 </TabsList>
               </div>
-              <TabsContent value="watch" className="mt-4">
-                
-              </TabsContent>
+              <TabsContent value="watch" className="mt-4"></TabsContent>
               <TabsContent value="credits" className="mt-4">
                 Credits
               </TabsContent>

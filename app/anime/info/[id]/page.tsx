@@ -1,4 +1,5 @@
 import DetailsContainer from "@/components/containers/anime/details";
+import { env } from "@/env.mjs";
 
 export default async function Info({ params }: any) {
   const id = params.id;
@@ -9,7 +10,7 @@ export default async function Info({ params }: any) {
 
 const get_movie_info = async (id: any) => {
   const res = await fetch(
-    `https://consumet-jade.vercel.app/meta/anilist/info/${id}`,
+    `${env.CONSUMET_API_ANILIST_URL}/info/${id}`,
     { next: { revalidate: 21620 } }
   );
   const data = await res.json();

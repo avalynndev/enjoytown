@@ -7,6 +7,7 @@ export const env = createEnv({
   shared: {
     DOWNLOAD_API_URL: z.string().url(),
     CONSUMET_API_URL: z.string().url(),
+    CONSUMET_API_ANILIST_URL: z.string().url(),
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),
