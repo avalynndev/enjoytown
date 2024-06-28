@@ -1,7 +1,5 @@
-import { format } from "date-fns";
 import Image from "next/image";
 import { Image as ImageIcon } from "lucide-react";
-import { Image as LucideImage } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -82,7 +80,7 @@ export default async function MangaInfo({ params }: any) {
                       src={data.image}
                     />
                   ) : (
-                    <LucideImage size={24} />
+                    <ImageIcon size={24} />
                   )}
                 </div>
               </aside>
@@ -135,10 +133,6 @@ export default async function MangaInfo({ params }: any) {
                 <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">
                   {description}
                 </p>
-
-                {/**<div className="flex flex-wrap items-center gap-1">
-                Watch Providers
-              </div>/ */}
               </article>
             </main>
 
@@ -214,15 +208,13 @@ export default async function MangaInfo({ params }: any) {
                         <div key={index}>
                           <Link
                             href={
-                              /**
-                               * item.type == "MOVIE"
+                              item.type == "MOVIE"
                                 ? `/anime/${item.id}`
                                 : item.type == "MANGA"
-                                ? `/manga/${item.id}`
+                                ? `/manga/info/${item.id}`
                                 : item.type == "TV"
                                 ? `/anime/${item.id}`
                                 : ``
-                               */ ""
                             }
                           >
                             <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
@@ -242,8 +234,8 @@ export default async function MangaInfo({ params }: any) {
                               )}
                             </div>
                             <div className="space-y-1.5">
-                              <div className="flex items-start justify-between gap-1">
-                                <span className="">
+                              <div className="flex items-start justify-between gap-2 pt-1">
+                                <span className="trucate line-clamp-1 pt-1">
                                   {item.title["english"] ||
                                     item.title["romaji"]}
                                 </span>
@@ -282,15 +274,13 @@ export default async function MangaInfo({ params }: any) {
                         <div key={index}>
                           <Link
                             href={
-                              /**
-                               * item.type == "MOVIE"
+                              item.type == "MOVIE"
                                 ? `/anime/${item.id}`
                                 : item.type == "MANGA"
-                                ? `/manga/${item.id}`
+                                ? `/manga/info/${item.id}`
                                 : item.type == "TV"
                                 ? `/anime/${item.id}`
                                 : ``
-                               */ ""
                             }
                           >
                             <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
@@ -310,8 +300,8 @@ export default async function MangaInfo({ params }: any) {
                               )}
                             </div>
                             <div className="space-y-1.5">
-                              <div className="flex items-start justify-between gap-1">
-                                <span className="">
+                              <div className="flex items-start justify-between gap-2 pt-1">
+                                <span className="trucate line-clamp-1 pt-1">
                                   {item.title["english"] ||
                                     item.title["romaji"]}
                                 </span>

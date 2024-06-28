@@ -1,14 +1,17 @@
 "use client";
-import { cn } from "@/lib/utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
-import { GlowingStarsBackgroundCard } from "@/components/ui/glowing-stars";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState, useEffect, useCallback } from "react";
-import { Icons } from "@/components/common/icons";
 import { GetSearchedAnime, PreFetchMangaInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   const placeholders = [
@@ -26,7 +29,7 @@ export default function Hero() {
     "Haikyuu!! (2014-2020)",
     "Blue Exorcist (2011-2016)",
     "Sword Art Online: Alicization (2018-2019)",
-    "The Rising of the Shield Hero (2019-present)"
+    "The Rising of the Shield Hero (2019-present)",
   ];
   const [title, setTitle] = useState("");
   const [data, setInfoTitle] = useState<any[]>([]);
@@ -52,10 +55,6 @@ export default function Hero() {
   };
 
   const debouncedSearch = useCallback(debounce(handleSearch, 500), []);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("submitted");
-  };
 
   // Effect to trigger search when title changes
   useEffect(() => {
@@ -65,18 +64,17 @@ export default function Hero() {
   }, [title, debouncedSearch]);
   return (
     <>
-      <div className="h-[40rem] flex flex-col justify-center  items-center px-4">
+      <div className="h-[30rem] flex flex-col justify-center  items-center px-4">
         <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
-          Ask Aceternity UI Anything
+          Search for Mangas.. 📖
         </h2>
         <PlaceholdersAndVanishInput
           placeholders={placeholders}
           onChange={(event) => setTitle(event.target.value)}
-          onSubmit={onSubmit}
+          onSubmit={() => handleSearch(title)}
         />
       </div>
-      <div className="container gap-6 pb-8 md:py-10 flex items-center flex-col text-center">
-
+      <div className="container gap-6 pb-8 flex items-center flex-col ">
         {loadingText && (
           <div className="w-full gap-x-2 flex justify-center items-center">
             <div className="w-5 bg-[#d991c2] animate-pulse h-5 rounded-full"></div>
@@ -84,7 +82,7 @@ export default function Hero() {
             <div className="w-5 h-5 animate-pulse bg-[#6756cc] rounded-full"></div>
           </div>
         )}
-        <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="mt-2  grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {data &&
             data.map((item: any, index: any) => {
               return (
@@ -94,32 +92,7 @@ export default function Hero() {
                   style={{ textDecoration: "none" }}
                   key={index}
                 >
-                  <Card className="text-center items-center hover:scale-105 transition-all duration-300">
-                    <CardHeader>
-                      <CardTitle className="text-xs h-6 truncate">
-                        {item.title["english"] || item.title["romaji"]}
-                      </CardTitle>
-                      <div className="flex-col space-x-4 space-y-2">
-                        <span className="right-0 px-2 py-1 bg-foreground text-background rounded-xl text-sm">
-                          Vol:{" "}
-                          {item.volumes !== undefined && item.volumes !== null
-                            ? item.volumes
-                            : "?"}
-                        </span>
-                        <span className="left-0 px-2 py-1 bg-foreground text-background rounded-xl text-sm">
-                          Ch:{" "}
-                          {item.totalChapters !== undefined &&
-                          item.totalChapters !== null
-                            ? item.totalChapters
-                            : "?"}
-                        </span>
-                      </div>
-                      <span className="bottom-3 left-8 right-8 px-7 py-1 bg-foreground text-background rounded-xl text-sm">
-                        {item.status !== undefined && item.status !== null
-                          ? item.status
-                          : "?"}
-                      </span>
-                    </CardHeader>
+                  <Card className="pt-4">
                     <CardContent>
                       <Image
                         className="h-2/4 w-full object-cover rounded-xl transition-all aspect-[3/4]"
@@ -130,6 +103,39 @@ export default function Hero() {
                       />
                     </CardContent>
                   </Card>
+
+                  <div className="space-y-1.5">
+                    <div className="flex items-start justify-between gap-1 px-2 pt-1">
+                      <span className="trucate line-clamp-1 pt-1">
+                        {item.title["english"] || item.title["romaji"]}
+                      </span>
+
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <Badge variant="outline">{item.rating / 10}</Badge>
+                          </TooltipTrigger>
+
+                          <TooltipContent>
+                            <p>{item.status}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
+
+                    <p className="line-clamp-3 text-xs text-muted-foreground px-2 pt-1">
+                      Volumes:{" "}
+                      {item.volumes !== undefined && item.volumes !== null
+                        ? item.volumes
+                        : "?"}{" "}
+                      {""}
+                      Chapters:{" "}
+                      {item.totalChapters !== undefined &&
+                      item.totalChapters !== null
+                        ? item.totalChapters
+                        : "?"}
+                    </p>
+                  </div>
                 </Link>
               );
             })}

@@ -171,6 +171,31 @@ export default function Read({ params }: any) {
               />
             </div>
           ))}
+        <div className="flex items-center mb-4 mt-8 space-x-6 ">
+          <Button
+            onClick={() => navigateChapter("prev")}
+            disabled={
+              data.chapters.findIndex(
+                (chapter: any) => chapter.id === chapterId
+              ) <= 0
+            }
+            className="border border-black px-4 py-2 flex items-center"
+          >
+            &larr; Prev Ch
+          </Button>
+          <Button
+            onClick={() => navigateChapter("next")}
+            disabled={
+              data.chapters.findIndex(
+                (chapter: any) => chapter.id === chapterId
+              ) >=
+              data.chapters.length - 1
+            }
+            className="border border-black px-4 py-2 flex items-center"
+          >
+            Next Ch &rarr;
+          </Button>
+        </div>
       </div>
     </div>
   );

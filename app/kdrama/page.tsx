@@ -1,15 +1,29 @@
 "use client";
-import { cn } from "@/lib/utils";
-import { GlowingStarsBackgroundCard } from "@/components/ui/glowing-stars";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
+import { Card, CardContent, } from "@/components/ui/card";
 import { useState, useEffect, useCallback } from "react";
-import { Icons } from "@/components/common/icons";
 import { FetchSearchTitle, FetchAnimeInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export default function DramaSearch() {
+  const placeholders = [
+    "Naruto (2002-2007)",
+    "Attack on Titan (2013-2023)",
+    "Death Note (2006-2007)",
+    "Demon Slayer: Kimetsu no Yaiba (2019-present)",
+    "My Hero Academia (2016-present)",
+    "Fullmetal Alchemist: Brotherhood (2009-2010)",
+    "Attack on Titan: The Final Season (2020-2023)",
+    "Jujutsu Kaisen (2020-present)",
+    "Sword Art Online (2012-2017)",
+    "Black Clover (2017-present)",
+    "One Piece (1999-present)",
+    "Haikyuu!! (2014-2020)",
+    "Blue Exorcist (2011-2016)",
+    "Sword Art Online: Alicization (2018-2019)",
+    "The Rising of the Shield Hero (2019-present)",
+  ];
   const [title, setTitle] = useState("");
   const [data, setInfoTitle] = useState<any[]>([]);
   const [loadingText, setLoading] = useState<boolean>(false);
@@ -43,69 +57,59 @@ export default function DramaSearch() {
   }, [title, debouncedSearch]);
 
   return (
-    <div className="container gap-6 pb-8 pt-6 md:py-10 flex items-center flex-col text-center">
-      <GlowingStarsBackgroundCard />
-      <div className="flex  flex-col  max-w-6xl w-full px-4 mx-auto  justify-center  items-center ">
-        <div className="flex justify-end flex-col">
-          <h2 className="mb-10  text-2xl text-center sm:text-4xl font-bold  ">
-            Search for k-dramas..
-          </h2>
-        </div>
-      </div>
-      <div className="flex w-full max-w-sm items-center space-x-2">
-        <input
-          placeholder="Search for drama"
-          className={cn(
-            "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-          )}
+    <>
+      <div className="h-[30rem] flex flex-col justify-center  items-center px-4">
+        <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
+          Search for k-drama.. 📺
+        </h2>
+        <PlaceholdersAndVanishInput
+          placeholders={placeholders}
           onChange={(event) => setTitle(event.target.value)}
+          onSubmit={() => handleSearch(title)}
         />
-        <Button
-          onClick={async () => {
-            if (title) {
-              await handleSearch(title);
-            }
-          }}
-          variant="ghost"
-          size="icon"
-        >
-          <Icons.search className="h-6 w-6" />
-        </Button>
       </div>
+      <div className="container gap-6 pb-8 flex items-center flex-col ">
+        {loadingText && (
+          <div className="w-full gap-x-2 flex justify-center items-center">
+            <div className="w-5 bg-[#d991c2] animate-pulse h-5 rounded-full"></div>
+            <div className="w-5 animate-pulse h-5 bg-[#9869b8] rounded-full"></div>
+            <div className="w-5 h-5 animate-pulse bg-[#6756cc] rounded-full"></div>
+          </div>
+        )}
+        <div className="mt-2  grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {data &&
+            data.map((item: any, index: any) => {
+              return (
+                <Link
+                  shallow
+                  href={`/kdrama/${encodeURIComponent(item.id)}`}
+                  style={{ textDecoration: "none" }}
+                  key={index}
+                >
+                  <Card className="pt-4">
+                    <CardContent>
+                      <Image
+                        className="h-2/4 w-full object-cover rounded-xl transition-all aspect-[3/4]"
+                        src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
+                        width={160}
+                        height={160}
+                        alt="Manga Poster"
+                      />
+                    </CardContent>
+                  </Card>
 
-      {loadingText && (
-        <div className="w-full gap-x-2 flex justify-center items-center">
-          <div className="w-5 bg-[#d991c2] animate-pulse h-5 rounded-full"></div>
-          <div className="w-5 animate-pulse h-5 bg-[#9869b8] rounded-full"></div>
-          <div className="w-5 h-5 animate-pulse bg-[#6756cc] rounded-full"></div>
+                  <div className="space-y-1.5">
+                    <div className="flex items-start justify-between gap-1 px-2 pt-1">
+                      <span className="trucate line-clamp-1 pt-1">
+                        {item.title}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
         </div>
-      )}
-
-      <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        {data &&
-          data.map((item, index) => (
-            <Link href={`/kdrama/${encodeURIComponent(item.id)}`} key={index}>
-              <Card className="text-center items-center hover:scale-105 transition-all duration-300">
-                <CardHeader>
-                  <CardTitle className="text-xs">
-                    {item.title.length > 24
-                      ? item.title.slice(0, 20) + "..."
-                      : item.title.replace(/\s*\((\d{4})\)$/, "")}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Image
-                    src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
-                    width={160}
-                    height={160}
-                    className="h-2/4 w-full object-cover transition-all aspect-[3/4] rounded-md"
-                    alt="Drama Poster"
-                  />
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
       </div>
-    </div>
+    </>
   );
 }
