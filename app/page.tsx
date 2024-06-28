@@ -85,7 +85,7 @@ export default async function Home() {
         </section>
       </div>
       <section className="pb-12 py-8">
-        <div className="mx-auto aspect-[9/16] w-full max-w-6xl overflow-hidden rounded-md border bg-background shadow-lg dark:shadow-none md:aspect-[16/9]">
+        <div className="mx-auto aspect-auto w-full max-w-6xl overflow-hidden rounded-md border bg-background shadow-lg dark:shadow-none md:aspect-">
           <Suspense fallback={<Skeleton className="h-full w-full" />}>
             <DetailsContainer data={data} id={id} embed />
           </Suspense>
