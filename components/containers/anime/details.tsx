@@ -4,17 +4,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Image as LucideImage } from "lucide-react";
 import { cn } from "@/lib/utils";
-import EpisodeContainer from "@/components/containers/anime/episode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
-const DetailsContainer = ({ data, watch_data, id, embed }: any) => {
+const DetailsContainer = ({ data }: any) => {
+  console.log(data)
   if (!data) {
     console.log(data)
     return <div>No Data!</div>;
   }
+  const embed=false;
   return (
     <>
       <div className="">
