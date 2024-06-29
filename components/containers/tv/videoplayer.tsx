@@ -3,7 +3,7 @@ import * as React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-const API_KEY = "171fe27dbfecc58e2a18fbced644cda9";
+import { API_KEY } from "@/config/url";
 
 interface Season {
   season_number: number;

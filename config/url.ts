@@ -10,7 +10,7 @@ export const url = {
   genre: "https://animetize-api.vercel.app/genre",
 };
 
-export const API_KEY = "171fe27dbfecc58e2a18fbced644cda9";
+export const API_KEY = process.env.TMDB_API_KEY;
 export const PROXY = "https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=";
 export const Tv_OntheAir = `${PROXY}https://api.themoviedb.org/3/tv/on_the_air?api_key=${API_KEY}`;
 export const Tv_NowPlaying = `${PROXY}https://api.themoviedb.org/3/tv/now_playing?api_key=${API_KEY}`;
