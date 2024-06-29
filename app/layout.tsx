@@ -6,7 +6,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import { cn } from "@/lib/utils";
-import "./globals.css";
+import "@/styles/globals.css";
 
 const fontSans = FontSans({
   subsets: ["latin"],

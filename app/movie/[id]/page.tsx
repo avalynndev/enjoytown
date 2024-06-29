@@ -1,11 +1,11 @@
 import { getInfoURL } from "@/config/url";
-import DetailsContainer from "@/components/movie/containers/details";
+import DetailsContainer from "@/components/containers/movie/details";
 
 export default async function Info({ params }: any) {
   const id = params.id;
   const data = await get_movie_info(id);
 
-  return <DetailsContainer data={data} id={id} />;
+  return <DetailsContainer data={data} id={id} embed="false" />;
 }
 
 const get_movie_info = async (id: any) => {

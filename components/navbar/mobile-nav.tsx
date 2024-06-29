@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { mobileConfig } from "@/config/mobile";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -33,7 +33,7 @@ export function MobileNav() {
             className="flex items-center"
             onOpenChange={setOpen}
           >
-            <Icons.orbit className="mr-2 h-4 w-4" />
+            <Icons.clapperboard className="mr-2 h-4 w-4" />
             <span className="font-bold">{siteConfig.name}</span>
           </MobileLink>
           <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">

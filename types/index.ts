@@ -1,4 +1,4 @@
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/common/icons";
 
 export interface Show {
   adult: boolean;

@@ -1,17 +1,12 @@
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
-import Popular from "@/components/movie/card/popular";
-import NowPlaying from "@/components/movie/card/nowplaying";
-import Upcoming from "@/components/movie/card/upcoming";
-import TopRated from "@/components/movie/card/toprated";
+import Popular from "@/components/sections/movie/popular";
+import NowPlaying from "@/components/sections/movie/nowplaying";
+import Upcoming from "@/components/sections/movie/upcoming";
+import TopRated from "@/components/sections/movie/toprated";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-const Carousal = dynamic(() => import("@/components/carousal"), {
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+const Carousal = dynamic(() => import("@/components/carousal/movie"), {
   ssr: false,
   loading: () => (
     <>
@@ -19,7 +14,7 @@ const Carousal = dynamic(() => import("@/components/carousal"), {
         <Skeleton className="absolute inset-0" />
       </div>
       <div className="relative h-[70vh] md:flex w-full hidden mx-auto">
-        <Skeleton className="object-cover rounded-xl transition-all w-[300vh] relative h-[70vh] container grid items-center gap-6 pb-8 pt-6 md:py-10" />
+        <Skeleton className="object-cover rounded-xl transition-all w-full relative h-[70vh] container grid items-center gap-6 pb-8 pt-6 md:py-10" />
       </div>
     </>
   ),

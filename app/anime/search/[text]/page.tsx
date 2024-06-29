@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
 
 import { url } from "@/config/url";
-import AnimeCard from "@/components/anime/card/main";
+import AnimeCard from "@/components/anime-card/main";
 import axios from "axios";
 
 const Search = ({ params }: any) => {

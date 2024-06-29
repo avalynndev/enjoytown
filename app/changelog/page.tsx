@@ -1,11 +1,8 @@
 "use client";
-import Image from "next/image";
-import { Pattern } from "@/components/pattern";
+import { Pattern } from "@/components/ui/pattern";
 import { SiteHeader } from "@/components/navbar/site-header";
 import { useRouter } from "next/navigation";
-import * as Craft from "@/components/craft";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import * as Craft from "@/components/ui/craft";
 
 interface ChangelogEntry {
   version: string;

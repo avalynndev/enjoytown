@@ -16,7 +16,6 @@ import {
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -31,22 +30,22 @@ export function MainNav() {
   return (
     <div className="mr-4 hidden xl:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">
-        <Icons.orbit className="h-6 w-6" />
+        <Clapperboard className="h-6 w-6" />
       </Link>
       <nav className="flex items-center gap-4 text-sm lg:gap-6">
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link href="/explore" legacyBehavior passHref>
+              <Link href="/" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <Home className="h-4 w-4" />
-                  <div className="px-2"> Explore </div>
+                  <div className="px-2"> Home </div>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger>
-                <Clapperboard className="h-4 w-4" />
+                <Tv className="h-4 w-4" />
                 <div className="px-2"> Watch </div>
               </NavigationMenuTrigger>
               <NavigationMenuContent>

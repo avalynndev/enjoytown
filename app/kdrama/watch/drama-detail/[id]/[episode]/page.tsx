@@ -9,12 +9,8 @@ import {
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import React, { useState, useCallback, useEffect } from "react";
-import {
-  getVideoLink,
-  getDramaInfoOnWatch,
-  getDramaDownload,
-} from "@/lib/fetch";
-import WatchEpisodeButtons from "@/components/kdrama/containers/watch-episode";
+import { getVideoLink, getDramaInfoOnWatch, getDramaDownload } from "@/fetch";
+import WatchEpisodeButtons from "@/components/containers/kdrama/watch-episode";
 import { DramaInfo } from "@/types";
 import { Button } from "@/components/ui/button";
 
@@ -22,15 +18,13 @@ const EpisodeContainer = ({ params }: any) => {
   const { id, episode } = params;
   const [isLoading, setLoading] = useState(true);
   const [videoLink, setVideoLink] = useState(null);
-  const [download, setDownloadLink] = useState(null)
+  const [download, setDownloadLink] = useState(null);
   const [info, setDramaInfo] = useState<DramaInfo | null>(null);
 
   const fetchDetails = useCallback(async () => {
     try {
       const episode_link = await getVideoLink(episode, id);
-      const download_link = await getDramaDownload(
-        episode
-      );
+      const download_link = await getDramaDownload(episode);
       const info = await getDramaInfoOnWatch(id);
       setVideoLink(episode_link);
       setDownloadLink(download_link.downloadLink);

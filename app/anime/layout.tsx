@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/anime/anime-nav";
+import { SiteHeader } from "@/components/navbar/anime-nav";
 import { NextUIProvider } from "@nextui-org/react";
 
 export default function RootLayout({

@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/tv/tv-nav";
+import { SiteHeader } from "@/components/navbar/tv-nav";
 
 export default function RootLayout({
   children,
