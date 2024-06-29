@@ -1,53 +1,18 @@
-"use client"
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import Image from "next/image";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-export default function Watch({ id }: any) {
-  const [selectedGroup, setSelectedGroup] = useState(0);
-  const [groupedEpisodes, setGroupedEpisodes] = useState<any[][]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await get_watch_data(id);
-      const grouped = chunkArray(data, 50);
-      setGroupedEpisodes(grouped);
-    };
-
-    fetchData();
-  }, [id]);
-
-  if (!groupedEpisodes.length) {
-    return <div>Loading...</div>;
-  }
-
+export default async function Watch({ id }: any) {
+  const data = await get_watch_data(id);
   return (
-    <div>
-      <div className="mb-4">
-        <label htmlFor="group-select" className="mr-2">
-          Select Group:
-        </label>
-        <select
-          id="group-select"
-          value={selectedGroup}
-          onChange={(e) => setSelectedGroup(Number(e.target.value))}
-          className="border rounded p-2"
-        >
-          {groupedEpisodes.map((_, index) => (
-            <option key={index} value={index}>
-              Group {index + 1}
-            </option>
-          ))}
-        </select>
-      </div>
-
+    <ScrollArea className="h-[40rem] rounded-md border">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {groupedEpisodes[selectedGroup].map((episode: any) => (
+        {data.map((episode: any) => (
           <Link
             key={episode.id}
-            href={`/watch/${episode.id}`}
+            href={`/anime/watch/${id}/${episode.id}`}
             className="relative flex flex-col rounded p-4"
           >
             <div className="relative mb-4 h-40 w-full overflow-hidden rounded-xl">
@@ -75,7 +40,7 @@ export default function Watch({ id }: any) {
           </Link>
         ))}
       </div>
-    </div>
+    </ScrollArea>
   );
 }
 
@@ -89,11 +54,3 @@ const get_watch_data = async (id: any) => {
   const data = await res.json();
   return data;
 };
-
-function chunkArray(array: any[], chunkSize: number) {
-  const chunks = [];
-  for (let i = 0; i < array.length; i += chunkSize) {
-    chunks.push(array.slice(i, i + chunkSize));
-  }
-  return chunks;
-}

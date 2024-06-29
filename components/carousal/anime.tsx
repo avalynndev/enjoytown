@@ -18,7 +18,7 @@ export default async function CarousalComponent() {
         <CarouselContent className="w-full mx-auto flex ">
           {data?.map((el: Show) => (
             <CarouselItem key={el.id}>
-              <CarousalCard isDetailsPage={false} show={el} type="movie" />
+              <CarousalCard isDetailsPage={false} show={el} type="anime" />
             </CarouselItem>
           ))}
         </CarouselContent>

@@ -1,8 +1,7 @@
 import { format } from "date-fns";
 import { Poster } from "@/components/common/poster";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import VideoPlayer from "@/components/containers/tv/videoplayer";
+import { Play } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -86,16 +85,23 @@ const DetailsContainer = ({ data, id, embed }: any) => {
                 {data.overview}
               </p>
 
-              {/**<div className="flex flex-wrap items-center gap-1">
-                Watch Providers
-              </div>/ */}
+              <div className="flex flex-wrap items-center gap-1">
+                <Link href={`/tv/watch/${id}`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer whitespace-nowrap"
+                  >
+                    <Play className="mr-1.5" size={12} />
+                    Watch
+                  </Badge>
+                </Link>
+              </div>
             </article>
           </main>
 
           <Tabs defaultValue="watch">
             <div className="scrollbar-hide">
               <TabsList>
-                <TabsTrigger value="watch">Watch</TabsTrigger>
                 <TabsTrigger disabled value="credits">
                   Credits
                 </TabsTrigger>
@@ -107,9 +113,6 @@ const DetailsContainer = ({ data, id, embed }: any) => {
                 </TabsTrigger>
               </TabsList>
             </div>
-            <TabsContent value="watch" className="mt-4">
-              <VideoPlayer id={id} />
-            </TabsContent>
             <TabsContent value="credits" className="mt-4">
               Credits
             </TabsContent>
