@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from "react";
-import { env } from "@/env.mjs";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
@@ -82,7 +81,7 @@ export default function Watch({ id }: any) {
 
 const get_watch_data = async (id: any) => {
   const res = await fetch(
-    `${env.CONSUMET_API_ANILIST_URL}/episodes/${id}?provider=gogoanime`,
+    `${process.env.CONSUMET_API_ANILIST_URL}/episodes/${id}?provider=gogoanime`,
     {
       next: { revalidate: 21620 },
     }
