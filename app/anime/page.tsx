@@ -3,8 +3,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Popular from "@/components/sections/anime/popular";
 import Trending from "@/components/sections/anime/trending";
 import AiringSchedule from "@/components/sections/anime/airing";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 const Carousal = dynamic(() => import("@/components/carousal/anime"), {
   ssr: false,
   loading: () => (
@@ -54,7 +54,7 @@ export default async function Home() {
                 </h1>
 
                 <p className="text-muted-foreground">
-                  Anime that are currently popular.
+                  Anime that are all-time popular.
                 </p>
               </div>
             </div>

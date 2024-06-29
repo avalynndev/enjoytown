@@ -2,16 +2,28 @@ import React from "react";
 import { format } from "date-fns";
 import Link from "next/link";
 import Image from "next/image";
-import { Image as LucideImage } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import Watch from "@/components/containers/anime/watch";
+import {
+  Card,
+  CardFooter,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Image as LucideImage, ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 
 const DetailsContainer = ({ data }: any) => {
-  console.log(data)
   if (!data) {
-    console.log(data)
     return <div>No Data!</div>;
   }
   const embed=false;
@@ -50,7 +62,11 @@ const DetailsContainer = ({ data }: any) => {
                       className="object-fill"
                       loading="lazy"
                       sizes="100%"
-                      alt={data.title["english"] || data.title["romanji"]}
+                      alt={
+                        data.title["english"] == null || !data.title["english"]
+                          ? data.title["romaji"]
+                          : data.title["english"]
+                      }
                       src={data.image}
                     />
                   ) : (
@@ -67,7 +83,9 @@ const DetailsContainer = ({ data }: any) => {
                 )}
 
                 <h1 className="text-lg font-bold md:text-4xl">
-                  {data.title["english"] || data.title["romanji"]}
+                  {data.title["english"] == null || !data.title["english"]
+                    ? data.title["romaji"]
+                    : data.title["english"]}
                 </h1>
 
                 <div className="flex flex-wrap items-center gap-2">
@@ -114,28 +132,173 @@ const DetailsContainer = ({ data }: any) => {
               <div className="scrollbar-hide">
                 <TabsList>
                   <TabsTrigger value="watch">Watch</TabsTrigger>
-                  <TabsTrigger disabled value="credits">
-                    Credits
-                  </TabsTrigger>
-                  <TabsTrigger disabled value="images">
-                    Images
-                  </TabsTrigger>
-                  <TabsTrigger disabled value="videos">
-                    Videos
+                  <TabsTrigger value="characters">Characters</TabsTrigger>
+                  <TabsTrigger value="relations">Relations</TabsTrigger>
+                  <TabsTrigger value="recommendations">
+                    Recommendations
                   </TabsTrigger>
                 </TabsList>
               </div>
-              <TabsContent value="watch" className="mt-4"></TabsContent>
-              <TabsContent value="credits" className="mt-4">
-                Credits
+              <TabsContent value="watch" className="mt-4">
+                <Watch id={data.id} />
               </TabsContent>
 
-              <TabsContent value="images" className="mt-4">
-                IMAges
+              <TabsContent value="characters" className="mt-4">
+                <div className="mt-2 items-center grid grid-  cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4 ">
+                  {data.characters &&
+                    data.characters.map((item: any, index: any) => (
+                      <div key={index}>
+                        <Card className="text-center items-center hover:scale-105 transition-all duration-300">
+                          <CardHeader>
+                            <CardTitle className="text-xs h-6 truncate">
+                              {item.name.full} ({item.role})
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <Image
+                              src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
+                              width={140}
+                              height={200}
+                              className="rounded-md"
+                              alt="Character Poster"
+                            />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    ))}{" "}
+                </div>
               </TabsContent>
 
-              <TabsContent value="videos" className="mt-4">
-                videos
+              <TabsContent value="relations" className="mt-4">
+                <div className="flex items-center justify-between">
+                  <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
+                    {data.relations &&
+                      data.relations.map((item: any, index: any) => (
+                        <div key={index}>
+                          <Link
+                            href={
+                              item.type == "MOVIE"
+                                ? `/anime/${item.id}`
+                                : item.type == "MANGA"
+                                ? `/manga/info/${item.id}`
+                                : item.type == "TV"
+                                ? `/anime/${item.id}`
+                                : ``
+                            }
+                          >
+                            <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
+                              {item.cover ? (
+                                <Image
+                                  fill
+                                  className="object-cover"
+                                  src={`${item.cover}`}
+                                  alt={
+                                    item.title["english"] ||
+                                    item.title["romaji"]
+                                  }
+                                  sizes="100%"
+                                />
+                              ) : (
+                                <ImageIcon className="text-muted" />
+                              )}
+                            </div>
+                            <div className="space-y-1.5">
+                              <div className="flex items-start justify-between gap-2 pt-1">
+                                <span className="trucate line-clamp-1 pt-1">
+                                  {item.title["english"] ||
+                                    item.title["romaji"]}
+                                </span>
+
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger>
+                                      <Badge variant="outline">
+                                        {item.relationType}
+                                      </Badge>
+                                    </TooltipTrigger>
+
+                                    <TooltipContent>
+                                      <p>{item.status}</p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              </div>
+
+                              <p className="line-clamp-3 text-xs text-muted-foreground">
+                                {item.type}
+                              </p>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}{" "}
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="recommendations" className="mt-4">
+                <div className="flex items-center justify-between">
+                  <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
+                    {data.recommendations &&
+                      data.recommendations.map((item: any, index: any) => (
+                        <div key={index}>
+                          <Link
+                            href={
+                              item.type == "MOVIE"
+                                ? `/anime/${item.id}`
+                                : item.type == "MANGA"
+                                ? `/manga/info/${item.id}`
+                                : item.type == "TV"
+                                ? `/anime/${item.id}`
+                                : ``
+                            }
+                          >
+                            <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
+                              {item.cover ? (
+                                <Image
+                                  fill
+                                  className="object-cover"
+                                  src={`${item.cover}`}
+                                  alt={
+                                    item.title["english"] ||
+                                    item.title["romaji"]
+                                  }
+                                  sizes="100%"
+                                />
+                              ) : (
+                                <ImageIcon className="text-muted" />
+                              )}
+                            </div>
+                            <div className="space-y-1.5">
+                              <div className="flex items-start justify-between gap-2 pt-1">
+                                <span className="trucate line-clamp-1 pt-1">
+                                  {item.title["english"] ||
+                                    item.title["romaji"]}
+                                </span>
+
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger>
+                                      <Badge variant="outline">
+                                        {item.rating / 10}
+                                      </Badge>
+                                    </TooltipTrigger>
+
+                                    <TooltipContent>
+                                      <p>{item.status}</p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              </div>
+
+                              <p className="line-clamp-3 text-xs text-muted-foreground">
+                                {item.type}
+                              </p>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}{" "}
+                  </div>
+                </div>
               </TabsContent>
             </Tabs>
           </div>

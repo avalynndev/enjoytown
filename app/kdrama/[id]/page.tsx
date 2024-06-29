@@ -1,5 +1,4 @@
 import DetailsContainer from "@/components/containers/kdrama/details";
-import EpisodeContainer from "@/components/containers/kdrama/episode";
 import { getDramaInfo } from "@/fetch";
 
 export default async function DramaInfo({ params }: any) {

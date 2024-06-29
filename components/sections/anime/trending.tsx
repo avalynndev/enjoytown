@@ -24,7 +24,11 @@ export default async function Trending() {
                       fill
                       className="object-cover"
                       src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.cover}`}
-                      alt={item.title["english"]}
+                      alt={
+                        item.title["english"] == null || !item.title["english"]
+                          ? item.title["romaji"]
+                          : item.title["english"]
+                      }
                       sizes="100%"
                     />
                   ) : (
@@ -34,7 +38,11 @@ export default async function Trending() {
                 <div className="space-y-1.5">
                   <div className="flex items-start gap-1 justify-between">
                     <div className="justify-start">
-                      <span className="">{item.title["english"]}</span>
+                      <span className="trucate line-clamp-1">
+                        {item.title["english"] == null || !item.title["english"]
+                          ? item.title["romaji"]
+                          : item.title["english"]}
+                      </span>
                     </div>
                     <div className="justify-end flex items-center gap-2">
                       <Badge variant="outline">

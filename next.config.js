@@ -7,6 +7,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        hostname: 'media.kitsu.io',
+        port: '',
+        pathname: '/**',
+        protocol: 'https',
+      },
+      {
         protocol: "https",
         hostname: "asianimg.pro",
         pathname: "/cover/**",

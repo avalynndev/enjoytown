@@ -10,7 +10,7 @@ export default async function Info({ params }: any) {
 
 const get_movie_info = async (id: any) => {
   const res = await fetch(
-    `${env.CONSUMET_API_ANILIST_URL}/info/${id}`,
+    `${env.CONSUMET_API_ANILIST_URL}/data/${id}`,
     { next: { revalidate: 21620 } }
   );
   const data = await res.json();

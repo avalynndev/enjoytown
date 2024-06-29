@@ -60,7 +60,7 @@ export async function PreFetchChaterLinks(data: any) {
     });
 
     await Promise.all(fetchPromises);
-    console.log("Chapter links pre-fetched successfully!");
+
   } catch (error) {
     console.error("Error occurred while pre-fetching chapter links:", error);
   }
@@ -73,7 +73,6 @@ export async function PreFetchMangaInfo(data: any) {
       await fetch(link, { next: { revalidate: 86400 } });
     });
     await Promise.all(fetchPromises);
-    console.log("Manga info pre-fetched successfully!");
   } catch (error) {
     console.error("error", error);
   }
