@@ -62,6 +62,7 @@ Add a ENV FILE with:
 ```env
 DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
 CONSUMET_API_URL=https://consumet_api_url (dont end with slash)
+CONSUMET_API_ANILIST_URL=https://consumet_api_url/meta/anilist (the source code for this consumet api will be open sourced soon)
 ```
 
 ### 3. Run on development &/or production
