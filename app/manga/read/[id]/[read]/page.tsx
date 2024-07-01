@@ -143,6 +143,9 @@ export default function Read({ params }: any) {
           >
             &larr; Prev Ch
           </Button>
+          <Link href={`https://mangadex-downloader.onrender.com/${chapterId}`}>
+            <Button>Download</Button>
+          </Link>
           <Button
             onClick={() => navigateChapter("next")}
             disabled={
