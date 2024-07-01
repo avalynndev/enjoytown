@@ -90,7 +90,7 @@ Uh-oh, looks like you stumbled upon a bug? No worries, we're here to squash it! 
 
 ## Contributors 🤲
 
-<img width="100" src="https://contrib.rocks/image?repo=avalynndev/enjoytown" />
+<img height="50" src="https://contrib.rocks/image?repo=avalynndev/enjoytown" />
 
 #### Want to Help Out?
 
