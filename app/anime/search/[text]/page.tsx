@@ -1,79 +1,75 @@
-"use client";
-import React, { useState, useEffect, useCallback, Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
+import Image from "next/image";
+import Link from "next/link";
+import { Image as ImageIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
-import { url } from "@/config/url";
-import AnimeCard from "@/components/anime-card/main";
-import axios from "axios";
-
-const Search = ({ params }: any) => {
-  const { text } = params;
-  const [isLoading, setIsLoading] = useState(true);
-  const [search_results, setSearchResults] = useState<any[]>([]);
-
-  const fetchDetails = useCallback(async () => {
-    try {
-      const search = await axios.get(url.search + text);
-      setSearchResults(search.data.results);
-    } catch (error) {
-      console.error("Error fetching details:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [text]);
-
-  useEffect(() => {
-    fetchDetails();
-  }, [fetchDetails]);
+export default async function Search({ params }: any) {
+  const text = params.text;
+  const data = await get_search(text);
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="text-center max-w mx-auto px-6">
-        <div className="text-center max-w mx-auto px-6 pb-3">
-          <Suspense>
-            {isLoading ? (
-              <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                {Array.from({ length: 12 }, (_, index) => (
-                  <Card
-                    key={index}
-                    className="w-[200px] text-center items-center hover:scale-105 transition-all duration-300"
-                  >
-                    <CardHeader>
-                      <CardTitle className="text-xs h-6">
-                        <Skeleton className="rounded-md text-tiny text-center h-4" />
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="overflow-visible py-2">
-                      <Skeleton className="object-cover rounded-xl h-[230px] w-[270px] h-2/4 w-full object-cover transition-all aspect-[3/4] rounded-md" />
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <div>
-                {search_results.length === 0 ? (
-                  <div className="flex flex-col text-center items-center justify-center h-screen">
-                    <div className="text-4xl font-bold mb-4">
-                      No Results Found
+    <main className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+      <div className="flex items-center justify-between">
+        <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
+          {data &&
+            data.results.slice(0, 18).map((item: any, index: any) => (
+              <Link
+                href={`/anime/${encodeURIComponent(item.id)}`}
+                key={index}
+                className="w-full cursor-pointer space-y-2"
+                data-testid="movie-card"
+              >
+                <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
+                  {item.cover ? (
+                    <Image
+                      fill
+                      className="object-cover"
+                      src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.cover}`}
+                      alt={
+                        item.title["english"] == null || !item.title["english"]
+                          ? item.title["romaji"]
+                          : item.title["english"]
+                      }
+                      sizes="100%"
+                    />
+                  ) : (
+                    <ImageIcon className="text-muted" />
+                  )}
+                </div>
+                <div className="space-y-1.5">
+                  <div className="flex items-start gap-1 justify-between">
+                    <div className="justify-start">
+                      <span className="trucate line-clamp-1">
+                        {item.title["english"] == null || !item.title["english"]
+                          ? item.title["romaji"]
+                          : item.title["english"]}
+                      </span>
                     </div>
-                    <div className="text-gray-500 ">
-                      Try adjusting your search criteria or check your spelling.
+                    <div className="justify-end flex items-center gap-2">
+                      <Badge variant="outline">
+                        {item.rating ? item.rating / 10 : "?"}
+                      </Badge>
+                      <Separator orientation="vertical" className="h-6" />
+                      <Badge variant="secondary">
+                        {item.totalEpisodes ? item.totalEpisodes : "?"}
+                      </Badge>
                     </div>
                   </div>
-                ) : (
-                  <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    {search_results.map((anime: any) => (
-                      <AnimeCard key={anime.id} anime={anime} />
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-          </Suspense>
+
+                  <p className="line-clamp-3 text-xs text-muted-foreground">
+                    {item.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
         </div>
       </div>
-    </section>
+    </main>
   );
-};
+}
 
-export default Search;
+const get_search = async (text: any) => {
+  const res = await fetch(`${process.env.CONSUMET_API_ANILIST_URL}/${text}`);
+  const data = await res.json();
+  return data;
+};

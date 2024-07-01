@@ -43,7 +43,7 @@ export default async function Watch({ params }: any) {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink href={`/anime/info/${id}`}>
+                  <BreadcrumbLink href={`/anime/${id}`}>
                     {id.charAt(0).toUpperCase() + id.slice(1)}
                   </BreadcrumbLink>
                 </BreadcrumbItem>

@@ -23,9 +23,7 @@ export default async function Home() {
   return (
     <>
       <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-        <div className="relative h-[70vh] md:flex w-full hidden mx-auto">
-          <Skeleton className="object-cover rounded-xl transition-all w-full relative h-[70vh] container grid items-center gap-6 pb-8 pt-6 md:py-10" />
-        </div>
+        <Carousal/>
         <Tabs defaultValue="trending" className="w-full">
           <TabsList className="w-full grid grid-cols-3 pb-4">
             <TabsTrigger value="trending">Trending</TabsTrigger>

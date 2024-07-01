@@ -13,7 +13,7 @@ export default async function Popular() {
           {data &&
             data.results.slice(0, 18).map((item: any, index: any) => (
               <Link
-                href={`/anime/info/${encodeURIComponent(item.id)}`}
+                href={`/anime/${encodeURIComponent(item.id)}`}
                 key={index}
                 className="w-full cursor-pointer space-y-2"
                 data-testid="movie-card"
