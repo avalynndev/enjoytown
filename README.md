@@ -95,4 +95,6 @@ Uh-oh, looks like you stumbled upon a bug? No worries, we're here to squash it! 
 #### Want to Help Out?
 
 Feel free to contribute to this project! Whether you're an experienced developer or have been in the field for a while, your help is valuable.
+
+
 [![Star History Chart](https://api.star-history.com/svg?repos=avalynndev/enjoytown&type=Date)](https://star-history.com/embed?secret=#avalynndev/enjoytown&Date)
