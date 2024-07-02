@@ -56,7 +56,7 @@ export const Footer = () => {
               className="text-xs text-muted-foreground"
               target="blank"
             >
-              Data provided by TMDB.
+              Data provided by TMDB, Consumet.
             </Link>
           </div>
         </div>

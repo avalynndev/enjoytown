@@ -1,15 +1,8 @@
 "use client";
 import {
-  Calendar,
   Clapperboard,
-  Heart,
   Home,
-  JapaneseYen,
   List,
-  LucideIcon,
-  Play,
-  Sparkles,
-  Star,
   Book,
   Tv,
 } from "lucide-react";
@@ -70,6 +63,14 @@ export function MainNav() {
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <Book className="h-4 w-4" />
                   <div className="px-2"> Manga </div>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/list" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <List className="h-4 w-4" />
+                  <div className="px-2"> List </div>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

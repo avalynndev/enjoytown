@@ -34,16 +34,11 @@ export const mobileConfig: MobileConfig = {
   ],
   sidebarNav: [
     {
-      title: "Search",
+      title: "Other Features",
       items: [
         {
-          title: "K-Drama Search",
-          href: "/kdrama/search",
-          items: [],
-        },
-        {
-          title: "Movie Search",
-          href: "/movie/search",
+          title: "List",
+          href: "/list",
           items: [],
         },
       ],
