@@ -73,9 +73,11 @@ export default async function Home() {
               watch
             </p>
             <div className="flex gap-2">
-              <Link href={`/auth/register`}>
-                <Button disabled>Sign up</Button>
-              </Link>
+              <Button disabled>
+                <Link href={`/auth/register`}>
+                  Sign up
+                </Link>
+              </Button>
               <Link href={`/changelog`}>
                 <Button variant="outline">Changelog</Button>
               </Link>

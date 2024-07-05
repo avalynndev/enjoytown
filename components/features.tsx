@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import {
-  ListChecks,
+  List,
   LucideIcon,
   MessageSquare,
   Globe as GlobeLucide,
@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { ComponentProps, PropsWithChildren } from "react";
-
+import { Globe } from "@/components/globe";
 
 type HomeFeatureProps = {
   icon: LucideIcon;
@@ -65,12 +65,12 @@ export const HomeFeatures = () => {
 
         <ul className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-3 lg:p-0">
           <HomeFeature
-            title={"Lists"}
+            title={"List"}
             description={
-              "Create and manage the status of your movies, series, and animes in one beautiful place."
+              "Discover and enjoy free streaming content across various genres."
             }
             className="col-span-1 aspect-[16/9] lg:col-span-2"
-            icon={ListChecks}
+            icon={List}
           >
             <span className="animate-pulse">Work in progress...</span>
           </HomeFeature>
@@ -94,7 +94,7 @@ export const HomeFeatures = () => {
             }
             className="col-span-1"
           >
-            <span className="animate-pulse">Work in progress...</span>
+            <Globe />
           </HomeFeature>
 
           <HomeFeature

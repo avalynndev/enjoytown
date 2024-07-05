@@ -50,7 +50,7 @@ export function MainNav() {
                     Live on TV Shows: Addiction await ≥
                   </ListItem>
                   <ListItem href="/drama" title="Drama">
-                    Indulge in K Drama: Emotions Await!
+                    Indulge in Drama: Emotions Await!
                   </ListItem>
                   <ListItem href="/anime" title="Anime">
                     Dive into Anime Worlds: Adventures Await!

@@ -1,10 +1,12 @@
 import * as Craft from "@/components/ui/craft";
 import Link from "next/link";
+
 type FeatureText = {
   title: string;
   description: string;
   href?: string;
 };
+
 const featureText: FeatureText[] = [
   {
     title: "Movie/TV",
@@ -17,9 +19,9 @@ const featureText: FeatureText[] = [
     description: "Dive into Anime Worlds: Adventures Await!",
   },
   {
-    title: "K-drama",
-    href: "/kdrama",
-    description: "Indulge in K Drama: Emotions Await!",
+    title: "Drama",
+    href: "/drama",
+    description: "Indulge in Drama: Emotions Await!",
   },
   {
     title: "Manga",

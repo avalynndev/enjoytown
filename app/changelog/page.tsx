@@ -12,6 +12,15 @@ interface ChangelogEntry {
 
 const changelogEntries: ChangelogEntry[] = [
   {
+    version: "2.1.0",
+    date: "2024-06-28",
+    changes: [
+      "Added cooler and fresh ui",
+      "Added New List Feature",
+      "Fixed minor bugs",
+    ],
+  },
+  {
     version: "1.2.0",
     date: "2024-06-08",
     changes: [
