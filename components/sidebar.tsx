@@ -8,8 +8,16 @@ export default function Sidebar() {
 
   return (
     <>
+      <button
+        className="pt-16 fixed top-4 left-4 z-40 sm:hidden"
+        onClick={() => setSidebarOpen(!isSidebarOpen)}
+      >
+        ☰
+      </button>
       <aside
-        className={`fixed inset-y-0 right-0 z-30 w-64 flex-col border-r p-4 transform transition-transform duration-300  3xl:translate-x-0`}
+        className={`fixed inset-y-0 xs:left-0 z-30 w-64 flex-col border-r p-4 bg-background sm:bg-transparent sm:right-0 transform transition-transform duration-300 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } sm:translate-x-0`}
       >
         <nav className="flex flex-col space-y-1 mt-24">
           <Link
