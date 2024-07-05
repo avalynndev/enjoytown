@@ -49,7 +49,7 @@ export function MainNav() {
                   <ListItem href="/tv" title="Tv Shows">
                     Live on TV Shows: Addiction await ≥
                   </ListItem>
-                  <ListItem href="/drama" title="K-drama">
+                  <ListItem href="/drama" title="Drama">
                     Indulge in K Drama: Emotions Await!
                   </ListItem>
                   <ListItem href="/anime" title="Anime">

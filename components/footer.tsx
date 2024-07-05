@@ -47,7 +47,7 @@ export const Footer = () => {
               </div>
             </div>
 
-            <p className="text-sm text-muted-foreground">Created with {`<3`}</p>
+            <p className="text-sm text-muted-foreground">Created with {`<3`} by Kushi</p>
           </div>
 
           <div>
@@ -71,7 +71,7 @@ export const Footer = () => {
               </Section.Item>
 
               <Section.Item>
-                <Link href={`/support`}>Support</Link>
+                <Link href={`https://buymeacoffee.com/`}>Support</Link>
               </Section.Item>
 
               <Section.Item>

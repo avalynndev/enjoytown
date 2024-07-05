@@ -8,21 +8,23 @@ import Link from "next/link";
 
 export default function DramaSearch() {
   const placeholders = [
-    "Naruto (2002-2007)",
-    "Attack on Titan (2013-2023)",
-    "Death Note (2006-2007)",
-    "Demon Slayer: Kimetsu no Yaiba (2019-present)",
-    "My Hero Academia (2016-present)",
-    "Fullmetal Alchemist: Brotherhood (2009-2010)",
-    "Attack on Titan: The Final Season (2020-2023)",
-    "Jujutsu Kaisen (2020-present)",
-    "Sword Art Online (2012-2017)",
-    "Black Clover (2017-present)",
-    "One Piece (1999-present)",
-    "Haikyuu!! (2014-2020)",
-    "Blue Exorcist (2011-2016)",
-    "Sword Art Online: Alicization (2018-2019)",
-    "The Rising of the Shield Hero (2019-present)",
+    "True beauty (2020)",
+    "Lovely runner (2024)",
+    "Twenty-five Twenty-one (2022)",
+    "Business proposal (2022)",
+    "Queen of Tears (2024)",
+    "Hidden Love (2023)",
+    "All of us are dead (2022)",
+    "My demon (2023-2024)",
+    "Glory (2022)",
+    "Twinkling watermelon (2023)",
+    "Vincenzo (2021)",
+    "The Uncanny counter (2020-2023)",
+    "The Atypical family (2024)",
+    "Penthouse (2020-2021)",
+    "Hotel del Luna (2019)",
+    "Backstreet Rookie (2020)",
+    "Sweet Home (2020-2024)",
   ];
   const [title, setTitle] = useState("");
   const [data, setInfoTitle] = useState<any[]>([]);
@@ -60,7 +62,7 @@ export default function DramaSearch() {
     <>
       <div className="h-[30rem] flex flex-col justify-center  items-center px-4">
         <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
-          Search for k-drama.. 📺
+          Search for drama.. 📺
         </h2>
         <PlaceholdersAndVanishInput
           placeholders={placeholders}

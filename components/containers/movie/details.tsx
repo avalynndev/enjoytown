@@ -94,33 +94,6 @@ const DetailsContainer = ({ data, id, embed }: any) => {
               </div>
             </article>
           </main>
-
-          <Tabs>
-            <div className="scrollbar-hide">
-              <TabsList>
-                <TabsTrigger disabled value="credits">
-                  Credits
-                </TabsTrigger>
-                <TabsTrigger disabled value="images">
-                  Images
-                </TabsTrigger>
-                <TabsTrigger disabled value="videos">
-                  Videos
-                </TabsTrigger>
-              </TabsList>
-            </div>
-            <TabsContent value="credits" className="mt-4">
-              Credits
-            </TabsContent>
-
-            <TabsContent value="images" className="mt-4">
-              Images
-            </TabsContent>
-
-            <TabsContent value="videos" className="mt-4">
-              videos
-            </TabsContent>
-          </Tabs>
         </div>
       </div>
     </div>
