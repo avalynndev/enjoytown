@@ -11,7 +11,7 @@ const EpisodeContainer = ({ data, id }: any) => {
             <Link
               shallow
               key={`episode-${id}-${episodes.id}`}
-              href={`/kdrama/watch/${id}/${episodes.id}` }
+              href={`/drama/watch/${id}/${episodes.id}` }
             >
               <Button key={data.id}>{episodes.episode}</Button>
             </Link>

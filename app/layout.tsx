@@ -58,14 +58,22 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-84Z171LN4N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+      {/* Google Tag Manager Script */}
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-84Z171LN4N"
+      ></script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
 
-  gtag('config', 'G-84Z171LN4N');
-</script>
+              gtag('config', 'G-84Z171LN4N');
+            `,
+        }}
+      />
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

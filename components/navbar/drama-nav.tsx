@@ -16,7 +16,7 @@ export function SiteHeader() {
         <MainNav />
         <MobileNav />
         <div className="flex w-full items-center justify-end space-x-10">
-          <Link href={"/kdrama"}>
+          <Link href={"/drama"}>
             <Button
               variant="outline"
               className={cn(

@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import { Image as LucideImage } from "lucide-react";
 import { cn } from "@/lib/utils";
-import EpisodeContainer from "@/components/containers/kdrama/episode";
+import EpisodeContainer from "@/components/containers/drama/episode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";

@@ -10,7 +10,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import React, { useState, useCallback, useEffect } from "react";
 import { getVideoLink, getDramaInfoOnWatch, getDramaDownload } from "@/fetch";
-import WatchEpisodeButtons from "@/components/containers/kdrama/watch-episode";
+import WatchEpisodeButtons from "@/components/containers/drama/watch-episode";
 import { DramaInfo } from "@/types";
 import { Button } from "@/components/ui/button";
 

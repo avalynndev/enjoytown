@@ -20,8 +20,8 @@ export const mobileConfig: MobileConfig = {
       href: "/manga",
     },
     {
-      title: "K-drama",
-      href: "/kdrama",
+      title: "Drama",
+      href: "/drama",
     },
     {
       title: "Movie",

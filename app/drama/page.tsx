@@ -82,7 +82,7 @@ export default function DramaSearch() {
               return (
                 <Link
                   shallow
-                  href={`/kdrama/${encodeURIComponent(item.id)}`}
+                  href={`/drama/${encodeURIComponent(item.id)}`}
                   style={{ textDecoration: "none" }}
                   key={index}
                 >
