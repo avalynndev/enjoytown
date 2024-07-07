@@ -20,6 +20,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 
 type VideoSourceKey =
+  | "kushi"
   | "vidsrc"
   | "vidsrcicu"
   | "vidsrcpro"
@@ -28,10 +29,11 @@ type VideoSourceKey =
 
 export default function VideoPlayer({ id }: any) {
   const [selectedSource, setSelectedSource] =
-    useState<VideoSourceKey>("vidsrc");
+    useState<VideoSourceKey>("kushi");
   const [loading, setLoading] = useState(false);
 
   const videoSources: Record<VideoSourceKey, string> = {
+    kushi: `https://9streams.xyz/hindi-embed?movie=${id}&watermark=EnjoyTown`,
     vidsrc: `https://vidsrc.vip/embed/movie/${id}`,
     vidsrcicu: `https://vidsrc.icu/embed/movie/${id}`,
     vidsrcpro: `https://vidsrc.pro/embed/movie/${id}`,
@@ -86,6 +88,7 @@ export default function VideoPlayer({ id }: any) {
               <SelectValue placeholder="Select Video Source" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="kushi">Kushi</SelectItem>
               <SelectItem value="vidsrc">VidSrc</SelectItem>
               <SelectItem value="vidsrcicu">VidSrc.icu</SelectItem>
               <SelectItem value="vidsrcpro">Vidsrc.pro</SelectItem>
