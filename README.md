@@ -20,9 +20,9 @@ Enjoytown
 
 ## What is Enjoytown?
 
-Welcome to **Enjoytown** the one stop for all your streaming desires! Explore **[enjoytown.netlify.app](https://enjoytown.netlify.app)** and dive into the world of movies, kdrama and anime.
+Welcome to **Enjoytown** the one stop for all your streaming desires! Explore **[enjoytown.netlify.app](https://enjoytown.netlify.app)** and dive into the world of movies, drama and anime.
 
-Enjoy your favorite movies, Kdrama and anime with English subs or dubs, and here's the kicker - no sign-up required!
+Enjoy your favorite movies, drama and anime with English subs or dubs, and here's the kicker - no sign-up required!
 
 ## Images
 
