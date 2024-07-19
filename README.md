@@ -81,7 +81,7 @@ npm start
 
 > Deploy **your own Enjoytown** Instance on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Favalynndev%2Fenjoytown&project-name=enjoytown&repository-name=enjoytown)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Favalynndev%2Fenjoytown&env=DOWNLOAD_API_URL,CONSUMET_API_URL,CONSUMET_API_ANILIST_URL)
 
 
 ## Found a Bug? 🐞
