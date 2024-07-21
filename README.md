@@ -83,6 +83,9 @@ npm start
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Favalynndev%2Fenjoytown&env=DOWNLOAD_API_URL,CONSUMET_API_URL,CONSUMET_API_ANILIST_URL)
 
+<a href="https://www.youtube.com/watch?v=kB_qcHYWW0U)" target="_blank">
+    <img src="https://raw.githubusercontent.com/avalynndev/enjoytown/main/public/DEPLOY.png" alt="Logo" width="500"/>
+</a>
 
 ## Found a Bug? 🐞
 
