@@ -1,5 +1,4 @@
-"use client";
-import { Movie_Popular } from "@/config/url";
+"use client"
 import { FetchMovieInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,14 +27,17 @@ type MovieData = {
   results: Movie[];
 };
 
-export default async function Popular() {
+export default function Popular() {
   const [data, setData] = React.useState<MovieData | null>(null);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await fetch(Movie_Popular, { next: { revalidate: 21600 } });
+      const res = await fetch(
+        "https://api.themoviedb.org/3/movie/popular?api_key=171fe27dbfecc58e2a18fbced644cda9",
+        { next: { revalidate: 21600 } }
+      );
       const data = await res.json();
       FetchMovieInfo(data);
       setData(data);
