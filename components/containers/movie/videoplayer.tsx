@@ -20,22 +20,18 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 
 type VideoSourceKey =
-  | "kushi"
   | "vidsrc"
-  | "vidsrcicu"
   | "vidsrcpro"
   | "vidsrcin"
   | "superembed";
 
 export default function VideoPlayer({ id }: any) {
   const [selectedSource, setSelectedSource] =
-    useState<VideoSourceKey>("kushi");
+    useState<VideoSourceKey>("vidsrc");
   const [loading, setLoading] = useState(false);
 
   const videoSources: Record<VideoSourceKey, string> = {
-    kushi: `https://9streams.xyz/hindi-embed?movie=${id}&watermark=EnjoyTown`,
     vidsrc: `https://vidsrc.vip/embed/movie/${id}`,
-    vidsrcicu: `https://vidsrc.icu/embed/movie/${id}`,
     vidsrcpro: `https://vidsrc.pro/embed/movie/${id}`,
     vidsrcin: `https://vidsrc.in/embed/movie/${id}`,
     superembed: `https://multiembed.mov/?video_id=${id}&tmdb=1`,

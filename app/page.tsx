@@ -17,6 +17,23 @@ type Post = {
 };
 
 const posts: Post[] = [
+   {
+    title: "Enjoytown v2 Released!",
+    content: (
+      <>
+        <p>
+          Hey EnjoyTown users! In the past few months we have worked day and night for v2 of enjoytown. 
+          Here are some of the main changes:
+        </p>
+        <ul>
+          <li>- Managa has been added </li>
+          <li>- Improved UI and speed for better experience</li>
+          <li>- Added more providers For Movies and tv shows</li>
+        </ul>
+      </>
+    ),
+    date: "2024-24-07",
+  },
   {
     title: "Exciting Updates Ahead!",
     content: (
@@ -37,19 +54,6 @@ const posts: Post[] = [
       </>
     ),
     date: "2024-08-05",
-  },
-  {
-    title: "Hindi Dubbed Movie Added!",
-    content: (
-      <>
-        <div>
-          We&apos;re excited to announce that we&apos;ve added a new collection
-          of Hindi dubbed movies to our website. Now you can enjoy your favorite
-          movies in Hindi too!
-        </div>
-      </>
-    ),
-    date: "2024-08-06",
   },
 ];
 

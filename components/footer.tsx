@@ -87,7 +87,6 @@ export const Footer = () => {
 
             <Section.List>
               <Section.Item disabled>About Us</Section.Item>
-              <Section.Item disabled>Carrers</Section.Item>
               <Section.Item disabled>Brand</Section.Item>
             </Section.List>
           </Section.Root>
