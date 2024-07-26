@@ -1,10 +1,7 @@
-"use client";
 import { Movie_NowPlaying } from "@/config/url";
 import { FetchMovieInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
-
 import { Image as ImageIcon } from "lucide-react";
 
 import {
@@ -15,34 +12,15 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 
-export default function NowPlaying() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<any>();
-
-  const fetchDetails = async () => {
-    try {
-      const response = await get_nowplaying();
-      setData(response.data);
-    } catch (error) {
-      console.error("Error fetching details:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchDetails();
-  }, [fetchDetails]);
+export default async function Popular() {
+  const data = await get_nowplaying();
   FetchMovieInfo(data);
 
   return (
     <main>
       <div className="flex items-center justify-between">
         <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
-          {isLoading ? (
-            <>hiya</>
-          ) : (
-            data &&
+          {data &&
             data.results.slice(0, 18).map((item: any, index: any) => (
               <Link
                 href={`/movie/${encodeURIComponent(item.id)}`}
@@ -89,8 +67,7 @@ export default function NowPlaying() {
                   </p>
                 </div>
               </Link>
-            ))
-          )}
+            ))}
         </div>
       </div>
     </main>
