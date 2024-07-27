@@ -160,24 +160,12 @@ export default function VideoPlayer({ id }: { id: number }) {
       <Tabs defaultValue="vidsrcin">
         <div className="flex flex-col items-center">
           <TabsList>
-            <TabsTrigger value="vidsrc">VidSrc</TabsTrigger>
             <TabsTrigger value="vidsrcvip">VidSrc.Vip</TabsTrigger>
             <TabsTrigger value="vidsrcpro">Vid.Pro</TabsTrigger>
             <TabsTrigger value="vidsrcin">Vid.In</TabsTrigger>
             <TabsTrigger value="superembed">SuberEmbed</TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="vidsrc">
-          <iframe
-            src={`https://vidsrc.icu/embed/tv/${id}/${season}/${episode}`}
-            referrerPolicy="origin"
-            allowFullScreen
-            width="100%"
-            height="450"
-            scrolling="no"
-            className="max-w-3xl mx-auto px-4 pt-10"
-          ></iframe>
-        </TabsContent>
         <TabsContent value="vidsrcvip">
           <iframe
             src={`https://vidsrc.vip/embed/tv/${id}/${season}/${episode}`}

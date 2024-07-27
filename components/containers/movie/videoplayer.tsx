@@ -84,9 +84,7 @@ export default function VideoPlayer({ id }: any) {
               <SelectValue placeholder="Select Video Source" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="kushi">Kushi</SelectItem>
               <SelectItem value="vidsrc">VidSrc</SelectItem>
-              <SelectItem value="vidsrcicu">VidSrc.icu</SelectItem>
               <SelectItem value="vidsrcpro">Vidsrc.pro</SelectItem>
               <SelectItem value="vidsrcin">Vid.In</SelectItem>
               <SelectItem value="superembed">SuperEmbed</SelectItem>
