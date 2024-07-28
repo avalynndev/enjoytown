@@ -1,16 +1,6 @@
 "use client";
 import { useState } from "react";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import {
   Select,
   SelectTrigger,
   SelectContent,
@@ -46,41 +36,11 @@ export default function VideoPlayer({ id }: any) {
   };
 
   return (
-    <div className="py-8 mx-auto max-w-5xl">
-      <div className="flex flex-col text-center items-center justify-center">
-        <div className="flex flex-col flex-wrap pb-4">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href={`/movie/${id}`}>
-                  {id.charAt(0).toUpperCase() + id.slice(1)}
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Watch</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </div>
-      {loading ? (
-        <Skeleton className="mx-auto px-4 pt-10 w-full h-[500px]" />
-      ) : (
-        <iframe
-          src={videoSources[selectedSource]}
-          referrerPolicy="origin"
-          allowFullScreen
-          width="100%"
-          height="450"
-          scrolling="no"
-          className="max-w-3xl mx-auto px-4 pt-10"
-        />
-      )}
-      <div className="py-8 flex flex-row items-center justify-between w-full">
-        <div className="flex flex-col text-left">
+    <div className="pb-8 mx-auto max-w-5xl">
+      <div className="flex flex-row items-center justify-center w-full">
+        <div className="flex flex-col text-center">
           <Select onValueChange={handleSelectChange} value={selectedSource}>
-            <SelectTrigger className="px-4 py-2 rounded-md w-[180px]">
+            <SelectTrigger className="px-4 py-2 rounded-md w-[280px]">
               <SelectValue placeholder="Select Video Source" />
             </SelectTrigger>
             <SelectContent>
@@ -91,12 +51,20 @@ export default function VideoPlayer({ id }: any) {
             </SelectContent>
           </Select>
         </div>
-        <div className="ml-auto">
-          <Link href={`https://dl.vidsrc.vip/movie/${id}`}>
-            <Button>Download Movie</Button>
-          </Link>
-        </div>
       </div>
+      {loading ? (
+        <Skeleton className="mx-auto px-4 pt-6 w-full h-[500px]" />
+      ) : (
+        <iframe
+          src={videoSources[selectedSource]}
+          referrerPolicy="origin"
+          allowFullScreen
+          width="100%"
+          height="450"
+          scrolling="no"
+          className="max-w-3xl mx-auto px-4 pt-6"
+        />
+      )}
     </div>
   );
 }

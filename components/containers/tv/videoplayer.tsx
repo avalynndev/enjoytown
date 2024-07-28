@@ -157,7 +157,7 @@ export default function VideoPlayer({ id }: { id: number }) {
           </div>
         </div>
       </div>
-      <Tabs defaultValue="vidsrcin">
+      <Tabs defaultValue="vidsrcvip">
         <div className="flex flex-col items-center">
           <TabsList>
             <TabsTrigger value="vidsrcvip">VidSrc.Vip</TabsTrigger>

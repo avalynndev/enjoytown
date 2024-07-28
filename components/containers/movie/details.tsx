@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { Poster } from "@/components/common/poster";
 import Link from "next/link";
-import { Play } from "lucide-react";
+import { Download, Play } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -82,15 +82,15 @@ const DetailsContainer = ({ data, id, embed }: any) => {
                 {data.overview}
               </p>
               <div className="flex flex-wrap items-center gap-1">
-                <Link href={`/movie/watch/${id}`}>
-                  <Badge
-                    variant="outline"
-                    className="cursor-pointer whitespace-nowrap"
-                  >
-                    <Play className="mr-1.5" size={12} />
-                    Watch
-                  </Badge>
-                </Link>
+                  <Link href={`https://dl.vidsrc.vip/movie/${id}`}>
+                    <Badge
+                      variant="outline"
+                      className="cursor-pointer whitespace-nowrap"
+                    >
+                      <Download className="mr-1.5" size={12} />
+                      Download Movie
+                    </Badge>
+                  </Link>
               </div>
             </article>
           </main>
