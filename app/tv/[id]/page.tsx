@@ -1,6 +1,5 @@
 "use client";
 import DetailsContainer from "@/components/containers/tv/details";
-import VideoPlayer from "@/components/containers/tv/videoplayer";
 import * as React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -91,7 +90,6 @@ const Info: React.FC<{ params: Params }> = ({ params }) => {
       ) : (
         <>
           <DetailsContainer data={data} id={id} embed="false" />
-          <VideoPlayer id={id} />
         </>
       )}
     </>

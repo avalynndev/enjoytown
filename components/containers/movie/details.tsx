@@ -82,15 +82,15 @@ const DetailsContainer = ({ data, id, embed }: any) => {
                 {data.overview}
               </p>
               <div className="flex flex-wrap items-center gap-1">
-                  <Link href={`https://dl.vidsrc.vip/movie/${id}`}>
-                    <Badge
-                      variant="outline"
-                      className="cursor-pointer whitespace-nowrap"
-                    >
-                      <Download className="mr-1.5" size={12} />
-                      Download Movie
-                    </Badge>
-                  </Link>
+                <Link href={`/movie/watch/${id}`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer whitespace-nowrap"
+                  >
+                    <Play className="mr-1.5" size={12} />
+                    Watch
+                  </Badge>
+                </Link>
               </div>
             </article>
           </main>

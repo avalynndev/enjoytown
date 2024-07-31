@@ -1,7 +1,6 @@
 "use client"
 import { getInfoURL } from "@/config/url";
 import DetailsContainer from "@/components/containers/movie/details";
-import VideoPlayer from "@/components/containers/movie/videoplayer";
 import * as React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -89,7 +88,6 @@ const Info: React.FC<{ params: Params }> = ({ params }) => {
       ) : (
         <>
           <DetailsContainer data={data} id={id} embed="false" />
-          <VideoPlayer id={id} />
         </>
       )}
     </>

@@ -1,7 +1,16 @@
 "use client";
 import * as React from "react";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Download } from "lucide-react";
 import Link from "next/link";
 import { API_KEY } from "@/config/url";
 
@@ -88,11 +97,21 @@ export default function VideoPlayer({ id }: { id: number }) {
   }
 
   if (isLoading) {
-    return <div className="text-center">Loading...</div>;
+    return (
+      <div className="py-8 mx-auto max-w-5xl">
+        <Skeleton className="mx-auto px-4 pt-6 w-full h-[500px]" />
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-center text-red-500">Error: {error}</div>;
+    
+    return (
+      <div className="py-8 mx-auto max-w-5xl">
+        <Skeleton className="mx-auto px-4 pt-6 w-full h-[500px]" />{" "}
+        <div className="text-center text-red-500">Error: {error}</div>
+      </div>
+    );
   }
 
   return (
@@ -101,74 +120,81 @@ export default function VideoPlayer({ id }: { id: number }) {
         <div className="flex flex-col text-center items-center justify-center">
           <div className="rounded-md pl-4 flex w-full max-w-sm items-center space-x-2">
             <div className="flex items-center space-x-2">
-              <select
-                id="season-select"
+              <Select
                 value={season}
-                onChange={(e) => setSeason(e.target.value)}
+                onValueChange={(e) => setSeason(e)}
                 disabled={isLoading || seasons.length === 0}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                {seasons.length > 0 ? (
-                  seasons.map((s) => (
-                    <option
-                      key={s.season_number}
-                      value={s.season_number.toString()}
-                    >
-                      Season {s.season_number}
-                    </option>
-                  ))
-                ) : (
-                  <option value="">No seasons available</option>
-                )}
-              </select>
+                <SelectTrigger className="px-4 py-2 rounded-md w-[180px]">
+                  <SelectValue placeholder="Select Video Source" />
+                </SelectTrigger>
+                <SelectContent>
+                  {seasons.length > 0 ? (
+                    seasons.map((s) => (
+                      <SelectItem
+                        key={s.season_number}
+                        value={s.season_number.toString()}
+                      >
+                        Season {s.season_number}
+                      </SelectItem>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </SelectContent>
+              </Select>
             </div>
             <div className="flex items-center space-x-2">
-              <select
-                id="episode-select"
+              <Select
                 value={episode}
-                onChange={(e) => setEpisode(e.target.value)}
+                onValueChange={(e) => setEpisode(e)}
                 disabled={isLoading || episodes.length === 0}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                {episodes.length > 0 ? (
-                  episodes.map((e) => (
-                    <option
-                      key={e.episode_number}
-                      value={e.episode_number.toString()}
-                    >
-                      Episode {e.episode_number}
-                    </option>
-                  ))
-                ) : (
-                  <option value="">No episodes available</option>
-                )}
-              </select>
+                <SelectTrigger className="px-4 py-2 rounded-md w-[180px]">
+                  <SelectValue placeholder="Select Video Source" />
+                </SelectTrigger>
+                <SelectContent>
+                  {episodes.length > 0 ? (
+                    episodes.map((s) => (
+                      <SelectItem
+                        key={s.episode_number}
+                        value={s.episode_number.toString()}
+                      >
+                        Episode {s.episode_number}
+                      </SelectItem>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </SelectContent>
+              </Select>
             </div>
-            <div className="flex flex-col text-center items-center justify-center">
-            <Link href={`https://dl.vidsrc.vip/tv/${id}/${season}/${episode}`}>
-              <Button
-                disabled={isLoading || !season || !episode}
-                className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Download EP: {episode}
-              </Button>
-            </Link>
           </div>
+          <div className="pt-2">
+            <Link href={`https://dl.vidsrc.vip/tv/${id}/${season}/${episode}`}>
+              <Badge
+                variant="outline"
+                className="cursor-pointer whitespace-nowrap"
+              >
+                <Download className="mr-1.5" size={12} />
+                Download {season}-{episode}
+              </Badge>
+            </Link>
           </div>
         </div>
       </div>
-      <Tabs defaultValue="vidsrcvip">
+      <Tabs defaultValue="autoembed">
         <div className="flex flex-col items-center">
           <TabsList>
-            <TabsTrigger value="vidsrcvip">VidSrc.Vip</TabsTrigger>
-            <TabsTrigger value="vidsrcpro">Vid.Pro</TabsTrigger>
-            <TabsTrigger value="vidsrcin">Vid.In</TabsTrigger>
+            <TabsTrigger value="autoembed">AutoEmbed</TabsTrigger>
+            <TabsTrigger value="vidsrcpro">VidSrc.Pro</TabsTrigger>
+            <TabsTrigger value="vidsrc">VidSrc</TabsTrigger>
             <TabsTrigger value="superembed">SuberEmbed</TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="vidsrcvip">
+        <TabsContent value="autoembed">
           <iframe
-            src={`https://vidsrc.vip/embed/tv/${id}/${season}/${episode}`}
+            src={`https://player.autoembed.cc/embed/tv/${id}/${season}/${episode}`}
             referrerPolicy="origin"
             allowFullScreen
             width="100%"
@@ -188,7 +214,7 @@ export default function VideoPlayer({ id }: { id: number }) {
             className="max-w-3xl mx-auto px-4 pt-10"
           ></iframe>
         </TabsContent>
-        <TabsContent value="vidsrcin">
+        <TabsContent value="vidsrc">
           <iframe
             src={`https://vidsrc.in/embed/tv/${id}/${season}/${episode}`}
             referrerPolicy="origin"
