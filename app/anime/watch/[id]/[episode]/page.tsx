@@ -1,5 +1,6 @@
-import EpisodeContainer from "@/components/containers/anime/episode";
-import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Download } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -24,17 +25,27 @@ interface WatchDataSources {
   quality: string;
 }
 export default async function Watch({ params }: any) {
-  const {id, episode} = params;
-  const data = await get_data(episode)
+  const { id, episode } = params;
+  const data = await get_data(episode);
+  function removeQueryParams(url: string, paramsToRemove: string[]): string {
+    const urlObj = new URL(url);
+    paramsToRemove.forEach((param) => urlObj.searchParams.delete(param));
+    return urlObj.toString();
+  }
+
+  const originalUrl = data.download;
+  const paramsToRemove = ["token", "expires"];
+
+  const cleanedUrl = removeQueryParams(originalUrl, paramsToRemove);
   const defaultSourceUrl = data.sources
-    .map((value:any) => {
+    .map((value: any) => {
       const source = value as WatchDataSources;
       if (source.quality === "default") {
         return source.url;
       }
       return null;
     })
-    .filter((url:any) => url !== null)[0];
+    .filter((url: any) => url !== null)[0];
   return (
     <div className="max-w-6xl pb-1 mx-auto px-4 pt-10">
       <div className="pb-4">
@@ -56,6 +67,21 @@ export default async function Watch({ params }: any) {
           </div>
         </div>
       </div>
+      <div className="flex flex-row items-center justify-center w-full">
+        <div className="flex flex-col text-center">
+          <div className="pb-2">
+            <Link href={cleanedUrl}>
+              <Badge
+                variant="outline"
+                className="cursor-pointer whitespace-nowrap"
+              >
+                <Download className="mr-1.5" size={12} />
+                Download Episode
+              </Badge>
+            </Link>
+          </div>
+        </div>
+      </div>
       <div className="max-w-4xl mx-auto flex">
         <MediaPlayer src={defaultSourceUrl}>
           <MediaProvider />
@@ -67,8 +93,7 @@ export default async function Watch({ params }: any) {
       </div>
     </div>
   );
-};
-
+}
 
 const get_data = async (episode: any) => {
   const res = await fetch(
@@ -80,4 +105,3 @@ const get_data = async (episode: any) => {
   const data = await res.json();
   return data;
 };
-
