@@ -13,6 +13,7 @@ interface CarousalCardProps {
 
 export default function CarousalCard(props: CarousalCardProps) {
   const { show, isDetailsPage, type } = props;
+  console.log(show)
 
   return (
     <>
@@ -63,10 +64,14 @@ export default function CarousalCard(props: CarousalCardProps) {
               <div className="w-[96%] mx-auto">
                 <div className=" flex gap-1 flex-col  uppercase w-[500px] text-pretty">
                   <div className="text-sm normal-case opacity-50">
-                    {format(
-                      new Date(show.first_air_date || show.release_date),
-                      "PPP"
-                    )}
+                    {props.show.release_date || props.show.first_air_date
+                      ? format(
+                          new Date(
+                            props.show.release_date || props.show.first_air_date
+                          ),
+                          "PPP"
+                        )
+                      : "Unknown"}
                   </div>
                   <div className="text-3xl text-pretty font-bold ">
                     {show.title || show.name}
