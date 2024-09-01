@@ -341,7 +341,7 @@ export default async function MangaInfo({ params }: any) {
 
 async function getMangaInfo(id: any) {
   const res = await fetch(
-    `https://consumet-jade.vercel.app/meta/anilist-manga/info/${id}?provider=mangadex`,
+    `${env.CONSUMET_API_URL}/meta/anilist-manga/info/${id}?provider=mangadex`,
     { next: { revalidate: 21600 } }
   );
   const data = await res.json();

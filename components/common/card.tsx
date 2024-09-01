@@ -13,7 +13,6 @@ interface CarousalCardProps {
 
 export default function CarousalCard(props: CarousalCardProps) {
   const { show, isDetailsPage, type } = props;
-  console.log(show)
 
   return (
     <>

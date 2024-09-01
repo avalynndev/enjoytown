@@ -5,7 +5,7 @@ import { getInfoURL } from "@/config/url";
 
 export async function GetSearchedAnime(title: any) {
   const res = await fetch(
-    "https://consumet-jade.vercel.app/meta/anilist-manga/" + title
+    `${env.CONSUMET_API_URL}/meta/anilist-manga/` + title
   );
   const data = await res.json();
   return data;
@@ -44,10 +44,9 @@ export async function fetchCarousalData(type: string) {
 }
 
 export async function fetchManga(id: any) {
-  const res = await fetch(
-     `https://api.mangadex.dev/at-home/server/${id}`,
-    { next: { revalidate: 21600 } }
-  );
+  const res = await fetch(`https://api.mangadex.dev/at-home/server/${id}`, {
+    next: { revalidate: 21600 },
+  });
   const data = await res.json();
   return data;
 }
@@ -60,7 +59,6 @@ export async function PreFetchChaterLinks(data: any) {
     });
 
     await Promise.all(fetchPromises);
-
   } catch (error) {
     console.error("Error occurred while pre-fetching chapter links:", error);
   }

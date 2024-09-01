@@ -7,6 +7,7 @@ import { MainNav } from "@/components/navbar/main-nav";
 import { MobileNav } from "@/components/navbar/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
+import { CommandSearch } from "../command-search";
 
 export function SiteHeader() {
   return (
@@ -16,6 +17,7 @@ export function SiteHeader() {
         <MobileNav />
         <div className="flex flex-1 items-center space-x-2 justify-end">
           <nav className="flex items-center">
+            <CommandSearch />
             <Link
               href={siteConfig.links.github}
               target="_blank"
@@ -50,6 +52,7 @@ export function SiteHeader() {
                 <span className="sr-only">Twitter</span>
               </div>
             </Link>
+
             <ThemeToggle />
           </nav>
         </div>
