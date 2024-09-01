@@ -7,6 +7,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { useState, useEffect, useCallback } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from "next/navigation";
+import { env } from "@/env.mjs";
 
 export default function Read({ params }: any) {
   const chapterId = params.read;
