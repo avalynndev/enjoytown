@@ -140,7 +140,7 @@ export async function FetchAnimeInfo(data: any) {
   }
 }
 
-export async function FetchSearchTitle(title: any) {
+export async function fetchDramaSearch(title: any) {
   const res = await fetch(`${env.CONSUMET_API_URL}/movies/dramacool/${title}`, {
     cache: "force-cache",
   });

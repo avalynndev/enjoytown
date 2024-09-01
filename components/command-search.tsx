@@ -14,6 +14,14 @@ import { Movie_Search, Tv_Search } from "@/config/url";
 import { FetchMovieInfo } from "@/fetch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
+import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";
+
+type DramaResult = {
+  id: string;
+  title: string;
+  url: string;
+  image: string;
+};
 
 type MangaResult = {
   id: string;
@@ -80,7 +88,9 @@ export const CommandSearch = () => {
     movies: [],
     tvShows: [],
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);  
+  const [dramaResults, setDramaResults] = useState<DramaResult[] | null>(null);
+  const [mangaResults, setMangaResults] = useState<MangaResult[] | null>(null);
 
   const debounce = (func: (...args: any[]) => void, delay: number) => {
     let debounceTimer: NodeJS.Timeout;
@@ -89,7 +99,22 @@ export const CommandSearch = () => {
       debounceTimer = setTimeout(() => func(...args), delay);
     };
   };
-  const [mangaResults, setMangaResults] = useState<MangaResult[] | null>(null);
+
+  const fetchDramaResults = async (title: string) => {
+    setIsLoading(true);
+    if (title) {
+      const data = await fetchDramaSearch(title); // Fetch drama search results
+      FetchAnimeInfo(data); // Process the fetched info if needed
+      setDramaResults(data.results); // Set the drama results
+    }
+    setIsLoading(false);
+  };
+
+  // Trigger drama search on input change
+  useEffect(() => {
+    const debouncedFetch = debounce(fetchDramaResults, 500);
+    debouncedFetch(search);
+  }, [search]);
 
   const fetchMangaResults = async (title: string) => {
     setIsLoading(true);
@@ -106,8 +131,6 @@ export const CommandSearch = () => {
     const debouncedFetch = debounce(fetchMangaResults, 500);
     debouncedFetch(search);
   }, [search]);
-
-  const hasMangaResults = mangaResults?.length ?? 0 > 0;
 
   const pathName = usePathname();
 
@@ -151,6 +174,8 @@ export const CommandSearch = () => {
 
   const hasMovies = result?.movies && result?.movies?.length > 0;
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
+  const hasMangaResults = mangaResults?.length ?? 0 > 0;
+  const hasDramaResults = dramaResults?.length ?? 0 > 0;
 
   return (
     <>
@@ -235,7 +260,7 @@ export const CommandSearch = () => {
                 )}
 
                 {hasMangaResults && (
-                  <CommandSearchGroup heading="TV Shows">
+                  <CommandSearchGroup heading="Manga">
                     {mangaResults?.map((item) => (
                       <Link
                         key={item.id}
@@ -243,12 +268,31 @@ export const CommandSearch = () => {
                         href={`/manga/${item.id}`}
                       >
                         <span className="truncate whitespace-nowrap text-sm">
-                          {item.title.userPreferred || item.title.english || item.title.romaji}
+                          {item.title.userPreferred ||
+                            item.title.english ||
+                            item.title.romaji}
                         </span>
 
                         <span className="whitespace-nowrap text-xs text-muted-foreground">
                           CH: {item.totalChapters}
                         </span>
+                      </Link>
+                    ))}
+                  </CommandSearchGroup>
+                )}
+
+                {dramaResults && (
+                  <CommandSearchGroup heading="Drama">
+                    {dramaResults?.map((item) => (
+                      <Link
+                        key={item.id}
+                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                        href={`/manga/${item.id}`}
+                      >
+                        <span className="truncate whitespace-nowrap text-sm">
+                          {item.title}
+                        </span>
+
                       </Link>
                     ))}
                   </CommandSearchGroup>

@@ -1,5 +1,4 @@
 import { Pattern } from "@/components/ui/pattern";
-import { SiteHeader } from "@/components/navbar/site-header";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -7,7 +6,6 @@ export default async function Home() {
   return (
     <>
       <Pattern variant="checkered" />
-      <SiteHeader />
       <div className="mx-auto max-w-4xl p-4">
         <section className="flex h-[75vh] items-center md:h-[50vh]">
           <div className="mx-auto flex w-4/5 flex-col items-center justify-center space-y-4 text-center">

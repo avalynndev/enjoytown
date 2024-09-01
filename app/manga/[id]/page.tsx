@@ -212,7 +212,7 @@ export default async function MangaInfo({ params }: any) {
                               item.type == "MOVIE"
                                 ? `/anime/${item.id}`
                                 : item.type == "MANGA"
-                                ? `/manga/info/${item.id}`
+                                ? `/manga/${item.id}`
                                 : item.type == "TV"
                                 ? `/anime/${item.id}`
                                 : ``
@@ -278,7 +278,7 @@ export default async function MangaInfo({ params }: any) {
                               item.type == "MOVIE"
                                 ? `/anime/${item.id}`
                                 : item.type == "MANGA"
-                                ? `/manga/info/${item.id}`
+                                ? `/manga/${item.id}`
                                 : item.type == "TV"
                                 ? `/anime/${item.id}`
                                 : ``

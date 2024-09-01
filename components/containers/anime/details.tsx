@@ -180,7 +180,7 @@ const DetailsContainer = ({ data }: any) => {
                               item.type == "MOVIE"
                                 ? `/anime/${item.id}`
                                 : item.type == "MANGA"
-                                ? `/manga/info/${item.id}`
+                                ? `/manga/${item.id}`
                                 : item.type == "TV"
                                 ? `/anime/${item.id}`
                                 : ``
@@ -246,7 +246,7 @@ const DetailsContainer = ({ data }: any) => {
                               item.type == "MOVIE"
                                 ? `/anime/${item.id}`
                                 : item.type == "MANGA"
-                                ? `/manga/info/${item.id}`
+                                ? `/manga/${item.id}`
                                 : item.type == "TV"
                                 ? `/anime/${item.id}`
                                 : ``

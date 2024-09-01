@@ -88,7 +88,7 @@ export default function Hero() {
               return (
                 <Link
                   shallow
-                  href={`/manga/info/${item.id}`}
+                  href={`/manga/${item.id}`}
                   style={{ textDecoration: "none" }}
                   key={index}
                 >
