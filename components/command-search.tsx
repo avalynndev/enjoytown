@@ -11,7 +11,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Movie_Search, Tv_Search } from "@/config/url";
-import { FetchMovieInfo } from "@/fetch";
+import { FetchMovieInfo, get_search_anime } from "@/fetch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
 import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";
@@ -160,7 +160,7 @@ export const CommandSearch = () => {
   const fetchAnimeResults = async (text: string) => {
     setIsLoading(true);
     if (text) {
-      const data = await get_search(text); // Fetch search results
+      const data = await get_search_anime(text); // Fetch search results
       setSearchResults(data.results); // Set the search results
     }
     setIsLoading(false);
@@ -382,10 +382,4 @@ const get_tv_results = async (title: string) => {
     next: { revalidate: 21600 },
   });
   return res.json();
-};
-
-const get_search = async (text: any) => {
-  const res = await fetch(`${process.env.CONSUMET_API_ANILIST_URL}/${text}`);
-  const data = await res.json();
-  return data;
 };

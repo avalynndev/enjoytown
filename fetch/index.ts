@@ -3,6 +3,17 @@ import { API_KEY } from "@/config/url";
 import { env } from "@/env.mjs";
 import { getInfoURL } from "@/config/url";
 
+export async function get_search_anime(text:any) {
+  const res = await fetch(
+    `${env.CONSUMET_API_URL}/meta/anilist` + text,
+    {
+      next: { revalidate: 21600 },
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+
 export async function get_trending_anime() {
   const res = await fetch(
     `${env.CONSUMET_API_URL}/meta/anilist/airing-schedule`,
