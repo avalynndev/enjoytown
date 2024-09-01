@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { Image as ImageIcon } from "lucide-react";
+import { API_KEY } from "@/config/url";
 
 import {
   Tooltip,
@@ -35,7 +36,7 @@ export default function TopRated() {
     const fetchData = async () => {
       setLoading(true);
       const res = await fetch(
-        "https://api.themoviedb.org/3/movie/now_playing?api_key=171fe27dbfecc58e2a18fbced644cda9",
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`,
         { next: { revalidate: 21600 } }
       );
       const data = await res.json();

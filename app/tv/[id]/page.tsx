@@ -2,6 +2,7 @@
 import DetailsContainer from "@/components/containers/tv/details";
 import * as React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { API_KEY } from "@/config/url";
 
 type Movie = {
   id: number;
@@ -33,7 +34,7 @@ const Info: React.FC<{ params: Params }> = ({ params }) => {
         setError(null); // Reset error state before fetching
 
         const res = await fetch(
-          `https://api.themoviedb.org/3/tv/${id}?api_key=171fe27dbfecc58e2a18fbced644cda9`,
+          `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`,
           {
             next: { revalidate: 21620 },
           }

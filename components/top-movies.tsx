@@ -4,6 +4,7 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import * as React from "react";
 import { FetchMovieInfo } from "@/fetch";
+import { API_KEY } from "@/config/url";
 
 type Movie = {
   id: number;
@@ -25,7 +26,7 @@ export const TopMovies = () => {
     const fetchData = async () => {
       setLoading(true);
       const res = await fetch(
-        "https://api.themoviedb.org/3/movie/popular?api_key=171fe27dbfecc58e2a18fbced644cda9",
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
         { next: { revalidate: 21600 } }
       );
       const data = await res.json();
