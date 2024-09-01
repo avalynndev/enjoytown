@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
 import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";
 
-type AnimeResultItem = {
+type AnimeResult = {
   id: string;
   malId: number | null;
   title: {
@@ -38,13 +38,6 @@ type AnimeResultItem = {
   type: string;
   releaseDate: number | null;
 };
-
-type animeResult = {
-  currentPage: number;
-  hasNextPage: boolean;
-  results: AnimeResultItem[];
-};
-
 
 type DramaResult = {
   id: string;
@@ -162,13 +155,13 @@ export const CommandSearch = () => {
     debouncedFetch(search);
   }, [search]);
 
-  const [animeResults, setSearchResults] = useState<animeResult | null>(null);
+  const [animeResults, setSearchResults] = useState<AnimeResult[] | null>(null);
 
   const fetchAnimeResults = async (text: string) => {
     setIsLoading(true);
     if (text) {
       const data = await get_search(text); // Fetch search results
-      setSearchResults(data); // Set the search results
+      setSearchResults(data.results); // Set the search results
     }
     setIsLoading(false);
   };
@@ -223,8 +216,7 @@ export const CommandSearch = () => {
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
   const hasMangaResults = mangaResults?.length ?? 0 > 0;
   const hasDramaResults = dramaResults?.length ?? 0 > 0;
-  const hasAnimeResults = animeResults?.results?.length ?? 0 > 0;
-
+  const hasAnimeResults = animeResults?.length ?? 0 > 0;
 
   return (
     <>
@@ -348,7 +340,7 @@ export const CommandSearch = () => {
 
                 {hasAnimeResults && (
                   <CommandSearchGroup heading="Anime">
-                    {animeResults?.results.map((item) => (
+                    {animeResults?.map((item) => (
                       <Link
                         key={item.id}
                         className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
