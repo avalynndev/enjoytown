@@ -5,7 +5,7 @@ import { getInfoURL } from "@/config/url";
 
 export async function get_search_anime(text:any) {
   const res = await fetch(
-    `${env.CONSUMET_API_URL}/meta/anilist` + text,
+    `${env.CONSUMET_API_ANILIST_URL}/` + text,
     {
       next: { revalidate: 21600 },
     }
@@ -16,7 +16,7 @@ export async function get_search_anime(text:any) {
 
 export async function get_trending_anime() {
   const res = await fetch(
-    `${env.CONSUMET_API_URL}/meta/anilist/airing-schedule`,
+    `${env.CONSUMET_API_ANILIST_URL}/airing-schedule`,
     {
       next: { revalidate: 21600 },
     }
@@ -27,7 +27,7 @@ export async function get_trending_anime() {
 
 export async function get_airing_anime() {
   const res = await fetch(
-    `${env.CONSUMET_API_URL}/meta/anilist/airing-schedule`,
+    `${env.CONSUMET_API_ANILIST_URL}/airing-schedule`,
     {
       next: { revalidate: 21600 },
     }
@@ -37,7 +37,7 @@ export async function get_airing_anime() {
 };
 
 export async function get_popular_anime() {
-  const res = await fetch(`${env.CONSUMET_API_URL}/meta/anilist/popular`, {
+  const res = await fetch(`${env.CONSUMET_API_ANILIST_URL}/popular`, {
     next: { revalidate: 21600 },
   });
   const data = await res.json();
