@@ -13,6 +13,25 @@ import {
 import { Movie_Search, Tv_Search } from "@/config/url";
 import { FetchMovieInfo } from "@/fetch";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
+
+type MangaResult = {
+  id: string;
+  malId?: number;
+  title: {
+    romaji: string;
+    english?: string;
+    native?: string;
+    userPreferred: string;
+  };
+  status: string;
+  image: string;
+  description: string;
+  genres: string[];
+  totalChapters?: number;
+  volumes?: number;
+  type: string;
+};
 
 type MovieResult = {
   id: number;
@@ -70,6 +89,25 @@ export const CommandSearch = () => {
       debounceTimer = setTimeout(() => func(...args), delay);
     };
   };
+  const [mangaResults, setMangaResults] = useState<MangaResult[] | null>(null);
+
+  const fetchMangaResults = async (title: string) => {
+    setIsLoading(true);
+    if (title) {
+      const data = await getSearchedManga(title); // Fetch manga results
+      PreFetchMangaInfo(data); // Process the fetched manga info
+      setMangaResults(data.results); // Set the manga results
+    }
+    setIsLoading(false);
+  };
+
+  // Trigger the manga search on input change
+  useEffect(() => {
+    const debouncedFetch = debounce(fetchMangaResults, 500);
+    debouncedFetch(search);
+  }, [search]);
+
+  const hasMangaResults = mangaResults?.length ?? 0 > 0;
 
   const pathName = usePathname();
 
@@ -114,7 +152,6 @@ export const CommandSearch = () => {
   const hasMovies = result?.movies && result?.movies?.length > 0;
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
 
-
   return (
     <>
       <Button
@@ -122,7 +159,7 @@ export const CommandSearch = () => {
         className="flex w-full flex-1 justify-between gap-2 pr-2 text-sm text-muted-foreground"
         onClick={() => setOpen(true)}
       >
-        Search
+        Search Anything
         <div className="mobile:hidden flex items-center gap-1 rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
           <CommandIcon size={12} />K
         </div>
@@ -160,7 +197,7 @@ export const CommandSearch = () => {
                     {result.movies.map((item) => (
                       <Link
                         key={item.id}
-                        href={`/movies/${item.id}`}
+                        href={`/movie/${item.id}`}
                         className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
                       >
                         <span className="truncate whitespace-nowrap text-sm">
@@ -182,7 +219,7 @@ export const CommandSearch = () => {
                       <Link
                         key={item.id}
                         className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
-                        href={`/tv-series/${item.id}`}
+                        href={`/tv/${item.id}`}
                       >
                         <span className="truncate whitespace-nowrap text-sm">
                           {item.name}
@@ -191,6 +228,26 @@ export const CommandSearch = () => {
                         <span className="whitespace-nowrap text-xs text-muted-foreground">
                           {item.first_air_date &&
                             new Date(item.first_air_date).getFullYear()}
+                        </span>
+                      </Link>
+                    ))}
+                  </CommandSearchGroup>
+                )}
+
+                {hasMangaResults && (
+                  <CommandSearchGroup heading="TV Shows">
+                    {mangaResults?.map((item) => (
+                      <Link
+                        key={item.id}
+                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                        href={`/manga/${item.id}`}
+                      >
+                        <span className="truncate whitespace-nowrap text-sm">
+                          {item.title.userPreferred || item.title.english || item.title.romaji}
+                        </span>
+
+                        <span className="whitespace-nowrap text-xs text-muted-foreground">
+                          CH: {item.totalChapters}
                         </span>
                       </Link>
                     ))}

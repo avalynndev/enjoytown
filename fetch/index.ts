@@ -3,7 +3,7 @@ import { API_KEY } from "@/config/url";
 import { env } from "@/env.mjs";
 import { getInfoURL } from "@/config/url";
 
-export async function GetSearchedAnime(title: any) {
+export async function getSearchedManga(title: any) {
   const res = await fetch(
     `${env.CONSUMET_API_URL}/meta/anilist-manga/` + title
   );

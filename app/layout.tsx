@@ -8,6 +8,7 @@ import NextTopLoader from "nextjs-toploader";
 
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
+import { SiteHeader } from "@/components/navbar/site-header";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -93,6 +94,7 @@ export default function RootLayout({
             speed={200}
             shadow="0 0 10px #2299DD,0 0 5px #2299DD"
           />
+          <SiteHeader/>
           <div className="relative flex min-h-screen flex-col">
             <div className="flex-1">{children}</div>
           </div>

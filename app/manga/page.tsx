@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState, useEffect, useCallback } from "react";
-import { GetSearchedAnime, PreFetchMangaInfo } from "@/fetch";
+import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,7 +38,7 @@ export default function Hero() {
   const handleSearch = async (title: string) => {
     if (title) {
       setLoading(true);
-      const data = await GetSearchedAnime(title);
+      const data = await getSearchedManga(title);
       PreFetchMangaInfo(data);
       setLoading(false);
       setInfoTitle(data.results);

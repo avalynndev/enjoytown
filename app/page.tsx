@@ -1,10 +1,7 @@
 import { Pattern } from "@/components/ui/pattern";
 import { SiteHeader } from "@/components/navbar/site-header";
-import * as Craft from "@/components/ui/craft";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { getInfoURL } from "@/config/url";
-import { TopMovies } from "@/components/top-movies";
 
 export default async function Home() {
   return (
@@ -40,9 +37,3 @@ export default async function Home() {
     </>
   );
 }
-
-const get_movie_info = async (id: any) => {
-  const res = await fetch(getInfoURL(id), { next: { revalidate: 21620 } });
-  const data = await res.json();
-  return data;
-};
