@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { Image as ImageIcon } from "lucide-react";
-import { env } from "@/env.mjs";
+import { get_trending_anime } from "@/fetch";
 
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -30,9 +30,7 @@ export default function Trending() {
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await fetch(`${env.CONSUMET_API_URL}/meta/anilist/trending`, {
-        next: { revalidate: 21600 },
-      });
+      const res = await get_trending_anime();
       const data = await res.json();
       FetchMovieInfo(data);
       setData(data);

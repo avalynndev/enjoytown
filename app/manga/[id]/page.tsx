@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import { PreFetchChaterLinks } from "@/fetch";
 import Link from "next/link";
+import { getMangaInfo } from "@/fetch";
 import {
   Card,
   CardFooter,
@@ -338,13 +339,4 @@ export default async function MangaInfo({ params }: any) {
       </div>
     </div>
   );
-}
-
-async function getMangaInfo(id: any) {
-  const res = await fetch(
-    `${env.CONSUMET_API_URL}/meta/anilist-manga/info/${id}?provider=mangadex`,
-    { next: { revalidate: 21600 } }
-  );
-  const data = await res.json();
-  return data;
 }

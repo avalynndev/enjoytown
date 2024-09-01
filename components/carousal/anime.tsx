@@ -5,12 +5,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { env } from "@/env.mjs";
-import { Show } from "@/types";
+import { get_popular_anime } from "@/fetch";
 import CarousalCard from "@/components/carousal/card";
 
 export default async function CarousalComponent() {
-  const data = await get_popular();
+  const data = await get_popular_anime();
   if (!data) return <div>None Found</div>;
   return (
     <>
@@ -26,11 +25,3 @@ export default async function CarousalComponent() {
     </>
   );
 }
-
-const get_popular = async () => {
-  const res = await fetch(`${env.CONSUMET_API_URL}/meta/anilist/popular`, {
-    next: { revalidate: 21600 },
-  });
-  const data = await res.json();
-  return data;
-};
