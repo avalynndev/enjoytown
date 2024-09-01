@@ -3,9 +3,60 @@ import { API_KEY } from "@/config/url";
 import { env } from "@/env.mjs";
 import { getInfoURL } from "@/config/url";
 
-export async function GetSearchedAnime(title: any) {
+export async function get_search_anime(text:any) {
   const res = await fetch(
-    "https://consumet-jade.vercel.app/meta/anilist-manga/" + title
+    `${env.CONSUMET_API_URL}/meta/anilist` + text,
+    {
+      next: { revalidate: 21600 },
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+
+export async function get_trending_anime() {
+  const res = await fetch(
+    `${env.CONSUMET_API_URL}/meta/anilist/airing-schedule`,
+    {
+      next: { revalidate: 21600 },
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+
+export async function get_airing_anime() {
+  const res = await fetch(
+    `${env.CONSUMET_API_URL}/meta/anilist/airing-schedule`,
+    {
+      next: { revalidate: 21600 },
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+
+export async function get_popular_anime() {
+  const res = await fetch(`${env.CONSUMET_API_URL}/meta/anilist/popular`, {
+    next: { revalidate: 21600 },
+  });
+  const data = await res.json();
+  return data;
+};
+
+export async function getMangaInfo(id: any) {
+  const res = await fetch(
+    `${env.CONSUMET_API_URL}/meta/anilist-manga/info/${id}?provider=mangadex`,
+    { next: { revalidate: 21600 } }
+  );
+  const data = await res.json();
+  return data;
+}
+
+
+export async function getSearchedManga(title: any) {
+  const res = await fetch(
+    `${env.CONSUMET_API_URL}/meta/anilist-manga/` + title
   );
   const data = await res.json();
   return data;
@@ -44,10 +95,9 @@ export async function fetchCarousalData(type: string) {
 }
 
 export async function fetchManga(id: any) {
-  const res = await fetch(
-     `https://api.mangadex.dev/at-home/server/${id}`,
-    { next: { revalidate: 21600 } }
-  );
+  const res = await fetch(`https://api.mangadex.dev/at-home/server/${id}`, {
+    next: { revalidate: 21600 },
+  });
   const data = await res.json();
   return data;
 }
@@ -60,7 +110,6 @@ export async function PreFetchChaterLinks(data: any) {
     });
 
     await Promise.all(fetchPromises);
-
   } catch (error) {
     console.error("Error occurred while pre-fetching chapter links:", error);
   }
@@ -142,7 +191,7 @@ export async function FetchAnimeInfo(data: any) {
   }
 }
 
-export async function FetchSearchTitle(title: any) {
+export async function fetchDramaSearch(title: any) {
   const res = await fetch(`${env.CONSUMET_API_URL}/movies/dramacool/${title}`, {
     cache: "force-cache",
   });

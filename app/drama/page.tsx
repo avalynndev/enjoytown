@@ -2,7 +2,7 @@
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { Card, CardContent, } from "@/components/ui/card";
 import { useState, useEffect, useCallback } from "react";
-import { FetchSearchTitle, FetchAnimeInfo } from "@/fetch";
+import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ export default function DramaSearch() {
   const handleSearch = async (title: string) => {
     if (title) {
       setLoading(true);
-      const data = await FetchSearchTitle(title);
+      const data = await fetchDramaSearch(title);
       FetchAnimeInfo(data);
       setLoading(false);
       setInfoTitle(data.results);

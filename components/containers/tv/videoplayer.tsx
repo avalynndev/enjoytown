@@ -57,7 +57,6 @@ export default function VideoPlayer({ id }: { id: number }) {
       const relevantSeasons = data.seasons.filter(
         (s: any) => s.season_number > 0
       );
-      console.log("Fetched seasons:", relevantSeasons);
       setSeasons(relevantSeasons || []);
       if (relevantSeasons.length > 0) {
         setSeason(relevantSeasons[0].season_number.toString());
@@ -82,7 +81,6 @@ export default function VideoPlayer({ id }: { id: number }) {
       if (data.success === false) {
         throw new Error(data.status_message || "Failed to fetch episodes");
       }
-      console.log("Fetched episodes:", data.episodes);
       setEpisodes(data.episodes || []);
       if (data.episodes.length > 0) {
         setEpisode(data.episodes[0].episode_number.toString());

@@ -3,6 +3,7 @@ import { getInfoURL } from "@/config/url";
 import DetailsContainer from "@/components/containers/movie/details";
 import * as React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { API_KEY } from "@/config/url";
 
 type Movie = {
   id: number;
@@ -32,9 +33,12 @@ const Info: React.FC<{ params: Params }> = ({ params }) => {
         setLoading(true);
         setError(null); // Reset error state before fetching
 
-        const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=171fe27dbfecc58e2a18fbced644cda9`, {
-          next: { revalidate: 21620 },
-        });
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`,
+          {
+            next: { revalidate: 21620 },
+          }
+        );
 
         if (!res.ok) {
           throw new Error(`Error: ${res.status} ${res.statusText}`);

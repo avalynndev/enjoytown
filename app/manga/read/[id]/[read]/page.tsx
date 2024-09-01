@@ -7,6 +7,8 @@ import { Spinner } from "@/components/ui/spinner";
 import { useState, useEffect, useCallback } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from "next/navigation";
+import { env } from "@/env.mjs";
+import { getMangaInfo } from "@/fetch";
 
 export default function Read({ params }: any) {
   const chapterId = params.read;
@@ -202,13 +204,4 @@ export default function Read({ params }: any) {
       </div>
     </div>
   );
-}
-
-async function getMangaInfo(id: any) {
-  const res = await fetch(
-    `https://consumet-jade.vercel.app/meta/anilist-manga/info/${id}?provider=mangadex`,
-    { next: { revalidate: 21600 } }
-  );
-  const data = await res.json();
-  return data;
 }

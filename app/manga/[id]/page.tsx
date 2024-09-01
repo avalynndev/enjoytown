@@ -8,12 +8,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { env } from "@/env.mjs";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import { PreFetchChaterLinks } from "@/fetch";
 import Link from "next/link";
+import { getMangaInfo } from "@/fetch";
 import {
   Card,
   CardFooter,
@@ -211,7 +213,7 @@ export default async function MangaInfo({ params }: any) {
                               item.type == "MOVIE"
                                 ? `/anime/${item.id}`
                                 : item.type == "MANGA"
-                                ? `/manga/info/${item.id}`
+                                ? `/manga/${item.id}`
                                 : item.type == "TV"
                                 ? `/anime/${item.id}`
                                 : ``
@@ -277,7 +279,7 @@ export default async function MangaInfo({ params }: any) {
                               item.type == "MOVIE"
                                 ? `/anime/${item.id}`
                                 : item.type == "MANGA"
-                                ? `/manga/info/${item.id}`
+                                ? `/manga/${item.id}`
                                 : item.type == "TV"
                                 ? `/anime/${item.id}`
                                 : ``
@@ -337,13 +339,4 @@ export default async function MangaInfo({ params }: any) {
       </div>
     </div>
   );
-}
-
-async function getMangaInfo(id: any) {
-  const res = await fetch(
-    `https://consumet-jade.vercel.app/meta/anilist-manga/info/${id}?provider=mangadex`,
-    { next: { revalidate: 21600 } }
-  );
-  const data = await res.json();
-  return data;
 }

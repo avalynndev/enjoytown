@@ -4,9 +4,11 @@ import { Inter as FontSans } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
+import NextTopLoader from "nextjs-toploader";
 
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
+import { SiteHeader } from "@/components/navbar/site-header";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -81,6 +83,18 @@ export default function RootLayout({
           }}
         />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <NextTopLoader
+            color="#2299DD"
+            initialPosition={0.08}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            showSpinner={true}
+            easing="ease"
+            speed={200}
+            shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+          />
+          <SiteHeader/>
           <div className="relative flex min-h-screen flex-col">
             <div className="flex-1">{children}</div>
           </div>

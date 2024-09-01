@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { Image as ImageIcon } from "lucide-react";
+import { get_popular_anime } from "@/fetch";
 
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -29,10 +30,7 @@ export default function Popular() {
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await fetch(
-        "https://consumet-jade.vercel.app/meta/anilist/popular",
-        { next: { revalidate: 21600 } }
-      );
+      const res = await get_popular_anime();
       const data = await res.json();
       FetchMovieInfo(data);
       setData(data);
