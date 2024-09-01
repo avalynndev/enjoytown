@@ -16,6 +16,36 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
 import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";
 
+type AnimeResultItem = {
+  id: string;
+  malId: number | null;
+  title: {
+    romaji: string;
+    english: string | null;
+    native: string;
+    userPreferred: string;
+  };
+  status: string;
+  image: string;
+  cover: string;
+  popularity: number;
+  description: string;
+  rating: number | null;
+  genres: string[];
+  color: string;
+  totalEpisodes: number | null;
+  currentEpisodeCount: number | null;
+  type: string;
+  releaseDate: number | null;
+};
+
+type animeResult = {
+  currentPage: number;
+  hasNextPage: boolean;
+  results: AnimeResultItem[];
+};
+
+
 type DramaResult = {
   id: string;
   title: string;
@@ -132,6 +162,23 @@ export const CommandSearch = () => {
     debouncedFetch(search);
   }, [search]);
 
+  const [animeResults, setSearchResults] = useState<animeResult | null>(null);
+
+  const fetchAnimeResults = async (text: string) => {
+    setIsLoading(true);
+    if (text) {
+      const data = await get_search(text); // Fetch search results
+      setSearchResults(data); // Set the search results
+    }
+    setIsLoading(false);
+  };
+
+  // Trigger search on input change
+  useEffect(() => {
+    const debouncedFetch = debounce(fetchAnimeResults, 500);
+    debouncedFetch(search);
+  }, [search]);
+
   const pathName = usePathname();
 
   const fetch_results = async (title: string) => {
@@ -176,6 +223,8 @@ export const CommandSearch = () => {
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
   const hasMangaResults = mangaResults?.length ?? 0 > 0;
   const hasDramaResults = dramaResults?.length ?? 0 > 0;
+  const hasAnimeResults = animeResults?.results?.length ?? 0 > 0;
+
 
   return (
     <>
@@ -281,18 +330,39 @@ export const CommandSearch = () => {
                   </CommandSearchGroup>
                 )}
 
-                {dramaResults && (
+                {hasDramaResults && (
                   <CommandSearchGroup heading="Drama">
                     {dramaResults?.map((item) => (
                       <Link
                         key={item.id}
                         className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
-                        href={`/manga/${item.id}`}
+                        href={`/drama/${item.id}`}
                       >
                         <span className="truncate whitespace-nowrap text-sm">
                           {item.title}
                         </span>
+                      </Link>
+                    ))}
+                  </CommandSearchGroup>
+                )}
 
+                {hasAnimeResults && (
+                  <CommandSearchGroup heading="Anime">
+                    {animeResults?.results.map((item) => (
+                      <Link
+                        key={item.id}
+                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                        href={`/anime/${item.id}`}
+                      >
+                        <span className="truncate whitespace-nowrap text-sm">
+                          {item.title.userPreferred ||
+                            item.title.english ||
+                            item.title.romaji}
+                        </span>
+
+                        <span className="whitespace-nowrap text-xs text-muted-foreground">
+                          Episodes: {item.totalEpisodes}
+                        </span>
                       </Link>
                     ))}
                   </CommandSearchGroup>
@@ -320,4 +390,10 @@ const get_tv_results = async (title: string) => {
     next: { revalidate: 21600 },
   });
   return res.json();
+};
+
+const get_search = async (text: any) => {
+  const res = await fetch(`${process.env.CONSUMET_API_ANILIST_URL}/${text}`);
+  const data = await res.json();
+  return data;
 };
