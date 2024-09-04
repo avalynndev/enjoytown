@@ -248,7 +248,25 @@ export const CommandSearch = () => {
                   ))}
                 </CommandSearchGroup>
 
-                <CommandSearchGroup heading="TV Shows">
+                <CommandSearchGroup heading="Tv Shows">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <CommandSearchSkeleton key={index} />
+                  ))}
+                </CommandSearchGroup>
+
+                <CommandSearchGroup heading="Manga">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <CommandSearchSkeleton key={index} />
+                  ))}
+                </CommandSearchGroup>
+
+                <CommandSearchGroup heading="Drama">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <CommandSearchSkeleton key={index} />
+                  ))}
+                </CommandSearchGroup>
+
+                <CommandSearchGroup heading="Anime">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <CommandSearchSkeleton key={index} />
                   ))}

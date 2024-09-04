@@ -31,8 +31,7 @@ export default function Airing() {
     const fetchData = async () => {
       setLoading(true);
       const res = await get_airing_anime()
-      const data = await res.json();
-      FetchMovieInfo(data);
+      FetchMovieInfo(res);
       setData(data);
       setLoading(false);
     };
