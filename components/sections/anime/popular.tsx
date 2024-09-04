@@ -30,9 +30,13 @@ export default function Popular() {
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await get_popular_anime();
-      FetchMovieInfo(res);
-      setData(data);
+      const res = await fetch(
+        `https://api-spicy.vercel.app/meta/anilist/popular`,
+        {
+          next: { revalidate: 21600 },
+        }
+      );
+      setData(await res.json());
       setLoading(false);
     };
 

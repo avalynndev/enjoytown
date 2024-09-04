@@ -30,9 +30,13 @@ export default function Trending() {
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await get_trending_anime();
-      FetchMovieInfo(res);
-      setData(data);
+      const res = await fetch(
+        `https://api-spicy.vercel.app/meta/anilist/trending`,
+        {
+          next: { revalidate: 21600 },
+        }
+      );
+      setData(await res.json());
       setLoading(false);
     };
 
