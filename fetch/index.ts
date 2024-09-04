@@ -37,7 +37,7 @@ export async function get_airing_anime() {
 };
 
 export async function get_popular_anime() {
-  const res = await fetch(`${env.CONSUMET_API_ANILIST_URL}/popular`, {
+  const res = await fetch(`https://api-spicy.vercel.app/meta/anilist/popular`, {
     next: { revalidate: 21600 },
   });
   const data = await res.json();

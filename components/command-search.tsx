@@ -160,8 +160,14 @@ export const CommandSearch = () => {
   const fetchAnimeResults = async (text: string) => {
     setIsLoading(true);
     if (text) {
-      const data = await get_search_anime(text); // Fetch search results
-      setSearchResults(data.results); // Set the search results
+      const res = await fetch(
+        `https://api-spicy.vercel.app/meta/anilist/` + text,
+        {
+          next: { revalidate: 21600 },
+        }
+      );
+      const data = await res.json()
+      setSearchResults(data.results);
     }
     setIsLoading(false);
   };
