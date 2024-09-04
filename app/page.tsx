@@ -1,6 +1,7 @@
 import { Pattern } from "@/components/ui/pattern";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { TopMovies } from "@/components/top-movies";
 
 export default async function Home() {
   return (
@@ -31,7 +32,7 @@ export default async function Home() {
           </div>
         </section>
       </div>
-     
+      <TopMovies/>
     </>
   );
 }

@@ -31,8 +31,7 @@ export default function Trending() {
     const fetchData = async () => {
       setLoading(true);
       const res = await get_trending_anime();
-      const data = await res.json();
-      FetchMovieInfo(data);
+      FetchMovieInfo(res);
       setData(data);
       setLoading(false);
     };

@@ -31,8 +31,7 @@ export default function Popular() {
     const fetchData = async () => {
       setLoading(true);
       const res = await get_popular_anime();
-      const data = await res.json();
-      FetchMovieInfo(data);
+      FetchMovieInfo(res);
       setData(data);
       setLoading(false);
     };
