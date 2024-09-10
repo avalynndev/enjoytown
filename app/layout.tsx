@@ -6,7 +6,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import NextTopLoader from "nextjs-toploader";
 
-import { cn } from "@/lib/utils";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "@/styles/globals.css";
 import { SiteHeader } from "@/components/navbar/site-header";
 
@@ -57,23 +57,8 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </head>
+      <GoogleAnalytics gaId="G-84Z171LN4N" />
       <body className="min-h-screen bg-background font-sans antialiased">
-        {/* Google Tag Manager Script */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-84Z171LN4N"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-84Z171LN4N');
-            `,
-          }}
-        />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <NextTopLoader
             color="#2299DD"
