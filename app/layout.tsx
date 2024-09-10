@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Space_Grotesk as SpaceGrotesk } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -10,10 +10,7 @@ import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import { SiteHeader } from "@/components/navbar/site-header";
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+const spaceGrotesk = SpaceGrotesk({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
   themeColor: [
@@ -36,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={spaceGrotesk.className} suppressHydrationWarning>
       <head>
         <link
           rel="apple-touch-icon"
@@ -60,12 +57,7 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >
+      <body className="min-h-screen bg-background font-sans antialiased">
         {/* Google Tag Manager Script */}
         <script
           async
@@ -94,7 +86,7 @@ export default function RootLayout({
             speed={200}
             shadow="0 0 10px #2299DD,0 0 5px #2299DD"
           />
-          <SiteHeader/>
+          <SiteHeader />
           <div className="relative flex min-h-screen flex-col">
             <div className="flex-1">{children}</div>
           </div>

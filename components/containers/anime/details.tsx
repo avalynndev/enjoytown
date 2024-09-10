@@ -21,22 +21,14 @@ import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { IAnimeInfo } from "@consumet/extensions/dist/models";
 
-const DetailsContainer = ({ data }: any) => {
-  if (!data) {
-    return <div>No Data!</div>;
-  }
-  const embed=false;
+const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
   return (
     <>
       <div className="">
-        <div className={cn("mx-auto max-w-6xl", embed ? "p-0" : "md:pt-4")}>
-          <div
-            className={cn(
-              "h-[30dvh] w-full overflow-hidden border bg-muted shadow md:rounded-lg lg:h-[55dvh]",
-              embed ? "max-h-[20vh] md:max-h-[50vh]" : undefined
-            )}
-          >
+        <div className="mx-auto max-w-6xl md:pt-4">
+          <div className="h-[30dvh] w-full overflow-hidden border bg-muted shadow md:rounded-lg lg:h-[55dvh]">
             <div
               style={{
                 backgroundImage: `url('${data.cover}')`,
@@ -63,9 +55,13 @@ const DetailsContainer = ({ data }: any) => {
                       loading="lazy"
                       sizes="100%"
                       alt={
-                        data.title["english"] == null || !data.title["english"]
-                          ? data.title["romaji"]
-                          : data.title["english"]
+                        typeof data.title === "string"
+                          ? data.title
+                          : data.title.english ||
+                            data.title.userPreferred ||
+                            data.title.romaji ||
+                            data.title.native ||
+                            ""
                       }
                       src={data.image}
                     />
@@ -83,9 +79,13 @@ const DetailsContainer = ({ data }: any) => {
                 )}
 
                 <h1 className="text-lg font-bold md:text-4xl">
-                  {data.title["english"] == null || !data.title["english"]
-                    ? data.title["romaji"]
-                    : data.title["english"]}
+                  {typeof data.title === "string"
+                    ? data.title
+                    : data.title.english ||
+                      data.title.userPreferred ||
+                      data.title.romaji ||
+                      data.title.native ||
+                      ""}
                 </h1>
 
                 <div className="flex flex-wrap items-center gap-2">

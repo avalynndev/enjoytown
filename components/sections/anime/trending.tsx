@@ -1,42 +1,26 @@
 "use client";
-import { FetchMovieInfo } from "@/fetch";
+import { IAnimeResult } from "@consumet/extensions/dist/models/types";
+import Gogoanime from "@consumet/extensions/dist/providers/anime/gogoanime";
+import Anilist from "@consumet/extensions/dist/providers/meta/anilist";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { Image as ImageIcon } from "lucide-react";
-import { get_trending_anime } from "@/fetch";
 
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
-type Movie = {
-  id: number;
-  title: string;
-  backdrop_path: string | null;
-  vote_average: number;
-  vote_count: number;
-  overview: string;
-};
-
-type MovieData = {
-  results: Movie[];
-};
-
 export default function Trending() {
-  const [data, setData] = React.useState<MovieData | null>(null);
+  const [data, setData] = React.useState<IAnimeResult[] | null>(null);
   const [loading, setLoading] = React.useState(true);
+  const anilist = new Anilist(new Gogoanime());
 
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await fetch(
-        `https://api-spicy.vercel.app/meta/anilist/trending`,
-        {
-          next: { revalidate: 21600 },
-        }
-      );
-      setData(await res.json());
+      const res = await anilist.fetchTrendingAnime(1, 20);
+      setData(res.results);
       setLoading(false);
     };
 
@@ -60,7 +44,7 @@ export default function Trending() {
                 </div>
               ))
             : data &&
-              data.results.slice(0, 18).map((item: any, index: any) => (
+              data.slice(0, 18).map((item: any, index: any) => (
                 <Link
                   href={`/anime/${encodeURIComponent(item.id)}`}
                   key={index}

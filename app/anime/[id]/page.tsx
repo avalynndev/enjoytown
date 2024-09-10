@@ -1,17 +1,11 @@
 import DetailsContainer from "@/components/containers/anime/details";
+import Gogoanime from "@consumet/extensions/dist/providers/anime/gogoanime";
+import Anilist from "@consumet/extensions/dist/providers/meta/anilist";
 
 export default async function Info({ params }: any) {
   const id = params.id;
-  const data = await get_movie_info(id);
+  const anilist = new Anilist(new Gogoanime());
+  const res = await anilist.fetchAnilistInfoById(id);
 
-  return <DetailsContainer data={data} />;
+  return <DetailsContainer data={res} />;
 }
-
-const get_movie_info = async (id: any) => {
-  const res = await fetch(
-    `${process.env.CONSUMET_API_ANILIST_URL}/data/${id}`,
-    { next: { revalidate: 21620 } }
-  );
-  const data = await res.json();
-  return data;
-};

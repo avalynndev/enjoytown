@@ -2,15 +2,17 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
-import { get_popular_anime } from "@/fetch";
+import Gogoanime from "@consumet/extensions/dist/providers/anime/gogoanime";
+import Anilist from "@consumet/extensions/dist/providers/meta/anilist";
 import CarousalCard from "@/components/carousal/card";
 
 export default async function CarousalComponent() {
-  const data = await get_popular_anime();
+  const anilist = new Anilist(new Gogoanime());
+  const data = await anilist.fetchPopularAnime(1, 20);
+
   if (!data) return <div>None Found</div>;
+
   return (
     <>
       <Carousel className="mb-10 ">

@@ -11,7 +11,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Movie_Search, Tv_Search } from "@/config/url";
-import { FetchMovieInfo, get_search_anime } from "@/fetch";
+import { FetchMovieInfo } from "@/fetch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
 import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";
@@ -161,7 +161,7 @@ export const CommandSearch = () => {
     setIsLoading(true);
     if (text) {
       const res = await fetch(
-        `https://api-spicy.vercel.app/meta/anilist/` + text,
+        `https://api-consumet-org-jet.vercel.app/meta/anilist/` + text,
         {
           next: { revalidate: 21600 },
         }

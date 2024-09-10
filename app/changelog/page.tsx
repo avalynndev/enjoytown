@@ -1,8 +1,6 @@
 "use client";
-import { Pattern } from "@/components/ui/pattern";
-import { SiteHeader } from "@/components/navbar/site-header";
-import { useRouter } from "next/navigation";
-import * as Craft from "@/components/ui/craft";
+import React from "react";
+import { Timeline } from "@/components/ui/timeline";
 
 interface ChangelogEntry {
   version: string;
@@ -49,13 +47,75 @@ const changelogEntries: ChangelogEntry[] = [
   },
 ];
 
+ const data = [
+   {
+     title: "2024",
+     content: (
+       <div>
+         <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal">
+           ✅ Totally revamped the UI to be cooler and fresher than ever. The
+           vibe is on point!
+         </p>
+         <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal">
+           ✅ Added a New Lists Feature to find alternatives for watching movies
+           and anime
+         </p>
+         <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+           ✅ Squashed those pesky minor bugs for an even smoother experience.
+           No more annoying little hiccups.
+         </p>
+       </div>
+     ),
+   },
+   {
+     title: "Early 2023",
+     content: (
+       <div>
+         <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+           I usually run out of copy, but when I see content this big, I try to
+           integrate lorem ipsum.
+         </p>
+         <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
+           Lorem ipsum is for people who are too lazy to write copy. But we are
+           not. Here are some more example of beautiful designs I built.
+         </p>
+       </div>
+     ),
+   },
+   {
+     title: "Changelog",
+     content: (
+       <div>
+         <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
+           Deployed 5 new components on Aceternity today
+         </p>
+         <div className="mb-8">
+           <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+             ✅ Card grid component
+           </div>
+           <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+             ✅ Startup template Aceternity
+           </div>
+           <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+             ✅ Random file upload lol
+           </div>
+           <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+             ✅ Himesh Reshammiya Music CD
+           </div>
+           <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
+             ✅ Salman Bhai Fan Club registrations open
+           </div>
+         </div>
+       </div>
+     ),
+   },
+ ];
 export default function Changelog() {
-  const router = useRouter();
-
   return (
     <>
-      <Pattern variant="checkered" />
-      <SiteHeader />
+      <div className="w-full">
+        <Timeline data={data} />
+      </div>
       <div className="mx-auto max-w-4xl p-4">
         <section className="flex h-[50vh] items-center">
           <div className="mx-auto flex w-4/5 flex-col items-center justify-center space-y-4 text-center">
@@ -67,33 +127,6 @@ export default function Changelog() {
           </div>
         </section>
       </div>
-      <section className="space-y-8">
-        <Craft.Section className="">
-          <Craft.Container className="">
-            <div className="flex flex-col gap-6">
-              {changelogEntries.map((entry, index) => (
-                <div key={index} className="rounded-lg border p-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-bold">
-                      Version {entry.version}
-                    </h2>
-                    <p className="text-sm text-muted-foreground">
-                      {entry.date}
-                    </p>
-                  </div>
-                  <ul className="list-disc pl-6">
-                    {entry.changes.map((change, changeIndex) => (
-                      <li key={changeIndex} className="mb-2">
-                        {change} {/* Removed the extra dot */}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </Craft.Container>
-        </Craft.Section>
-      </section>
     </>
   );
 }

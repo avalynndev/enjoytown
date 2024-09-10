@@ -1,4 +1,7 @@
 import Link from "next/link";
+import DetailsContainer from "@/components/containers/anime/details";
+import Gogoanime from "@consumet/extensions/dist/providers/anime/gogoanime";
+import Anilist from "@consumet/extensions/dist/providers/meta/anilist";
 import { Badge } from "@/components/ui/badge";
 import { Download } from "lucide-react";
 import {
@@ -26,26 +29,29 @@ interface WatchDataSources {
 }
 export default async function Watch({ params }: any) {
   const { id, episode } = params;
-  const data = await get_data(episode);
+  const anilist = new Anilist(new Gogoanime());
+
+  const data = await anilist.fetchEpisodeSources(episode);
   function removeQueryParams(url: string, paramsToRemove: string[]): string {
     const urlObj = new URL(url);
     paramsToRemove.forEach((param) => urlObj.searchParams.delete(param));
     return urlObj.toString();
   }
 
-  const originalUrl = data.download;
-  const paramsToRemove = ["token", "expires"];
-
-  const cleanedUrl = removeQueryParams(originalUrl, paramsToRemove);
-  const defaultSourceUrl = data.sources
-    .map((value: any) => {
-      const source = value as WatchDataSources;
-      if (source.quality === "default") {
-        return source.url;
-      }
-      return null;
-    })
-    .filter((url: any) => url !== null)[0];
+  const cleanedUrl = removeQueryParams(data.download || "", [
+    "token",
+    "expires",
+  ]);
+  const defaultSourceUrl =
+    data.sources
+      .map((value: any) => {
+        const source = value as WatchDataSources;
+        if (source.quality === "default") {
+          return source.url;
+        }
+        return null;
+      })
+      .filter((url: string | null) => url !== null)[0] || undefined;
   return (
     <div className="max-w-6xl pb-1 mx-auto px-4 pt-10">
       <div className="pb-4">
@@ -94,14 +100,3 @@ export default async function Watch({ params }: any) {
     </div>
   );
 }
-
-const get_data = async (episode: any) => {
-  const res = await fetch(
-    `${process.env.CONSUMET_API_ANILIST_URL}/watch/${episode}`,
-    {
-      next: { revalidate: 21620 },
-    }
-  );
-  const data = await res.json();
-  return data;
-};

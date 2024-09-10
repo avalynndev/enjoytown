@@ -1,42 +1,28 @@
 "use client";
-import { FetchMovieInfo } from "@/fetch";
+import { IAnimeResult } from "@consumet/extensions/dist/models/types";
+import Gogoanime from "@consumet/extensions/dist/providers/anime/gogoanime";
+import Anilist from "@consumet/extensions/dist/providers/meta/anilist";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { Image as ImageIcon } from "lucide-react";
-import { get_airing_anime } from "@/fetch";
 
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
-type Movie = {
-  id: number;
-  title: string;
-  backdrop_path: string | null;
-  vote_average: number;
-  vote_count: number;
-  overview: string;
-};
-
-type MovieData = {
-  results: Movie[];
-};
-
-export default function Airing() {
-  const [data, setData] = React.useState<MovieData | null>(null);
+export default function recentEpisodes() {
+  const [data, setData] = React.useState<IAnimeResult[] | null>(null);
   const [loading, setLoading] = React.useState(true);
+  const anilist = new Anilist(new Gogoanime());
 
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await fetch(
-        `https://api-spicy.vercel.app/meta/anilist/airing-schedule`,
-        {
-          next: { revalidate: 21600 },
-        }
-      );
-      setData(await res.json());
+      const res = await anilist.fetchRecentEpisodes();
+      setData(res.results);
+      console.log(res)
+      console.log(res);
       setLoading(false);
     };
 
@@ -60,7 +46,7 @@ export default function Airing() {
                 </div>
               ))
             : data &&
-              data.results.slice(0, 18).map((item: any, index: any) => (
+              data.slice(0, 18).map((item, index) => (
                 <Link
                   href={`/anime/${encodeURIComponent(item.id)}`}
                   key={index}
@@ -68,16 +54,19 @@ export default function Airing() {
                   data-testid="movie-card"
                 >
                   <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
-                    {item.cover ? (
+                    {item.image ? (
                       <Image
                         fill
                         className="object-cover"
-                        src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.cover}`}
+                        src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
                         alt={
-                          item.title["english"] == null ||
-                          !item.title["english"]
-                            ? item.title["romaji"]
-                            : item.title["english"]
+                          typeof item.title === "string"
+                            ? item.title
+                            : item.title.english ||
+                              item.title.userPreferred ||
+                              item.title.romaji ||
+                              item.title.native ||
+                              ""
                         }
                         sizes="100%"
                       />
@@ -85,29 +74,30 @@ export default function Airing() {
                       <ImageIcon className="text-muted" />
                     )}
                   </div>
+
                   <div className="space-y-1.5">
                     <div className="flex items-start gap-1 justify-between">
                       <div className="justify-start">
                         <span className="trucate line-clamp-1">
-                          {item.title["english"] == null ||
-                          !item.title["english"]
-                            ? item.title["romaji"]
-                            : item.title["english"]}
+                          {typeof item.title === "string"
+                            ? item.title
+                            : item.title.english ||
+                              item.title.userPreferred ||
+                              item.title.romaji ||
+                              item.title.native ||
+                              ""}
                         </span>
                       </div>
                       <div className="justify-end flex items-center gap-2">
-                        <Badge variant="outline">
-                          {item.rating ? item.rating / 10 : "?"}
-                        </Badge>
                         <Separator orientation="vertical" className="h-6" />
                         <Badge variant="secondary">
-                          {item.episode ? item.episode : "?"}
+                          {item.episodeNumber ? item.episodeNumber : "?"}
                         </Badge>
                       </div>
                     </div>
 
                     <p className="line-clamp-3 text-xs text-muted-foreground">
-                      {item.description}
+                      {item.episodeTitle}
                     </p>
                   </div>
                 </Link>
