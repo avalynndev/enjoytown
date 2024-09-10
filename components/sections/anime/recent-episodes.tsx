@@ -11,7 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function recentEpisodes() {
+export default function RecentEpisodes() {
   const [data, setData] = React.useState<IAnimeResult[] | null>(null);
   const [loading, setLoading] = React.useState(true);
   const anilist = new Anilist(new Gogoanime());
@@ -21,13 +21,11 @@ export default function recentEpisodes() {
       setLoading(true);
       const res = await anilist.fetchRecentEpisodes();
       setData(res.results);
-      console.log(res)
-      console.log(res);
       setLoading(false);
     };
 
     fetchData();
-  }, []);
+  }, [anilist]);
 
   return (
     <main>
