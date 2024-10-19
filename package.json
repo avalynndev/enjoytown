@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@consumet/extensions": "^1.7.0",
+    "@consumet/extensions": "^1.8.0",
     "@hookform/resolvers": "^3.9.0",
     "@next/third-parties": "^14.2.11",
     "@nextui-org/react": "^2.4.6",
