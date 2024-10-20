@@ -29,7 +29,7 @@ export default function VideoPlayer({ id }: any) {
 
   const videoSources: Record<VideoSourceKey, string> = {
     autoembed: `https://player.autoembed.cc/embed/movie/${id}`,
-    embedsu: `https://vidsrc.pro/embed/movie/${id}`,
+    embedsu: `https://embed.su/embed/movie/${id}`,
     vidsrc: `https://vidsrc.in/embed/movie/${id}`,
     superembed: `https://multiembed.mov/?video_id=${id}&tmdb=1`,
     twoembed: `https://www.2embed.cc/embed/${id}`,
