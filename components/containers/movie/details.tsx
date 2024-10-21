@@ -25,7 +25,7 @@ const DetailsContainer = ({ data, id, embed }: any) => {
         >
           <div
             style={{
-              backgroundImage: `url('https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=https://image.tmdb.org/t/p/original${data.backdrop_path}')`,
+              backgroundImage: `url('${process.env.GOOD_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${data.backdrop_path}')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}

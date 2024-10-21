@@ -56,7 +56,7 @@ export default function RecentEpisodes() {
                       <Image
                         fill
                         className="object-cover"
-                        src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
+                        src={`${process.env.GOOD_PROXY_URL}/fetch?url=${item.image}`}
                         alt={
                           typeof item.title === "string"
                             ? item.title

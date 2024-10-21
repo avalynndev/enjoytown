@@ -56,7 +56,7 @@ export default function Trending() {
                       <Image
                         fill
                         className="object-cover"
-                        src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.cover}`}
+                        src={`${process.env.GOOD_PROXY_URL}/fetch?url=${item.cover}`}
                         alt={
                           item.title["english"] == null ||
                           !item.title["english"]

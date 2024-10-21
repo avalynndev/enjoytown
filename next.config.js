@@ -41,7 +41,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "sup-proxy.zephex0-f6c.workers.dev",
+        hostname: `${process.env.GOOD_PROXY_URL.replace('https://', '')}`,
       },
       {
         protocol: "https",
@@ -54,6 +54,10 @@ const nextConfig = {
       allowedOrigins: ["localhost:3000"],
     },
   },
+  env: {
+    GOOD_PROXY_URL: process.env.GOOD_PROXY_URL,
+  },
+
 };
 
 module.exports = nextConfig;
