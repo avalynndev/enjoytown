@@ -185,9 +185,13 @@ export default function VideoPlayer({ id }: { id: number }) {
         <div className="flex flex-col items-center">
           <TabsList>
             <TabsTrigger value="autoembed">AutoEmbed</TabsTrigger>
-            <TabsTrigger value="vidsrcpro">VidSrc.Pro</TabsTrigger>
+            <TabsTrigger value="embedsu">EmbedSu</TabsTrigger>
             <TabsTrigger value="vidsrc">VidSrc</TabsTrigger>
             <TabsTrigger value="superembed">SuberEmbed</TabsTrigger>
+            <TabsTrigger value="2embed">2Embed</TabsTrigger>
+            <TabsTrigger value="vidlink">VidLink</TabsTrigger>
+            <TabsTrigger value="vidsrcdev">VidSrc.dev</TabsTrigger>
+            <TabsTrigger value="vidsrcnl">VidSrc.nl</TabsTrigger>
           </TabsList>
         </div>
         <TabsContent value="autoembed">
@@ -201,9 +205,9 @@ export default function VideoPlayer({ id }: { id: number }) {
             className="max-w-3xl mx-auto px-4 pt-10"
           ></iframe>
         </TabsContent>
-        <TabsContent value="vidsrcpro">
+        <TabsContent value="embedsu">
           <iframe
-            src={`https://vidsrc.pro/embed/tv/${id}/${season}/${episode}`}
+            src={`https://embed.su/embed/tv/${id}/${season}/${episode}`}
             referrerPolicy="origin"
             allowFullScreen
             width="100%"
@@ -226,6 +230,50 @@ export default function VideoPlayer({ id }: { id: number }) {
         <TabsContent value="superembed">
           <iframe
             src={`https://multiembed.mov/?video_id=${id}&tmdb=1&s=${season}&e=${episode}`}
+            referrerPolicy="origin"
+            allowFullScreen
+            width="100%"
+            height="450"
+            scrolling="no"
+            className="max-w-3xl mx-auto px-4 pt-10"
+          ></iframe>
+        </TabsContent>
+        <TabsContent value="2embed">
+          <iframe
+            src={`https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`}
+            referrerPolicy="origin"
+            allowFullScreen
+            width="100%"
+            height="450"
+            scrolling="no"
+            className="max-w-3xl mx-auto px-4 pt-10"
+          ></iframe>
+        </TabsContent>
+        <TabsContent value="vidlink">
+          <iframe
+            src={`https://vidlink.pro/tv/${id}/${season}/${episode}`}
+            referrerPolicy="origin"
+            allowFullScreen
+            width="100%"
+            height="450"
+            scrolling="no"
+            className="max-w-3xl mx-auto px-4 pt-10"
+          ></iframe>
+        </TabsContent>
+        <TabsContent value="vidsrcdev">
+          <iframe
+            src={`https://vidsrc.dev/embed/tv/${id}/${season}/${episode}`}
+            referrerPolicy="origin"
+            allowFullScreen
+            width="100%"
+            height="450"
+            scrolling="no"
+            className="max-w-3xl mx-auto px-4 pt-10"
+          ></iframe>
+        </TabsContent>
+        <TabsContent value="vidsrcnl">
+          <iframe
+            src={`https://player.vidsrc.nl/embed/tv/${id}/${season}/${episode}`}
             referrerPolicy="origin"
             allowFullScreen
             width="100%"
