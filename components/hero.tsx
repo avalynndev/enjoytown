@@ -39,7 +39,7 @@ export function Card({ item }: CardProps) {
           <Image
             fill
             className="object-cover rounded-xl"
-            src={`${process.env.GOOD_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+            src={`${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`}
             alt={item.title}
             sizes="100%"
           />

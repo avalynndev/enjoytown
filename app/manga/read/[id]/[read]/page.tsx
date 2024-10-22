@@ -165,7 +165,7 @@ export default function Read({ params }: any) {
           images.map((item, index) => (
             <div key={index}>
               <Image
-                src={`${process.env.GOOD_PROXY_URL}/fetch?url=${item}&headers=https://mangadex.org`}
+                src={`${process.env.TMDB_PROXY_URL}/fetch?url=${item}&headers=https://mangadex.org`}
                 key={index}
                 alt="Pages"
                 width={800}

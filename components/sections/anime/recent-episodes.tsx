@@ -56,7 +56,7 @@ export default function RecentEpisodes() {
                       <Image
                         fill
                         className="object-cover"
-                        src={`${process.env.GOOD_PROXY_URL}/fetch?url=${item.image}`}
+                        src={`${process.env.TMDB_PROXY_URL}/fetch?url=${item.image}`}
                         alt={
                           typeof item.title === "string"
                             ? item.title

@@ -92,7 +92,7 @@ export default function DramaSearch() {
                     <CardContent>
                       <Image
                         className="h-2/4 w-full object-cover rounded-xl transition-all aspect-[3/4]"
-                        src={`${process.env.GOOD_PROXY_URL}/fetch?url=${item.image}`}
+                        src={`${process.env.TMDB_PROXY_URL}/fetch?url=${item.image}`}
                         width={160}
                         height={160}
                         alt="Manga Poster"

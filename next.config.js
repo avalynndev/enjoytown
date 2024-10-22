@@ -41,7 +41,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: `${process.env.GOOD_PROXY_URL.replace('https://', '')}`,
+        hostname: `${process.env.TMDB_PROXY_URL.replace('https://', '')}`,
       },
       {
         protocol: "https",
@@ -55,7 +55,7 @@ const nextConfig = {
     },
   },
   env: {
-    GOOD_PROXY_URL: process.env.GOOD_PROXY_URL,
+    TMDB_PROXY_URL: process.env.TMDB_PROXY_URL,
   },
 
 };

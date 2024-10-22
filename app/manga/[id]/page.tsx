@@ -189,7 +189,7 @@ export default async function MangaInfo({ params }: any) {
                           </CardHeader>
                           <CardContent>
                             <Image
-                              src={`${process.env.GOOD_PROXY_URL}/fetch?url=${item.image}`}
+                              src={`${process.env.TMDB_PROXY_URL}/fetch?url=${item.image}`}
                               width={140}
                               height={200}
                               className="rounded-md"

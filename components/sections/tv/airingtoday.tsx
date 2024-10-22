@@ -33,7 +33,7 @@ export default async function Popular() {
                     <Image
                       fill
                       className="object-cover"
-                      src={`${process.env.GOOD_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                      src={`${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`}
                       alt={item.name}
                       sizes="100%"
                     />

@@ -56,7 +56,7 @@ export default function Popular() {
                       <Image
                         fill
                         className="object-cover"
-                        src={`${process.env.GOOD_PROXY_URL}/fetch?url=${item.cover}`}
+                        src={`${process.env.TMDB_PROXY_URL}/fetch?url=${item.cover}`}
                         alt={
                           item.title["english"] == null ||
                           !item.title["english"]
