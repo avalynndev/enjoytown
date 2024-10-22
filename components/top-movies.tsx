@@ -58,7 +58,7 @@ export const TopMovies = () => {
             >
               <div className="relative aspect-poster rounded-3xl">
                 <Image
-                  src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                  src={`${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${movie.poster_path}`}
                   fill
                   quality={100}
                   alt={movie.title}

@@ -41,7 +41,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "sup-proxy.zephex0-f6c.workers.dev",
+        hostname: `${process.env.TMDB_PROXY_URL.replace('https://', '')}`,
       },
       {
         protocol: "https",
@@ -54,6 +54,11 @@ const nextConfig = {
       allowedOrigins: ["localhost:3000"],
     },
   },
+  env: {
+    TMDB_PROXY_URL: process.env.TMDB_PROXY_URL,
+    TMDB_API_KEY: process.env.TMDB_API_KEY,
+  },
+
 };
 
 module.exports = nextConfig;

@@ -77,7 +77,7 @@ export default function Popular() {
                       <Image
                         fill
                         className="object-cover"
-                        src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                        src={`${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`}
                         alt={item.title}
                         sizes="100%"
                       />

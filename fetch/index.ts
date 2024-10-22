@@ -25,7 +25,7 @@ export async function getSearchedManga(title: any) {
 export async function fetchTvCarousalData(type: string) {
   try {
     const url = new URL(
-      `https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://api.themoviedb.org/3/trending/tv/day?api_key=${API_KEY}`
+      `${process.env.TMDB_PROXY_URL}/fetch?url=https://api.themoviedb.org/3/trending/tv/day?api_key=${API_KEY}`
     );
     const response = await fetch(url.toString(), {
       next: { revalidate: 60 * 60 * 24 * 7 },
@@ -41,7 +41,7 @@ export async function fetchTvCarousalData(type: string) {
 export async function fetchCarousalData(type: string) {
   try {
     const url = new URL(
-      `https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
+      `${process.env.TMDB_PROXY_URL}/fetch?url=https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
     );
     const response = await fetch(url.toString(), {
       next: { revalidate: 60 * 60 * 24 * 7 },

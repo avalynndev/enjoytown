@@ -189,7 +189,7 @@ export default async function MangaInfo({ params }: any) {
                           </CardHeader>
                           <CardContent>
                             <Image
-                              src={`https://sup-proxy.zephex0-f6c.workers.dev/api-content?url=${item.image}`}
+                              src={`${process.env.TMDB_PROXY_URL}/fetch?url=${item.image}`}
                               width={140}
                               height={200}
                               className="rounded-md"
