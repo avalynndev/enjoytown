@@ -69,11 +69,14 @@ DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
 CONSUMET_API_URL=https://consumet_api_url (deploy your own with the instructions below, dont end with slash)
 CONSUMET_API_ANILIST_URL=https://consumet_api_url/meta/anilist (MENTION meta/anilist)
 TMDB_PROXY_URL=https://sup-proxy.zephex0-f6c.workers.dev (deploy your own with the instructions below, dont end with slash)
+TMDB_API_KEY=(get your own api key with the instructions below)
 ```
 
 <a href="https://github.com/avalynndev/animetize-api">Deploy your own Consumet API</a>
 
 <a href="https://github.com/real-zephex/Good-Proxy">Deploy your own TMDB Proxy</a>
+
+<a href="https://www.themoviedb.org/settings/api/request">Get your own TMDB api key here after registering</a>
 
 ### 3. Run on development &/or production
 
