@@ -73,7 +73,7 @@ TMDB_PROXY_URL=https://sup-proxy.zephex0-f6c.workers.dev (deploy your own with t
 
 <a href="https://github.com/avalynndev/animetize-api">Deploy your own Consumet API</a>
 
-<a href="https://github.com/real-zephex/Good-Proxy">Deploy your own GoodProxy</a>
+<a href="https://github.com/real-zephex/Good-Proxy">Deploy your own TMDB Proxy</a>
 
 ### 3. Run on development &/or production
 

@@ -56,6 +56,7 @@ const nextConfig = {
   },
   env: {
     TMDB_PROXY_URL: process.env.TMDB_PROXY_URL,
+    TMDB_API_KEY: process.env.TMDB_API_KEY,
   },
 
 };
