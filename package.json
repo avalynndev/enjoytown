@@ -43,7 +43,7 @@
     "next": "^14.2.15",
     "next-pwa": "^5.6.0",
     "next-themes": "^0.3.0",
-    "nextjs-toploader": "^3.6.15",
+    "nextjs-toploader": "^3.7.15",
     "radix-ui": "^1.0.1",
     "react": "^18",
     "react-dom": "^18",
