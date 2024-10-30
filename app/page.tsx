@@ -10,6 +10,7 @@ export default async function Home() {
       <div className="mx-auto max-w-4xl p-4">
         <section className="flex h-[75vh] items-center md:h-[50vh]">
           <div className="mx-auto flex w-4/5 flex-col items-center justify-center space-y-4 text-center">
+          {/**  
             <Link
               href={`/`}
               className="flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-xs shadow"
@@ -19,6 +20,7 @@ export default async function Home() {
                 PRO
               </span>
             </Link>
+          **/}
             <h1 className="text-6xl font-bold">
               Explore movies, tv series, and animes!
             </h1>

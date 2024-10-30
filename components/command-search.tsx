@@ -3,6 +3,10 @@ import { ReactNode, useEffect, useState } from "react";
 import { CommandIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import {
+  getRecentSearchesFromLocalStorage,
+  saveSearchToLocalStorage,
+} from "@/components/storage";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -111,9 +115,11 @@ export const CommandSearch = () => {
     movies: [],
     tvShows: [],
   });
-  const [isLoading, setIsLoading] = useState(false);  
+  const [isLoading, setIsLoading] = useState(false);
   const [dramaResults, setDramaResults] = useState<DramaResult[] | null>(null);
   const [mangaResults, setMangaResults] = useState<MangaResult[] | null>(null);
+  const [animeResults, setSearchResults] = useState<AnimeResult[] | null>(null);
+  const [recentSearches, setRecentSearches] = useState<string[]>([]); // State for recent searches
 
   const debounce = (func: (...args: any[]) => void, delay: number) => {
     let debounceTimer: NodeJS.Timeout;
@@ -155,8 +161,6 @@ export const CommandSearch = () => {
     debouncedFetch(search);
   }, [search]);
 
-  const [animeResults, setSearchResults] = useState<AnimeResult[] | null>(null);
-
   const fetchAnimeResults = async (text: string) => {
     setIsLoading(true);
     if (text) {
@@ -166,7 +170,7 @@ export const CommandSearch = () => {
           next: { revalidate: 21600 },
         }
       );
-      const data = await res.json()
+      const data = await res.json();
       setSearchResults(data.results);
     }
     setIsLoading(false);
@@ -179,10 +183,16 @@ export const CommandSearch = () => {
   }, [search]);
 
   const pathName = usePathname();
+  useEffect(() => {
+    // Load recent searches from local storage on mount
+    const searches = getRecentSearchesFromLocalStorage();
+    setRecentSearches(searches);
+  }, []);
 
   const fetch_results = async (title: string) => {
     setIsLoading(true);
     if (title) {
+      saveSearchToLocalStorage(title);
       const [movieData, tvData] = await Promise.all([
         get_movie_results(title),
         get_tv_results(title),
@@ -244,6 +254,22 @@ export const CommandSearch = () => {
             onValueChange={setSearch}
             value={search}
           />
+
+          <CommandList>
+            <CommandSearchGroup heading="Recent Searches">
+              {recentSearches.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                  onClick={() => setSearch(item)}
+                >
+                  <span className="truncate whitespace-nowrap text-sm">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </CommandSearchGroup>
+          </CommandList>
 
           <CommandList>
             {isLoading && (
