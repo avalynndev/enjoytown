@@ -17,9 +17,7 @@ type Movie = {
 type MovieData = {
   results: Movie[];
 };
-type Params = {
-  id: string;
-};
+
 
 const Info = ({ params }: any) => {
   const { id } = params;
