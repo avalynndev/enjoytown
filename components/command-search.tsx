@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useCallback } from "react";
 import { CommandIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -189,7 +189,7 @@ export const CommandSearch = () => {
     setRecentSearches(searches);
   }, []);
 
-  const fetch_results = async (title: string) => {
+  const fetch_results = useCallback(async (title: string) => {
     setIsLoading(true);
     if (title) {
       debounce(() => saveSearchToLocalStorage(title), 500)();
@@ -204,12 +204,12 @@ export const CommandSearch = () => {
       setResults(combinedResults);
     }
     setIsLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     const debouncedFetch = debounce(fetch_results, 500);
     debouncedFetch(search);
-  }, [search]);
+  }, [search, fetch_results]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -225,7 +225,7 @@ export const CommandSearch = () => {
 
   useEffect(() => {
     if (open) setOpen(false);
-  }, [pathName]);
+  }, [pathName, open]);
 
   const hasMovies = result?.movies && result?.movies?.length > 0;
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;

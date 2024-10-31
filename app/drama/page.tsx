@@ -49,7 +49,9 @@ export default function DramaSearch() {
     };
   };
 
-  const debouncedSearch = useCallback(debounce(handleSearch, 500), []);
+  const debouncedSearch = useCallback(debounce(handleSearch, 500), [
+    handleSearch,
+  ]);
 
   // Effect to trigger search when title changes
   useEffect(() => {

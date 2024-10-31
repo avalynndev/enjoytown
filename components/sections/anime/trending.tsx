@@ -14,7 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function Trending() {
   const [data, setData] = React.useState<IAnimeResult[] | null>(null);
   const [loading, setLoading] = React.useState(true);
-  const anilist = new Anilist(new Gogoanime());
+  const anilist = React.useMemo(() => new Anilist(new Gogoanime()), []);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +25,7 @@ export default function Trending() {
     };
 
     fetchData();
-  }, []);
+  }, [anilist]);
 
   return (
     <main>

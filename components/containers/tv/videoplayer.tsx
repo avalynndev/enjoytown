@@ -33,17 +33,37 @@ export default function VideoPlayer({ id }: { id: number }) {
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
 
-  React.useEffect(() => {
-    fetchSeasons();
-  }, []);
+  const fetchEpisodes = React.useCallback(async (seasonNumber: number) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?api_key=${API_KEY}`
+      );
+      const data = await response.json();
+      if (data.success === false) {
+        throw new Error(data.status_message || "Failed to fetch episodes");
+      }
+      setEpisodes(data.episodes || []);
+      if (data.episodes.length > 0) {
+        setEpisode(data.episodes[0].episode_number.toString());
+      }
+    } catch (error: unknown) {
+      console.error("Error fetching episodes:", error);
+      setError(error instanceof Error ? error.message : String(error));
+      setEpisodes([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [id]);
 
   React.useEffect(() => {
     if (season) {
       fetchEpisodes(Number(season));
     }
-  }, [season]);
+  }, [season, fetchEpisodes]);
 
-  async function fetchSeasons() {
+  const fetchSeasons = React.useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
@@ -68,31 +88,11 @@ export default function VideoPlayer({ id }: { id: number }) {
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [id]);
 
-  async function fetchEpisodes(seasonNumber: number) {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?api_key=${API_KEY}`
-      );
-      const data = await response.json();
-      if (data.success === false) {
-        throw new Error(data.status_message || "Failed to fetch episodes");
-      }
-      setEpisodes(data.episodes || []);
-      if (data.episodes.length > 0) {
-        setEpisode(data.episodes[0].episode_number.toString());
-      }
-    } catch (error: unknown) {
-      console.error("Error fetching episodes:", error);
-      setError(error instanceof Error ? error.message : String(error));
-      setEpisodes([]);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  React.useEffect(() => {
+    fetchSeasons();
+  }, [fetchSeasons]);
 
   if (isLoading) {
     return (
