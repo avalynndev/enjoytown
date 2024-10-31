@@ -6,6 +6,7 @@ import Link from "next/link";
 import {
   getRecentSearchesFromLocalStorage,
   saveSearchToLocalStorage,
+  deleteSearchFromLocalStorage,
 } from "@/components/storage";
 import { Button } from "@/components/ui/button";
 import {
@@ -228,6 +229,13 @@ export const CommandSearch = () => {
     if (open) setOpen(false);
   }, [pathName]);
 
+  const deleteSearch = (searchTerm: string) => {
+    setRecentSearches((prevSearches) =>
+      prevSearches.filter((search) => search !== searchTerm)
+    );
+    deleteSearchFromLocalStorage(searchTerm);
+  };
+
   const hasMovies = result?.movies && result?.movies?.length > 0;
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
   const hasMangaResults = mangaResults?.length ?? 0 > 0;
@@ -256,22 +264,28 @@ export const CommandSearch = () => {
           />
 
           <CommandList>
-            <CommandSearchGroup heading="Recent Searches">
-              {recentSearches.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
-                  onClick={() => setSearch(item)}
-                >
-                  <span className="truncate whitespace-nowrap text-sm">
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </CommandSearchGroup>
-          </CommandList>
+            {recentSearches && (
+              <CommandSearchGroup heading="Recent Searches">
+                {recentSearches.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                    onClick={() => setSearch(item)}
+                  >
+                    <span className="truncate whitespace-nowrap text-sm">
+                      {item}
+                    </span>
+                    <button
+                      className="text-xs text-muted-foreground"
+                      onClick={() => deleteSearch(item)}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </CommandSearchGroup>
+            )}
 
-          <CommandList>
             {isLoading && (
               <div className="space-y-8">
                 <CommandSearchGroup heading="Movies">

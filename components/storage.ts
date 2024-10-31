@@ -14,5 +14,11 @@ export const getRecentSearchesFromLocalStorage = (): string[] => {
   const searches: string[] = JSON.parse(
     localStorage.getItem(STORAGE_KEY) || "[]"
   );
-  return searches.sort(); // Sort alphabetically; consider custom sorting for relevance/popularity
+  return searches.sort();
+};
+
+export const deleteSearchFromLocalStorage = (searchTerm:string) => {
+  const searches = getRecentSearchesFromLocalStorage();
+  const updatedSearches = searches.filter((search) => search !== searchTerm);
+  localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
 };
