@@ -21,11 +21,7 @@ type Params = {
   id: string;
 };
 
-interface PageProps {
-  params: Params;
-}
-
-const Info: React.FC<PageProps> = ({ params }) => {
+const Info = ({ params }: any) => {
   const { id } = params;
   const [data, setData] = React.useState<MovieData | null>(null);
   const [loading, setLoading] = React.useState(true);
