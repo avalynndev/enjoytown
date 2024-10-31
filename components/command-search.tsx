@@ -209,7 +209,7 @@ export const CommandSearch = () => {
   useEffect(() => {
     const debouncedFetch = debounce(fetch_results, 500);
     debouncedFetch(search);
-  }, [search, fetch_results]);
+  }, [search]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -225,7 +225,7 @@ export const CommandSearch = () => {
 
   useEffect(() => {
     if (open) setOpen(false);
-  }, [pathName, open]);
+  }, [pathName]);
 
   const hasMovies = result?.movies && result?.movies?.length > 0;
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
