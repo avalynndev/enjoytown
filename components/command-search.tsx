@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   getRecentSearchesFromLocalStorage,
-  saveSearchToLocalStorage,
-  deleteSearchFromLocalStorage,
+  saveSearchToLocalStorage
 } from "@/components/storage";
 import { Button } from "@/components/ui/button";
 import {
@@ -193,7 +192,7 @@ export const CommandSearch = () => {
   const fetch_results = async (title: string) => {
     setIsLoading(true);
     if (title) {
-      saveSearchToLocalStorage(title);
+      debounce(() => saveSearchToLocalStorage(title), 500)();
       const [movieData, tvData] = await Promise.all([
         get_movie_results(title),
         get_tv_results(title),
@@ -202,7 +201,6 @@ export const CommandSearch = () => {
         movies: movieData.results,
         tvShows: tvData.results,
       };
-      FetchMovieInfo(combinedResults);
       setResults(combinedResults);
     }
     setIsLoading(false);
@@ -228,13 +226,6 @@ export const CommandSearch = () => {
   useEffect(() => {
     if (open) setOpen(false);
   }, [pathName]);
-
-  const deleteSearch = (searchTerm: string) => {
-    setRecentSearches((prevSearches) =>
-      prevSearches.filter((search) => search !== searchTerm)
-    );
-    deleteSearchFromLocalStorage(searchTerm);
-  };
 
   const hasMovies = result?.movies && result?.movies?.length > 0;
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
@@ -275,12 +266,6 @@ export const CommandSearch = () => {
                     <span className="truncate whitespace-nowrap text-sm">
                       {item}
                     </span>
-                    <button
-                      className="text-xs text-muted-foreground"
-                      onClick={() => deleteSearch(item)}
-                    >
-                      ✕
-                    </button>
                   </div>
                 ))}
               </CommandSearchGroup>
@@ -427,6 +412,7 @@ export const CommandSearch = () => {
             ) : (
               !isLoading && <p className="p-8 text-center">No Results</p>
             )}
+
           </CommandList>
         </Command>
       </CommandDialog>

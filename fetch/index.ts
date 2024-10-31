@@ -125,18 +125,6 @@ export async function getDramaInfoOnWatch(id: any) {
   return data;
 }
 
-export async function FetchVideoLinks(data: any, dramaId: any) {
-  try {
-    const fetchPromises = data.map(async (element: any) => {
-      const link = `${env.CONSUMET_API_URL}/movies/dramacool/watch?episodeId=${element.id}&mediaId=${dramaId}`;
-      await fetch(link, { cache: "force-cache" });
-    });
-
-    await Promise.all(fetchPromises);
-  } catch (error) {
-    console.error("Error occurred while pre-fetching video links:", error);
-  }
-}
 
 export async function FetchAnimeInfo(data: any) {
   try {
