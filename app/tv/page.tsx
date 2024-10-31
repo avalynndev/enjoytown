@@ -1,26 +1,12 @@
-import dynamic from "next/dynamic";
-import { Skeleton } from "@/components/ui/skeleton";
 import Popular from "@/components/sections/tv/popular";
 import AiringToday from "@/components/sections/tv/airingtoday";
 import OnTheAir from "@/components/sections/tv/ontheair";
 import TopRated from "@/components/sections/tv/toprated";
+import Carousal from "@/components/carousal/tv";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-const Carousal = dynamic(() => import("@/components/carousal/tv"), {
-  ssr: false,
-  loading: () => (
-    <>
-      <div className="flex md:hidden h-[70vh] relative">
-        <Skeleton className="absolute inset-0" />
-      </div>
-      <div className="relative h-[70vh] md:flex w-full hidden mx-auto">
-        <Skeleton className="object-cover rounded-xl transition-all w-full relative h-[70vh] container grid items-center gap-6 pb-8 pt-6 md:py-10" />
-      </div>
-    </>
-  ),
-});
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
