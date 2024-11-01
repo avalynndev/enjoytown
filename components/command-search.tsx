@@ -15,7 +15,6 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Movie_Search, Tv_Search } from "@/config/url";
-import { FetchMovieInfo } from "@/fetch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
 import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";

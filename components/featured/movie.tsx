@@ -14,7 +14,15 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 type Movie = {
   id: number;
@@ -44,7 +52,7 @@ export default function FeaturedMovies({ endpoint }: MovieListProps) {
     const fetchData = async () => {
       setLoading(true);
       const res = await fetch(
-        `${PROXY}https://api.themoviedb.org/3/movie/${endpoint}?api_key=${API_KEY}&page=${currentPage}`,
+        `https://api.themoviedb.org/3/movie/${endpoint}?api_key=${API_KEY}&page=${currentPage}`,
         { next: { revalidate: 21600 } }
       );
       const data = await res.json();
@@ -64,7 +72,7 @@ export default function FeaturedMovies({ endpoint }: MovieListProps) {
         <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
           {loading
             ? // Skeleton component while loading
-              Array.from({ length: 18 }).map((_, index) => (
+              Array.from({ length: 20 }).map((_, index) => (
                 <div key={index} className="w-full space-y-2">
                   <Skeleton className="aspect-video w-full rounded-md" />
                   <div className="space-y-1.5">
@@ -153,7 +161,9 @@ export default function FeaturedMovies({ endpoint }: MovieListProps) {
             <PaginationNext
               onClick={(e) => {
                 e.preventDefault();
-                setCurrentPage((prev) => (data && prev < totalPages ? prev + 1 : prev));
+                setCurrentPage((prev) =>
+                  data && prev < totalPages ? prev + 1 : prev
+                );
               }}
               aria-disabled={data ? currentPage === totalPages : true}
             />

@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { Tv_Search } from "@/config/url";
-import { FetchMovieInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,7 +23,6 @@ export default function Search() {
   const fetch_results = async (title: string) => {
     if (title) {
       const data = await get_search_results(title);
-      FetchMovieInfo(data);
       setResults(data);
     }
   };
