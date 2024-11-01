@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import * as React from "react";
 import { FetchMovieInfo } from "@/fetch";
+import Marquee from "@/components/ui/marquee";
 import { API_KEY, PROXY } from "@/config/url";
 import Image from "next/image";
 import { Spinner } from "@/components/ui/spinner";
