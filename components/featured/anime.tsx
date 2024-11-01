@@ -67,7 +67,7 @@ export default function FeaturedAnime({featureType} : AnimeFeatureProps) {
                 </div>
               ))
             : data &&
-              data.slice(0, 18).map((item, index) => (
+              data.map((item, index) => (
                 <Link
                   href={`/anime/${encodeURIComponent(item.id)}`}
                   key={index}

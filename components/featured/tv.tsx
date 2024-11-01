@@ -48,7 +48,7 @@ export default async function FeaturedTV({ featureType }: TVFeatureProps) {
       <div className="flex items-center justify-between">
         <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
           {data &&
-            data.results.slice(0, 18).map((item: any, index: any) => (
+            data.results.map((item: any, index: any) => (
               <Link
                 href={`/tv/${encodeURIComponent(item.id)}`}
                 key={index}
