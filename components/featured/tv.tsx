@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Image as ImageIcon } from "lucide-react";
 
+
 import {
   Tooltip,
   TooltipContent,
@@ -11,6 +12,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
+import React from "react";
 
 type TVFeatureType = "airingtoday" | "ontheair" | "popular" | "toprated";
 
@@ -20,24 +22,25 @@ type TVFeatureProps = {
 
 
 export default async function FeaturedTV({ featureType }: TVFeatureProps) {
-
-  let res;
+  let url = "";
   switch (featureType) {
     case "airingtoday":
-      res = await fetch(Tv_AiringToday, { next: { revalidate: 21600 } });
+      url = Tv_AiringToday;
       break;
     case "ontheair":
-      res = await fetch(Tv_OntheAir, { next: { revalidate: 21600 } });
+      url = Tv_OntheAir;
       break;
     case "popular":
-      res = await fetch(Tv_Popular, { next: { revalidate: 21600 } });
+      url = Tv_Popular;
       break;
     case "toprated":
-      res = await fetch(Tv_TopRated, { next: { revalidate: 21600 } });
+      url = Tv_TopRated;
       break;
   }
 
+  const res = await fetch(url, { next: { revalidate: 21600 } });
   const data = await res.json();
+
   FetchMovieInfo(res);
 
   return (
@@ -97,4 +100,3 @@ export default async function FeaturedTV({ featureType }: TVFeatureProps) {
     </main>
   );
 }
-

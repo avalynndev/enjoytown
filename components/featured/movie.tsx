@@ -87,7 +87,7 @@ export default function FeaturedMovies({ endpoint }: MovieListProps) {
                       <Image
                         fill
                         className="object-cover"
-                        src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                        src={`${PROXY}https://image.tmdb.org/t/p/original${item.backdrop_path}`}
                         alt={item.title}
                         sizes="100%"
                       />
