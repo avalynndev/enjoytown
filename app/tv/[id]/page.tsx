@@ -2,7 +2,8 @@
 import DetailsContainer from "@/components/containers/tv/details";
 import * as React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { API_KEY } from "@/config/url";
+import { API_KEY, PROXY } from "@/config/url";
+import { useParams } from "next/navigation";
 
 type Movie = {
   id: number;
@@ -18,8 +19,8 @@ type MovieData = {
 };
 
 
-const Info = ({ params }: any) => {
-  const { id } = params;
+const Info = () => {
+  const { id } = useParams<{ id: string;}>()
   const [data, setData] = React.useState<MovieData | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
@@ -31,7 +32,7 @@ const Info = ({ params }: any) => {
         setError(null); // Reset error state before fetching
 
         const res = await fetch(
-          `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`,
+          `${PROXY}https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`,
           {
             next: { revalidate: 21620 },
           }

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { Image as ImageIcon } from "lucide-react";
-import { API_KEY } from "@/config/url";
+import { API_KEY, PROXY } from "@/config/url";
 
 import {
   Tooltip,
@@ -14,6 +14,15 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 type Movie = {
   id: number;
@@ -26,17 +35,24 @@ type Movie = {
 
 type MovieData = {
   results: Movie[];
+  total_pages: number;
+  page: number;
 };
 
-export default function TopRated() {
+type MovieListProps = {
+  endpoint: string;
+};
+
+export default function FeaturedMovies({ endpoint }: MovieListProps) {
   const [data, setData] = React.useState<MovieData | null>(null);
   const [loading, setLoading] = React.useState(true);
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`,
+        `https://api.themoviedb.org/3/movie/${endpoint}?api_key=${API_KEY}&page=${currentPage}`,
         { next: { revalidate: 21600 } }
       );
       const data = await res.json();
@@ -46,7 +62,9 @@ export default function TopRated() {
     };
 
     fetchData();
-  }, []);
+  }, [endpoint, currentPage]);
+
+  const totalPages = data ? data.total_pages : 1;
 
   return (
     <main>
@@ -54,7 +72,7 @@ export default function TopRated() {
         <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
           {loading
             ? // Skeleton component while loading
-              Array.from({ length: 18 }).map((_, index) => (
+              Array.from({ length: 20 }).map((_, index) => (
                 <div key={index} className="w-full space-y-2">
                   <Skeleton className="aspect-video w-full rounded-md" />
                   <div className="space-y-1.5">
@@ -65,7 +83,7 @@ export default function TopRated() {
                 </div>
               ))
             : data &&
-              data.results.slice(0, 18).map((item: any, index: any) => (
+              data.results.map((item: any, index: any) => (
                 <Link
                   href={`/movie/${encodeURIComponent(item.id)}`}
                   key={index}
@@ -77,7 +95,7 @@ export default function TopRated() {
                       <Image
                         fill
                         className="object-cover"
-                        src={`${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                        src={`${PROXY}https://image.tmdb.org/t/p/original${item.backdrop_path}`}
                         alt={item.title}
                         sizes="100%"
                       />
@@ -114,6 +132,44 @@ export default function TopRated() {
               ))}
         </div>
       </div>
+      {/* Pagination controls */}
+      <Pagination className="pt-16">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentPage((prev) => Math.max(prev - 1, 1));
+              }}
+              aria-disabled={currentPage <= 1}
+            />
+          </PaginationItem>
+
+          <PaginationItem>
+            <PaginationLink onClick={(e) => e.preventDefault()}>
+              {currentPage}
+            </PaginationLink>
+          </PaginationItem>
+
+          {totalPages > currentPage + 1 && (
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+          )}
+
+          <PaginationItem>
+            <PaginationNext
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentPage((prev) =>
+                  data && prev < totalPages ? prev + 1 : prev
+                );
+              }}
+              aria-disabled={data ? currentPage === totalPages : true}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </main>
   );
 }

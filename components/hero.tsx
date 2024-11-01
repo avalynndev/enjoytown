@@ -3,12 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import * as React from "react";
 import { FetchMovieInfo } from "@/fetch";
-import { API_KEY, Tv_Popular } from "@/config/url";
 import Marquee from "@/components/ui/marquee";
+import { API_KEY, PROXY } from "@/config/url";
 import Image from "next/image";
 import { Spinner } from "@/components/ui/spinner";
 import { Image as ImageIcon } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 
 type Movie = {
   id: number;
@@ -45,7 +44,7 @@ export interface CardProps {
 export function Card({ item }: CardProps) {
   const title = "title" in item ? item.title : item.name; // Handle both Movie and Tv titles
   const backdropPath = item.backdrop_path
-    ? `${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`
+    ? `${PROXY}https://image.tmdb.org/t/p/original${item.backdrop_path}`
     : null;
 
   return (
@@ -100,12 +99,14 @@ export default function HeroSection() {
       try {
         const [movieRes, tvRes] = await Promise.all([
           fetch(
-            `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
+            `${PROXY}https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
             {
               next: { revalidate: 21600 },
             }
           ),
-          fetch(Tv_Popular, { next: { revalidate: 21600 } }),
+          fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`, {
+            next: { revalidate: 21600 },
+          }),
         ]);
 
         if (!movieRes.ok || !tvRes.ok) {
@@ -115,8 +116,7 @@ export default function HeroSection() {
         const movieData: MovieData = await movieRes.json();
         const tvData: TvData = await tvRes.json();
 
-        FetchMovieInfo(movieData); // Assuming FetchMovieInfo does something useful
-        FetchMovieInfo(tvData); // Assuming FetchMovieInfo does something useful
+        FetchMovieInfo(movieData);
         setTVData(tvData);
         setMovieData(movieData);
         setError(null); // Reset error state if fetch is successful

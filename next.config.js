@@ -41,12 +41,16 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: `${process.env.TMDB_PROXY_URL.replace('https://', '')}`,
+        hostname: `${process.env.TMDB_PROXY_URL?.replace('https://', '')}`,
       },
       {
         protocol: "https",
         hostname: "image.tmdb.org",
       },
+      {
+        protocol: "https",
+        hostname: "artworks.thetvdb.com"
+      }
     ],
   },
   experimental: {

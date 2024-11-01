@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Download } from "lucide-react";
 import Link from "next/link";
-import { API_KEY } from "@/config/url";
+import { API_KEY, PROXY } from "@/config/url";
 
 interface Season {
   season_number: number;
@@ -25,7 +25,7 @@ interface Episode {
   name: string;
 }
 
-export default function VideoPlayer({ id }: { id: number }) {
+export default function VideoPlayer({ id }: { id: string }) {
   const [seasons, setSeasons] = React.useState<Season[]>([]);
   const [episodes, setEpisodes] = React.useState<Episode[]>([]);
   const [season, setSeason] = React.useState("1");
@@ -38,7 +38,7 @@ export default function VideoPlayer({ id }: { id: number }) {
     setError(null);
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?api_key=${API_KEY}`
+        `${PROXY}https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?api_key=${API_KEY}`
       );
       const data = await response.json();
       if (data.success === false) {
