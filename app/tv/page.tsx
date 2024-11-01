@@ -40,7 +40,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Featured featureType="airingtoday"/>
+            <Featured featureType="airing_today"/>
           </TabsContent>
           <TabsContent value="toprated">
             <div className="flex items-center justify-between gap-2 pb-4 py-4">
@@ -54,7 +54,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Featured featureType="toprated"/>
+            <Featured featureType="top_rated"/>
           </TabsContent>
           <TabsContent value="ontheair">
             <div className="flex items-center justify-between gap-2 pb-4 py-4">
@@ -68,7 +68,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Featured featureType="ontheair"/>
+            <Featured featureType="on_the_air"/>
           </TabsContent>
         </Tabs>
       </section>
