@@ -100,7 +100,7 @@ export default function FeaturedAnime({featureType} : AnimeFeatureProps) {
                     <div className="flex items-start gap-1 justify-between">
                       <div className="justify-start">
                         <span className="trucate line-clamp-1">
-                          {typeof item.title === "string"
+                        {typeof item.title === "string"
                             ? item.title
                             : item.title.english ||
                               item.title.userPreferred ||
@@ -110,15 +110,19 @@ export default function FeaturedAnime({featureType} : AnimeFeatureProps) {
                         </span>
                       </div>
                       <div className="justify-end flex items-center gap-2">
+                        <Badge variant="outline">
+                          {item.rating ? item.rating / 10 : "?"}
+                        </Badge>
                         <Separator orientation="vertical" className="h-6" />
                         <Badge variant="secondary">
-                          {item.episodeNumber ? item.episodeNumber : "?"}
+                          {item.totalEpisodes ? item.totalEpisodes : "?"}
                         </Badge>
                       </div>
                     </div>
-
+                   
                     <p className="line-clamp-3 text-xs text-muted-foreground">
-                      {item.episodeTitle}
+                      {/* Recent only includes ep. title and others only have description */}
+                      {item.episodeTitle}{item.description}
                     </p>
                   </div>
                 </Link>
