@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { PROXY } from "@/config/url";
 
 const DetailsContainer = ({ data, id, embed }: any) => {
   return (
@@ -25,7 +26,7 @@ const DetailsContainer = ({ data, id, embed }: any) => {
         >
           <div
             style={{
-              backgroundImage: `url('${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${data.backdrop_path}')`,
+              backgroundImage: `url('${PROXY}https://image.tmdb.org/t/p/original${data.backdrop_path}')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}

@@ -1,8 +1,7 @@
 import { format } from "date-fns";
 import { Poster } from "@/components/common/poster";
 import Link from "next/link";
-import { Download, Play } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Play } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
@@ -12,6 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { PROXY } from "@/config/url";
 
 const DetailsContainer = ({ data, id, embed }: any) => {
   return (
@@ -25,7 +25,7 @@ const DetailsContainer = ({ data, id, embed }: any) => {
         >
           <div
             style={{
-              backgroundImage: `url('${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${data.backdrop_path}')`,
+              backgroundImage: `url('${PROXY}https://image.tmdb.org/t/p/original${data.backdrop_path}')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -81,6 +81,9 @@ const DetailsContainer = ({ data, id, embed }: any) => {
               <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">
                 {data.overview}
               </p>
+              {/* TODO: add trailer via TMDB video API
+                e.g. https://api.themoviedb.org/3/movie/{id}/videos?api_key={key}
+              */}
               <div className="flex flex-wrap items-center gap-1">
                 <Link href={`/movie/watch/${id}`}>
                   <Badge

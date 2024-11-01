@@ -10,8 +10,17 @@ import { Image as ImageIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PROXY } from "@/config/url";
 
-export default function RecentEpisodes() {
+
+type AnimeFeatureType = "recent" | "popular" | "trending";
+
+type AnimeFeatureProps = {
+  featureType: AnimeFeatureType;
+};
+
+
+export default function FeaturedAnime({featureType} : AnimeFeatureProps) {
   const [data, setData] = React.useState<IAnimeResult[] | null>(null);
   const [loading, setLoading] = React.useState(true);
 
@@ -20,13 +29,26 @@ export default function RecentEpisodes() {
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await anilist.fetchRecentEpisodes();
+
+      let res;
+      switch (featureType) {
+        case "recent":
+          res = await anilist.fetchRecentEpisodes();
+          break;
+        case "popular":
+          res = await anilist.fetchPopularAnime(1, 20);
+          break;
+        case "trending":
+          res = await anilist.fetchTrendingAnime(1, 20);
+          break;
+      }
+
       setData(res.results);
       setLoading(false);
     };
 
     fetchData();
-  }, [anilist]);
+  }, [anilist, featureType]);
 
   return (
     <main>
@@ -57,7 +79,7 @@ export default function RecentEpisodes() {
                       <Image
                         fill
                         className="object-cover"
-                        src={`${process.env.TMDB_PROXY_URL}/fetch?url=${item.image}`}
+                        src={`${PROXY}${item.image}`}
                         alt={
                           typeof item.title === "string"
                             ? item.title

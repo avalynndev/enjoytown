@@ -1,9 +1,6 @@
 import Link from "next/link";
-import Image from 'next/image'
 import { GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { Clapperboard } from "lucide-react";
-
-const INTERESTELAR_ID = "157336";
 
 export const Footer = () => {
   return (

@@ -1,4 +1,4 @@
-import { Tv_AiringToday } from "@/config/url";
+import { PROXY, Tv_AiringToday, Tv_OntheAir, Tv_Popular, Tv_TopRated } from "@/config/url";
 import { FetchMovieInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,9 +12,33 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 
-export default async function Popular() {
-  const data = await get_airingtoday();
-  FetchMovieInfo(data);
+type TVFeatureType = "airingtoday" | "ontheair" | "popular" | "toprated";
+
+type TVFeatureProps = {
+  featureType: TVFeatureType;
+};
+
+
+export default async function FeaturedTV({ featureType }: TVFeatureProps) {
+
+  let res;
+  switch (featureType) {
+    case "airingtoday":
+      res = await fetch(Tv_AiringToday, { next: { revalidate: 21600 } });
+      break;
+    case "ontheair":
+      res = await fetch(Tv_OntheAir, { next: { revalidate: 21600 } });
+      break;
+    case "popular":
+      res = await fetch(Tv_Popular, { next: { revalidate: 21600 } });
+      break;
+    case "toprated":
+      res = await fetch(Tv_TopRated, { next: { revalidate: 21600 } });
+      break;
+  }
+
+  const data = await res.json();
+  FetchMovieInfo(res);
 
   return (
     <main>
@@ -33,7 +57,7 @@ export default async function Popular() {
                     <Image
                       fill
                       className="object-cover"
-                      src={`${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                      src={`${PROXY}https://image.tmdb.org/t/p/original${item.backdrop_path}`}
                       alt={item.name}
                       sizes="100%"
                     />
@@ -74,8 +98,3 @@ export default async function Popular() {
   );
 }
 
-const get_airingtoday = async () => {
-  const res = await fetch(Tv_AiringToday, { next: { revalidate: 21600 } });
-  const data = await res.json();
-  return data;
-};

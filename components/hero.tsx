@@ -3,12 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import * as React from "react";
 import { FetchMovieInfo } from "@/fetch";
-import { API_KEY, Tv_Popular } from "@/config/url";
+import { API_KEY, PROXY, Tv_Popular } from "@/config/url";
 import Marquee from "@/components/ui/marquee";
 import Image from "next/image";
 import { Spinner } from "@/components/ui/spinner";
 import { Image as ImageIcon } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 
 type Movie = {
   id: number;
@@ -45,7 +44,7 @@ export interface CardProps {
 export function Card({ item }: CardProps) {
   const title = "title" in item ? item.title : item.name; // Handle both Movie and Tv titles
   const backdropPath = item.backdrop_path
-    ? `${process.env.TMDB_PROXY_URL}/fetch?url=https://image.tmdb.org/t/p/original${item.backdrop_path}`
+    ? `${PROXY}https://image.tmdb.org/t/p/original${item.backdrop_path}`
     : null;
 
   return (
@@ -100,7 +99,7 @@ export default function HeroSection() {
       try {
         const [movieRes, tvRes] = await Promise.all([
           fetch(
-            `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
+            `${PROXY}https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
             {
               next: { revalidate: 21600 },
             }

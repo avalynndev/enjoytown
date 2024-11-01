@@ -1,9 +1,5 @@
-import Popular from "@/components/sections/tv/popular";
-import AiringToday from "@/components/sections/tv/airingtoday";
-import OnTheAir from "@/components/sections/tv/ontheair";
-import TopRated from "@/components/sections/tv/toprated";
+import Featured from "@/components/featured/tv";
 import Carousal from "@/components/carousal/tv";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Home() {
@@ -30,7 +26,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Popular />
+            <Featured featureType="popular"/>
           </TabsContent>
           <TabsContent value="airingtoday">
             <div className="flex items-center justify-between gap-2 pb-4 py-4">
@@ -44,7 +40,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <AiringToday />
+            <Featured featureType="airingtoday"/>
           </TabsContent>
           <TabsContent value="toprated">
             <div className="flex items-center justify-between gap-2 pb-4 py-4">
@@ -58,7 +54,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <TopRated />
+            <Featured featureType="toprated"/>
           </TabsContent>
           <TabsContent value="ontheair">
             <div className="flex items-center justify-between gap-2 pb-4 py-4">
@@ -72,7 +68,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <OnTheAir />
+            <Featured featureType="ontheair"/>
           </TabsContent>
         </Tabs>
       </section>
