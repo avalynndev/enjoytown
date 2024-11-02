@@ -1,8 +1,6 @@
 "use server";
 import { API_KEY, PROXY } from "@/config/url";
 import { env } from "@/env.mjs";
-import { getInfoURL } from "@/config/url";
-
 
 export async function getMangaInfo(id: any) {
   const res = await fetch(
@@ -90,7 +88,7 @@ export async function PreFetchMangaInfo(data: any) {
 export const FetchMovieInfo = async (data: any) => {
   try {
     const fetchPromises = data.results.map(async (element: any) => {
-      const link = `${getInfoURL(element.id)}`;
+      const link = `${PROXY}https://api.themoviedb.org/3/movie/${element.id}?api_key=${API_KEY}`;
       await fetch(link, { next: { revalidate: 21600 } });
     });
 

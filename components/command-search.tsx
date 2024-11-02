@@ -1,11 +1,12 @@
 "use client";
+import { PROXY, API_KEY } from "@/config/url";
 import { ReactNode, useEffect, useState, useCallback } from "react";
 import { CommandIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   getRecentSearchesFromLocalStorage,
-  saveSearchToLocalStorage
+  saveSearchToLocalStorage,
 } from "@/components/storage";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +15,6 @@ import {
   CommandInput,
   CommandList,
 } from "@/components/ui/command";
-import { Movie_Search, Tv_Search } from "@/config/url";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
 import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";
@@ -202,13 +202,14 @@ export const CommandSearch = () => {
       };
       setResults(combinedResults);
     }
+    console.log();
     setIsLoading(false);
   }, []);
 
   useEffect(() => {
     const debouncedFetch = debounce(fetch_results, 500);
     debouncedFetch(search);
-  }, [search]);
+  }, [search, fetch_results]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -411,7 +412,6 @@ export const CommandSearch = () => {
             ) : (
               !isLoading && <p className="p-8 text-center">No Results</p>
             )}
-
           </CommandList>
         </Command>
       </CommandDialog>
@@ -420,15 +420,23 @@ export const CommandSearch = () => {
 };
 
 const get_movie_results = async (title: string) => {
-  const res = await fetch(Movie_Search + title, {
-    next: { revalidate: 21600 },
-  });
+  const res = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=` +
+      title,
+    {
+      next: { revalidate: 21600 },
+    }
+  );
   return res.json();
 };
 
 const get_tv_results = async (title: string) => {
-  const res = await fetch(Tv_Search + title, {
-    next: { revalidate: 21600 },
-  });
+  const res = await fetch(
+    `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=` +
+      title,
+    {
+      next: { revalidate: 21600 },
+    }
+  );
   return res.json();
 };
