@@ -12,7 +12,7 @@ export default async function CarousalComponent() {
         <CarouselContent className="mx-auto flex w-full">
           {trending.results?.map((tvShow) => (
             <CarouselItem key={tvShow.id}>
-              <CarousalCard isDetailsPage={false} show={tvShow} type="tv" />
+              <CarousalCard show={tvShow} type="tv" />
             </CarouselItem>
           ))}
         </CarouselContent>

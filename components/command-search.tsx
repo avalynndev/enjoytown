@@ -196,7 +196,6 @@ export const CommandSearch = () => {
       };
       setResults(combinedResults);
     }
-    console.log();
     setIsLoading(false);
   }, []);
 

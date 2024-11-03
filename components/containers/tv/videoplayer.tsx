@@ -13,8 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Download } from 'lucide-react';
 import Link from 'next/link';
-import { API_KEY } from '@/config/url';
-import { Episode, Season, SeasonDetails, tmdb } from '@/lib/tmdb';
+import { Episode, Season, tmdb } from '@/lib/tmdb';
 
 export default function VideoPlayer({ id }: { id: string }) {
   const [seasons, setSeasons] = React.useState<Season[]>([]);
