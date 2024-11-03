@@ -1,7 +1,7 @@
-import { Pattern } from "@/components/ui/pattern";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import HeroSection from "@/components/hero";
+import { Pattern } from '@/components/ui/pattern';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import HeroSection from '@/components/hero';
 
 export default async function Home() {
   return (
@@ -10,7 +10,7 @@ export default async function Home() {
       <div className="mx-auto max-w-4xl p-4">
         <section className="flex h-[75vh] items-center md:h-[50vh]">
           <div className="mx-auto flex w-4/5 flex-col items-center justify-center space-y-4 text-center">
-          {/**  
+            {/**  
             <Link
               href={`/`}
               className="flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-xs shadow"
@@ -21,14 +21,11 @@ export default async function Home() {
               </span>
             </Link>
           **/}
-            <h1 className="text-6xl font-bold">
-              Explore movies, tv series, and animes!
-            </h1>
+            <h1 className="text-6xl font-bold">Explore movies, tv series, and animes!</h1>
             <p className="text-sm leading-6 text-muted-foreground">
               EnjoyTown is a streaming platform for lazy people who like to
               <br />
-              watch millions of movies, series and animes for free. Go down to
-              watch
+              watch millions of movies, series and animes for free. Go down to watch
             </p>
             <div className="flex gap-2">
               <Button disabled>

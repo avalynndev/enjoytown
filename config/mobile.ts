@@ -1,4 +1,4 @@
-import { MainNavItem, SidebarNavItem } from "@/types";
+import { MainNavItem, SidebarNavItem } from '@/types';
 
 interface MobileConfig {
   mainNav: MainNavItem[];
@@ -8,37 +8,37 @@ interface MobileConfig {
 export const mobileConfig: MobileConfig = {
   mainNav: [
     {
-      title: "Home",
-      href: "/",
+      title: 'Home',
+      href: '/',
     },
     {
-      title: "Anime",
-      href: "/anime",
+      title: 'Anime',
+      href: '/anime',
     },
     {
-      title: "Manga",
-      href: "/manga",
+      title: 'Manga',
+      href: '/manga',
     },
     {
-      title: "Drama",
-      href: "/drama",
+      title: 'Drama',
+      href: '/drama',
     },
     {
-      title: "Movie",
-      href: "/movie",
+      title: 'Movie',
+      href: '/movie',
     },
     {
-      title: "TV",
-      href: "/tv",
+      title: 'TV',
+      href: '/tv',
     },
   ],
   sidebarNav: [
     {
-      title: "Other Features",
+      title: 'Other Features',
       items: [
         {
-          title: "List",
-          href: "/list",
+          title: 'List',
+          href: '/list',
           items: [],
         },
       ],

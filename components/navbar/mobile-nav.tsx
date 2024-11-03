@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import Link, { LinkProps } from "next/link";
-import { useRouter } from "next/navigation";
+import * as React from 'react';
+import Link, { LinkProps } from 'next/link';
+import { useRouter } from 'next/navigation';
 
-import { mobileConfig } from "@/config/mobile";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
-import { Icons } from "@/components/common/icons";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { mobileConfig } from '@/config/mobile';
+import { siteConfig } from '@/config/site';
+import { cn } from '@/lib/utils';
+import { Icons } from '@/components/common/icons';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
@@ -28,11 +28,7 @@ export function MobileNav() {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="pr-0">
-          <MobileLink
-            href="/"
-            className="flex items-center"
-            onOpenChange={setOpen}
-          >
+          <MobileLink href="/" className="flex items-center" onOpenChange={setOpen}>
             <Icons.clapperboard className="mr-2 h-4 w-4" />
             <span className="font-bold">{siteConfig.name}</span>
           </MobileLink>
@@ -41,14 +37,10 @@ export function MobileNav() {
               {mobileConfig.mainNav?.map(
                 (item) =>
                   item.href && (
-                    <MobileLink
-                      key={item.href}
-                      href={item.href}
-                      onOpenChange={setOpen}
-                    >
+                    <MobileLink key={item.href} href={item.href} onOpenChange={setOpen}>
                       {item.title}
                     </MobileLink>
-                  )
+                  ),
               )}
             </div>
             <div className="flex flex-col space-y-2">
@@ -93,13 +85,7 @@ interface MobileLinkProps extends LinkProps {
   className?: string;
 }
 
-function MobileLink({
-  href,
-  onOpenChange,
-  className,
-  children,
-  ...props
-}: MobileLinkProps) {
+function MobileLink({ href, onOpenChange, className, children, ...props }: MobileLinkProps) {
   const router = useRouter();
   return (
     <Link

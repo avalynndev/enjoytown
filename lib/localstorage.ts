@@ -1,8 +1,8 @@
-import { data_types } from "@/types";
+import { data_types } from '@/types';
 
 const SaveToLocalStorage = (data: data_types) => {
   try {
-    const jsonData = localStorage.getItem("watchHistory");
+    const jsonData = localStorage.getItem('watchHistory');
     const dataObject = jsonData ? JSON.parse(jsonData) : {};
 
     if (!dataObject.AnimeHistory) {
@@ -10,7 +10,7 @@ const SaveToLocalStorage = (data: data_types) => {
     }
 
     let found_anime = false;
-    if (data.type === "anime") {
+    if (data.type === 'anime') {
       dataObject.AnimeHistory.forEach((element: data_types) => {
         if (element.title === data.title) {
           element.episode_number = data.episode_number;
@@ -24,11 +24,9 @@ const SaveToLocalStorage = (data: data_types) => {
     }
 
     let updatedData = JSON.stringify(dataObject);
-    localStorage.setItem("watchHistory", updatedData);
+    localStorage.setItem('watchHistory', updatedData);
   } catch (error) {
-    console.log(
-      "Some error occured while saving the data. Please contact the DEVs."
-    );
+    console.log('Some error occured while saving the data. Please contact the DEVs.');
   }
 };
 

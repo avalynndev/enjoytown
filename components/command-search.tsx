@@ -1,23 +1,20 @@
-"use client";
-import { PROXY, API_KEY } from "@/config/url";
-import { ReactNode, useEffect, useState, useCallback } from "react";
-import { CommandIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+'use client';
+
+import { ReactNode, useEffect, useState, useCallback } from 'react';
+import { CommandIcon } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { getRecentSearchesFromLocalStorage, saveSearchToLocalStorage } from '@/components/storage';
+import { Button } from '@/components/ui/button';
+import { Command, CommandDialog, CommandInput, CommandList } from '@/components/ui/command';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
-  getRecentSearchesFromLocalStorage,
-  saveSearchToLocalStorage,
-} from "@/components/storage";
-import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandDialog,
-  CommandInput,
-  CommandList,
-} from "@/components/ui/command";
-import { Skeleton } from "@/components/ui/skeleton";
-import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
-import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";
+  FetchAnimeInfo,
+  fetchDramaSearch,
+  getSearchedManga,
+  PreFetchMangaInfo,
+} from '@/lib/comsumet';
+import { tmdb } from '@/lib/tmdb';
 
 type AnimeResult = {
   id: string;
@@ -109,7 +106,7 @@ const CommandSearchGroup = ({ children, heading }: CommandSearchGroupProps) => {
 
 export const CommandSearch = () => {
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [result, setResults] = useState<Result | null>({
     movies: [],
     tvShows: [],
@@ -163,12 +160,9 @@ export const CommandSearch = () => {
   const fetchAnimeResults = async (text: string) => {
     setIsLoading(true);
     if (text) {
-      const res = await fetch(
-        `https://api-consumet-org-jet.vercel.app/meta/anilist/` + text,
-        {
-          next: { revalidate: 21600 },
-        }
-      );
+      const res = await fetch(`https://api-consumet-org-jet.vercel.app/meta/anilist/` + text, {
+        next: { revalidate: 21600 },
+      });
       const data = await res.json();
       setSearchResults(data.results);
     }
@@ -188,13 +182,13 @@ export const CommandSearch = () => {
     setRecentSearches(searches);
   }, []);
 
-  const fetch_results = useCallback(async (title: string) => {
+  const fetchResults = useCallback(async (title: string) => {
     setIsLoading(true);
     if (title) {
       debounce(() => saveSearchToLocalStorage(title), 500)();
       const [movieData, tvData] = await Promise.all([
-        get_movie_results(title),
-        get_tv_results(title),
+        tmdb.movies.search(title, 'en-US'),
+        tmdb.tv.search(title, 'en-US'),
       ]);
       const combinedResults = {
         movies: movieData.results,
@@ -202,25 +196,24 @@ export const CommandSearch = () => {
       };
       setResults(combinedResults);
     }
-    console.log();
     setIsLoading(false);
   }, []);
 
   useEffect(() => {
-    const debouncedFetch = debounce(fetch_results, 500);
+    const debouncedFetch = debounce(fetchResults, 500);
     debouncedFetch(search);
-  }, [search, fetch_results]);
+  }, [search, fetchResults]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if ((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey)) {
+      if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
       }
     };
 
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
   }, []);
 
   useEffect(() => {
@@ -248,11 +241,7 @@ export const CommandSearch = () => {
 
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
-          <CommandInput
-            placeholder="Search"
-            onValueChange={setSearch}
-            value={search}
-          />
+          <CommandInput placeholder="Search" onValueChange={setSearch} value={search} />
 
           <CommandList>
             {recentSearches && (
@@ -263,9 +252,7 @@ export const CommandSearch = () => {
                     className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
                     onClick={() => setSearch(item)}
                   >
-                    <span className="truncate whitespace-nowrap text-sm">
-                      {item}
-                    </span>
+                    <span className="truncate whitespace-nowrap text-sm">{item}</span>
                   </div>
                 ))}
               </CommandSearchGroup>
@@ -315,13 +302,10 @@ export const CommandSearch = () => {
                         href={`/movie/${item.id}`}
                         className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
                       >
-                        <span className="truncate whitespace-nowrap text-sm">
-                          {item.title}
-                        </span>
+                        <span className="truncate whitespace-nowrap text-sm">{item.title}</span>
 
                         <span className="whitespace-nowrap text-xs text-muted-foreground">
-                          {item.release_date &&
-                            new Date(item.release_date).getFullYear()}
+                          {item.release_date && new Date(item.release_date).getFullYear()}
                         </span>
                       </Link>
                     ))}
@@ -336,13 +320,10 @@ export const CommandSearch = () => {
                         className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
                         href={`/tv/${item.id}`}
                       >
-                        <span className="truncate whitespace-nowrap text-sm">
-                          {item.name}
-                        </span>
+                        <span className="truncate whitespace-nowrap text-sm">{item.name}</span>
 
                         <span className="whitespace-nowrap text-xs text-muted-foreground">
-                          {item.first_air_date &&
-                            new Date(item.first_air_date).getFullYear()}
+                          {item.first_air_date && new Date(item.first_air_date).getFullYear()}
                         </span>
                       </Link>
                     ))}
@@ -358,9 +339,7 @@ export const CommandSearch = () => {
                         href={`/manga/${item.id}`}
                       >
                         <span className="truncate whitespace-nowrap text-sm">
-                          {item.title.userPreferred ||
-                            item.title.english ||
-                            item.title.romaji}
+                          {item.title.userPreferred || item.title.english || item.title.romaji}
                         </span>
 
                         <span className="whitespace-nowrap text-xs text-muted-foreground">
@@ -379,9 +358,7 @@ export const CommandSearch = () => {
                         className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
                         href={`/drama/${item.id}`}
                       >
-                        <span className="truncate whitespace-nowrap text-sm">
-                          {item.title}
-                        </span>
+                        <span className="truncate whitespace-nowrap text-sm">{item.title}</span>
                       </Link>
                     ))}
                   </CommandSearchGroup>
@@ -396,9 +373,7 @@ export const CommandSearch = () => {
                         href={`/anime/${item.id}`}
                       >
                         <span className="truncate whitespace-nowrap text-sm">
-                          {item.title.userPreferred ||
-                            item.title.english ||
-                            item.title.romaji}
+                          {item.title.userPreferred || item.title.english || item.title.romaji}
                         </span>
 
                         <span className="whitespace-nowrap text-xs text-muted-foreground">
@@ -417,26 +392,4 @@ export const CommandSearch = () => {
       </CommandDialog>
     </>
   );
-};
-
-const get_movie_results = async (title: string) => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=` +
-      title,
-    {
-      next: { revalidate: 21600 },
-    }
-  );
-  return res.json();
-};
-
-const get_tv_results = async (title: string) => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=` +
-      title,
-    {
-      next: { revalidate: 21600 },
-    }
-  );
-  return res.json();
 };

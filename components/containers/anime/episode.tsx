@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import { Icons } from "@/components/common/icons";
-import SaveToLocalStorage from "@/lib/localstorage";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { Icons } from '@/components/common/icons';
+import SaveToLocalStorage from '@/lib/localstorage';
 
-import { Button } from "@/components/ui/button";
-import { SelectItem, Select } from "@nextui-org/react";
+import { Button } from '@/components/ui/button';
+import { SelectItem, Select } from '@nextui-org/react';
 
 const EpisodeContainer = ({ data }: any) => {
   const [selectedGroup, setSelectedGroup] = useState(0);
@@ -25,25 +25,15 @@ const EpisodeContainer = ({ data }: any) => {
         <Link
           shallow
           key={`episode-${data.id}-${episode.number}`}
-          href={`/anime/watch/${data.id}/${episode.number
-            .toString()
-            .replace(/\./g, "-")}`}
+          href={`/anime/watch/${data.id}/${episode.number.toString().replace(/\./g, '-')}`}
         >
           <Button
             key={episode.id}
-            onClick={() =>
-              save_to_local(
-                data.id,
-                data.title,
-                episode.number,
-                data.image,
-                "anime"
-              )
-            }
+            onClick={() => save_to_local(data.id, data.title, episode.number, data.image, 'anime')}
           >
             {episode.number}
           </Button>
-        </Link>
+        </Link>,
       );
     }
     return episodeButtons;
@@ -54,19 +44,16 @@ const EpisodeContainer = ({ data }: any) => {
       const totalGroups = Math.ceil(episodes.length / 100);
       const options = Array.from({ length: totalGroups }, (_, index) => ({
         value: index,
-        label: `${index * 100 + 1}-${Math.min(
-          (index + 1) * 100,
-          episodes.length
-        )}`,
+        label: `${index * 100 + 1}-${Math.min((index + 1) * 100, episodes.length)}`,
       }));
 
       return (
         <Select
           size="sm"
           placeholder="Select a Episode Group"
-          className="rounded-md max-w-xs"
+          className="max-w-xs rounded-md"
           disableSelectorIconRotation
-          defaultSelectedKeys={["0"]}
+          defaultSelectedKeys={['0']}
           selectorIcon={<Icons.blank className="h-0 w-0" />}
           endContent={<Icons.paw />}
           renderValue={(items) => {
@@ -83,7 +70,7 @@ const EpisodeContainer = ({ data }: any) => {
             <SelectItem
               key={option.value}
               value={option.value}
-              className="text-foreground bg-background"
+              className="bg-background text-foreground"
               onClick={() => handleGroupChange(option.value)}
             >
               {option.label}
@@ -95,13 +82,11 @@ const EpisodeContainer = ({ data }: any) => {
   };
 
   return (
-    <div className="py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto ">
+    <div className="px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl">
         <div className="">
           {renderGroupDropdown()}
-          <div className="flex flex-wrap gap-2 items-center pt-6">
-            {renderEpisodeButtons()}
-          </div>
+          <div className="flex flex-wrap items-center gap-2 pt-6">{renderEpisodeButtons()}</div>
         </div>
       </div>
     </div>
@@ -113,7 +98,7 @@ const save_to_local = (
   title: string,
   episode: number,
   image: URL,
-  type: string
+  type: string,
 ): void => {
   const data: any = {
     id: id,

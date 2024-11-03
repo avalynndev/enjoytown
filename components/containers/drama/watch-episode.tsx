@@ -1,12 +1,12 @@
-import React from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const WatchEpisodes = ({ data, id }: any) => {
   return (
-    <div className="py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto flex">
-        <div className="flex flex-wrap gap-2 items-center">
+    <div className="px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-3xl">
+        <div className="flex flex-wrap items-center gap-2">
           {data &&
             data.map((episodes: any) => (
               <Link

@@ -1,99 +1,67 @@
-import { Show } from "@/types";
-import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
-import { Button } from "@/components/ui/button";
-import Link from 'next/link'
+import { Badge } from '@/components/ui/badge';
+import { format } from 'date-fns';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Show } from '@/types';
 
 interface CarousalCardProps {
-  isDetailsPage?: boolean;
   show: Show;
-  type?: string;
+  type?: 'tv' | 'movie' | 'anime';
   id?: string;
 }
 
-export default function CarousalCard(props: CarousalCardProps) {
-  const { show, isDetailsPage, type } = props;
+export default function CarousalCard({ show, type }: CarousalCardProps) {
+  const title = show.title || show.name || 'Unknown Title';
+  const releaseDate = show.release_date || show.first_air_date || 'Unknown Date';
 
   return (
     <>
-      {props.show && (
-        <>
-          <div className="flex md:hidden   h-[70vh]   relative">
-            <img
-              alt=""
-              className="inset-0 object-cover rounded-t-xl   h-full w-full"
-              src={`https://image.tmdb.org/t/p/original/${props.show.poster_path}`}
-            />
-            <div className="   border-white absolute flex justify-between bg-gradient-to-t from-background to-transparent bottom-0 top-1/2 w-full   flex-col    ">
-              <div></div>
-              <div className="flex items-center flex-col">
-                <div className="text-3xl text-pretty flex text-center w-9/12 items-center justify-center  font-bold">
-                  {props.show.title || props.show.name}
-                </div>
-                <div className="opacity-50">
-                  {props.show.genres?.name?.join(",") || "Comedy"}{" "}
-                  {" • " +
-                    (
-                      props.show.release_date || props.show.first_air_date
-                    ).split("-")[0]}
-                </div>
-
-                {props.show.genres?.map((genre: any) => {
-                  return (
-                    <Badge
-                      key={genre.id}
-                      variant="outline"
-                      className="whitespace-nowrap"
-                    >
-                      {genre.name}
-                    </Badge>
-                  );
-                })}
+      <div className="relative flex h-[70vh] md:hidden">
+        <Image
+          alt={title}
+          className="inset-0 h-full w-full rounded-t-xl object-cover"
+          src={`https://image.tmdb.org/t/p/original${show.poster_path}`}
+          width={500}
+          height={500}
+        />
+        <div className="absolute bottom-0 top-1/2 flex w-full flex-col justify-between border-white bg-gradient-to-t from-background to-transparent">
+          <div></div>
+          <div className="flex flex-col items-center">
+            <div className="flex w-9/12 items-center justify-center text-pretty text-center text-3xl font-bold">
+              {title}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="relative mx-auto hidden h-[70vh] w-full md:flex">
+        <Image
+          alt={title}
+          className="h-full w-full rounded-t-xl object-cover object-center"
+          src={`https://image.tmdb.org/t/p/original${show.backdrop_path}`}
+          width={500}
+          height={500}
+        />
+        <div className="to-from-background/10 absolute inset-0 flex flex-col justify-between bg-gradient-to-t from-background">
+          <div></div>
+          <div className="mx-auto w-[96%]">
+            <div className="flex w-[500px] flex-col gap-1 text-pretty uppercase">
+              <div className="text-sm normal-case opacity-50">
+                {releaseDate ? format(new Date(releaseDate), 'PPP') : 'Unknown'}
+              </div>
+              <div className="text-pretty text-3xl font-bold">{show.title || show.name}</div>
+              <div className="line-clamp-3 text-xs normal-case opacity-50">{show?.overview}</div>
+              <div className="my-2 flex gap-2">
+                <Link href={`/${type}/${show.id}`}>
+                  <Button variant={'ringHover'} className="w-full whitespace-nowrap">
+                    Go To Show
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
-          <div className="relative h-[70vh] md:flex hidden w-full  mx-auto  ">
-            <img
-              alt=""
-              className=" h-full w-full rounded-t-xl object-center object-cover"
-              src={`https://image.tmdb.org/t/p/original/${show.backdrop_path}`}
-            />
-            <div className="inset-0 bg-gradient-to-t from-background to-from-background/10  absolute justify-between flex flex-col">
-              <div></div>
-              <div className="w-[96%] mx-auto">
-                <div className=" flex gap-1 flex-col  uppercase w-[500px] text-pretty">
-                  <div className="text-sm normal-case opacity-50">
-                    {props.show.release_date || props.show.first_air_date
-                      ? format(
-                          new Date(
-                            props.show.release_date || props.show.first_air_date
-                          ),
-                          "PPP"
-                        )
-                      : "Unknown"}
-                  </div>
-                  <div className="text-3xl text-pretty font-bold ">
-                    {show.title || show.name}
-                  </div>
-                  <div className="text-xs opacity-50 normal-case line-clamp-3">
-                    {show?.overview}
-                  </div>
-                  <div className="flex my-2  gap-2">
-                    <Link href={`/${props.type}/${show.id}`}>
-                      <Button
-                        variant={"ringHover"}
-                        className="whitespace-nowrap w-full"
-                      >
-                        Go To Show
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+        </div>
+      </div>
     </>
   );
 }

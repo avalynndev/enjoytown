@@ -15,54 +15,57 @@ const nextConfig = {
         protocol: 'https',
       },
       {
-        protocol: "https",
-        hostname: "asianimg.pro",
-        pathname: "/cover/**",
+        protocol: 'https',
+        hostname: 'asianimg.pro',
+        pathname: '/cover/**',
       },
       {
-        protocol: "https",
-        hostname: "www.pngall.com",
+        protocol: 'https',
+        hostname: 'www.pngall.com',
       },
       {
-        protocol: "https",
-        hostname: "gogocdn.net",
+        protocol: 'https',
+        hostname: 'gogocdn.net',
       },
       {
-        protocol: "https",
-        hostname: "asianimg.pro",
+        protocol: 'https',
+        hostname: 'asianimg.pro',
       },
       {
-        protocol: "https",
-        hostname: "s4.anilist.co",
+        protocol: 'https',
+        hostname: 's4.anilist.co',
       },
       {
-        protocol: "https",
-        hostname: "uploads.mangadex.org",
+        protocol: 'https',
+        hostname: 'uploads.mangadex.org',
       },
       {
-        protocol: "https",
-        hostname: `${process.env.TMDB_PROXY_URL?.replace('https://', '')}`,
+        protocol: 'https',
+        hostname: 'image.tmdb.org',
       },
       {
-        protocol: "https",
-        hostname: "image.tmdb.org",
+        protocol: 'https',
+        hostname: 'artworks.thetvdb.com',
       },
-      {
-        protocol: "https",
-        hostname: "artworks.thetvdb.com"
-      }
     ],
   },
   experimental: {
     serverActions: {
-      allowedOrigins: ["localhost:3000"],
+      allowedOrigins: ['localhost:3000'],
     },
   },
   env: {
-    TMDB_PROXY_URL: process.env.TMDB_PROXY_URL,
     TMDB_API_KEY: process.env.TMDB_API_KEY,
   },
-
+  async rewrites() {
+    return [
+      {
+        // Proxy /api/tmdb requests to TMDB API to hide API key
+        source: '/api/tmdb/:path*',
+        destination: `https://api.themoviedb.org/3/:path*?api_key=${process.env.TMDB_API_KEY}`,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

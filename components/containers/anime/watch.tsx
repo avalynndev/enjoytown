@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ImageIcon, Play } from "lucide-react";
-import Image from "next/image";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import Gogoanime from "@consumet/extensions/dist/providers/anime/gogoanime";
-import Anilist from "@consumet/extensions/dist/providers/meta/anilist";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ImageIcon, Play } from 'lucide-react';
+import Image from 'next/image';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import Gogoanime from '@consumet/extensions/dist/providers/anime/gogoanime';
+import Anilist from '@consumet/extensions/dist/providers/meta/anilist';
 
 export default async function Watch({ id }: any) {
   const anilist = new Anilist(new Gogoanime());
@@ -22,9 +22,7 @@ export default async function Watch({ id }: any) {
               {episode.image ? (
                 <Image
                   src={episode.image}
-                  alt={
-                    episode.title ? episode.title : `Episode ${episode.number}`
-                  }
+                  alt={episode.title ? episode.title : `Episode ${episode.number}`}
                   width={1600}
                   height={1600}
                   className="h-full w-full object-cover"
@@ -33,7 +31,7 @@ export default async function Watch({ id }: any) {
                 <ImageIcon />
               )}
               <div className="absolute inset-0 z-50 flex items-center justify-center">
-                <Button variant={"ghost"} className="h-12 w-12">
+                <Button variant={'ghost'} className="h-12 w-12">
                   <Play className="h-6 w-6 text-white" />
                 </Button>
               </div>
