@@ -1,19 +1,23 @@
-'use client';
-import { ReactNode, useEffect, useState, useCallback } from 'react';
-import { CommandIcon } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import { getRecentSearchesFromLocalStorage, saveSearchToLocalStorage } from '@/components/storage';
-import { Button } from '@/components/ui/button';
-import { Command, CommandDialog, CommandInput, CommandList } from '@/components/ui/command';
-import { Skeleton } from '@/components/ui/skeleton';
-import { tmdb } from '@/lib/tmdb';
+"use client";
+
+import { ReactNode, useEffect, useState, useCallback } from "react";
+import { CommandIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import {
-  FetchAnimeInfo,
-  fetchDramaSearch,
-  getSearchedManga,
-  PreFetchMangaInfo,
-} from '@/lib/comsumet';
+  getRecentSearchesFromLocalStorage,
+  saveSearchToLocalStorage,
+} from "@/components/storage";
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+} from "@/components/ui/command";
+import { Skeleton } from "@/components/ui/skeleton";
+import { FetchAnimeInfo, fetchDramaSearch, getSearchedManga, PreFetchMangaInfo } from "@/lib/comsumet";
+import { tmdb } from "@/lib/tmdb";
 
 type AnimeResult = {
   id: string;
@@ -195,13 +199,14 @@ export const CommandSearch = () => {
       };
       setResults(combinedResults);
     }
+    console.log();
     setIsLoading(false);
   }, []);
 
   useEffect(() => {
     const debouncedFetch = debounce(fetchResults, 500);
     debouncedFetch(search);
-  }, [search]);
+  }, [search, fetchResults]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
