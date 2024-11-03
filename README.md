@@ -63,7 +63,9 @@ npm install
 ```
 
 ### Go to the 'config` folder and edit the values as per your requirement or leave them as it is
+
 Add a ENV FILE with:
+
 ```env
 DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
 CONSUMET_API_URL=https://consumet_api_url (deploy your own with the instructions below, dont end with slash)
@@ -92,7 +94,6 @@ npm start
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Favalynndev%2Fenjoytown&env=DOWNLOAD_API_URL,CONSUMET_API_URL,CONSUMET_API_ANILIST_URL,TMDB_PROXY_URL)
 
-
 ## Found a Bug? 🐞
 
 Uh-oh, looks like you stumbled upon a bug? No worries, we're here to squash it! Just head over to our [**issues**](https://github.com/avalynndev/enjoytown/issues) section on GitHub and let us know what's up.
@@ -104,6 +105,5 @@ Uh-oh, looks like you stumbled upon a bug? No worries, we're here to squash it! 
 #### Want to Help Out?
 
 Feel free to contribute to this project! Whether you're an experienced developer or have been in the field for a while, your help is valuable.
-
 
 [![Star History Chart](https://api.star-history.com/svg?repos=avalynndev/enjoytown&type=Date)](https://star-history.com/embed?secret=#avalynndev/enjoytown&Date)

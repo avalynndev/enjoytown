@@ -1,7 +1,7 @@
-import { Language } from '@/lib/tmdb'
-import { axiosClient } from '../index'
-import { TvSerie, TvSerieDetails } from '@/lib/tmdb'
-import { ListResponse } from '@/lib/tmdb/utils/list-response'
+import { Language } from '@/lib/tmdb';
+import { axiosClient } from '../index';
+import { TvSerie, TvSerieDetails } from '@/lib/tmdb';
+import { ListResponse } from '@/lib/tmdb/utils/list-response';
 
 /*
 |-----------------------------------------------------------------------------
@@ -18,10 +18,10 @@ const details = async (id: number, language: Language) => {
     params: {
       language,
     },
-  })
+  });
 
-  return data
-}
+  return data;
+};
 
 /*
 |-----------------------------------------------------------------------------
@@ -48,30 +48,27 @@ type DiscoverTvSeriesFilters = Partial<
     | 'vote_count.gte',
     string | null
   >
->
+>;
 
 type DiscoverTvSeriesOptions = {
-  language: Language
-  page: number
-  filters?: DiscoverTvSeriesFilters
-}
+  language: Language;
+  page: number;
+  filters?: DiscoverTvSeriesFilters;
+};
 
 export const discover = async (options: DiscoverTvSeriesOptions) => {
-  const { page, language, filters } = options
+  const { page, language, filters } = options;
 
-  const { data } = await axiosClient.get<ListResponse<TvSerie>>(
-    `/discover/tv`,
-    {
-      params: {
-        page,
-        language,
-        ...filters,
-      },
+  const { data } = await axiosClient.get<ListResponse<TvSerie>>(`/discover/tv`, {
+    params: {
+      page,
+      language,
+      ...filters,
     },
-  )
+  });
 
-  return data
-}
+  return data;
+};
 
 /*
 |-----------------------------------------------------------------------------
@@ -86,64 +83,57 @@ export const discover = async (options: DiscoverTvSeriesOptions) => {
 |-----------------------------------------------------------------------------
 */
 
-type TvSeriesListType = 'airing_today' | 'on_the_air' | 'popular' | 'top_rated'
+type TvSeriesListType = 'airing_today' | 'on_the_air' | 'popular' | 'top_rated';
 
 type ListQueryParams = {
-  list: TvSeriesListType
-  language: Language
-  page: number
-}
+  list: TvSeriesListType;
+  language: Language;
+  page: number;
+};
 
 const list = async (params: ListQueryParams) => {
-  const { list, language, page } = params
+  const { list, language, page } = params;
 
   const { data } = await axiosClient.get<ListResponse<TvSerie>>(`/tv/${list}`, {
     params: {
       language,
       page,
     },
-  })
+  });
 
-  return data
-}
+  return data;
+};
 
 const trending = async (timeWindow: 'day' | 'week', language: Language) => {
-  const { data } = await axiosClient.get<ListResponse<TvSerie>>(
-    `/trending/tv/${timeWindow}`,
-    {
-      params: {
-        language,
-      },
-    },
-  )
-
-  return data
-}
-
-const search = async (query: string, language: Language) => {
-  const { data } = await axiosClient.get<ListResponse<TvSerie>>(
-    `/search/tv`,
-    {
-      params: {
-        query,
-        language,
-      },
-    },
-  )
-
-  return data
-}
-
-const popular = async (language: Language) => {
-  const { data } = await axiosClient.get<ListResponse<TvSerie>>(
-    `/tv/popular`, {
+  const { data } = await axiosClient.get<ListResponse<TvSerie>>(`/trending/tv/${timeWindow}`, {
     params: {
       language,
     },
-  })
+  });
 
-  return data
-}
+  return data;
+};
+
+const search = async (query: string, language: Language) => {
+  const { data } = await axiosClient.get<ListResponse<TvSerie>>(`/search/tv`, {
+    params: {
+      query,
+      language,
+    },
+  });
+
+  return data;
+};
+
+const popular = async (language: Language) => {
+  const { data } = await axiosClient.get<ListResponse<TvSerie>>(`/tv/popular`, {
+    params: {
+      language,
+    },
+  });
+
+  return data;
+};
 
 /*
 |-----------------------------------------------------------------------------
@@ -155,13 +145,9 @@ const popular = async (language: Language) => {
 | 
 |-----------------------------------------------------------------------------
 */
-export type TVRelatedType = 'recommendations' | 'similar'
+export type TVRelatedType = 'recommendations' | 'similar';
 
-const related = async (
-  id: number,
-  type: TVRelatedType,
-  language: Language,
-) => {
+const related = async (id: number, type: TVRelatedType, language: Language) => {
   const { data } = await axiosClient.get<ListResponse<TvSerie>>(
     `/tv/${id}/${type}`,
 
@@ -170,10 +156,10 @@ const related = async (
         language,
       },
     },
-  )
+  );
 
-  return data
-}
+  return data;
+};
 
-export const tv = { details, discover, list, related, trending, search, popular}
-export { type TvSeriesListType, type DiscoverTvSeriesFilters }
+export const tv = { details, discover, list, related, trending, search, popular };
+export { type TvSeriesListType, type DiscoverTvSeriesFilters };

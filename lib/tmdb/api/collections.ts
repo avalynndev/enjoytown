@@ -1,14 +1,14 @@
-import { axiosClient } from '@/lib/tmdb/index'
-import { Language } from '@/lib/tmdb/models/language'
+import { axiosClient } from '@/lib/tmdb/index';
+import { Language } from '@/lib/tmdb/models/language';
 
 const details = async (id: number, language: Language) => {
   const { data } = await axiosClient.get(`/collection/${id}`, {
     params: {
       language,
     },
-  })
+  });
 
-  return data
-}
+  return data;
+};
 
-export const collections = { details }
+export const collections = { details };

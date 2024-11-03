@@ -1,26 +1,16 @@
-import React from "react";
-import { format } from "date-fns";
-import Link from "next/link";
-import Image from "next/image";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import Watch from "@/components/containers/anime/watch";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Image as LucideImage, ImageIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { IAnimeInfo } from "@consumet/extensions/dist/models";
+import React from 'react';
+import { format } from 'date-fns';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import Watch from '@/components/containers/anime/watch';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Image as LucideImage, ImageIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Separator } from '@/components/ui/separator';
+import { Badge } from '@/components/ui/badge';
+import { IAnimeInfo } from '@consumet/extensions/dist/models';
 
 const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
   return (
@@ -31,20 +21,20 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
             <div
               style={{
                 backgroundImage: `url('${data.cover}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
               }}
               className="h-full w-full brightness-50"
               data-testid="banner"
             />
           </div>
 
-          <div className="mx-auto my-8 max-w-4xl space-y-8 p-4 md:space-y-12 md:p-0 ">
+          <div className="mx-auto my-8 max-w-4xl space-y-8 p-4 md:space-y-12 md:p-0">
             <main className="flex flex-col gap-4 md:flex-row">
-              <aside className="-mt-24 w-full space-y-2  md:-mt-32 md:w-1/3">
+              <aside className="-mt-24 w-full space-y-2 md:-mt-32 md:w-1/3">
                 <div
                   className={cn(
-                    "relative flex aspect-poster w-full items-center justify-center overflow-hidden rounded-lg border bg-muted text-muted shadow"
+                    'relative flex aspect-poster w-full items-center justify-center overflow-hidden rounded-lg border bg-muted text-muted shadow',
                   )}
                 >
                   {data.image ? (
@@ -54,13 +44,13 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                       loading="lazy"
                       sizes="100%"
                       alt={
-                        typeof data.title === "string"
+                        typeof data.title === 'string'
                           ? data.title
                           : data.title.english ||
                             data.title.userPreferred ||
                             data.title.romaji ||
                             data.title.native ||
-                            ""
+                            ''
                       }
                       src={data.image}
                     />
@@ -73,18 +63,18 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
               <article className="flex w-full flex-col gap-2 md:w-2/3">
                 {data.releaseDate && (
                   <span className="text-xs text-muted-foreground">
-                    {format(new Date(data.releaseDate), "PPP", {})}
+                    {format(new Date(data.releaseDate), 'PPP', {})}
                   </span>
                 )}
 
                 <h1 className="text-lg font-bold md:text-4xl">
-                  {typeof data.title === "string"
+                  {typeof data.title === 'string'
                     ? data.title
                     : data.title.english ||
                       data.title.userPreferred ||
                       data.title.romaji ||
                       data.title.native ||
-                      ""}
+                      ''}
                 </h1>
 
                 <div className="flex flex-wrap items-center gap-2">
@@ -94,14 +84,9 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                         return (
                           <Link
                             key={genre}
-                            href={`/anime/genre/${genre
-                              .toLowerCase()
-                              .replace(/ /g, "-")}`}
+                            href={`/anime/genre/${genre.toLowerCase().replace(/ /g, '-')}`}
                           >
-                            <Badge
-                              variant="outline"
-                              className="whitespace-nowrap"
-                            >
+                            <Badge variant="outline" className="whitespace-nowrap">
                               {genre}
                             </Badge>
                           </Link>
@@ -133,9 +118,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                   <TabsTrigger value="watch">Watch</TabsTrigger>
                   <TabsTrigger value="characters">Characters</TabsTrigger>
                   <TabsTrigger value="relations">Relations</TabsTrigger>
-                  <TabsTrigger value="recommendations">
-                    Recommendations
-                  </TabsTrigger>
+                  <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
                 </TabsList>
               </div>
               <TabsContent value="watch" className="mt-4">
@@ -143,13 +126,13 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
               </TabsContent>
 
               <TabsContent value="characters" className="mt-4">
-                <div className="mt-2 items-center grid grid-  cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4 ">
+                <div className="grid- cols-2 mt-2 grid items-center gap-4 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6">
                   {data.characters &&
                     data.characters.map((item: any, index: any) => (
                       <div key={index}>
-                        <Card className="text-center items-center hover:scale-105 transition-all duration-300">
+                        <Card className="items-center text-center transition-all duration-300 hover:scale-105">
                           <CardHeader>
-                            <CardTitle className="text-xs h-6 truncate">
+                            <CardTitle className="h-6 truncate text-xs">
                               {item.name.full} ({item.role})
                             </CardTitle>
                           </CardHeader>
@@ -164,7 +147,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                           </CardContent>
                         </Card>
                       </div>
-                    ))}{" "}
+                    ))}{' '}
                 </div>
               </TabsContent>
 
@@ -176,13 +159,13 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                         <div key={index}>
                           <Link
                             href={
-                              item.type == "MOVIE"
+                              item.type == 'MOVIE'
                                 ? `/anime/${item.id}`
-                                : item.type == "MANGA"
-                                ? `/manga/${item.id}`
-                                : item.type == "TV"
-                                ? `/anime/${item.id}`
-                                : ``
+                                : item.type == 'MANGA'
+                                  ? `/manga/${item.id}`
+                                  : item.type == 'TV'
+                                    ? `/anime/${item.id}`
+                                    : ``
                             }
                           >
                             <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
@@ -191,10 +174,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                                   fill
                                   className="object-cover"
                                   src={`${item.cover}`}
-                                  alt={
-                                    item.title["english"] ||
-                                    item.title["romaji"]
-                                  }
+                                  alt={item.title['english'] || item.title['romaji']}
                                   sizes="100%"
                                 />
                               ) : (
@@ -204,16 +184,13 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                             <div className="space-y-1.5">
                               <div className="flex items-start justify-between gap-2 pt-1">
                                 <span className="trucate line-clamp-1 pt-1">
-                                  {item.title["english"] ||
-                                    item.title["romaji"]}
+                                  {item.title['english'] || item.title['romaji']}
                                 </span>
 
                                 <TooltipProvider>
                                   <Tooltip>
                                     <TooltipTrigger>
-                                      <Badge variant="outline">
-                                        {item.relationType}
-                                      </Badge>
+                                      <Badge variant="outline">{item.relationType}</Badge>
                                     </TooltipTrigger>
 
                                     <TooltipContent>
@@ -229,7 +206,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                             </div>
                           </Link>
                         </div>
-                      ))}{" "}
+                      ))}{' '}
                   </div>
                 </div>
               </TabsContent>
@@ -242,13 +219,13 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                         <div key={index}>
                           <Link
                             href={
-                              item.type == "MOVIE"
+                              item.type == 'MOVIE'
                                 ? `/anime/${item.id}`
-                                : item.type == "MANGA"
-                                ? `/manga/${item.id}`
-                                : item.type == "TV"
-                                ? `/anime/${item.id}`
-                                : ``
+                                : item.type == 'MANGA'
+                                  ? `/manga/${item.id}`
+                                  : item.type == 'TV'
+                                    ? `/anime/${item.id}`
+                                    : ``
                             }
                           >
                             <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
@@ -257,10 +234,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                                   fill
                                   className="object-cover"
                                   src={`${item.cover}`}
-                                  alt={
-                                    item.title["english"] ||
-                                    item.title["romaji"]
-                                  }
+                                  alt={item.title['english'] || item.title['romaji']}
                                   sizes="100%"
                                 />
                               ) : (
@@ -270,16 +244,13 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                             <div className="space-y-1.5">
                               <div className="flex items-start justify-between gap-2 pt-1">
                                 <span className="trucate line-clamp-1 pt-1">
-                                  {item.title["english"] ||
-                                    item.title["romaji"]}
+                                  {item.title['english'] || item.title['romaji']}
                                 </span>
 
                                 <TooltipProvider>
                                   <Tooltip>
                                     <TooltipTrigger>
-                                      <Badge variant="outline">
-                                        {item.rating / 10}
-                                      </Badge>
+                                      <Badge variant="outline">{item.rating / 10}</Badge>
                                     </TooltipTrigger>
 
                                     <TooltipContent>
@@ -295,7 +266,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                             </div>
                           </Link>
                         </div>
-                      ))}{" "}
+                      ))}{' '}
                   </div>
                 </div>
               </TabsContent>

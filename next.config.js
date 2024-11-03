@@ -15,43 +15,43 @@ const nextConfig = {
         protocol: 'https',
       },
       {
-        protocol: "https",
-        hostname: "asianimg.pro",
-        pathname: "/cover/**",
+        protocol: 'https',
+        hostname: 'asianimg.pro',
+        pathname: '/cover/**',
       },
       {
-        protocol: "https",
-        hostname: "www.pngall.com",
+        protocol: 'https',
+        hostname: 'www.pngall.com',
       },
       {
-        protocol: "https",
-        hostname: "gogocdn.net",
+        protocol: 'https',
+        hostname: 'gogocdn.net',
       },
       {
-        protocol: "https",
-        hostname: "asianimg.pro",
+        protocol: 'https',
+        hostname: 'asianimg.pro',
       },
       {
-        protocol: "https",
-        hostname: "s4.anilist.co",
+        protocol: 'https',
+        hostname: 's4.anilist.co',
       },
       {
-        protocol: "https",
-        hostname: "uploads.mangadex.org",
+        protocol: 'https',
+        hostname: 'uploads.mangadex.org',
       },
       {
-        protocol: "https",
-        hostname: "image.tmdb.org",
+        protocol: 'https',
+        hostname: 'image.tmdb.org',
       },
       {
-        protocol: "https",
-        hostname: "artworks.thetvdb.com"
-      }
+        protocol: 'https',
+        hostname: 'artworks.thetvdb.com',
+      },
     ],
   },
   experimental: {
     serverActions: {
-      allowedOrigins: ["localhost:3000"],
+      allowedOrigins: ['localhost:3000'],
     },
   },
   env: {
@@ -64,10 +64,8 @@ const nextConfig = {
         source: '/api/tmdb/:path*',
         destination: `https://api.themoviedb.org/3/:path*?api_key=${process.env.TMDB_API_KEY}`,
       },
-    ]
+    ];
   },
 };
-
-
 
 module.exports = nextConfig;

@@ -1,50 +1,48 @@
-import type { CombinedCredit, RawMovieCredit, RawTvSerieCredit } from "@/lib/tmdb";
+import type { CombinedCredit, RawMovieCredit, RawTvSerieCredit } from '@/lib/tmdb';
 
-export const formatCombinedCredit = (
-	credit: RawMovieCredit | RawTvSerieCredit,
-): CombinedCredit => {
-	if ((credit as RawTvSerieCredit).name) {
-		const {
-			first_air_date: date,
-			id,
-			name,
-			character,
-			vote_average,
-			vote_count,
-			backdrop_path,
-		} = credit as RawTvSerieCredit;
+export const formatCombinedCredit = (credit: RawMovieCredit | RawTvSerieCredit): CombinedCredit => {
+  if ((credit as RawTvSerieCredit).name) {
+    const {
+      first_air_date: date,
+      id,
+      name,
+      character,
+      vote_average,
+      vote_count,
+      backdrop_path,
+    } = credit as RawTvSerieCredit;
 
-		return {
-			date,
-			id,
-			title: name,
-			media_type: "tv",
-			role: character,
-			vote_average,
-			vote_count,
-			backdrop_path,
-		};
-	}
+    return {
+      date,
+      id,
+      title: name,
+      media_type: 'tv',
+      role: character,
+      vote_average,
+      vote_count,
+      backdrop_path,
+    };
+  }
 
-	const {
-		title,
-		id,
-		character,
-		release_date: date,
-		vote_average,
-		vote_count,
-		backdrop_path,
-	} = credit as RawMovieCredit;
+  const {
+    title,
+    id,
+    character,
+    release_date: date,
+    vote_average,
+    vote_count,
+    backdrop_path,
+  } = credit as RawMovieCredit;
 
-	return {
-		title,
-		id,
-		date,
+  return {
+    title,
+    id,
+    date,
 
-		media_type: "movie",
-		role: character,
-		vote_count,
-		vote_average,
-		backdrop_path,
-	};
+    media_type: 'movie',
+    role: character,
+    vote_count,
+    vote_average,
+    backdrop_path,
+  };
 };

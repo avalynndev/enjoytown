@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
 
 // cn util
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,7 +19,7 @@ const Layout = ({ children, className }: LayoutProps) => {
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("scroll-smooth antialiased focus:scroll-auto", className)}
+      className={cn('scroll-smooth antialiased focus:scroll-auto', className)}
     >
       {children}
     </html>
@@ -38,22 +38,22 @@ const Main = ({ children, className, id }: MainProps) => {
     <main
       className={cn(
         // `Main` Specific Styles
-        "max-w-none prose-p:m-0",
+        'prose-p:m-0 max-w-none',
         // General Prose
-        "prose prose-neutral prose:font-sans dark:prose-invert xl:prose-lg",
+        'prose prose-neutral prose:font-sans dark:prose-invert xl:prose-lg',
         // Prose Headings
-        "prose-headings:font-normal",
+        'prose-headings:font-normal',
         // Prose Strong
-        "prose-strong:font-semibold",
+        'prose-strong:font-semibold',
         // Inline Links
-        "prose-a:underline prose-a:decoration-primary/50 prose-a:underline-offset-2 prose-a:text-foreground/75 prose-a:transition-all",
+        'prose-a:underline prose-a:decoration-primary/50 prose-a:underline-offset-2 prose-a:text-foreground/75 prose-a:transition-all',
         // Inline Link Hover
-        "hover:prose-a:decoration-primary hover:prose-a:text-foreground",
+        'hover:prose-a:decoration-primary hover:prose-a:text-foreground',
         // Blockquotes
-        "prose-blockquote:not-italic",
+        'prose-blockquote:not-italic',
         // Pre and Code Blocks
-        "prose-pre:border prose-pre:bg-muted/25 prose-pre:text-foreground",
-        className
+        'prose-pre:border prose-pre:bg-muted/25 prose-pre:text-foreground',
+        className,
       )}
       id={id}
     >
@@ -71,7 +71,7 @@ type SectionProps = {
 
 const Section = ({ children, className, id }: SectionProps) => {
   return (
-    <section className={cn("py-8 md:py-12", className)} id={id}>
+    <section className={cn('py-8 md:py-12', className)} id={id}>
       {children}
     </section>
   );
@@ -86,7 +86,7 @@ type ContainerProps = {
 
 const Container = ({ children, className, id }: ContainerProps) => {
   return (
-    <div className={cn("mx-auto max-w-5xl", "p-6 sm:p-8", className)} id={id}>
+    <div className={cn('mx-auto max-w-5xl', 'p-6 sm:p-8', className)} id={id}>
       {children}
     </div>
   );
@@ -104,24 +104,24 @@ const Article = ({ children, className, id }: ArticleProps) => {
     <article
       className={cn(
         // General Prose
-        "prose prose-neutral prose:font-sans dark:prose-invert xl:prose-lg max-w-none",
+        'prose prose-neutral prose:font-sans dark:prose-invert xl:prose-lg max-w-none',
         // Prose Headings
-        "prose-headings:font-normal",
+        'prose-headings:font-normal',
         // Prose Paragraphs
-        "prose-p:mb-0",
+        'prose-p:mb-0',
         // Prose Strong
-        "prose-strong:font-semibold",
+        'prose-strong:font-semibold',
         // Prose Images
-        "prose-img:m-0 prose-img:",
+        'prose-img:m-0 prose-img:',
         // Inline Links
-        "prose-a:underline prose-a:decoration-primary/50 prose-a:underline-offset-2 prose-a:text-foreground/75 prose-a:transition-all",
+        'prose-a:underline prose-a:decoration-primary/50 prose-a:underline-offset-2 prose-a:text-foreground/75 prose-a:transition-all',
         // Inline Link Hover
-        "hover:prose-a:decoration-primary hover:prose-a:text-foreground",
+        'hover:prose-a:decoration-primary hover:prose-a:text-foreground',
         // Blockquotes
-        "prose-blockquote:not-italic",
+        'prose-blockquote:not-italic',
         // Pre and Code Blocks
-        "prose-pre:border prose-pre:bg-muted/25",
-        className
+        'prose-pre:border prose-pre:bg-muted/25',
+        className,
       )}
       id={id}
     >

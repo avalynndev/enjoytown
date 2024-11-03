@@ -1,22 +1,17 @@
-"use client";
+'use client';
 
-import "@vidstack/react/player/styles/default/theme.css";
-import "@vidstack/react/player/styles/default/layouts/video.css";
-import { MediaPlayer, MediaProvider } from "@vidstack/react";
-import {
-  defaultLayoutIcons,
-  DefaultVideoLayout,
-} from "@vidstack/react/player/layouts/default";
-import Link from "next/link";
-import { Skeleton } from "@/components/ui/skeleton";
-import React, { useState, useCallback, useEffect } from "react";
-import WatchEpisodeButtons from "@/components/containers/drama/watch-episode";
-import { DramaInfo } from "@/types";
-import { Button } from "@/components/ui/button";
-import { getDramaInfoOnWatch, getVideoLink } from "@/lib/comsumet";
-import { getDramaDownload } from "@/lib/download";
-
-
+import '@vidstack/react/player/styles/default/theme.css';
+import '@vidstack/react/player/styles/default/layouts/video.css';
+import { MediaPlayer, MediaProvider } from '@vidstack/react';
+import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
+import Link from 'next/link';
+import { Skeleton } from '@/components/ui/skeleton';
+import React, { useState, useCallback, useEffect } from 'react';
+import WatchEpisodeButtons from '@/components/containers/drama/watch-episode';
+import { DramaInfo } from '@/types';
+import { Button } from '@/components/ui/button';
+import { getDramaInfoOnWatch, getVideoLink } from '@/lib/comsumet';
+import { getDramaDownload } from '@/lib/download';
 
 const EpisodeContainer = ({ params }: any) => {
   const { id, episode } = params;
@@ -34,7 +29,7 @@ const EpisodeContainer = ({ params }: any) => {
       setDownloadLink(downloadLink.downloadLink);
       setDramaInfo(info);
     } catch (error) {
-      console.error("Error fetching details:", error);
+      console.error('Error fetching details:', error);
     } finally {
       setLoading(false);
     }
@@ -45,21 +40,21 @@ const EpisodeContainer = ({ params }: any) => {
   }, [fetchDetails]);
 
   return (
-    <div className="pb-1 mx-auto px-4 pt-10">
+    <div className="mx-auto px-4 pb-1 pt-10">
       <div className="pb-4">
-        <div className="flex flex-col text-center items-center justify-center">
+        <div className="flex flex-col items-center justify-center text-center">
           <div className="flex flex-col flex-wrap pb-2">Episode: {episode}</div>
-          <Link href={download || ""}>
+          <Link href={download || ''}>
             <Button>Download EP</Button>
           </Link>
         </div>
       </div>
-      <div className="max-w-4xl mx-auto flex">
+      <div className="mx-auto flex max-w-4xl">
         {isLoading ? (
-          <Skeleton className="mx-auto px-4 pt-10 w-full h-[500px]" />
+          <Skeleton className="mx-auto h-[500px] w-full px-4 pt-10" />
         ) : (
           <>
-            <MediaPlayer src={videoLink || ""}>
+            <MediaPlayer src={videoLink || ''}>
               <MediaProvider />
               <DefaultVideoLayout icons={defaultLayoutIcons} />
             </MediaPlayer>

@@ -1,5 +1,5 @@
-import * as Craft from "@/components/ui/craft";
-import Link from "next/link";
+import * as Craft from '@/components/ui/craft';
+import Link from 'next/link';
 
 type FeatureText = {
   title: string;
@@ -9,24 +9,24 @@ type FeatureText = {
 
 const featureText: FeatureText[] = [
   {
-    title: "Movie/TV",
-    href: "/list/mtv",
-    description: "Explore Movie And Tv Shows: Spectacles Await You!",
+    title: 'Movie/TV',
+    href: '/list/mtv',
+    description: 'Explore Movie And Tv Shows: Spectacles Await You!',
   },
   {
-    title: "Anime",
-    href: "/list/anime",
-    description: "Dive into Anime Worlds: Adventures Await!",
+    title: 'Anime',
+    href: '/list/anime',
+    description: 'Dive into Anime Worlds: Adventures Await!',
   },
   {
-    title: "Drama",
-    href: "/drama",
-    description: "Indulge in Drama: Emotions Await!",
+    title: 'Drama',
+    href: '/drama',
+    description: 'Indulge in Drama: Emotions Await!',
   },
   {
-    title: "Manga",
-    href: "/manga",
-    description: "Unleash Manga Magic: Stories Await!",
+    title: 'Manga',
+    href: '/manga',
+    description: 'Unleash Manga Magic: Stories Await!',
   },
 ];
 
@@ -47,7 +47,7 @@ export default function List() {
           <Craft.Section className="">
             <Craft.Container className="">
               <div className="flex flex-col gap-6">
-                <div className=" grid gap-6 md:grid-cols-2">
+                <div className="grid gap-6 md:grid-cols-2">
                   {featureText.map(({ title, description, href }, index) => (
                     <Link
                       href={`${href}`}
@@ -55,8 +55,8 @@ export default function List() {
                       key={index}
                     >
                       <div className="grid gap-4">
-                        <h4 className="text-primary text-xl">
-                          {title}{" "}
+                        <h4 className="text-xl text-primary">
+                          {title}{' '}
                           <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                             -&gt;
                           </span>

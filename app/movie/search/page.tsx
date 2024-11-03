@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState, useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import Link from "next/link";
-import { Movie, tmdb } from "@/lib/tmdb";
-import { ListResponse } from "@/lib/tmdb/utils/list-response";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState, useEffect } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Movie, tmdb } from '@/lib/tmdb';
+import { ListResponse } from '@/lib/tmdb/utils/list-response';
 
 export default function Search() {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [result, setResults] = useState<ListResponse<Movie> | null>(null);
 
   const fetchResults = async (title: string) => {
     if (title) {
-      const foundMovies = await tmdb.movies.search(title, "en-US");
+      const foundMovies = await tmdb.movies.search(title, 'en-US');
       setResults(foundMovies);
     }
   };
@@ -42,24 +42,21 @@ export default function Search() {
         <input
           placeholder="Search for movies"
           className={cn(
-            "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
           )}
           onChange={(event) => setTitle(event.target.value)}
         />
       </div>
 
       <section>
-        <div className="mt-2 items-center grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="mt-2 grid grid-cols-2 items-center gap-4 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-6">
           {result &&
             result.results &&
             result.results.map((item, index) => {
               if (item.poster_path) {
                 return (
-                  <Link
-                    href={`/movie/${encodeURIComponent(item.id)}`}
-                    key={index}
-                  >
-                    <Card className="text-center items-center hover:scale-105 transition-all duration-300">
+                  <Link href={`/movie/${encodeURIComponent(item.id)}`} key={index}>
+                    <Card className="items-center text-center transition-all duration-300 hover:scale-105">
                       <CardHeader>
                         <CardTitle className="text-xs">
                           {item.title || item.original_title}
@@ -70,7 +67,7 @@ export default function Search() {
                           src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
                           width={160}
                           height={160}
-                          className="h-2/4 w-full object-cover transition-all aspect-[3/4] rounded-md"
+                          className="aspect-[3/4] h-2/4 w-full rounded-md object-cover transition-all"
                           alt="Drama Poster"
                         />
                       </CardContent>

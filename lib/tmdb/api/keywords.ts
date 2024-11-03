@@ -1,9 +1,7 @@
-import { axiosClient, GetKeywordsResponse } from '@/lib/tmdb'
+import { axiosClient, GetKeywordsResponse } from '@/lib/tmdb';
 
 export const keywords = async (type: 'tv' | 'movie', id: number) => {
-  const { data } = await axiosClient.get<GetKeywordsResponse>(
-    `/${type}/${id}/keywords`,
-  )
+  const { data } = await axiosClient.get<GetKeywordsResponse>(`/${type}/${id}/keywords`);
 
-  return data.keywords || data.results
-}
+  return data.keywords || data.results;
+};

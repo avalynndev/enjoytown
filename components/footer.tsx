@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
-import { Clapperboard } from "lucide-react";
+import Link from 'next/link';
+import { GitHubLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
+import { Clapperboard } from 'lucide-react';
 
 export const Footer = () => {
   return (
@@ -17,7 +17,7 @@ export const Footer = () => {
 
             <div className="h-3 border-r" />
 
-            <span className=" text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               Data provided by Consumet and Tmdb API
             </span>
           </div>

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React, { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 export const GlowingStarsBackgroundCard = ({
   className,
@@ -21,9 +21,9 @@ export const GlowingStarsBackgroundCard = ({
       onMouseLeave={() => {
         setMouseEnter(false);
       }}
-      className={cn("p-4 w-full h-full  ", className)}
+      className={cn('h-full w-full p-4', className)}
     >
-      <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center">
         <Illustration mouseEnter={false} />
       </div>
       <div className="px-2 pb-6">{children}</div>
@@ -38,11 +38,7 @@ export const GlowingStarsDescription = ({
   className?: string;
   children?: React.ReactNode;
 }) => {
-  return (
-    <p className={cn("text-base text-white max-w-[16rem]", className)}>
-      {children}
-    </p>
-  );
+  return <p className={cn('max-w-[16rem] text-base text-white', className)}>{children}</p>;
 };
 
 export const GlowingStarsTitle = ({
@@ -52,11 +48,7 @@ export const GlowingStarsTitle = ({
   className?: string;
   children?: React.ReactNode;
 }) => {
-  return (
-    <h2 className={cn("font-bold text-2xl text-[#eaeaea]", className)}>
-      {children}
-    </h2>
-  );
+  return <h2 className={cn('text-2xl font-bold text-[#eaeaea]', className)}>{children}</h2>;
 };
 
 export const Illustration = ({ mouseEnter }: { mouseEnter: boolean }) => {
@@ -69,9 +61,7 @@ export const Illustration = ({ mouseEnter }: { mouseEnter: boolean }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      highlightedStars.current = Array.from({ length: 5 }, () =>
-        Math.floor(Math.random() * stars)
-      );
+      highlightedStars.current = Array.from({ length: 5 }, () => Math.floor(Math.random() * stars));
       setGlowingStars([...highlightedStars.current]);
     }, 4000);
 
@@ -80,9 +70,9 @@ export const Illustration = ({ mouseEnter }: { mouseEnter: boolean }) => {
 
   return (
     <div
-      className="h-48 p-1 w-full"
+      className="h-48 w-full p-1"
       style={{
-        display: "grid",
+        display: 'grid',
         gridTemplateColumns: `repeat(${columns}, 1fr)`,
         gap: `1px`,
       }}
@@ -92,18 +82,13 @@ export const Illustration = ({ mouseEnter }: { mouseEnter: boolean }) => {
         const delay = (starIdx % 10) * 0.1;
         const staticDelay = starIdx * 0.01;
         return (
-          <div
-            key={`matrix-col-${starIdx}}`}
-            className="relative flex items-center justify-center"
-          >
+          <div key={`matrix-col-${starIdx}}`} className="relative flex items-center justify-center">
             <Star
               isGlowing={mouseEnter ? true : isGlowing}
               delay={mouseEnter ? staticDelay : delay}
             />
             {mouseEnter && <Glow delay={staticDelay} />}
-            <AnimatePresence mode="wait">
-              {isGlowing && <Glow delay={delay} />}
-            </AnimatePresence>
+            <AnimatePresence mode="wait">{isGlowing && <Glow delay={delay} />}</AnimatePresence>
           </div>
         );
       })}
@@ -123,12 +108,12 @@ const Star = ({ isGlowing, delay }: { isGlowing: boolean; delay: number }) => {
       }}
       transition={{
         duration: 2,
-        ease: "easeInOut",
+        ease: 'easeInOut',
         delay: delay,
       }}
       className={cn(
-        "h-[1px] w-[1px] rounded-full relative z-0",
-        isGlowing ? "bg-primary" : " bg-background"
+        'relative z-0 h-[1px] w-[1px] rounded-full',
+        isGlowing ? 'bg-primary' : 'bg-background',
       )}
     ></motion.div>
   );
@@ -145,13 +130,13 @@ const Glow = ({ delay }: { delay: number }) => {
       }}
       transition={{
         duration: 2,
-        ease: "easeInOut",
+        ease: 'easeInOut',
         delay: delay,
       }}
       exit={{
         opacity: 0,
       }}
-      className="absolute  z-20 left-1/2 -translate-x-1/2  h-[5px] w-[5px] rounded-full bg-primary blur-[1px] shadow-2xl shadow-primary"
+      className="absolute left-1/2 z-20 h-[5px] w-[5px] -translate-x-1/2 rounded-full bg-primary shadow-2xl shadow-primary blur-[1px]"
     />
   );
 };

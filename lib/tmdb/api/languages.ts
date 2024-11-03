@@ -1,10 +1,8 @@
-import { axiosClient } from '..'
-import { GetLanguagesResponse } from '@/lib/tmdb'
+import { axiosClient } from '..';
+import { GetLanguagesResponse } from '@/lib/tmdb';
 
 export const languages = async () => {
-  const { data } = await axiosClient.get<GetLanguagesResponse>(
-    '/configuration/languages',
-  )
+  const { data } = await axiosClient.get<GetLanguagesResponse>('/configuration/languages');
 
-  return data
-}
+  return data;
+};

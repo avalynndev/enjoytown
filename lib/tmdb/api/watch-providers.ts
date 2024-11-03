@@ -1,10 +1,6 @@
-import { axiosClient } from '..'
-import { Language } from '@/lib/tmdb'
-import {
-  GetAvailableRegionsResponse,
-  GetWatchProvidersResponse,
-  WatchProviders,
-} from '@/lib/tmdb'
+import { axiosClient } from '..';
+import { Language } from '@/lib/tmdb';
+import { GetAvailableRegionsResponse, GetWatchProvidersResponse, WatchProviders } from '@/lib/tmdb';
 
 /*
 |-----------------------------------------------------------------------------
@@ -18,23 +14,17 @@ import {
 */
 
 type WatchProvidersQueryParams = {
-  language: Language
-  watch_region?: string
-}
+  language: Language;
+  watch_region?: string;
+};
 
-const list = async (
-  type: 'tv' | 'movie',
-  params: WatchProvidersQueryParams,
-) => {
-  const { data } = await axiosClient.get<GetWatchProvidersResponse>(
-    `/watch/providers/${type}`,
-    {
-      params,
-    },
-  )
+const list = async (type: 'tv' | 'movie', params: WatchProvidersQueryParams) => {
+  const { data } = await axiosClient.get<GetWatchProvidersResponse>(`/watch/providers/${type}`, {
+    params,
+  });
 
-  return data.results
-}
+  return data.results;
+};
 
 /*
 |-----------------------------------------------------------------------------
@@ -47,19 +37,16 @@ const list = async (
 */
 
 type AvailableRegionsQueryParams = {
-  language: Language
-}
+  language: Language;
+};
 
 const regions = async (params: AvailableRegionsQueryParams) => {
-  const { data } = await axiosClient.get<GetAvailableRegionsResponse>(
-    '/watch/providers/regions',
-    {
-      params,
-    },
-  )
+  const { data } = await axiosClient.get<GetAvailableRegionsResponse>('/watch/providers/regions', {
+    params,
+  });
 
-  return data.results
-}
+  return data.results;
+};
 
 /*
 |-----------------------------------------------------------------------------
@@ -73,11 +60,9 @@ const regions = async (params: AvailableRegionsQueryParams) => {
 */
 
 const item = async (type: 'tv' | 'movie', id: number) => {
-  const { data } = await axiosClient.get<WatchProviders>(
-    `/${type}/${id}/watch/providers`,
-  )
+  const { data } = await axiosClient.get<WatchProviders>(`/${type}/${id}/watch/providers`);
 
-  return data
-}
+  return data;
+};
 
-export const watchProviders = { list, item, regions }
+export const watchProviders = { list, item, regions };
