@@ -27,7 +27,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Featured endpoint="popular"/>
+            <Featured featureType="popular"/>
           </TabsContent>
           <TabsContent value="nowplaying">
             <div className="flex items-center justify-between gap-2 pb-4 py-4">
@@ -41,7 +41,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Featured endpoint="now_playing"/>
+            <Featured featureType="now_playing"/>
           </TabsContent>
           <TabsContent value="toprated">
             <div className="flex items-center justify-between gap-2 pb-4 py-4">
@@ -55,7 +55,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Featured endpoint="top_rated"/>
+            <Featured featureType="top_rated"/>
           </TabsContent>
           <TabsContent value="upcoming">
             <div className="flex items-center justify-between gap-2 pb-4 py-4">
@@ -69,7 +69,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Featured endpoint="upcoming"/>
+            <Featured featureType="upcoming"/>
           </TabsContent>
         </Tabs>
       </section>

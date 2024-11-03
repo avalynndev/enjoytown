@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 interface CarouselCardProps {
   show: AnimeShow;
@@ -12,10 +13,11 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ show }) => {
   return (
     <>
       <div className="flex md:hidden h-[70vh] relative">
-        <img
+        <Image
           alt={show.title.userPreferred}
           className="inset-0 object-cover rounded-t-xl h-full w-full"
           src={show.image}
+          layout="fill"
         />
         <div className="border-white absolute flex justify-between bg-gradient-to-t from-background to-transparent bottom-0 top-1/2 w-full flex-col">
           <div></div>
@@ -36,7 +38,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ show }) => {
         </div>
       </div>
       <div className="relative h-[70vh] md:flex hidden w-full mx-auto">
-        <img
+        <Image
           alt={show.title.userPreferred}
           className="h-full w-full rounded-t-xl object-center object-cover"
           src={show.cover}

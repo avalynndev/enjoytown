@@ -1,10 +1,10 @@
 "use client";
-import { FetchMovieInfo } from "@/fetch";
+
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { Image as ImageIcon } from "lucide-react";
-import { API_KEY, PROXY } from "@/config/url";
+
 
 import {
   Tooltip,
@@ -23,46 +23,34 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Movie, MovieListType, tmdb } from "@/lib/tmdb";
+import { ListResponse } from "@/lib/tmdb/utils/list-response";
+import Loading from "./loading-featured";
 
-type Movie = {
-  id: number;
-  title: string;
-  backdrop_path: string | null;
-  vote_average: number;
-  vote_count: number;
-  overview: string;
-};
-
-type MovieData = {
-  results: Movie[];
-  total_pages: number;
-  page: number;
-};
 
 type MovieListProps = {
-  endpoint: string;
+  featureType: MovieListType;
 };
 
-export default function FeaturedMovies({ endpoint }: MovieListProps) {
-  const [data, setData] = React.useState<MovieData | null>(null);
+export default function FeaturedMovies({ featureType }: MovieListProps) {
+  const [data, setData] = React.useState<ListResponse<Movie> | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${endpoint}?api_key=${API_KEY}&page=${currentPage}`,
-        { next: { revalidate: 21600 } }
-      );
-      const data = await res.json();
-      FetchMovieInfo(data);
+      setLoading(true);    
+      const data = await tmdb.movies.list({
+        list: featureType,
+        language: "en-US",
+        page: currentPage,
+      });
       setData(data);
       setLoading(false);
     };
 
     fetchData();
-  }, [endpoint, currentPage]);
+  }, [featureType, currentPage]);
 
   const totalPages = data ? data.total_pages : 1;
 
@@ -71,17 +59,7 @@ export default function FeaturedMovies({ endpoint }: MovieListProps) {
       <div className="flex items-center justify-between">
         <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
           {loading
-            ? // Skeleton component while loading
-              Array.from({ length: 20 }).map((_, index) => (
-                <div key={index} className="w-full space-y-2">
-                  <Skeleton className="aspect-video w-full rounded-md" />
-                  <div className="space-y-1.5">
-                    <Skeleton className="h-6 w-3/4" />
-                    <Skeleton className="h-4 w-1/2" />
-                    <Skeleton className="h-3 w-full" />
-                  </div>
-                </div>
-              ))
+            ? <Loading />
             : data &&
               data.results.map((item: any, index: any) => (
                 <Link
@@ -95,7 +73,7 @@ export default function FeaturedMovies({ endpoint }: MovieListProps) {
                       <Image
                         fill
                         className="object-cover"
-                        src={`${PROXY}https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                        src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
                         alt={item.title}
                         sizes="100%"
                       />

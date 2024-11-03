@@ -9,8 +9,7 @@ import { Image as ImageIcon } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { PROXY } from "@/config/url";
+import Loading from "./loading-featured";
 
 type AnimeFeatureType = "recent" | "popular" | "trending";
 
@@ -53,17 +52,7 @@ export default function FeaturedAnime({ featureType }: AnimeFeatureProps) {
       <div className="flex items-center justify-between">
         <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
           {loading
-            ? // Skeleton component while loading
-              Array.from({ length: 18 }).map((_, index) => (
-                <div key={index} className="w-full space-y-2">
-                  <Skeleton className="aspect-video w-full rounded-md" />
-                  <div className="space-y-1.5">
-                    <Skeleton className="h-6 w-3/4" />
-                    <Skeleton className="h-4 w-1/2" />
-                    <Skeleton className="h-3 w-full" />
-                  </div>
-                </div>
-              ))
+            ? <Loading />
             : data &&
               data.map((item, index) => (
                 <Link
@@ -77,7 +66,7 @@ export default function FeaturedAnime({ featureType }: AnimeFeatureProps) {
                       <Image
                         fill
                         className="object-cover"
-                        src={`${PROXY}${item.image}`}
+                        src={item.image}
                         alt={
                           typeof item.title === "string"
                             ? item.title

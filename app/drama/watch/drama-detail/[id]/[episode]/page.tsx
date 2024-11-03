@@ -1,4 +1,5 @@
 "use client";
+
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
@@ -9,10 +10,13 @@ import {
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import React, { useState, useCallback, useEffect } from "react";
-import { getVideoLink, getDramaInfoOnWatch, getDramaDownload } from "@/fetch";
 import WatchEpisodeButtons from "@/components/containers/drama/watch-episode";
 import { DramaInfo } from "@/types";
 import { Button } from "@/components/ui/button";
+import { getDramaInfoOnWatch, getVideoLink } from "@/lib/comsumet";
+import { getDramaDownload } from "@/lib/download";
+
+
 
 const EpisodeContainer = ({ params }: any) => {
   const { id, episode } = params;
@@ -23,11 +27,11 @@ const EpisodeContainer = ({ params }: any) => {
 
   const fetchDetails = useCallback(async () => {
     try {
-      const episode_link = await getVideoLink(episode, id);
-      const download_link = await getDramaDownload(episode);
+      const episodeLink = await getVideoLink(episode, id);
+      const downloadLink = await getDramaDownload(episode);
       const info = await getDramaInfoOnWatch(id);
-      setVideoLink(episode_link);
-      setDownloadLink(download_link.downloadLink);
+      setVideoLink(episodeLink);
+      setDownloadLink(downloadLink.downloadLink);
       setDramaInfo(info);
     } catch (error) {
       console.error("Error fetching details:", error);

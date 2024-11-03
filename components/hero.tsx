@@ -2,49 +2,21 @@
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import * as React from "react";
-import { FetchMovieInfo } from "@/fetch";
 import Marquee from "@/components/ui/marquee";
-import { API_KEY, PROXY } from "@/config/url";
 import Image from "next/image";
 import { Spinner } from "@/components/ui/spinner";
 import { Image as ImageIcon } from "lucide-react";
-
-type Movie = {
-  id: number;
-  title: string;
-  backdrop_path: string | null;
-  poster_path: string | null;
-  vote_average: number;
-  vote_count: number;
-  overview: string;
-};
-
-type Tv = {
-  id: number;
-  name: string;
-  backdrop_path: string | null;
-  poster_path: string | null;
-  vote_average: number;
-  vote_count: number;
-  overview: string;
-};
-
-type TvData = {
-  results: Tv[];
-};
-
-type MovieData = {
-  results: Movie[];
-};
+import { tmdb, TvSerie, Movie } from "@/lib/tmdb";
+import { ListResponse } from "@/lib/tmdb/utils/list-response";
 
 export interface CardProps {
-  item: Movie | Tv; // Allow both Movie and Tv for flexibility
+  item: Movie | TvSerie; // Allow both Movie and Tv for flexibility
 }
 
 export function Card({ item }: CardProps) {
   const title = "title" in item ? item.title : item.name; // Handle both Movie and Tv titles
   const backdropPath = item.backdrop_path
-    ? `${PROXY}https://image.tmdb.org/t/p/original${item.backdrop_path}`
+    ? `https://image.tmdb.org/t/p/original${item.backdrop_path}`
     : null;
 
   return (
@@ -88,8 +60,8 @@ export function Card({ item }: CardProps) {
 }
 
 export default function HeroSection() {
-  const [movieData, setMovieData] = React.useState<MovieData | null>(null);
-  const [tvData, setTVData] = React.useState<TvData | null>(null);
+  const [movieData, setMovieData] = React.useState<ListResponse<Movie> | null>(null);
+  const [tvData, setTVData] = React.useState<ListResponse<TvSerie> | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -97,28 +69,12 @@ export default function HeroSection() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const [movieRes, tvRes] = await Promise.all([
-          fetch(
-            `${PROXY}https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
-            {
-              next: { revalidate: 21600 },
-            }
-          ),
-          fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`, {
-            next: { revalidate: 21600 },
-          }),
+        const [movies, tvs] = await Promise.all([
+          tmdb.movies.popular("en-US" ),
+          tmdb.tv.popular("en-US"),
         ]);
-
-        if (!movieRes.ok || !tvRes.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        const movieData: MovieData = await movieRes.json();
-        const tvData: TvData = await tvRes.json();
-
-        FetchMovieInfo(movieData);
-        setTVData(tvData);
-        setMovieData(movieData);
+        setTVData(tvs);
+        setMovieData(movies);
         setError(null); // Reset error state if fetch is successful
       } catch (err: any) {
         setError(err.message || "An unexpected error occurred");

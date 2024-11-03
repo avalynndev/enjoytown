@@ -2,7 +2,6 @@ import { format } from "date-fns";
 import { Poster } from "@/components/common/poster";
 import Link from "next/link";
 import { Play } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
@@ -12,9 +11,12 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { PROXY } from "@/config/url";
+import { tmdb } from "@/lib/tmdb";
 
-const DetailsContainer = ({ data, id, embed }: any) => {
+const DetailsContainer = async({ data, id, embed }: any) => {
+  const trailers = (await tmdb.videos("tv", id)).results
+    .filter(video => video.type === "Trailer" && video.site === "YouTube");
+
   return (
     <div className="">
       <div className={cn("mx-auto max-w-6xl", embed ? "p-0" : "md:pt-4")}>
@@ -26,7 +28,7 @@ const DetailsContainer = ({ data, id, embed }: any) => {
         >
           <div
             style={{
-              backgroundImage: `url('${PROXY}https://image.tmdb.org/t/p/original${data.backdrop_path}')`,
+              backgroundImage: `url('https://image.tmdb.org/t/p/original${data.backdrop_path}')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -87,6 +89,17 @@ const DetailsContainer = ({ data, id, embed }: any) => {
               </p>
 
               <div className="flex flex-wrap items-center gap-1">
+                {trailers.length > 0 && (
+                  <Link href={`https://www.youtube.com/watch?v=${trailers[0].key}`} target="_blank" >
+                    <Badge
+                      variant="outline"
+                      className="cursor-pointer whitespace-nowrap"
+                    >
+                      <Play className="mr-1.5" size={12} />
+                      Trailer
+                    </Badge>
+                  </Link>
+                )}
                 <Link href={`/tv/watch/${id}`}>
                   <Badge
                     variant="outline"

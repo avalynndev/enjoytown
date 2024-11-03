@@ -1,9 +1,8 @@
 "use client";
-import { API_KEY, PROXY } from "@/config/url";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Image as ImageIcon } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
@@ -21,49 +20,30 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import Loading from "./loading-featured";
+import { tmdb, TvSerie, TvSeriesListType } from "@/lib/tmdb";
+import { ListResponse } from "@/lib/tmdb/utils/list-response";
 
-type TVFeatureType = "airing_today" | "on_the_air" | "popular" | "top_rated";
 
-type TVFeatureProps = {
-  featureType: TVFeatureType;
-};
-type TVShow = {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  origin_country: string[];
-  original_language: string;
-  original_name: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  first_air_date: string;
-  name: string;
-  vote_average: number;
-  vote_count: number;
+type FeaturedTVProps = {
+  featureType: TvSeriesListType;
 };
 
-type TVData = {
-  page: number;
-  results: TVShow[];
-  total_pages: number;
-  total_results: number;
-};
-
-export default function FeaturedTV({ featureType }: TVFeatureProps) {
-  const [data, setData] = React.useState<TVData | null>(null);
+export default function FeaturedTV({ featureType }: FeaturedTVProps) {
+  const [data, setData] = React.useState<ListResponse<TvSerie> | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const res = await fetch(
-        `https://api.themoviedb.org/3/tv/${featureType}?api_key=${API_KEY}&page=${currentPage}`,
-        { next: { revalidate: 21600 } }
-      );
-      const data = await res.json();
+
+      const data = await tmdb.tv.list({
+        list: featureType,
+        language: "en-US",
+        page: currentPage,
+      });
+
       setData(data);
       setLoading(false);
     };
@@ -77,17 +57,7 @@ export default function FeaturedTV({ featureType }: TVFeatureProps) {
       <div className="flex items-center justify-between">
         <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
           {loading
-            ? // Skeleton component while loading
-              Array.from({ length: 20 }).map((_, index) => (
-                <div key={index} className="w-full space-y-2">
-                  <Skeleton className="aspect-video w-full rounded-md" />
-                  <div className="space-y-1.5">
-                    <Skeleton className="h-6 w-3/4" />
-                    <Skeleton className="h-4 w-1/2" />
-                    <Skeleton className="h-3 w-full" />
-                  </div>
-                </div>
-              ))
+            ? <Loading />
             : data &&
               data.results.map((item: any, index: any) => (
                 <Link
@@ -101,7 +71,7 @@ export default function FeaturedTV({ featureType }: TVFeatureProps) {
                       <Image
                         fill
                         className="object-cover"
-                        src={`${PROXY}https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                        src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
                         alt={item.name}
                         sizes="100%"
                       />

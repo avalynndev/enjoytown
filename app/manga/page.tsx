@@ -7,12 +7,11 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect, useCallback } from "react";
-import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
-import { PROXY } from "@/config/url";
+import { getSearchedManga, PreFetchMangaInfo } from "@/lib/comsumet";
 
 export default function Hero() {
   const placeholders = [
@@ -97,7 +96,7 @@ export default function Hero() {
                     <CardContent>
                       <Image
                         className="h-2/4 w-full object-cover rounded-xl transition-all aspect-[3/4]"
-                        src={`${PROXY}${item.image}`}
+                        src={item.image}
                         width={160}
                         height={160}
                         alt="Manga Poster"

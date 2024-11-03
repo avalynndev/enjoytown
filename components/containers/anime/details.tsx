@@ -21,7 +21,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { IAnimeInfo } from "@consumet/extensions/dist/models";
-import { PROXY } from "@/config/url";
 
 const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
   return (
@@ -156,7 +155,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                           </CardHeader>
                           <CardContent>
                             <Image
-                              src={`${PROXY}${item.image}`}
+                              src={item.image}
                               width={140}
                               height={200}
                               className="rounded-md"

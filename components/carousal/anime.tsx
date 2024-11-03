@@ -1,8 +1,4 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Gogoanime from "@consumet/extensions/dist/providers/anime/gogoanime";
 import Anilist from "@consumet/extensions/dist/providers/meta/anilist";
 import CarousalCard from "@/components/carousal/card";

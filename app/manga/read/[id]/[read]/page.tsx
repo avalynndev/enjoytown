@@ -1,15 +1,14 @@
 "use client";
+
 import Image from "next/image";
-import { PreFetchChaterLinks, fetchManga } from "@/fetch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Spinner } from "@/components/ui/spinner";
 import { useState, useEffect, useCallback } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from "next/navigation";
-import { env } from "@/env.mjs";
-import { getMangaInfo } from "@/fetch";
-import { PROXY } from "@/config/url";
+import { fetchManga } from "@/lib/mangadex";
+import { getMangaInfo, PreFetchChaterLinks } from "@/lib/comsumet";
 
 export default function Read({ params }: any) {
   const chapterId = params.read;
@@ -166,7 +165,7 @@ export default function Read({ params }: any) {
           images.map((item, index) => (
             <div key={index}>
               <Image
-                src={`${PROXY}${item}&headers=https://mangadex.org`}
+                src={`${item}&headers=https://mangadex.org`}
                 key={index}
                 alt="Pages"
                 width={800}

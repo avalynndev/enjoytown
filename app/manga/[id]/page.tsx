@@ -8,22 +8,18 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { env } from "@/env.mjs";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
-import { PreFetchChaterLinks } from "@/fetch";
 import Link from "next/link";
-import { getMangaInfo } from "@/fetch";
 import {
   Card,
-  CardFooter,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PROXY } from "@/config/url";
+import { getMangaInfo, PreFetchChaterLinks } from "@/lib/comsumet";
 
 export default async function MangaInfo({ params }: any) {
   const id = params.id;
@@ -190,7 +186,7 @@ export default async function MangaInfo({ params }: any) {
                           </CardHeader>
                           <CardContent>
                             <Image
-                              src={`${PROXY}${item.image}`}
+                              src={`${item.image}`}
                               width={140}
                               height={200}
                               className="rounded-md"

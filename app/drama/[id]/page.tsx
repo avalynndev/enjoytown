@@ -1,5 +1,5 @@
 import DetailsContainer from "@/components/containers/drama/details";
-import { getDramaInfo } from "@/fetch";
+import { getDramaInfo } from "@/lib/comsumet";
 
 export default async function DramaInfo({ params }: any) {
   const id = decodeURIComponent(params.id);

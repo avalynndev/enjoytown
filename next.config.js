@@ -41,10 +41,6 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: `${process.env.TMDB_PROXY_URL?.replace('https://', '')}`,
-      },
-      {
-        protocol: "https",
         hostname: "image.tmdb.org",
       },
       {
@@ -59,10 +55,19 @@ const nextConfig = {
     },
   },
   env: {
-    TMDB_PROXY_URL: process.env.TMDB_PROXY_URL,
     TMDB_API_KEY: process.env.TMDB_API_KEY,
   },
-
+  async rewrites() {
+    return [
+      {
+        // Proxy /api/tmdb requests to TMDB API to hide API key
+        source: '/api/tmdb/:path*',
+        destination: `https://api.themoviedb.org/3/:path*?api_key=${process.env.TMDB_API_KEY}`,
+      },
+    ]
+  },
 };
+
+
 
 module.exports = nextConfig;

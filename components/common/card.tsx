@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import Link from 'next/link'
+import Image from "next/image";
 
 interface CarousalCardProps {
   isDetailsPage?: boolean;
@@ -12,17 +13,19 @@ interface CarousalCardProps {
 }
 
 export default function CarousalCard(props: CarousalCardProps) {
-  const { show, isDetailsPage, type } = props;
+  const { show } = props;
 
   return (
     <>
       {props.show && (
         <>
           <div className="flex md:hidden   h-[70vh]   relative">
-            <img
-              alt=""
-              className="inset-0 object-cover rounded-t-xl   h-full w-full"
-              src={`https://image.tmdb.org/t/p/original/${props.show.poster_path}`}
+            <Image
+              alt={show.title || show.name}
+              className="inset-0 object-cover rounded-t-xl h-full w-full"
+              src={`https://image.tmdb.org/t/p/original${props.show.poster_path}`}
+              width={500}
+              height={500}
             />
             <div className="   border-white absolute flex justify-between bg-gradient-to-t from-background to-transparent bottom-0 top-1/2 w-full   flex-col    ">
               <div></div>
@@ -52,11 +55,13 @@ export default function CarousalCard(props: CarousalCardProps) {
               </div>
             </div>
           </div>
-          <div className="relative h-[70vh] md:flex hidden w-full  mx-auto  ">
-            <img
-              alt=""
-              className=" h-full w-full rounded-t-xl object-center object-cover"
-              src={`https://image.tmdb.org/t/p/original/${show.backdrop_path}`}
+          <div className="relative h-[70vh] md:flex hidden w-full mx-auto">
+            <Image
+              alt={show.title || show.name}
+              className="h-full w-full rounded-t-xl object-center object-cover"
+              src={`https://image.tmdb.org/t/p/original${show.backdrop_path}`}
+              width={500}
+              height={500}
             />
             <div className="inset-0 bg-gradient-to-t from-background to-from-background/10  absolute justify-between flex flex-col">
               <div></div>

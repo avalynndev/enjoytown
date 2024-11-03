@@ -14,10 +14,9 @@ import {
   CommandInput,
   CommandList,
 } from "@/components/ui/command";
-import { Movie_Search, Tv_Search } from "@/config/url";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getSearchedManga, PreFetchMangaInfo } from "@/fetch";
-import { fetchDramaSearch, FetchAnimeInfo } from "@/fetch";
+import { tmdb } from "@/lib/tmdb";
+import { FetchAnimeInfo, fetchDramaSearch, getSearchedManga, PreFetchMangaInfo } from "@/lib/comsumet";
 
 type AnimeResult = {
   id: string;
@@ -188,13 +187,13 @@ export const CommandSearch = () => {
     setRecentSearches(searches);
   }, []);
 
-  const fetch_results = useCallback(async (title: string) => {
+  const fetchResults = useCallback(async (title: string) => {
     setIsLoading(true);
     if (title) {
       debounce(() => saveSearchToLocalStorage(title), 500)();
       const [movieData, tvData] = await Promise.all([
-        get_movie_results(title),
-        get_tv_results(title),
+        tmdb.movies.search(title, "en-US"),
+        tmdb.tv.search(title, "en-US"),
       ]);
       const combinedResults = {
         movies: movieData.results,
@@ -206,7 +205,7 @@ export const CommandSearch = () => {
   }, []);
 
   useEffect(() => {
-    const debouncedFetch = debounce(fetch_results, 500);
+    const debouncedFetch = debounce(fetchResults, 500);
     debouncedFetch(search);
   }, [search]);
 
@@ -417,18 +416,4 @@ export const CommandSearch = () => {
       </CommandDialog>
     </>
   );
-};
-
-const get_movie_results = async (title: string) => {
-  const res = await fetch(Movie_Search + title, {
-    next: { revalidate: 21600 },
-  });
-  return res.json();
-};
-
-const get_tv_results = async (title: string) => {
-  const res = await fetch(Tv_Search + title, {
-    next: { revalidate: 21600 },
-  });
-  return res.json();
 };

@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import {
   Select,
@@ -12,18 +13,9 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Download } from "lucide-react";
 import Link from "next/link";
-import { API_KEY, PROXY } from "@/config/url";
+import { API_KEY } from "@/config/url";
+import { Episode, Season, SeasonDetails, tmdb } from "@/lib/tmdb";
 
-interface Season {
-  season_number: number;
-  name: string;
-  episode_count: number;
-}
-
-interface Episode {
-  episode_number: number;
-  name: string;
-}
 
 export default function VideoPlayer({ id }: { id: string }) {
   const [seasons, setSeasons] = React.useState<Season[]>([]);
@@ -37,21 +29,15 @@ export default function VideoPlayer({ id }: { id: string }) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-        `${PROXY}https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?api_key=${API_KEY}`
-      );
-      const data = await response.json();
-      if (data.success === false) {
-        throw new Error(data.status_message || "Failed to fetch episodes");
-      }
-      setEpisodes(data.episodes || []);
-      if (data.episodes.length > 0) {
-        setEpisode(data.episodes[0].episode_number.toString());
+      const season = await tmdb.season.details(Number(id), seasonNumber, "en-US");
+      
+      setEpisodes(season.episodes || []);
+      if (season.episodes.length > 0) {
+        setEpisode(season.episodes[0].episode_number.toString());
       }
     } catch (error: unknown) {
       console.error("Error fetching episodes:", error);
       setError(error instanceof Error ? error.message : String(error));
-      setEpisodes([]);
     } finally {
       setIsLoading(false);
     }
@@ -67,16 +53,10 @@ export default function VideoPlayer({ id }: { id: string }) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`
-      );
-      const data = await response.json();
-      if (data.success === false) {
-        throw new Error(data.status_message || "Failed to fetch seasons");
-      }
-      const relevantSeasons = data.seasons.filter(
-        (s: any) => s.season_number > 0
-      );
+      
+      const series = await tmdb.tv.details(Number(id), "en-US");
+      const relevantSeasons = series.seasons.filter(s => s.season_number > 0);
+
       setSeasons(relevantSeasons || []);
       if (relevantSeasons.length > 0) {
         setSeason(relevantSeasons[0].season_number.toString());
@@ -103,7 +83,6 @@ export default function VideoPlayer({ id }: { id: string }) {
   }
 
   if (error) {
-    
     return (
       <div className="py-8 mx-auto max-w-5xl">
         <Skeleton className="mx-auto px-4 pt-6 w-full h-[500px]" />{" "}

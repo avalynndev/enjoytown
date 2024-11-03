@@ -1,32 +1,22 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { cn } from "@/lib/utils";
-import { Movie_Search } from "@/config/url";
-import { FetchMovieInfo } from "@/fetch";
 import Image from "next/image";
 import Link from "next/link";
-
-type Result = {
-  results: Array<{
-    id: number;
-    title: string;
-    original_title: string;
-    poster_path: string;
-  }>;
-};
+import { Movie, tmdb } from "@/lib/tmdb";
+import { ListResponse } from "@/lib/tmdb/utils/list-response";
 
 export default function Search() {
   const [title, setTitle] = useState("");
-  const [result, setResults] = useState<Result | null>(null);
+  const [result, setResults] = useState<ListResponse<Movie> | null>(null);
 
-  const fetch_results = async (title: string) => {
+  const fetchResults = async (title: string) => {
     if (title) {
-      const data = await get_search_results(title);
-      FetchMovieInfo(data);
-      setResults(data);
+      const foundMovies = await tmdb.movies.search(title, "en-US");
+      setResults(foundMovies);
     }
   };
 
@@ -41,7 +31,7 @@ export default function Search() {
 
   // Effect to trigger search when title changes
   useEffect(() => {
-    const debouncedFetch = debounce(fetch_results, 500);
+    const debouncedFetch = debounce(fetchResults, 500);
     debouncedFetch(title);
   }, [title]);
 
@@ -94,11 +84,3 @@ export default function Search() {
     </main>
   );
 }
-
-const get_search_results = async (title: string) => {
-  const res = await fetch(Movie_Search + title, {
-    next: { revalidate: 21600 },
-  });
-  const data = await res.json();
-  return data;
-};
