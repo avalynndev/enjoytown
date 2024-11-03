@@ -1,23 +1,20 @@
-"use client";
+'use client';
 
-import { ReactNode, useEffect, useState, useCallback } from "react";
-import { CommandIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { ReactNode, useEffect, useState, useCallback } from 'react';
+import { CommandIcon } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { getRecentSearchesFromLocalStorage, saveSearchToLocalStorage } from '@/components/storage';
+import { Button } from '@/components/ui/button';
+import { Command, CommandDialog, CommandInput, CommandList } from '@/components/ui/command';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
-  getRecentSearchesFromLocalStorage,
-  saveSearchToLocalStorage,
-} from "@/components/storage";
-import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandDialog,
-  CommandInput,
-  CommandList,
-} from "@/components/ui/command";
-import { Skeleton } from "@/components/ui/skeleton";
-import { FetchAnimeInfo, fetchDramaSearch, getSearchedManga, PreFetchMangaInfo } from "@/lib/comsumet";
-import { tmdb } from "@/lib/tmdb";
+  FetchAnimeInfo,
+  fetchDramaSearch,
+  getSearchedManga,
+  PreFetchMangaInfo,
+} from '@/lib/comsumet';
+import { tmdb } from '@/lib/tmdb';
 
 type AnimeResult = {
   id: string;
