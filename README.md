@@ -25,20 +25,20 @@ Enjoytown
 
 ## What is Enjoytown?
 
-Welcome to **Enjoytown** the one stop for all your streaming desires! Explore **[enjoytown.netlify.app](https://enjoytown.netlify.app)** and dive into the world of movies, drama and anime.
+Welcome to **Enjoytown** the one stop for all your streaming desires! Explore **[enjoytown.pro](https://enjoytown.pro)** and dive into the world of movies, drama and anime.
 
 Enjoy your favorite movies, drama and anime with English subs or dubs, and here's the kicker - no sign-up required!
 
 ## Images
 
 <div style="text-align: left;">
-  <img src="https://api.microlink.io/?url=https://enjoytown.netlify.app&screenshot=true&meta=false&embed=screenshot.url&type=jpeg&overlay.browser=dark&overlay.background=linear-gradient%28225deg%2C+%23FF057C+0%25%2C+%238D0B93+50%25%2C+%23321575+100%25%29" alt="Home Page" style="max-width: 70%;" >
+  <img src="https://api.microlink.io/?url=https://enjoytown.pro&screenshot=true&meta=false&embed=screenshot.url&type=jpeg&overlay.browser=dark&overlay.background=linear-gradient%28225deg%2C+%23FF057C+0%25%2C+%238D0B93+50%25%2C+%23321575+100%25%29" alt="Home Page" style="max-width: 70%;" >
   <details>
   <summary>Screenshots [View More]</summary>
   <br>
-  <img src="https://api.microlink.io/?url=https://enjoytown.netlify.app/kdrama&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=3500&type=jpeg&overlay.browser=dark&overlay.background=linear-gradient%28225deg%2C+%23FF057C+0%25%2C+%238D0B93+50%25%2C+%23321575+100%25%29" alt="K Drama" style="max-width: 70%;">
-  <img src="https://api.microlink.io/?url=https://enjoytown.netlify.app/movie&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=4510&type=jpeg&overlay.browser=dark&overlay.background=linear-gradient%28225deg%2C+%23FF057C+0%25%2C+%238D0B93+50%25%2C+%23321575+100%25%29" alt="Movie" style="max-width: 70%;">
-    <img src="https://api.microlink.io/?url=https://enjoytown.netlify.app/anime&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=3510&type=jpeg&overlay.browser=dark&overlay.background=linear-gradient%28225deg%2C+%23FF057C+0%25%2C+%238D0B93+50%25%2C+%23321575+100%25%29" alt="Anime" style="max-width: 70%;">
+  <img src="https://api.microlink.io/?url=https://enjoytown.pro/drama&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=3500&type=jpeg&overlay.browser=dark&overlay.background=linear-gradient%28225deg%2C+%23FF057C+0%25%2C+%238D0B93+50%25%2C+%23321575+100%25%29" alt="K Drama" style="max-width: 70%;">
+  <img src="https://api.microlink.io/?url=https://enjoytown.pro/movie&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=4510&type=jpeg&overlay.browser=dark&overlay.background=linear-gradient%28225deg%2C+%23FF057C+0%25%2C+%238D0B93+50%25%2C+%23321575+100%25%29" alt="Movie" style="max-width: 70%;">
+    <img src="https://api.microlink.io/?url=https://enjoytown.pro/anime&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=3510&type=jpeg&overlay.browser=dark&overlay.background=linear-gradient%28225deg%2C+%23FF057C+0%25%2C+%238D0B93+50%25%2C+%23321575+100%25%29" alt="Anime" style="max-width: 70%;">
   </details>
 </div>
 
