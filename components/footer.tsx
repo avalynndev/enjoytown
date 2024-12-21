@@ -13,8 +13,11 @@ export const Footer = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <p className="text-xs text-muted-foreground">© 2024 avalynndev</p>
-
+            <Link href="https://1anime.co">
+              <span className="inline-flex items-center rounded-full bg-purple-500 px-2 py-1 text-xs font-semibold text-white">
+                ©️ 2024-2025 1Anime & avalynndev
+              </span>
+            </Link>
             <div className="h-3 border-r" />
 
             <span className="text-xs text-muted-foreground">
