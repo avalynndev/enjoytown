@@ -1,7 +1,7 @@
 <h1 align="center">
 <a href="https://enjoytown.pro">
 Enjoytown
-</a> (on break till march 2025)
+</a>
 </h1>
 
 <p align="center">
