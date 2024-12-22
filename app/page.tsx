@@ -14,8 +14,9 @@ export default async function Home() {
               href={`/`}
               className="flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-xs shadow"
             >
-              <span className="animate-shine rounded-full border bg-[linear-gradient(110deg,#ffffff,45%,#f1f1f1,55%,#ffffff)] bg-[length:200%_100%] px-2 py-[1px] text-[10px] text-foreground dark:bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] dark:text-white">
-                Welcome to the town of enjoyment!
+              Welcome to the town of enjoyment!
+              <span className="animate-shine rounded-md border bg-[linear-gradient(110deg,#ffffff,45%,#f1f1f1,55%,#ffffff)] bg-[length:200%_100%] px-2 py-[1px] text-[10px] text-foreground dark:bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] dark:text-white">
+                ENJOY
               </span>
             </Link>
             <h1 className="text-6xl font-bold">Explore movies, tv series, and animes!</h1>

@@ -8,7 +8,7 @@ export default async function MovieInfo({ params }: { params: Promise<{ id: stri
   try {
     const data = await tmdb.tv.details(Number(id), 'en-US');
     return (
-      <div className="mx-auto max-w-6xl md:pt-4">
+      <div className="mx-auto max-w-6xl pb-8 md:pt-4">
         <DetailsContainer data={data} id={id} />
 
         <h1 className="mt-20 text-2xl font-bold">Similar TV Shows</h1>
