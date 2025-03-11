@@ -185,7 +185,6 @@ export const CommandSearch = () => {
   const fetchResults = useCallback(async (title: string) => {
     setIsLoading(true);
     if (title) {
-      debounce(() => saveSearchToLocalStorage(title), 500)();
       const [movieData, tvData] = await Promise.all([
         tmdb.movies.search(title, 'en-US'),
         tmdb.tv.search(title, 'en-US'),
@@ -226,6 +225,12 @@ export const CommandSearch = () => {
   const hasDramaResults = dramaResults?.length ?? 0 > 0;
   const hasAnimeResults = animeResults?.length ?? 0 > 0;
 
+  const handleSearchSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      saveSearchToLocalStorage(search);
+    }
+  };
+
   return (
     <>
       <Button
@@ -241,7 +246,12 @@ export const CommandSearch = () => {
 
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
-          <CommandInput placeholder="Search" onValueChange={setSearch} value={search} />
+          <CommandInput
+            placeholder="Search"
+            onValueChange={setSearch}
+            value={search}
+            onKeyDown={handleSearchSubmit}
+          />
 
           <CommandList>
             {recentSearches && (
