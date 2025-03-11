@@ -8,6 +8,8 @@ export const env = createEnv({
     DOWNLOAD_API_URL: z.string().url(),
     CONSUMET_API_URL: z.string().url(),
     CONSUMET_API_ANILIST_URL: z.string().url(),
+    GOOD_PROXY_URL: z.string().url(),
+    TMDB_API_KEY: z.string(),
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   },
   experimental__runtimeEnv: {
