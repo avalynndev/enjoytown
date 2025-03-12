@@ -1,6 +1,6 @@
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import Gogoanime from '@consumet/extensions/dist/providers/anime/gogoanime';
-import Anilist from '@consumet/extensions/dist/providers/meta/anilist';
+import Gogoanime from 'avalynndev-extensions/dist/providers/anime/gogoanime';
+import Anilist from 'avalynndev-extensions/dist/providers/meta/anilist';
 import CarousalCard from '@/components/carousal/card';
 
 export default async function CarousalComponent() {

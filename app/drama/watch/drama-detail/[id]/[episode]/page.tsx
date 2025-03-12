@@ -8,9 +8,9 @@ import Link from 'next/link';
 import { Skeleton } from '@/components/ui/skeleton';
 import React, { useState, useCallback, useEffect } from 'react';
 import WatchEpisodeButtons from '@/components/containers/drama/watch-episode';
-import { DramaInfo } from '@/types';
 import { Button } from '@/components/ui/button';
-import { getDramaInfoOnWatch, getVideoLink } from '@/lib/comsumet';
+import { IMovieInfo, MOVIES } from 'avalynndev-extensions';
+import { getVideoLink } from '@/lib/comsumet';
 import { getDramaDownload } from '@/lib/download';
 
 const EpisodeContainer = ({ params }: any) => {
@@ -18,13 +18,14 @@ const EpisodeContainer = ({ params }: any) => {
   const [isLoading, setLoading] = useState(true);
   const [videoLink, setVideoLink] = useState(null);
   const [download, setDownloadLink] = useState(null);
-  const [info, setDramaInfo] = useState<DramaInfo | null>(null);
+  const [info, setDramaInfo] = useState<IMovieInfo | null>(null);
 
   const fetchDetails = useCallback(async () => {
     try {
       const episodeLink = await getVideoLink(episode, id);
       const downloadLink = await getDramaDownload(episode);
-      const info = await getDramaInfoOnWatch(id);
+      const dramacool = new MOVIES.DramaCool();
+      const info = await dramacool.fetchMediaInfo('%2Fdrama-detail%2F' + id);
       setVideoLink(episodeLink);
       setDownloadLink(downloadLink.downloadLink);
       setDramaInfo(info);

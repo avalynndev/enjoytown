@@ -1,7 +1,7 @@
 'use client';
-import { IAnimeResult } from '@consumet/extensions/dist/models/types';
-import Gogoanime from '@consumet/extensions/dist/providers/anime/gogoanime';
-import Anilist from '@consumet/extensions/dist/providers/meta/anilist';
+import { IAnimeResult } from 'avalynndev-extensions/dist/models/types';
+import Gogoanime from 'avalynndev-extensions/dist/providers/anime/gogoanime';
+import Anilist from 'avalynndev-extensions/dist/providers/meta/anilist';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';

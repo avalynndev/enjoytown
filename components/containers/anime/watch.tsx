@@ -3,16 +3,16 @@ import { Button } from '@/components/ui/button';
 import { ImageIcon, Play } from 'lucide-react';
 import Image from 'next/image';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import Gogoanime from '@consumet/extensions/dist/providers/anime/gogoanime';
-import Anilist from '@consumet/extensions/dist/providers/meta/anilist';
+import Zoro from 'avalynndev-extensions/dist/providers/anime/zoro';
+import Anilist from 'avalynndev-extensions/dist/providers/meta/anilist';
 
 export default async function Watch({ id }: any) {
-  const anilist = new Anilist(new Gogoanime());
+  const anilist = new Anilist(new Zoro());
   const data = await anilist.fetchEpisodesListById(id);
   return (
     <ScrollArea className="h-[40rem] rounded-md border">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {data.map((episode) => (
+        {data.map((episode: any) => (
           <Link
             key={episode.id}
             href={`/anime/watch/${id}/${episode.id}`}

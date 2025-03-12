@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import DetailsContainer from '@/components/containers/anime/details';
-import Gogoanime from '@consumet/extensions/dist/providers/anime/gogoanime';
-import Anilist from '@consumet/extensions/dist/providers/meta/anilist';
+import Gogoanime from 'avalynndev-extensions/dist/providers/anime/gogoanime';
+import Anilist from 'avalynndev-extensions/dist/providers/meta/anilist';
 import { Badge } from '@/components/ui/badge';
 import { Download } from 'lucide-react';
+
 import {
   Breadcrumb,
   BreadcrumbItem,

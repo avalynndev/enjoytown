@@ -4,9 +4,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { fetchDramaSearch } from '@/lib/comsumet';
+import { MOVIES } from 'avalynndev-extensions';
 
 export default function DramaSearch() {
+  const dramacool = new MOVIES.DramaCool();
   const placeholders = [
     'True beauty (2020)',
     'Lovely runner (2024)',
@@ -30,10 +31,11 @@ export default function DramaSearch() {
   const [data, setInfoTitle] = useState<any[]>([]);
   const [loadingText, setLoading] = useState<boolean>(false);
 
-  const handleSearch = async (title: string) => {
-    if (title) {
+  const handleSearch = async (query: string) => {
+    if (query) {
       setLoading(true);
-      const data = await fetchDramaSearch(title);
+      const data = await dramacool.search(query);
+      console.log;
       setLoading(false);
       setInfoTitle(data.results);
     }

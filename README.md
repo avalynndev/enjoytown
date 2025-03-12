@@ -69,7 +69,6 @@ Add a ENV FILE with:
 ```env
 DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
 CONSUMET_API_URL=https://consumet_api_url (deploy your own with the instructions below, dont end with slash)
-CONSUMET_API_ANILIST_URL=https://consumet_api_url/meta/anilist (MENTION meta/anilist)
 TMDB_API_KEY=(get your own api key with the instructions below)
 ```
 
@@ -99,7 +98,7 @@ npm start
 
 > Deploy **your own Enjoytown** Instance on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Favalynndev%2Fenjoytown&env=DOWNLOAD_API_URL,CONSUMET_API_URL,CONSUMET_API_ANILIST_URL,TMDB_PROXY_URL)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Favalynndev%2Fenjoytown&env=DOWNLOAD_API_URL,CONSUMET_API_URL,TMDB_PROXY_URL)
 
 ## Found a Bug? 🐞
 

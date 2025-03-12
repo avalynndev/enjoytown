@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { IAnimeInfo } from '@consumet/extensions/dist/models';
+import { IAnimeInfo } from 'avalynndev-extensions/dist/models';
 
 const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
   return (

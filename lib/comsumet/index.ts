@@ -1,23 +1,6 @@
 // import { env } from "@/env.mjs";
 import { env } from 'process';
 
-export async function getDramaInfo(id: any) {
-  const res = await fetch(`${env.CONSUMET_API_URL}/movies/dramacool/info?id=${id}`, {
-    next: { revalidate: 21600 },
-  });
-  const data = await res.json();
-  return data;
-}
-
-export async function getDramaInfoOnWatch(id: any) {
-  const res = await fetch(
-    `${env.CONSUMET_API_URL}/movies/dramacool/info?id=%2Fdrama-detail%2F${id}`,
-    { next: { revalidate: 21600 } },
-  );
-  const data = await res.json();
-  return data;
-}
-
 export async function FetchAnimeInfo(data: any) {
   try {
     const fetchPromises = data.results.map(async (element: any) => {
@@ -32,7 +15,7 @@ export async function FetchAnimeInfo(data: any) {
 }
 
 export async function fetchDramaSearch(title: any) {
-  const res = await fetch(`${env.CONSUMET_API_URL}/movies/dramacool/${title}`, {
+  const res = await fetch(`https://apiconsumetorg-1.vercel.app/movies/dramacool/${title}`, {
     cache: 'force-cache',
   });
   const data = await res.json();
