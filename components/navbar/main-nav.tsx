@@ -1,5 +1,5 @@
 'use client';
-import { Clapperboard, Home, List, Book } from 'lucide-react';
+import { Clapperboard, Home, List, Tv, Tv2, Antenna, Monitor } from 'lucide-react';
 import * as React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
@@ -31,7 +31,7 @@ export function MainNav() {
             <NavigationMenuItem>
               <Link href="/movie" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Book className="h-4 w-4" />
+                  <Tv2 className="h-4 w-4" />
                   <div className="px-2"> Movie </div>
                 </NavigationMenuLink>
               </Link>
@@ -39,7 +39,7 @@ export function MainNav() {
             <NavigationMenuItem>
               <Link href="/tv" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Book className="h-4 w-4" />
+                  <Tv className="h-4 w-4" />
                   <div className="px-2"> Tv Shows </div>
                 </NavigationMenuLink>
               </Link>
@@ -47,7 +47,7 @@ export function MainNav() {
             <NavigationMenuItem>
               <Link href="/anime" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Book className="h-4 w-4" />
+                  <Antenna className="h-4 w-4" />
                   <div className="px-2"> Anime </div>
                 </NavigationMenuLink>
               </Link>
@@ -55,7 +55,7 @@ export function MainNav() {
             <NavigationMenuItem>
               <Link href="/drama" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Book className="h-4 w-4" />
+                  <Monitor className="h-4 w-4" />
                   <div className="px-2"> Drama </div>
                 </NavigationMenuLink>
               </Link>

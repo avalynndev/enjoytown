@@ -11,9 +11,10 @@ import { ListResponse } from '@/lib/tmdb/utils/list-response';
 
 export interface CardProps {
   item: Movie | TvSerie; // Allow both Movie and Tv for flexibility
+  type: string;
 }
 
-export function Card({ item }: CardProps) {
+export function Card({ item, type }: CardProps) {
   const title = 'title' in item ? item.title : item.name; // Handle both Movie and Tv titles
   const backdropPath = item.backdrop_path
     ? `https://image.tmdb.org/t/p/original${item.backdrop_path}`
@@ -21,7 +22,7 @@ export function Card({ item }: CardProps) {
 
   return (
     <Link
-      href={`/movie/${item.id}`} // Ensure the correct URL based on the item type
+      href={`/${type == 'Tv' ? 'tv' : 'movie'}/${item.id}`} // Ensure the correct URL based on the item type
       className="group relative flex max-w-xs cursor-pointer flex-col gap-2 overflow-hidden md:max-w-sm"
     >
       <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
@@ -101,10 +102,12 @@ export default function HeroSection() {
           </div>
         )}
         <Marquee pauseOnHover className="max-w-screen [--duration:40s]">
-          {movieData?.results.slice(0, 10).map((movie) => <Card key={movie.id} item={movie} />)}
+          {movieData?.results
+            .slice(0, 10)
+            .map((movie) => <Card key={movie.id} item={movie} type="Movie" />)}
         </Marquee>
         <Marquee reverse pauseOnHover className="max-w-screen mt-10 [--duration:40s]">
-          {tvData?.results.slice(0, 10).map((tv) => <Card key={tv.id} item={tv} />)}
+          {tvData?.results.slice(0, 10).map((tv) => <Card key={tv.id} item={tv} type="Tv" />)}
         </Marquee>
         <div className="pointer-events-none absolute inset-y-0 left-0 h-full w-1/12 bg-gradient-to-r from-background"></div>
         <div className="pointer-events-none absolute inset-y-0 right-0 h-full w-1/12 bg-gradient-to-l from-background"></div>

@@ -7,7 +7,6 @@ export const env = createEnv({
   shared: {
     DOWNLOAD_API_URL: z.string().url(),
     CONSUMET_API_URL: z.string().url(),
-    GOOD_PROXY_URL: z.string().url(),
     TMDB_API_KEY: z.string(),
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   },
