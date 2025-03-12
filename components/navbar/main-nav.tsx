@@ -43,23 +43,23 @@ export function MainNav() {
                   <ListItem href="/tv" title="Tv Shows">
                     Live on TV Shows: Addiction await ≥
                   </ListItem>
-                  <ListItem href="/drama" title="Drama">
+                  {/** <ListItem href="/drama" title="Drama">
                     Indulge in Drama: Emotions Await!
-                  </ListItem>
+                  </ListItem> */}
                   <ListItem href="/anime" title="Anime">
                     Dive into Anime Worlds: Adventures Await!
                   </ListItem>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuItem>
+            {/** <NavigationMenuItem>
               <Link href="/manga" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <Book className="h-4 w-4" />
                   <div className="px-2"> Manga </div>
                 </NavigationMenuLink>
               </Link>
-            </NavigationMenuItem>
+            </NavigationMenuItem> */}
             <NavigationMenuItem>
               <Link href="/list" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
