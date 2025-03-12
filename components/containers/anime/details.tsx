@@ -161,8 +161,6 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                             href={
                               item.type == 'MOVIE'
                                 ? `/anime/${item.id}`
-                                : item.type == 'MANGA'
-                                  ? `/manga/${item.id}`
                                   : item.type == 'TV'
                                     ? `/anime/${item.id}`
                                     : ``
@@ -221,8 +219,6 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                             href={
                               item.type == 'MOVIE'
                                 ? `/anime/${item.id}`
-                                : item.type == 'MANGA'
-                                  ? `/manga/${item.id}`
                                   : item.type == 'TV'
                                     ? `/anime/${item.id}`
                                     : ``

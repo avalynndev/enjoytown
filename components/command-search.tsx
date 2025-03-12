@@ -11,9 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import {
   FetchAnimeInfo,
   fetchDramaSearch,
-  getSearchedManga,
-  PreFetchMangaInfo,
-} from '@/lib/comsumet';
+} from '@/lib/consumet';
 import { tmdb } from '@/lib/tmdb';
 
 type AnimeResult = {
@@ -44,24 +42,6 @@ type DramaResult = {
   title: string;
   url: string;
   image: string;
-};
-
-type MangaResult = {
-  id: string;
-  malId?: number;
-  title: {
-    romaji: string;
-    english?: string;
-    native?: string;
-    userPreferred: string;
-  };
-  status: string;
-  image: string;
-  description: string;
-  genres: string[];
-  totalChapters?: number;
-  volumes?: number;
-  type: string;
 };
 
 type MovieResult = {
@@ -113,7 +93,6 @@ export const CommandSearch = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [dramaResults, setDramaResults] = useState<DramaResult[] | null>(null);
-  const [mangaResults, setMangaResults] = useState<MangaResult[] | null>(null);
   const [animeResults, setSearchResults] = useState<AnimeResult[] | null>(null);
   const [recentSearches, setRecentSearches] = useState<string[]>([]); // State for recent searches
 
@@ -138,22 +117,6 @@ export const CommandSearch = () => {
   // Trigger drama search on input change
   useEffect(() => {
     const debouncedFetch = debounce(fetchDramaResults, 500);
-    debouncedFetch(search);
-  }, [search]);
-
-  const fetchMangaResults = async (title: string) => {
-    setIsLoading(true);
-    if (title) {
-      const data = await getSearchedManga(title); // Fetch manga results
-      PreFetchMangaInfo(data); // Process the fetched manga info
-      setMangaResults(data.results); // Set the manga results
-    }
-    setIsLoading(false);
-  };
-
-  // Trigger the manga search on input change
-  useEffect(() => {
-    const debouncedFetch = debounce(fetchMangaResults, 500);
     debouncedFetch(search);
   }, [search]);
 
@@ -221,7 +184,6 @@ export const CommandSearch = () => {
 
   const hasMovies = result?.movies && result?.movies?.length > 0;
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
-  const hasMangaResults = mangaResults?.length ?? 0 > 0;
   const hasDramaResults = dramaResults?.length ?? 0 > 0;
   const hasAnimeResults = animeResults?.length ?? 0 > 0;
 
@@ -282,12 +244,6 @@ export const CommandSearch = () => {
                   ))}
                 </CommandSearchGroup>
 
-                <CommandSearchGroup heading="Manga">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <CommandSearchSkeleton key={index} />
-                  ))}
-                </CommandSearchGroup>
-
                 <CommandSearchGroup heading="Drama">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <CommandSearchSkeleton key={index} />
@@ -334,26 +290,6 @@ export const CommandSearch = () => {
 
                         <span className="whitespace-nowrap text-xs text-muted-foreground">
                           {item.first_air_date && new Date(item.first_air_date).getFullYear()}
-                        </span>
-                      </Link>
-                    ))}
-                  </CommandSearchGroup>
-                )}
-
-                {hasMangaResults && (
-                  <CommandSearchGroup heading="Manga">
-                    {mangaResults?.map((item) => (
-                      <Link
-                        key={item.id}
-                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
-                        href={`/manga/${item.id}`}
-                      >
-                        <span className="truncate whitespace-nowrap text-sm">
-                          {item.title.userPreferred || item.title.english || item.title.romaji}
-                        </span>
-
-                        <span className="whitespace-nowrap text-xs text-muted-foreground">
-                          CH: {item.totalChapters}
                         </span>
                       </Link>
                     ))}

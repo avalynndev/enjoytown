@@ -23,11 +23,6 @@ const featureText: FeatureText[] = [
     href: '/drama',
     description: 'Indulge in Drama: Emotions Await!',
   },
-  {
-    title: 'Manga',
-    href: '/manga',
-    description: 'Unleash Manga Magic: Stories Await!',
-  },
 ];
 
 export default function List() {

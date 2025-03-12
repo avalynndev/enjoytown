@@ -10,7 +10,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import WatchEpisodeButtons from '@/components/containers/drama/watch-episode';
 import { Button } from '@/components/ui/button';
 import { IMovieInfo, MOVIES } from 'avalynndev-extensions';
-import { getVideoLink } from '@/lib/comsumet';
+import { getVideoLink } from '@/lib/consumet';
 import { getDramaDownload } from '@/lib/download';
 
 const EpisodeContainer = ({ params }: any) => {

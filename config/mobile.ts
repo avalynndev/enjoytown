@@ -16,10 +16,6 @@ export const mobileConfig: MobileConfig = {
       href: '/anime',
     },
     {
-      title: 'Manga',
-      href: '/manga',
-    },
-    {
       title: 'Drama',
       href: '/drama',
     },

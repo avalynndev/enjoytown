@@ -96,7 +96,7 @@ export default function DramaSearch() {
                         src={`${item.image}`}
                         width={160}
                         height={160}
-                        alt="Manga Poster"
+                        alt="Drama Poster"
                       />
                     </CardContent>
                   </Card>
