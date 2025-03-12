@@ -161,9 +161,9 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                             href={
                               item.type == 'MOVIE'
                                 ? `/anime/${item.id}`
-                                  : item.type == 'TV'
-                                    ? `/anime/${item.id}`
-                                    : ``
+                                : item.type == 'TV'
+                                  ? `/anime/${item.id}`
+                                  : ``
                             }
                           >
                             <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
@@ -219,9 +219,9 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                             href={
                               item.type == 'MOVIE'
                                 ? `/anime/${item.id}`
-                                  : item.type == 'TV'
-                                    ? `/anime/${item.id}`
-                                    : ``
+                                : item.type == 'TV'
+                                  ? `/anime/${item.id}`
+                                  : ``
                             }
                           >
                             <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">

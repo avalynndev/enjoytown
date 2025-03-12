@@ -1,15 +1,13 @@
 'use client';
-import { Clapperboard, Home, List, Book, Tv } from 'lucide-react';
+import { Clapperboard, Home, List, Book } from 'lucide-react';
 import * as React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 
@@ -31,35 +29,37 @@ export function MainNav() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>
-                <Tv className="h-4 w-4" />
-                <div className="px-2"> Watch </div>
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[400px]">
-                  <ListItem href="/movie" title="Movie">
-                    Explore Movie Marvels: Spectacles Await You!
-                  </ListItem>
-                  <ListItem href="/tv" title="Tv Shows">
-                    Live on TV Shows: Addiction await ≥
-                  </ListItem>
-                  {/** <ListItem href="/drama" title="Drama">
-                    Indulge in Drama: Emotions Await!
-                  </ListItem> */}
-                  <ListItem href="/anime" title="Anime">
-                    Dive into Anime Worlds: Adventures Await!
-                  </ListItem>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            {/** <NavigationMenuItem>
-              <Link href="/manga" legacyBehavior passHref>
+              <Link href="/movie" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <Book className="h-4 w-4" />
-                  <div className="px-2"> Manga </div>
+                  <div className="px-2"> Movie </div>
                 </NavigationMenuLink>
               </Link>
-            </NavigationMenuItem> */}
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/tv" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Book className="h-4 w-4" />
+                  <div className="px-2"> Tv Shows </div>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/anime" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Book className="h-4 w-4" />
+                  <div className="px-2"> Anime </div>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/drama" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Book className="h-4 w-4" />
+                  <div className="px-2"> Drama </div>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/list" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>

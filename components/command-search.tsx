@@ -8,10 +8,7 @@ import { getRecentSearchesFromLocalStorage, saveSearchToLocalStorage } from '@/c
 import { Button } from '@/components/ui/button';
 import { Command, CommandDialog, CommandInput, CommandList } from '@/components/ui/command';
 import { Skeleton } from '@/components/ui/skeleton';
-import {
-  FetchAnimeInfo,
-  fetchDramaSearch,
-} from '@/lib/consumet';
+import { FetchAnimeInfo, fetchDramaSearch } from '@/lib/consumet';
 import { tmdb } from '@/lib/tmdb';
 
 type AnimeResult = {
