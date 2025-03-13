@@ -1,6 +1,6 @@
 'use client';
 import { IAnimeResult } from 'avalynndev-extensions/dist/models/types';
-import Gogoanime from 'avalynndev-extensions/dist/providers/anime/gogoanime';
+import Zoro from 'avalynndev-extensions/dist/providers/anime/zoro';
 import Anilist from 'avalynndev-extensions/dist/providers/meta/anilist';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,7 +21,7 @@ export default function FeaturedAnime({ featureType }: AnimeFeatureProps) {
   const [data, setData] = React.useState<IAnimeResult[] | null>(null);
   const [loading, setLoading] = React.useState(true);
 
-  const anilist = React.useMemo(() => new Anilist(new Gogoanime()), []);
+  const anilist = React.useMemo(() => new Anilist(new Zoro()), []);
 
   React.useEffect(() => {
     const fetchData = async () => {

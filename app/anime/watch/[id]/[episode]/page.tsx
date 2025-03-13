@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import Gogoanime from 'avalynndev-extensions/dist/providers/anime/gogoanime';
-import Anilist from 'avalynndev-extensions/dist/providers/meta/anilist';
+import { HiAnime } from 'aniwatch';
 import { Badge } from '@/components/ui/badge';
 import { Download } from 'lucide-react';
 
@@ -19,33 +18,17 @@ import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/l
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 
-interface WatchDataSources {
-  url: string;
-  isM3U8: boolean;
-  quality: string;
-}
 export default async function Watch({ params }: any) {
-  const { id, episode } = params;
-  const anilist = new Anilist(new Gogoanime());
-
-  const data = await anilist.fetchEpisodeSources(episode);
-  function removeQueryParams(url: string, paramsToRemove: string[]): string {
-    const urlObj = new URL(url);
-    paramsToRemove.forEach((param) => urlObj.searchParams.delete(param));
-    return urlObj.toString();
-  }
-
-  const cleanedUrl = removeQueryParams(data.download || '', ['token', 'expires']);
-  const defaultSourceUrl =
-    data.sources
-      .map((value: any) => {
-        const source = value as WatchDataSources;
-        if (source.quality === 'default') {
-          return source.url;
-        }
-        return null;
-      })
-      .filter((url: string | null) => url !== null)[0] || undefined;
+  const { id, episode } = await params;
+  const hianime = new HiAnime.Scraper();
+  const data = await hianime.getEpisodeSources(
+    episode.replace(/\$?episode\$?\d*/gi, '?ep=').replace(/%24/g, ''),
+    'hd-1',
+    'sub',
+  );
+  console.log(data)
+  
+const m3u8Source = data.sources.find((source) => source.type === 'hls')?.url || '';
   return (
     <div className="mx-auto max-w-6xl px-4 pb-1 pt-10">
       <div className="pb-4">
@@ -70,7 +53,7 @@ export default async function Watch({ params }: any) {
       <div className="flex w-full flex-row items-center justify-center">
         <div className="flex flex-col text-center">
           <div className="pb-2">
-            <Link href={cleanedUrl}>
+            <Link href={""}>
               <Badge variant="outline" className="cursor-pointer whitespace-nowrap">
                 <Download className="mr-1.5" size={12} />
                 Download Episode
@@ -80,10 +63,14 @@ export default async function Watch({ params }: any) {
         </div>
       </div>
       <div className="mx-auto flex max-w-4xl">
-        <MediaPlayer src={defaultSourceUrl}>
-          <MediaProvider />
-          <DefaultVideoLayout icons={defaultLayoutIcons} />
-        </MediaPlayer>
+        {m3u8Source ? (
+          <MediaPlayer src={m3u8Source} autoPlay>
+            <MediaProvider />
+            <DefaultVideoLayout icons={defaultLayoutIcons} />
+          </MediaPlayer>
+        ) : (
+          <p className="text-center text-red-500">No playable source found.</p>
+        )}
       </div>
       <div className="py-8">
         <WatchContainer id={id} />

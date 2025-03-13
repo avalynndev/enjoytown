@@ -14,7 +14,7 @@ export default async function Watch({ id }: any) {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {data.map((episode: any) => (
           <Link
-            key={episode.id}
+            key={episode.id.split('$episode$')[1]}
             href={`/anime/watch/${id}/${episode.id}`}
             className="relative flex flex-col rounded p-4"
           >

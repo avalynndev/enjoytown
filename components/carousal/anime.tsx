@@ -1,10 +1,10 @@
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import Gogoanime from 'avalynndev-extensions/dist/providers/anime/gogoanime';
+import Zoro from 'avalynndev-extensions/dist/providers/anime/zoro';
 import Anilist from 'avalynndev-extensions/dist/providers/meta/anilist';
 import CarousalCard from '@/components/carousal/card';
 
 export default async function CarousalComponent() {
-  const anilist = new Anilist(new Gogoanime());
+  const anilist = new Anilist(new Zoro());
   const data = await anilist.fetchPopularAnime(1, 20);
 
   if (!data) return <div>None Found</div>;
