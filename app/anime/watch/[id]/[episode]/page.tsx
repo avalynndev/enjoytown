@@ -26,9 +26,9 @@ export default async function Watch({ params }: any) {
     'hd-1',
     'sub',
   );
-  console.log(data)
-  
-const m3u8Source = data.sources.find((source) => source.type === 'hls')?.url || '';
+  console.log(data);
+
+  const m3u8Source = data.sources.find((source) => source.type === 'hls')?.url || '';
   return (
     <div className="mx-auto max-w-6xl px-4 pb-1 pt-10">
       <div className="pb-4">
@@ -53,7 +53,7 @@ const m3u8Source = data.sources.find((source) => source.type === 'hls')?.url || 
       <div className="flex w-full flex-row items-center justify-center">
         <div className="flex flex-col text-center">
           <div className="pb-2">
-            <Link href={""}>
+            <Link href={''}>
               <Badge variant="outline" className="cursor-pointer whitespace-nowrap">
                 <Download className="mr-1.5" size={12} />
                 Download Episode
