@@ -26,9 +26,10 @@ export default async function Watch({ params }: any) {
     'hd-1',
     'sub',
   );
-  console.log(data);
 
   const m3u8Source = data.sources.find((source) => source.type === 'hls')?.url || '';
+  const proxy = 'https://goodproxy.goodproxy.workers.dev/fetch?url=';
+  const vidURL = proxy + m3u8Source;
   return (
     <div className="mx-auto max-w-6xl px-4 pb-1 pt-10">
       <div className="pb-4">
@@ -64,7 +65,7 @@ export default async function Watch({ params }: any) {
       </div>
       <div className="mx-auto flex max-w-4xl">
         {m3u8Source ? (
-          <MediaPlayer src={m3u8Source} autoPlay>
+          <MediaPlayer src={vidURL} autoPlay>
             <MediaProvider />
             <DefaultVideoLayout icons={defaultLayoutIcons} />
           </MediaPlayer>
