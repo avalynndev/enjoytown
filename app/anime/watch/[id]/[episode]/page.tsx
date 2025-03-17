@@ -28,7 +28,7 @@ export default async function Watch({ params }: any) {
   );
 
   const m3u8Source = data.sources.find((source) => source.type === 'hls')?.url || '';
-  const proxy = 'https://goodproxy.goodproxy.workers.dev/fetch?url=';
+  const proxy = `${process.env.PROXY_M3U8}`;
   const vidURL = proxy + m3u8Source;
   return (
     <div className="mx-auto max-w-6xl px-4 pb-1 pt-10">

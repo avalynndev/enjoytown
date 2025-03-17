@@ -70,17 +70,18 @@ Add a ENV FILE with:
 DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
 CONSUMET_API_URL=https://consumet_api_url (deploy your own with the instructions below, dont end with slash)
 TMDB_API_KEY=(get your own api key with the instructions below)
+PROXY_M3U8 = "https://yourproxy.com/fetch?url=""
+
+# PROXY_M3U8 would be found at https://github.com/Rawknee-69/Hianime-proxy . add it like this https://yourproxy.com/fetch?url=
 ```
 
-<a href="https://github.com/avalynndev/animetize-api">Deploy your own Consumet API</a>
-<a href="https://www.themoviedb.org/settings/api/request">Get your own TMDB api key here after registering</a>
-
+`<a href="https://github.com/avalynndev/animetize-api">`Deploy your own Consumet API`</a>`
+`<a href="https://www.themoviedb.org/settings/api/request">`Get your own TMDB api key here after registering`</a>`
 
 ## Please notice
 
 > [!CAUTION]
 > Self-hosting this application is **strictly limited to personal use only**. Commercial utilization is **prohibited**, and the inclusion of advertisements on your self-hosted website may lead to serious consequences, including **potential site takedown measures**. Ensure compliance to avoid any legal or operational issues.
-
 
 ### 3. Run on development &/or production
 
@@ -105,8 +106,9 @@ npm start
 Uh-oh, looks like you stumbled upon a bug? No worries, we're here to squash it! Just head over to our [**issues**](https://github.com/avalynndev/enjoytown/issues) section on GitHub and let us know what's up.
 
 ## Contributors 🤲
+
 > EnjoyTown is now under One Development LLC ([1Anime](https://github.com/1Anime))
-<img height="50" src="https://contrib.rocks/image?repo=avalynndev/enjoytown" />
+> `<img height="50" src="https://contrib.rocks/image?repo=avalynndev/enjoytown" />`
 
 #### Want to Help Out?
 
