@@ -6,7 +6,7 @@ export default async function DramaInfo({ params }: any) {
   const dramacool = new MOVIES.DramaCool();
   const info = await dramacool.fetchMediaInfo(id);
   if (!info.episodes || info.episodes.length == 0) {
-   //console.log('No Data');
+    // console.log('No Data');
   }
   return <div key={id}>{info && <DetailsContainer data={info} id={id} />}</div>;
 }
