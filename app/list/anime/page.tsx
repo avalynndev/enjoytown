@@ -79,7 +79,7 @@ export default function List() {
                   </a>
                 </li>
                 <li>
-                  <a href="https://hianime.to/" className="text-blue-500 hover:underline">
+                  <a href="https://hianime.sx/" className="text-blue-500 hover:underline">
                     HiAnime{' '}
                   </a>
                   -{' '}

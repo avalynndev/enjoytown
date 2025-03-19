@@ -26,7 +26,7 @@ const SaveToLocalStorage = (data: data_types) => {
     let updatedData = JSON.stringify(dataObject);
     localStorage.setItem('watchHistory', updatedData);
   } catch (error) {
-    console.log('Some error occured while saving the data. Please contact the DEVs.');
+    //('Some error occured while saving the data. Please contact the DEVs.');
   }
 };
 

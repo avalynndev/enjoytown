@@ -35,7 +35,7 @@ export default function DramaSearch() {
     if (query) {
       setLoading(true);
       const data = await dramacool.search(query);
-      console.log;
+      //console.log;
       setLoading(false);
       setInfoTitle(data.results);
     }
