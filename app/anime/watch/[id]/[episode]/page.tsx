@@ -23,7 +23,7 @@ export default async function Watch({ params }: any) {
   const hianime = new HiAnime.Scraper();
   const data = await hianime.getEpisodeSources(
     episode.replace(/\$?episode\$?\d*/gi, '?ep=').replace(/%24/g, ''),
-    'hd-1',
+    'hd-2',
     'sub',
   );
 
