@@ -59,7 +59,7 @@ cd enjoytown
 ### Install Dependencies
 
 ```bash
-npm install
+bun i || npm i
 ```
 
 ### Go to the 'config` folder and edit the values as per your requirement or leave them as it is
@@ -70,12 +70,11 @@ Add a ENV FILE with:
 DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
 CONSUMET_API_URL=https://consumet_api_url (deploy your own with the instructions below, dont end with slash)
 TMDB_API_KEY=(get your own api key with the instructions below)
-PROXY_M3U8 = "https://yourproxy.com/fetch?url=""
-
-# PROXY_M3U8 would be found at https://github.com/Rawknee-69/Hianime-proxy . add it like this https://yourproxy.com/fetch?url=
+PROXY_M3U8 = "https://yourproxy.com/fetch?url=
+# PROXY_M3U8 would be found at https://github.com/JulzOhern/Gogoanime-and-Hianime-proxy. If deploying to vercel keep . as output directory.
 ```
 
-`<a href="https://github.com/avalynndev/animetize-api">`Deploy your own Consumet API`</a>`
+`<a href="https://github.com/consumet/api.consumet.org">`Deploy your own Consumet API`</a>`
 `<a href="https://www.themoviedb.org/settings/api/request">`Get your own TMDB api key here after registering`</a>`
 
 ## Please notice
@@ -88,7 +87,7 @@ PROXY_M3U8 = "https://yourproxy.com/fetch?url=""
 - Run on development mode
 
 ```bash
-npm run dev
+bun run dev || npm run dev
 ```
 
 - Run on production mode
