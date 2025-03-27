@@ -25,7 +25,7 @@ export function Card({ item, type }: CardProps) {
       href={`/${type == 'Tv' ? 'tv' : 'movie'}/${item.id}`} // Ensure the correct URL based on the item type
       className="group relative flex max-w-xs cursor-pointer flex-col gap-2 overflow-hidden md:max-w-sm"
     >
-      <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
+      <div className="bg-background/50 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border shadow-sm">
         {backdropPath ? (
           <Image
             fill
@@ -45,7 +45,7 @@ export function Card({ item, type }: CardProps) {
           <Badge variant="outline">{item.vote_average ? item.vote_average.toFixed(1) : '?'}</Badge>
         </div>
 
-        <p className="line-clamp-3 text-xs text-muted-foreground">
+        <p className="text-muted-foreground line-clamp-3 text-xs">
           {item.overview || (
             <>
               No description is available for this item at the moment. Please check back later or
@@ -106,11 +106,11 @@ export default function HeroSection() {
             .slice(0, 10)
             .map((movie) => <Card key={movie.id} item={movie} type="Movie" />)}
         </Marquee>
-        <Marquee reverse pauseOnHover className="max-w-screen mt-10 [--duration:40s]">
+        <Marquee reverse pauseOnHover className="mt-10 max-w-screen [--duration:40s]">
           {tvData?.results.slice(0, 10).map((tv) => <Card key={tv.id} item={tv} type="Tv" />)}
         </Marquee>
-        <div className="pointer-events-none absolute inset-y-0 left-0 h-full w-1/12 bg-gradient-to-r from-background"></div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 h-full w-1/12 bg-gradient-to-l from-background"></div>
+        <div className="from-background pointer-events-none absolute inset-y-0 left-0 h-full w-1/12 bg-linear-to-r"></div>
+        <div className="from-background pointer-events-none absolute inset-y-0 right-0 h-full w-1/12 bg-linear-to-l"></div>
       </div>
     </section>
   );

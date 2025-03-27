@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 export default function Home() {
   return (
     <>
-      <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+      <section className="container grid items-center gap-6 pt-6 pb-8 md:py-10">
         <Carousal />
         <Tabs defaultValue="trending" className="w-full">
           <TabsList className="grid w-full grid-cols-3 pb-4">
@@ -16,7 +16,7 @@ export default function Home() {
           <TabsContent value="trending">
             <div className="flex items-center justify-between gap-2 py-4 pb-4">
               <div>
-                <h1 className="md:text-4x font-mono text-2xl font-bold leading-tight tracking-tighter">
+                <h1 className="md:text-4x font-mono text-2xl leading-tight font-bold tracking-tighter">
                   Trending Anime
                 </h1>
 
@@ -28,7 +28,7 @@ export default function Home() {
           <TabsContent value="popular">
             <div className="flex items-center justify-between gap-2 py-4 pb-4">
               <div>
-                <h1 className="md:text-4x font-mono text-2xl font-bold leading-tight tracking-tighter">
+                <h1 className="md:text-4x font-mono text-2xl leading-tight font-bold tracking-tighter">
                   Popular Anime
                 </h1>
 
@@ -40,7 +40,7 @@ export default function Home() {
           <TabsContent value="recent">
             <div className="flex items-center justify-between gap-2 py-4 pb-4">
               <div>
-                <h1 className="md:text-4x font-mono text-2xl font-bold leading-tight tracking-tighter">
+                <h1 className="md:text-4x font-mono text-2xl leading-tight font-bold tracking-tighter">
                   Recent Episodes
                 </h1>
 

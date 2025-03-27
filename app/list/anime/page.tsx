@@ -4,10 +4,10 @@ export default function List() {
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="space-y-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="text-foreground text-4xl font-bold tracking-tight sm:text-5xl">
               Anime{' '}
             </h1>
-            <p className="mt-4 text-xl text-muted-foreground">
+            <p className="text-muted-foreground mt-4 text-xl">
               A collection of free anime websites.
             </p>
           </div>

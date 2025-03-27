@@ -17,7 +17,7 @@ const DetailsContainer = async ({ data, id, embed }: any) => {
     <>
       <div
         className={cn(
-          'h-[30dvh] w-full overflow-hidden border bg-muted shadow md:rounded-lg lg:h-[55dvh]',
+          'bg-muted h-[30dvh] w-full overflow-hidden border shadow-sm md:rounded-lg lg:h-[55dvh]',
           embed ? 'max-h-[20vh] md:max-h-[50vh]' : undefined,
         )}
       >
@@ -40,7 +40,7 @@ const DetailsContainer = async ({ data, id, embed }: any) => {
 
           <article className="flex w-full flex-col gap-2 md:w-2/3">
             {data.release_date && (
-              <span className="text-xs text-muted-foreground">
+              <span className="text-muted-foreground text-xs">
                 {format(new Date(data.release_date), 'PPP', {})}
               </span>
             )}
@@ -72,7 +72,7 @@ const DetailsContainer = async ({ data, id, embed }: any) => {
                 </Tooltip>
               </TooltipProvider>
             </div>
-            <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">
+            <p className="text-muted-foreground text-xs leading-5 md:text-sm md:leading-6">
               {data.overview}
             </p>
 

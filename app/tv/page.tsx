@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 export default function Home() {
   return (
     <>
-      <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+      <section className="container grid items-center gap-6 pt-6 pb-8 md:py-10">
         <Carousal />
         <Tabs defaultValue="popular" className="w-full">
           <TabsList className="grid w-full grid-cols-4 pb-4">
@@ -17,7 +17,7 @@ export default function Home() {
           <TabsContent value="popular">
             <div className="flex items-center justify-between gap-2 py-4 pb-4">
               <div>
-                <h1 className="md:text-4x font-mono text-2xl font-bold leading-tight tracking-tighter">
+                <h1 className="md:text-4x font-mono text-2xl leading-tight font-bold tracking-tighter">
                   Popular
                 </h1>
 
@@ -29,7 +29,7 @@ export default function Home() {
           <TabsContent value="airingtoday">
             <div className="flex items-center justify-between gap-2 py-4 pb-4">
               <div>
-                <h1 className="md:text-4x font-mono text-2xl font-bold leading-tight tracking-tighter">
+                <h1 className="md:text-4x font-mono text-2xl leading-tight font-bold tracking-tighter">
                   Airing Today
                 </h1>
 
@@ -41,7 +41,7 @@ export default function Home() {
           <TabsContent value="toprated">
             <div className="flex items-center justify-between gap-2 py-4 pb-4">
               <div>
-                <h1 className="md:text-4x font-mono text-2xl font-bold leading-tight tracking-tighter">
+                <h1 className="md:text-4x font-mono text-2xl leading-tight font-bold tracking-tighter">
                   Top Rated
                 </h1>
 
@@ -53,7 +53,7 @@ export default function Home() {
           <TabsContent value="ontheair">
             <div className="flex items-center justify-between gap-2 py-4 pb-4">
               <div>
-                <h1 className="md:text-4x font-mono text-2xl font-bold leading-tight tracking-tighter">
+                <h1 className="md:text-4x font-mono text-2xl leading-tight font-bold tracking-tighter">
                   On the air
                 </h1>
 

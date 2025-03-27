@@ -31,7 +31,7 @@ export default async function Watch({ params }: any) {
   const proxy = `${process.env.PROXY_M3U8}`;
   const vidURL = proxy + m3u8Source;
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-1 pt-10">
+    <div className="mx-auto max-w-6xl px-4 pt-10 pb-1">
       <div className="pb-4">
         <div className="flex flex-col items-center justify-center text-center">
           <div className="flex flex-col flex-wrap pb-2">

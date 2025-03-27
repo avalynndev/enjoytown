@@ -32,10 +32,10 @@ export default function List() {
         <div className="space-y-8">
           {/* Introduction Section */}
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="text-foreground text-4xl font-bold tracking-tight sm:text-5xl">
               Introduction
             </h1>
-            <p className="mt-4 text-xl text-muted-foreground">
+            <p className="text-muted-foreground mt-4 text-xl">
               Discover and enjoy free streaming content across various genres.
             </p>
           </div>
@@ -50,7 +50,7 @@ export default function List() {
                       key={index}
                     >
                       <div className="grid gap-4">
-                        <h4 className="text-xl text-primary">
+                        <h4 className="text-primary text-xl">
                           {title}{' '}
                           <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                             -&gt;

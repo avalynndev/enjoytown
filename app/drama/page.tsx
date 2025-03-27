@@ -62,7 +62,7 @@ export default function DramaSearch() {
   return (
     <>
       <div className="flex h-[30rem] flex-col items-center justify-center px-4">
-        <h2 className="mb-10 text-center text-xl text-black dark:text-white sm:mb-20 sm:text-5xl">
+        <h2 className="mb-10 text-center text-xl text-black sm:mb-20 sm:text-5xl dark:text-white">
           Search for drama.. 📺
         </h2>
         <PlaceholdersAndVanishInput
@@ -92,7 +92,7 @@ export default function DramaSearch() {
                   <Card className="pt-4">
                     <CardContent>
                       <Image
-                        className="aspect-[3/4] h-2/4 w-full rounded-xl object-cover transition-all"
+                        className="aspect-3/4 h-2/4 w-full rounded-xl object-cover transition-all"
                         src={`${item.image}`}
                         width={160}
                         height={160}

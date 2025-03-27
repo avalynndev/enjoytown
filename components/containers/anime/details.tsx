@@ -17,7 +17,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
     <>
       <div className="">
         <div className="mx-auto max-w-6xl md:pt-4">
-          <div className="h-[30dvh] w-full overflow-hidden border bg-muted shadow md:rounded-lg lg:h-[55dvh]">
+          <div className="bg-muted h-[30dvh] w-full overflow-hidden border shadow-sm md:rounded-lg lg:h-[55dvh]">
             <div
               style={{
                 backgroundImage: `url('${data.cover}')`,
@@ -34,7 +34,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
               <aside className="-mt-24 w-full space-y-2 md:-mt-32 md:w-1/3">
                 <div
                   className={cn(
-                    'relative flex aspect-poster w-full items-center justify-center overflow-hidden rounded-lg border bg-muted text-muted shadow',
+                    'aspect-poster bg-muted text-muted relative flex w-full items-center justify-center overflow-hidden rounded-lg border shadow-sm',
                   )}
                 >
                   {data.image ? (
@@ -62,7 +62,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
 
               <article className="flex w-full flex-col gap-2 md:w-2/3">
                 {data.releaseDate && (
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-muted-foreground text-xs">
                     {format(new Date(data.releaseDate), 'PPP', {})}
                   </span>
                 )}
@@ -106,7 +106,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                   </Badge>
                 </div>
 
-                <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">
+                <p className="text-muted-foreground text-xs leading-5 md:text-sm md:leading-6">
                   {data.description}
                 </p>
               </article>
@@ -166,7 +166,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                                   : ``
                             }
                           >
-                            <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
+                            <div className="bg-background/50 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border shadow-sm">
                               {item.cover ? (
                                 <Image
                                   fill
@@ -198,7 +198,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                                 </TooltipProvider>
                               </div>
 
-                              <p className="line-clamp-3 text-xs text-muted-foreground">
+                              <p className="text-muted-foreground line-clamp-3 text-xs">
                                 {item.type}
                               </p>
                             </div>
@@ -224,7 +224,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                                   : ``
                             }
                           >
-                            <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
+                            <div className="bg-background/50 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border shadow-sm">
                               {item.cover ? (
                                 <Image
                                   fill
@@ -256,7 +256,7 @@ const DetailsContainer: React.FC<{ data: IAnimeInfo }> = ({ data }) => {
                                 </TooltipProvider>
                               </div>
 
-                              <p className="line-clamp-3 text-xs text-muted-foreground">
+                              <p className="text-muted-foreground line-clamp-3 text-xs">
                                 {item.type}
                               </p>
                             </div>

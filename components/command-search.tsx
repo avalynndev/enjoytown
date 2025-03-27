@@ -194,11 +194,11 @@ export const CommandSearch = () => {
     <>
       <Button
         variant="outline"
-        className="flex w-full flex-1 justify-between gap-2 pr-2 text-sm text-muted-foreground"
+        className="text-muted-foreground flex w-full flex-1 justify-between gap-2 pr-2 text-sm"
         onClick={() => setOpen(true)}
       >
         Search Anything
-        <div className="mobile:hidden flex items-center gap-1 rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+        <div className="mobile:hidden bg-muted text-muted-foreground flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10px]">
           <CommandIcon size={12} />K
         </div>
       </Button>
@@ -218,10 +218,10 @@ export const CommandSearch = () => {
                 {recentSearches.map((item, index) => (
                   <div
                     key={index}
-                    className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                    className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
                     onClick={() => setSearch(item)}
                   >
-                    <span className="truncate whitespace-nowrap text-sm">{item}</span>
+                    <span className="truncate text-sm whitespace-nowrap">{item}</span>
                   </div>
                 ))}
               </CommandSearchGroup>
@@ -263,11 +263,11 @@ export const CommandSearch = () => {
                       <Link
                         key={item.id}
                         href={`/movie/${item.id}`}
-                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                        className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
                       >
-                        <span className="truncate whitespace-nowrap text-sm">{item.title}</span>
+                        <span className="truncate text-sm whitespace-nowrap">{item.title}</span>
 
-                        <span className="whitespace-nowrap text-xs text-muted-foreground">
+                        <span className="text-muted-foreground text-xs whitespace-nowrap">
                           {item.release_date && new Date(item.release_date).getFullYear()}
                         </span>
                       </Link>
@@ -280,12 +280,12 @@ export const CommandSearch = () => {
                     {result.tvShows.map((item) => (
                       <Link
                         key={item.id}
-                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                        className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
                         href={`/tv/${item.id}`}
                       >
-                        <span className="truncate whitespace-nowrap text-sm">{item.name}</span>
+                        <span className="truncate text-sm whitespace-nowrap">{item.name}</span>
 
-                        <span className="whitespace-nowrap text-xs text-muted-foreground">
+                        <span className="text-muted-foreground text-xs whitespace-nowrap">
                           {item.first_air_date && new Date(item.first_air_date).getFullYear()}
                         </span>
                       </Link>
@@ -298,10 +298,10 @@ export const CommandSearch = () => {
                     {dramaResults?.map((item) => (
                       <Link
                         key={item.id}
-                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                        className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
                         href={`/drama/${item.id}`}
                       >
-                        <span className="truncate whitespace-nowrap text-sm">{item.title}</span>
+                        <span className="truncate text-sm whitespace-nowrap">{item.title}</span>
                       </Link>
                     ))}
                   </CommandSearchGroup>
@@ -312,14 +312,14 @@ export const CommandSearch = () => {
                     {animeResults?.map((item) => (
                       <Link
                         key={item.id}
-                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                        className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
                         href={`/anime/${item.id}`}
                       >
-                        <span className="truncate whitespace-nowrap text-sm">
+                        <span className="truncate text-sm whitespace-nowrap">
                           {item.title.userPreferred || item.title.english || item.title.romaji}
                         </span>
 
-                        <span className="whitespace-nowrap text-xs text-muted-foreground">
+                        <span className="text-muted-foreground text-xs whitespace-nowrap">
                           Episodes: {item.totalEpisodes}
                         </span>
                       </Link>

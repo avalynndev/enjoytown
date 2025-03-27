@@ -44,7 +44,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <GoogleAnalytics gaId="G-84Z171LN4N" />
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="bg-background min-h-screen font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <NextTopLoader
             color="#2299DD"

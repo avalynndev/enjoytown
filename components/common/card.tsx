@@ -24,10 +24,10 @@ export default function CarousalCard({ show, type }: CarousalCardProps) {
           width={500}
           height={500}
         />
-        <div className="absolute bottom-0 top-1/2 flex w-full flex-col justify-between border-white bg-gradient-to-t from-background to-transparent">
+        <div className="from-background absolute top-1/2 bottom-0 flex w-full flex-col justify-between border-white bg-linear-to-t to-transparent">
           <div></div>
           <div className="flex flex-col items-center">
-            <div className="flex w-9/12 items-center justify-center text-pretty text-center text-3xl font-bold">
+            <div className="flex w-9/12 items-center justify-center text-center text-3xl font-bold text-pretty">
               {title}
             </div>
           </div>
@@ -41,14 +41,14 @@ export default function CarousalCard({ show, type }: CarousalCardProps) {
           width={500}
           height={500}
         />
-        <div className="to-from-background/10 absolute inset-0 flex flex-col justify-between bg-gradient-to-t from-background">
+        <div className="to-from-background/10 from-background absolute inset-0 flex flex-col justify-between bg-linear-to-t">
           <div></div>
           <div className="mx-auto w-[96%]">
             <div className="flex w-[500px] flex-col gap-1 text-pretty uppercase">
               <div className="text-sm normal-case opacity-50">
                 {releaseDate ? format(new Date(releaseDate), 'PPP') : 'Unknown'}
               </div>
-              <div className="text-pretty text-3xl font-bold">{show.title || show.name}</div>
+              <div className="text-3xl font-bold text-pretty">{show.title || show.name}</div>
               <div className="line-clamp-3 text-xs normal-case opacity-50">{show?.overview}</div>
               <div className="my-2 flex gap-2">
                 <Link href={`/${type}/${show.id}`}>

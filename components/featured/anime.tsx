@@ -62,7 +62,7 @@ export default function FeaturedAnime({ featureType }: AnimeFeatureProps) {
                 className="w-full cursor-pointer space-y-2"
                 data-testid="movie-card"
               >
-                <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
+                <div className="bg-background/50 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border shadow-sm">
                   {item.image ? (
                     <Image
                       fill
@@ -108,7 +108,7 @@ export default function FeaturedAnime({ featureType }: AnimeFeatureProps) {
                     </div>
                   </div>
 
-                  <p className="line-clamp-3 text-xs text-muted-foreground">
+                  <p className="text-muted-foreground line-clamp-3 text-xs">
                     {/* Recent only includes ep. title and others only have description */}
                     {item.episodeTitle}
                     {item.description}

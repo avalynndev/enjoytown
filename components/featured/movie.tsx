@@ -61,7 +61,7 @@ export default function FeaturedMovies({ featureType }: MovieListProps) {
                 className="w-full cursor-pointer space-y-2"
                 data-testid="movie-card"
               >
-                <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border bg-background/50 shadow">
+                <div className="bg-background/50 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border shadow-sm">
                   {item.backdrop_path ? (
                     <Image
                       fill
@@ -93,7 +93,7 @@ export default function FeaturedMovies({ featureType }: MovieListProps) {
                     </TooltipProvider>
                   </div>
 
-                  <p className="line-clamp-3 text-xs text-muted-foreground">{item.overview}</p>
+                  <p className="text-muted-foreground line-clamp-3 text-xs">{item.overview}</p>
                 </div>
               </Link>
             ))

@@ -28,10 +28,10 @@ export const Pattern = ({ variant }: PatternProps) => {
 
   return (
     <>
-      <div className="absolute right-0 top-0 -z-40 h-screen w-screen bg-gradient-to-b from-transparent to-background" />
+      <div className="to-background absolute top-0 right-0 -z-40 h-screen w-screen bg-linear-to-b from-transparent" />
 
       <svg
-        className="absolute right-0 top-0 -z-50 h-screen w-screen opacity-10 dark:opacity-5"
+        className="absolute top-0 right-0 -z-50 h-screen w-screen opacity-10 dark:opacity-5"
         fill="none"
       >
         <defs>

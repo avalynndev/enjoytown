@@ -41,7 +41,7 @@ const EpisodeContainer = ({ params }: any) => {
   }, [fetchDetails]);
 
   return (
-    <div className="mx-auto px-4 pb-1 pt-10">
+    <div className="mx-auto px-4 pt-10 pb-1">
       <div className="pb-4">
         <div className="flex flex-col items-center justify-center text-center">
           <div className="flex flex-col flex-wrap pb-2">Episode: {episode}</div>
