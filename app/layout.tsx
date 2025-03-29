@@ -5,11 +5,11 @@ import { Footer } from '@/components/footer';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { ThemeProvider } from '@/components/theme-provider';
 import NextTopLoader from 'nextjs-toploader';
-
+import { Toaster } from '@/components/ui/sonner';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.css';
 import { SiteHeader } from '@/components/navbar/site-header';
-
+import Donate from '@/components/donate';
 const spaceGrotesk = SpaceGrotesk({ subsets: ['latin'] });
 
 export const viewport: Viewport = {
@@ -58,9 +58,11 @@ export default function RootLayout({
             shadow="0 0 10px #2299DD,0 0 5px #2299DD"
           />
           <SiteHeader />
+          <Toaster position="top-right" closeButton/>
           <div className="relative flex min-h-screen flex-col">
             <div className="flex-1">{children}</div>
           </div>
+          <Donate />
           <Footer />
           <TailwindIndicator />
         </ThemeProvider>
