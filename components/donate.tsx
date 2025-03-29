@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { useToastStore } from '@/lib/store';
 import { usePathname } from 'next/navigation';
 
-export default function RootLayout() { 
+export default function RootLayout() {
   const { triggerToast } = useToastStore();
   const pathname = usePathname();
   const [hasToastShown, setHasToastShown] = useState(false);
@@ -20,13 +20,13 @@ export default function RootLayout() {
     if (!hasToastShown) {
       triggerToast();
       toast('Support My Work 💖', {
-        description: `If you enjoy my work, consider buying me a coffee! ☕` ,
+        description: `If you enjoy my work, consider buying me a coffee! ☕`,
         cancel: {
           label: 'Donate ❤️',
           onClick: () => {
             window.open('https://www.buymeacoffee.com/avalynndev', '_blank');
-          }
-        }
+          },
+        },
       });
       setHasToastShown(true);
     }
@@ -36,5 +36,5 @@ export default function RootLayout() {
     setHasToastShown(false);
   }, [pathname]);
 
-  return <></>; 
+  return <></>;
 }
