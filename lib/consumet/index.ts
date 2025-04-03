@@ -1,5 +1,6 @@
-// import { env } from "@/env.mjs";
-import { env } from 'process';
+'use server';
+
+import { env } from '@/env.mjs';
 
 export async function FetchAnimeInfo(data: any) {
   try {

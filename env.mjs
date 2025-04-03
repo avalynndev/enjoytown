@@ -1,9 +1,7 @@
 import { createEnv } from '@t3-oss/env-nextjs';
-import { vercel } from '@t3-oss/env-nextjs/presets';
 import { z } from 'zod';
 
 export const env = createEnv({
-  extends: [vercel()],
   shared: {
     DOWNLOAD_API_URL: z.string().url(),
     CONSUMET_API_URL: z.string().url(),
