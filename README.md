@@ -71,11 +71,11 @@ DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
 CONSUMET_API_URL=https://consumet_api_url (deploy your own with the instructions below, dont end with slash)
 TMDB_API_KEY=(get your own api key with the instructions below)
 PROXY_M3U8 = "https://yourproxy.com/fetch?url=
-# PROXY_M3U8 would be found at https://github.com/JulzOhern/Gogoanime-and-Hianime-proxy. If deploying to vercel keep . as output directory.
 ```
+> PROXY_M3U8 would be found at <a href="https://github.com/JulzOhern/Gogoanime-and-Hianime-proxy">Hianime-proxy</a>. If deploying to vercel keep . as output directory.
 
-`<a href="https://github.com/consumet/api.consumet.org">`Deploy your own Consumet API`</a>`
-`<a href="https://www.themoviedb.org/settings/api/request">`Get your own TMDB api key here after registering`</a>`
+<a href="https://github.com/consumet/api.consumet.org">`Deploy your own Consumet API`</a>
+<a href="https://www.themoviedb.org/settings/api/request">`Get your own TMDB api key here after registering`</a>
 
 ## Please notice
 
@@ -93,7 +93,7 @@ bun run dev || npm run dev
 - Run on production mode
 
 ```bash
-npm start
+bun run start || npm start
 ```
 
 > Deploy **your own Enjoytown** Instance on Vercel
@@ -107,7 +107,7 @@ Uh-oh, looks like you stumbled upon a bug? No worries, we're here to squash it! 
 ## Contributors 🤲
 
 > EnjoyTown is now under One Development LLC ([1Anime](https://github.com/1Anime))
-> `<img height="50" src="https://contrib.rocks/image?repo=avalynndev/enjoytown" />`
+<img height="50" src="https://contrib.rocks/image?repo=avalynndev/enjoytown" />
 
 #### Want to Help Out?
 
