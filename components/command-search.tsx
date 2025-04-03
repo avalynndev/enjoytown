@@ -177,7 +177,7 @@ export const CommandSearch = () => {
 
   useEffect(() => {
     if (open) setOpen(false);
-  }, [pathName, open]);
+  }, [pathName]);
 
   const hasMovies = result?.movies && result?.movies?.length > 0;
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
