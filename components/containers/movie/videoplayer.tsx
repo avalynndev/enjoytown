@@ -21,28 +21,32 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Download } from 'lucide-react';
 
 type VideoSourceKey =
-  | 'autoembed'
   | 'embedsu'
+  | 'autoembed'
   | 'vidsrc'
   | 'superembed'
   | 'twoembed'
   | 'vidlink'
-  | 'vidsrcdev'
-  | 'vidsrcnl';
+  | 'videasy'
+  | 'onemovies'
+  | 'vidzee'
+  | 'vidzee4k';
 
 export default function VideoPlayer({ id }: any) {
-  const [selectedSource, setSelectedSource] = useState<VideoSourceKey>('autoembed');
+  const [selectedSource, setSelectedSource] = useState<VideoSourceKey>('embedsu');
   const [loading, setLoading] = useState(false);
 
   const videoSources: Record<VideoSourceKey, string> = {
-    autoembed: `https://player.autoembed.cc/embed/movie/${id}`,
     embedsu: `https://embed.su/embed/movie/${id}`,
+    autoembed: `https://player.autoembed.cc/embed/movie/${id}`,
     vidsrc: `https://vidsrc.in/embed/movie/${id}`,
     superembed: `https://multiembed.mov/?video_id=${id}&tmdb=1`,
     twoembed: `https://www.2embed.cc/embed/${id}`,
     vidlink: `https://vidlink.pro/movie/${id}`,
-    vidsrcdev: `https://vidsrc.dev/embed/movie/${id}`,
-    vidsrcnl: `https://player.vidsrc.nl/embed/movie/${id}`,
+    videasy: `https://player.videasy.net/movie/${id}`,
+    onemovies: `https://111movies.com/movie/${id}`,
+    vidzee: `https://vidzee.wtf/movie/${id}`,
+    vidzee4k: `https://vidzee.wtf/movie/4k/${id}`,
   };
 
   const handleSelectChange = (value: VideoSourceKey) => {
@@ -79,14 +83,16 @@ export default function VideoPlayer({ id }: any) {
               <SelectValue placeholder="Select Video Source" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="autoembed">AutoEmbed</SelectItem>
               <SelectItem value="embedsu">EmbedSu</SelectItem>
+              <SelectItem value="autoembed">AutoEmbed</SelectItem>
               <SelectItem value="vidsrc">VidSrc</SelectItem>
               <SelectItem value="superembed">SuperEmbed</SelectItem>
               <SelectItem value="twoembed">2Embed</SelectItem>
               <SelectItem value="vidlink">VidLink</SelectItem>
-              <SelectItem value="vidsrcdev">VidSrcDev</SelectItem>
-              <SelectItem value="vidsrcnl">VidSrcnl</SelectItem>
+              <SelectItem value="videasy">Videasy</SelectItem>
+              <SelectItem value="onemovies">111Movies</SelectItem>
+              <SelectItem value="vidzee">Vidzee</SelectItem>
+              <SelectItem value="vidzee4k">Vidzee 4K</SelectItem>
             </SelectContent>
           </Select>
           <div className="pt-2">
