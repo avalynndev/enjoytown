@@ -151,7 +151,7 @@ export default function VideoPlayer({ id }: { id: string }) {
           </div>
         </div>
       </div>
-      <Tabs defaultValue="autoembed">
+      <Tabs defaultValue="embedsu">
         <div className="flex flex-col items-center">
           <TabsList>
             <TabsTrigger value="autoembed">AutoEmbed</TabsTrigger>
@@ -160,8 +160,9 @@ export default function VideoPlayer({ id }: { id: string }) {
             <TabsTrigger value="superembed">SuberEmbed</TabsTrigger>
             <TabsTrigger value="2embed">2Embed</TabsTrigger>
             <TabsTrigger value="vidlink">VidLink</TabsTrigger>
-            <TabsTrigger value="vidsrcdev">VidSrc.dev</TabsTrigger>
-            <TabsTrigger value="vidsrcnl">VidSrc.nl</TabsTrigger>
+            <TabsTrigger value="videasy">Videasy</TabsTrigger>
+            <TabsTrigger value="111movies">111Movies</TabsTrigger>
+            <TabsTrigger value="vidzee">Vidzee</TabsTrigger>
           </TabsList>
         </div>
         <TabsContent value="autoembed">
@@ -230,9 +231,9 @@ export default function VideoPlayer({ id }: { id: string }) {
             className="mx-auto max-w-3xl px-4 pt-10"
           ></iframe>
         </TabsContent>
-        <TabsContent value="vidsrcdev">
+        <TabsContent value="videasy">
           <iframe
-            src={`https://vidsrc.dev/embed/tv/${id}/${season}/${episode}`}
+            src={`https://player.videasy.net/tv/${id}/${season}/${episode}`}
             referrerPolicy="origin"
             allowFullScreen
             width="100%"
@@ -241,9 +242,20 @@ export default function VideoPlayer({ id }: { id: string }) {
             className="mx-auto max-w-3xl px-4 pt-10"
           ></iframe>
         </TabsContent>
-        <TabsContent value="vidsrcnl">
+        <TabsContent value="111movies">
           <iframe
-            src={`https://player.vidsrc.nl/embed/tv/${id}/${season}/${episode}`}
+            src={`https://111movies.com/tv/${id}/${season}/${episode}`}
+            referrerPolicy="origin"
+            allowFullScreen
+            width="100%"
+            height="450"
+            scrolling="no"
+            className="mx-auto max-w-3xl px-4 pt-10"
+          ></iframe>
+        </TabsContent>
+        <TabsContent value="vidzee">
+          <iframe
+            src={`https://vidzee.wtf/tv/${id}/${season}/${episode}`}
             referrerPolicy="origin"
             allowFullScreen
             width="100%"
