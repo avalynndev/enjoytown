@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const redirects = {
-  patterns: ['1196943'],
+  patterns: ['1196943', '1370264'],
   redirect_to: '/removed',
 };
 
