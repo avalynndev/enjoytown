@@ -5,6 +5,7 @@ import { Play } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { tmdb } from '@/lib/tmdb';
 
@@ -76,7 +77,14 @@ const DetailsContainer = async ({ data, id, embed }: any) => {
               {data.overview}
             </p>
 
-            <div className="flex flex-wrap items-center gap-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <Link href={`/movie/watch/${id}`}>
+                <Button className="px-6 py-3 text-lg whitespace-nowrap">
+                  <Play className="mr-1.5" size={12} />
+                  Watch
+                </Button>
+              </Link>
+
               {trailers.length > 0 && (
                 <Link href={`https://www.youtube.com/watch?v=${trailers[0].key}`} target="_blank">
                   <Badge variant="outline" className="cursor-pointer whitespace-nowrap">
@@ -85,13 +93,6 @@ const DetailsContainer = async ({ data, id, embed }: any) => {
                   </Badge>
                 </Link>
               )}
-
-              <Link href={`/movie/watch/${id}`}>
-                <Badge variant="outline" className="cursor-pointer whitespace-nowrap">
-                  <Play className="mr-1.5" size={12} />
-                  Watch
-                </Badge>
-              </Link>
             </div>
           </article>
         </main>
