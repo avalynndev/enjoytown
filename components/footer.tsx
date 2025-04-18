@@ -3,28 +3,40 @@ import { Clapperboard } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <div className="mx-auto max-w-6xl overflow-hidden rounded-lg shadow-lg lg:mb-4 lg:border">
-      <div className="border-t p-6">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-0">
-          <div className="flex items-center gap-3">
+    <div className="mt-4 w-full border-t">
+      <div className="mx-auto max-w-6xl py-4">
+        <div className="flex flex-col justify-between gap-4 px-4 md:flex-row xl:px-0">
+          <div className="flex items-center gap-2">
             <Clapperboard size={24} />
-            <h2 className="text-lg font-semibold">EnjoyTown</h2>
-          </div>
 
-          <div className="flex items-center gap-3">
-            <Link href="https://aniverse.lostnova.space">
-              <p className="text-muted-foreground text-sm">© 2024-2025 AniVerse Pte Ltd</p>
-            </Link>
-            <div className="h-4 border-r" />
+            <p className="text-muted-foreground text-xs">
+              © {new Date().getFullYear()} AniVerse Pte Ltd
+            </p>
 
-            <span className="text-muted-foreground text-sm">
-              EnjoyTown doesn&apos;t store any media listed; we only link to third-party sources.
+            <div className="h-3 border-r" />
+
+            <span className="text-muted-foreground text-xs">
+              EnjoyTown doesn't store any media listed; we only link to third-party sources.
             </span>
           </div>
-        </div>
-        <div className="text-muted-foreground mt-4 text-sm">
-          <Link href="https://1ani.me/privacy">Privacy Policy</Link> |{' '}
-          <Link href="https://1ani.me/dmca">DMCA</Link>
+
+          <div className="text-muted-foreground flex items-center gap-4 text-sm">
+            <Link href="https://1ani.me/privacy" className="hover:text-foreground">
+              Privacy Policy
+            </Link>
+
+            <Link href="https://1ani.me/dmca" className="hover:text-foreground">
+              DMCA
+            </Link>
+
+            <Link href="https://github.com/avalynndev/enjoytown" className="hover:text-foreground">
+              Github
+            </Link>
+
+            <Link href="https://x.com/avalynndev" className="hover:text-foreground">
+              X
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -4,10 +4,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MOVIES } from 'avalynndev-extensions';
+import { fetchDramaSearch } from '@/lib/consumet';
 
 export default function DramaSearch() {
-  const dramacool = new MOVIES.DramaCool();
   const placeholders = [
     'True beauty (2020)',
     'Lovely runner (2024)',
@@ -34,31 +33,12 @@ export default function DramaSearch() {
   const handleSearch = async (query: string) => {
     if (query) {
       setLoading(true);
-      const data = await dramacool.search(query);
+      const data = await fetchDramaSearch(query)
       //console.log;
       setLoading(false);
       setInfoTitle(data.results);
     }
   };
-
-  // Debounce function to limit the rate of API calls
-  const debounce = (func: (...args: any[]) => void, delay: number) => {
-    let debounceTimer: NodeJS.Timeout;
-    return function (this: void, ...args: any[]) {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => func(...args), delay);
-    };
-  };
-
-  const debouncedSearch = useCallback(debounce(handleSearch, 500), [handleSearch]);
-
-  // Effect to trigger search when title changes
-  useEffect(() => {
-    if (title) {
-      debouncedSearch(title);
-    }
-  }, [title, debouncedSearch]);
-
   return (
     <>
       <div className="flex h-[30rem] flex-col items-center justify-center px-4">

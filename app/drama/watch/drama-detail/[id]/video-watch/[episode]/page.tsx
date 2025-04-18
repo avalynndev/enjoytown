@@ -18,7 +18,7 @@ const EpisodeContainer = ({ params }: any) => {
   const [isLoading, setLoading] = useState(true);
   const [videoLink, setVideoLink] = useState(null);
   const [download, setDownloadLink] = useState(null);
-  const [info, setDramaInfo] = useState<IMovieInfo | null>(null);
+const [info, setDramaInfo] = useState<IMovieInfo | null>(null);
 
   const fetchDetails = useCallback(async () => {
     try {
