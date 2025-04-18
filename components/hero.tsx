@@ -2,7 +2,7 @@
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import * as React from 'react';
-import Marquee from '@/components/ui/marquee';
+import { Marquee } from '@/components/ui/marquee';
 import Image from 'next/image';
 import { Spinner } from '@/components/ui/spinner';
 import { Image as ImageIcon } from 'lucide-react';
