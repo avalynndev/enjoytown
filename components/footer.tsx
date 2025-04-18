@@ -16,7 +16,7 @@ export const Footer = () => {
             <div className="h-3 border-r" />
 
             <span className="text-muted-foreground text-xs">
-              EnjoyTown doesn't store any media listed; we only link to third-party sources.
+              EnjoyTown doesn&apos;t store any media listed; we only link to third-party sources.
             </span>
           </div>
 
