@@ -72,6 +72,7 @@ CONSUMET_API_URL=https://consumet_api_url (deploy your own with the instructions
 TMDB_API_KEY=(get your own api key with the instructions below)
 PROXY_M3U8 = "https://yourproxy.com/fetch?url=
 ```
+
 > PROXY_M3U8 would be found at <a href="https://github.com/JulzOhern/Gogoanime-and-Hianime-proxy">Hianime-proxy</a>. If deploying to vercel keep . as output directory.
 
 <a href="https://github.com/consumet/api.consumet.org">`Deploy your own Consumet API`</a>

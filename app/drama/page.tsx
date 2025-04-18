@@ -33,7 +33,7 @@ export default function DramaSearch() {
   const handleSearch = async (query: string) => {
     if (query) {
       setLoading(true);
-      const data = await fetchDramaSearch(query)
+      const data = await fetchDramaSearch(query);
       //console.log;
       setLoading(false);
       setInfoTitle(data.results);
