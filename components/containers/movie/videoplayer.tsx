@@ -97,12 +97,9 @@ export default function VideoPlayer({ id }: VideoPlayerProps) {
         <MediaPlayer src={bestSource.file} autoPlay>
           <MediaProvider>
             {subtitles.map((sub, index) => (
-              <Track
-                src={sub.url}
-                kind="subtitles"
-                label={sub.lang}
-                default={index === 0}
-              />
+              <div key={index}>
+                <Track src={sub.url} kind="subtitles" label={sub.lang} default={index === 0} />
+              </div>
             ))}
           </MediaProvider>
           <DefaultVideoLayout icons={defaultLayoutIcons} />
