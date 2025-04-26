@@ -12,7 +12,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function VideoPlayer({ id }: any) {
   const [loading, setLoading] = useState(false);
-  
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
