@@ -2,7 +2,7 @@ import DetailsContainer from '@/components/containers/drama/details';
 import { MOVIES } from 'avalynndev-extensions';
 
 export default async function DramaInfo({ params }: any) {
-  const { id, ep } = await params;
+  const id = await decodeURIComponent(params.id);
   const dramacool = new MOVIES.DramaCool();
   const info = await dramacool.fetchMediaInfo('drama-detail%2F' + id);
   if (!info.episodes || info.episodes.length == 0) {
