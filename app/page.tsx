@@ -8,28 +8,29 @@ export default async function Home() {
   return (
     <>
       <Pattern variant="checkered" />
-      <div className="mx-auto max-w-4xl p-4">
-        <section className="flex h-[75vh] items-center md:h-[50vh]">
-          <div className="mx-auto flex w-4/5 flex-col items-center justify-center space-y-4 text-center">
-            <Link href={`/`}>
-              <Badge variant="outline" className="bg-background">
-                Welcome to the town of enjoyment! 🏙️
-              </Badge>
-            </Link>
-            <h1 className="text-6xl font-bold">Explore movies, tv series, and animes!</h1>
-            <p className="text-muted-foreground text-sm leading-6">
-              EnjoyTown is a streaming platform for lazy people who like to
-              <br />
-              watch millions of movies, series and animes for free. Go down to watch
-            </p>
-            <div className="flex gap-2">
-              <Button>
-                <Link href={`/movie`}>Watch Now</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-      </div>
+      <section className="mx-auto flex h-[80dvh] max-w-4xl flex-col items-center justify-center gap-4 px-4 py-8 text-center md:h-auto md:px-6 md:py-24">
+        <Link href={'/'}>
+          <Badge variant="outline" className="bg-background">
+            Welcome to the town of enjoyment! 🏙️
+          </Badge>
+        </Link>
+
+        <h2 className="text-3xl leading-tight md:text-6xl md:leading-[1.2]">
+          Explore movies, tv series,
+          <br /> and <b>animes!</b>
+        </h2>
+
+        <p className="text-muted-foreground max-w-xs text-base md:max-w-2xl">
+          {' '}
+          EnjoyTown is a streaming platform for lazy people who like to
+          <br />
+          watch millions of movies, series and animes for free. Go down to watch
+        </p>
+
+        <Button size="sm" asChild>
+          <Link href={`/movie`}>Watch Now</Link>
+        </Button>
+      </section>
       <HeroSection />
     </>
   );

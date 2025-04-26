@@ -1,5 +1,9 @@
 'use client';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
+import { MediaPlayer, MediaProvider, Track } from '@vidstack/react';
+import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   Select,
   SelectTrigger,
@@ -7,116 +11,102 @@ import {
   SelectItem,
   SelectValue,
 } from '@/components/ui/select';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Download } from 'lucide-react';
 
-type VideoSourceKey =
-  | 'embedsu'
-  | 'autoembed'
-  | 'vidsrc'
-  | 'superembed'
-  | 'twoembed'
-  | 'vidlink'
-  | 'videasy'
-  | 'onemovies'
-  | 'vidzee'
-  | 'vidzee4k';
+type ProviderKey = 'embedsu' | '2embed' | 'autoembed' | 'vidsrcsu' | 'primebox' | 'foxstream';
 
-export default function VideoPlayer({ id }: any) {
-  const [selectedSource, setSelectedSource] = useState<VideoSourceKey>('embedsu');
-  const [loading, setLoading] = useState(false);
+interface VideoPlayerProps {
+  id: string;
+}
 
-  const videoSources: Record<VideoSourceKey, string> = {
-    embedsu: `https://embed.su/embed/movie/${id}`,
-    autoembed: `https://player.autoembed.cc/embed/movie/${id}`,
-    vidsrc: `https://vidsrc.in/embed/movie/${id}`,
-    superembed: `https://multiembed.mov/?video_id=${id}&tmdb=1`,
-    twoembed: `https://www.2embed.cc/embed/${id}`,
-    vidlink: `https://vidlink.pro/movie/${id}`,
-    videasy: `https://player.videasy.net/movie/${id}`,
-    onemovies: `https://111movies.com/movie/${id}`,
-    vidzee: `https://vidzee.wtf/movie/${id}`,
-    vidzee4k: `https://vidzee.wtf/movie/4k/${id}`,
+interface SourceFile {
+  file: string;
+  type: string;
+  quality: string;
+  lang: string;
+}
+
+interface SubtitleFile {
+  url: string;
+  lang: string;
+}
+
+export default function VideoPlayer({ id }: VideoPlayerProps) {
+  const [selectedProvider, setSelectedProvider] = useState<ProviderKey>('2embed');
+  const [videoSources, setVideoSources] = useState<SourceFile[]>([]);
+  const [subtitles, setSubtitles] = useState<SubtitleFile[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  useEffect(() => {
+    if (!BASE_URL) {
+      console.error('BASE_URL is not defined');
+      return;
+    }
+
+    const fetchVideo = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${BASE_URL}/movie/${selectedProvider}/${id}`);
+        const data = await res.json();
+
+        if (data && data[0]?.source) {
+          const files: SourceFile[] = data[0].source.files || [];
+          const subs: SubtitleFile[] = data[0].source.subtitles || [];
+
+          setVideoSources(files);
+          setSubtitles(subs);
+        }
+      } catch (error) {
+        console.error('Failed to fetch video data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVideo();
+  }, [selectedProvider, id, BASE_URL]);
+
+  const handleProviderChange = (value: ProviderKey) => {
+    setSelectedProvider(value);
   };
 
-  const handleSelectChange = (value: VideoSourceKey) => {
-    setLoading(true);
-    setTimeout(() => {
-      setSelectedSource(value);
-      setLoading(false);
-    }, 1000);
-  };
+  const bestSource = videoSources.find((file) => file.quality === '1080p') || videoSources[0];
 
   return (
     <div className="mx-auto max-w-5xl py-8">
-      <div className="flex flex-col items-center justify-center text-center">
-        <div className="flex flex-col flex-wrap pb-4">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href={`/movie/${id}`}>
-                  Movie - {id.charAt(0).toUpperCase() + id.slice(1)}
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Watch</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
+      <div className="flex justify-center pb-4">
+        <Select onValueChange={handleProviderChange} value={selectedProvider}>
+          <SelectTrigger className="w-[280px] rounded-md px-4 py-2">
+            <SelectValue placeholder="Select Provider" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="embedsu">EmbedSu</SelectItem>
+            <SelectItem value="2embed">2Embed</SelectItem>
+            <SelectItem value="autoembed">AutoEmbed</SelectItem>
+            <SelectItem value="vidsrcsu">VidSrcSu</SelectItem>
+            <SelectItem value="primebox">Primebox</SelectItem>
+            <SelectItem value="foxstream">Foxstream</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
-      <div className="flex w-full flex-row items-center justify-center">
-        <div className="flex flex-col text-center">
-          <Select onValueChange={handleSelectChange} value={selectedSource}>
-            <SelectTrigger className="w-[280px] rounded-md px-4 py-2">
-              <SelectValue placeholder="Select Video Source" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="embedsu">EmbedSu</SelectItem>
-              <SelectItem value="autoembed">AutoEmbed</SelectItem>
-              <SelectItem value="vidsrc">VidSrc</SelectItem>
-              <SelectItem value="superembed">SuperEmbed</SelectItem>
-              <SelectItem value="twoembed">2Embed</SelectItem>
-              <SelectItem value="vidlink">VidLink</SelectItem>
-              <SelectItem value="videasy">Videasy</SelectItem>
-              <SelectItem value="onemovies">111Movies</SelectItem>
-              <SelectItem value="vidzee">Vidzee</SelectItem>
-              <SelectItem value="vidzee4k">Vidzee 4K</SelectItem>
-            </SelectContent>
-          </Select>
-          <div className="pt-2">
-            <Link href={`https://dl.vidsrc.vip/movie/${id}`}>
-              <Badge variant="outline" className="cursor-pointer whitespace-nowrap">
-                <Download className="mr-1.5" size={12} />
-                Download Movie
-              </Badge>
-            </Link>
-          </div>
-        </div>
-      </div>
-      {loading ? (
-        <Skeleton className="mx-auto h-[500px] w-full px-4 pt-6" />
+
+      {loading || !bestSource ? (
+        <Skeleton className="h-[500px] w-full" />
       ) : (
-        <iframe
-          src={videoSources[selectedSource]}
-          referrerPolicy="origin"
-          allowFullScreen
-          width="100%"
-          height="450"
-          scrolling="no"
-          className="mx-auto max-w-3xl px-4 pt-6"
-        />
+        <MediaPlayer src={bestSource.file} autoPlay>
+          <MediaProvider>
+            {subtitles.map((sub, index) => (
+              <Track
+                src={sub.url}
+                kind="subtitles"
+                label={sub.lang}
+                default={index === 0}
+              />
+            ))}
+          </MediaProvider>
+          <DefaultVideoLayout icons={defaultLayoutIcons} />
+        </MediaPlayer>
       )}
     </div>
   );

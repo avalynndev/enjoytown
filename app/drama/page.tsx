@@ -1,7 +1,7 @@
 'use client';
 import { PlaceholdersAndVanishInput } from '@/components/ui/placeholders-and-vanish-input';
 import { Card, CardContent } from '@/components/ui/card';
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { fetchDramaSearch } from '@/lib/consumet';
