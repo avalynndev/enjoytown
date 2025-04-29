@@ -108,7 +108,7 @@ Uh-oh, looks like you stumbled upon a bug? No worries, we're here to squash it! 
 ## Contributors 🤲
 
 > EnjoyTown is now under AniVerse Pte Ltd ([1Anime](https://github.com/1Anime))
-<img height="50" src="https://contrib.rocks/image?repo=avalynndev/enjoytown" />
+> <img height="50" src="https://contrib.rocks/image?repo=avalynndev/enjoytown" />
 
 #### Want to Help Out?
 

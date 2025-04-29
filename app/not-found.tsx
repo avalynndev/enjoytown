@@ -1,4 +1,5 @@
 import { Pattern } from '@/components/ui/pattern';
+import { Button } from '@/components/ui/button';
 
 export default function NotFound() {
   return (
@@ -14,6 +15,9 @@ export default function NotFound() {
         <p className="m-5 max-w-3xl px-6 text-center text-2xl font-thin text-slate-800 md:text-3xl dark:text-slate-100">
           Did you take a wrong turn?
         </p>
+        <Button asChild>
+          <a href="/">Return to Home</a>
+        </Button>
       </div>
     </div>
   );

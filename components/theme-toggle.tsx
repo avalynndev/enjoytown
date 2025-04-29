@@ -13,6 +13,7 @@ export function ThemeToggle() {
     <Button
       variant="ghost"
       size="icon"
+      className="rounded-md"
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
     >
       <SunIcon className="h-[1.5rem] w-[1.3rem] dark:hidden" />

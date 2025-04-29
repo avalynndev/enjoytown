@@ -1,16 +1,16 @@
 import { siteConfig } from '@/config/site';
 import type { Metadata, Viewport } from 'next';
 import { Space_Grotesk as SpaceGrotesk } from 'next/font/google';
-import { Footer } from '@/components/footer';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { ThemeProvider } from '@/components/theme-provider';
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from '@/components/ui/sonner';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/styles/globals.css';
-import { SiteHeader } from '@/components/navbar/site-header';
 import Donate from '@/components/donate';
 const spaceGrotesk = SpaceGrotesk({ subsets: ['latin'] });
+import { AppSidebar } from '@/components/app-sidebar';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 export const viewport: Viewport = {
   themeColor: [
@@ -44,7 +44,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <GoogleAnalytics gaId="G-84Z171LN4N" />
-      <body className="bg-background min-h-screen font-sans antialiased">
+      <body className="min-h-screen bg-[#121212] font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <NextTopLoader
             color="#2299DD"
@@ -57,14 +57,24 @@ export default function RootLayout({
             speed={200}
             shadow="0 0 10px #2299DD,0 0 5px #2299DD"
           />
-          <SiteHeader />
-          <Toaster position="top-right" closeButton />
-          <div className="relative flex min-h-screen flex-col">
-            <div className="flex-1">{children}</div>
-          </div>
-          <Donate />
-          <Footer />
-          <TailwindIndicator />
+          <SidebarProvider
+            style={
+              {
+                '--sidebar-width': 'calc(var(--spacing) * 72)',
+                '--header-height': 'calc(var(--spacing) * 12)',
+              } as React.CSSProperties
+            }
+          >
+            <AppSidebar variant="inset" />
+            <SidebarInset>
+              <Toaster position="top-right" closeButton />
+              <div className="relative flex min-h-screen flex-col">
+                <div className="flex-1">{children}</div>
+              </div>
+              <Donate />
+              <TailwindIndicator />
+            </SidebarInset>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
