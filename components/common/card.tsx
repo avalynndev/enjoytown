@@ -52,7 +52,7 @@ export default function CarousalCard({ show, type }: CarousalCardProps) {
               <div className="line-clamp-3 text-xs normal-case opacity-50">{show?.overview}</div>
               <div className="my-2 flex gap-2">
                 <Link href={`/${type}/${show.id}`}>
-                  <Button variant={'ringHover'} className="w-full whitespace-nowrap">
+                  <Button variant={'outline'} className="w-full whitespace-nowrap">
                     Go To Show
                   </Button>
                 </Link>

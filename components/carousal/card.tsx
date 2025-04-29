@@ -49,7 +49,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ show }) => {
               <div className="line-clamp-3 text-xs normal-case opacity-50">{show.description}</div>
               <div className="my-2 flex gap-2">
                 <Link href={`/anime/${show.id}`}>
-                  <Button variant={'ringHover'} className="w-full whitespace-nowrap">
+                  <Button variant={'outline'} className="w-full whitespace-nowrap">
                     Go To Show
                   </Button>
                 </Link>
