@@ -12,7 +12,7 @@ export default function RootLayout({
   const isMobile = useIsMobile();
   return (
     <div suppressHydrationWarning>
-      {isMobile ? <></> : <SiteHeader />}
+      <SiteHeader />
       <div className={`${isMobile ? 'pb-24' : ''}`}>{children}</div>
       {isMobile ? <></> : <Footer />}
       <MobileNavBar />

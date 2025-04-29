@@ -39,9 +39,9 @@ import Link from 'next/link';
 
 const data = {
   user: {
-    name: 'shadcn',
+    name: 'avalynndev',
     email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
+    avatar: '/avalynndev.png',
   },
   navMain: [
     {
@@ -167,7 +167,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 {state === 'collapsed' ? (
                   <></>
                 ) : (
-                  <span className="text-base font-semibold">Acme Inc.</span>
+                  <span className="text-base font-semibold">Enjoytown</span>
                 )}
               </Link>
             </SidebarMenuButton>
