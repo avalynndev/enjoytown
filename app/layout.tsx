@@ -61,7 +61,7 @@ export default function RootLayout({
             style={
               {
                 '--sidebar-width': 'calc(var(--spacing) * 72)',
-                '--header-height': 'calc(var(--spacing) * 12)',
+                '--header-height': 'calc(var(--spacing) * 14)',
               } as React.CSSProperties
             }
           >
