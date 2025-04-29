@@ -157,8 +157,8 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar();
   return (
-    <Sidebar collapsible="icon" {...props} className="bg-black">
-      <SidebarHeader className="mr-1 mb-3 rounded-xl bg-[#121212]">
+    <Sidebar collapsible="icon" {...props} className="bg-gray-100 dark:bg-black">
+      <SidebarHeader className="mr-1 mb-3 rounded-xl bg-white dark:bg-[#121212]">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
@@ -174,7 +174,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent className="mr-1 mb-3 rounded-xl bg-[#121212]">
+      <SidebarContent className="mr-1 mb-3 rounded-xl bg-white dark:bg-[#121212]">
         <SidebarGroup>
           <SidebarGroupContent className="flex flex-col gap-2">
             <SidebarMenu>
@@ -193,7 +193,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
-      <SidebarFooter className="mr-1 rounded-xl bg-[#121212]">
+      <SidebarFooter className="mr-1 rounded-xl bg-white dark:bg-[#121212]">
         <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />
