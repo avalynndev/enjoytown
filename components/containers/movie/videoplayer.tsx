@@ -21,6 +21,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Download } from 'lucide-react';
 
 type VideoSourceKey =
+  | 'default'
   | 'embedsu'
   | 'autoembed'
   | 'vidsrc'
@@ -33,10 +34,11 @@ type VideoSourceKey =
   | 'vidzee4k';
 
 export default function VideoPlayer({ id }: any) {
-  const [selectedSource, setSelectedSource] = useState<VideoSourceKey>('embedsu');
+  const [selectedSource, setSelectedSource] = useState<VideoSourceKey>('default');
   const [loading, setLoading] = useState(false);
 
   const videoSources: Record<VideoSourceKey, string> = {
+    default: `https://flix.1ani.me/embed/tmdb-movie-${id}`,
     embedsu: `https://embed.su/embed/movie/${id}`,
     autoembed: `https://player.autoembed.cc/embed/movie/${id}`,
     vidsrc: `https://vidsrc.in/embed/movie/${id}`,
@@ -83,6 +85,7 @@ export default function VideoPlayer({ id }: any) {
               <SelectValue placeholder="Select Video Source" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="default">Default</SelectItem>
               <SelectItem value="embedsu">EmbedSu</SelectItem>
               <SelectItem value="autoembed">AutoEmbed</SelectItem>
               <SelectItem value="vidsrc">VidSrc</SelectItem>
@@ -113,9 +116,9 @@ export default function VideoPlayer({ id }: any) {
           referrerPolicy="origin"
           allowFullScreen
           width="100%"
-          height="450"
+          height="650"
           scrolling="no"
-          className="mx-auto max-w-3xl px-4 pt-6"
+          className="mx-auto max-w-5xl px-4 pt-6"
         />
       )}
     </div>

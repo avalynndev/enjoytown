@@ -28,7 +28,7 @@ export default function Read() {
         {images.map((item, index) => (
           <div key={index}>
             <Image
-              src={item}
+              src={`https://api.1anime.app/image-proxy?url=${item}`}
               key={index}
               alt="Pages"
               width={800}
