@@ -35,6 +35,7 @@ import {
   SidebarGroupContent,
 } from '@/components/ui/sidebar';
 import { Clapperboard } from 'lucide-react';
+import Link from 'next/link';
 
 const data = {
   user: {
@@ -161,14 +162,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
-              <a href="/">
+              <Link href="/">
                 <Clapperboard className="pl-0.5 group-data-[collapsible=icon]:size-6" />
                 {state === 'collapsed' ? (
                   <></>
                 ) : (
                   <span className="text-base font-semibold">Acme Inc.</span>
                 )}
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
