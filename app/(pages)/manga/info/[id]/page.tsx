@@ -20,7 +20,6 @@ export default async function MangaInfo({ params }: any) {
     description = data.description.split('<br>')[0];
   }
 
-
   return (
     <div>
       {data && (

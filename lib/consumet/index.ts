@@ -65,7 +65,6 @@ export async function GetSearchedAnime(title: any) {
   return data;
 }
 
-
 export async function getMangaInfo(id: any) {
   const res = await fetch(
     `${process.env.CONSUMET_API_URL}/meta/anilist-manga/info/${id}?provider=mangareader`,

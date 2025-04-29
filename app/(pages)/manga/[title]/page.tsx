@@ -64,4 +64,3 @@ export default async function MangaInfo({ params }: any) {
     </div>
   );
 }
-
