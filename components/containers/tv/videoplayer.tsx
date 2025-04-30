@@ -151,10 +151,10 @@ export default function VideoPlayer({ id }: { id: string }) {
           </div>
         </div>
       </div>
-      <Tabs defaultValue="embedsu">
+      <Tabs defaultValue="vidora">
         <div className="flex flex-col items-center">
           <TabsList>
-            <TabsTrigger value="autoembed">AutoEmbed</TabsTrigger>
+            <TabsTrigger value="vidora">Vidora</TabsTrigger>
             <TabsTrigger value="embedsu">EmbedSu</TabsTrigger>
             <TabsTrigger value="vidsrc">VidSrc</TabsTrigger>
             <TabsTrigger value="superembed">SuberEmbed</TabsTrigger>
@@ -165,9 +165,9 @@ export default function VideoPlayer({ id }: { id: string }) {
             <TabsTrigger value="vidzee">Vidzee</TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="autoembed">
+        <TabsContent value="vidora">
           <iframe
-            src={`https://player.autoembed.cc/embed/tv/${id}/${season}/${episode}`}
+            src={`https://vidora.su/tv/${id}/${season}/${episode}?colour=141414&autoplay=true&autonextepisode=true&backbutton=https%3A%2F%2Fenjoytown.pro%2F&pausescreen=true&logo=https%3A%2F%2Fenjoytown.pro%2Fandroid-chrome-192x192.png`}
             referrerPolicy="origin"
             allowFullScreen
             width="100%"
