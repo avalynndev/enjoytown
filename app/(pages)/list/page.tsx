@@ -18,29 +18,21 @@ const featureText: FeatureText[] = [
     href: '/list/anime',
     description: 'Dive into Anime Worlds: Adventures Await!',
   },
-  {
-    title: 'Drama',
-    href: '/drama',
-    description: 'Indulge in Drama: Emotions Await!',
-  },
 ];
 
 export default function List() {
   return (
-    <div className="bg-background">
-      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="space-y-8">
-          {/* Introduction Section */}
+    <div className="bg-background flex min-h-screen items-center justify-center">
+      <div className="w-full max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+        <div>
           <div className="text-center">
-            <h1 className="text-foreground text-4xl font-bold tracking-tight sm:text-5xl">
-              Introduction
-            </h1>
+            <h1 className="text-foreground text-4xl font-bold tracking-tight sm:text-5xl">List</h1>
             <p className="text-muted-foreground mt-4 text-xl">
               Discover and enjoy free streaming content across various genres.
             </p>
           </div>
-          <Craft.Section className="">
-            <Craft.Container className="">
+          <Craft.Section>
+            <Craft.Container>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-6 md:grid-cols-2">
                   {featureText.map(({ title, description, href }, index) => (

@@ -8,7 +8,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { Image as ImageIcon } from 'lucide-react';
 import { tmdb, TvSerie, Movie } from '@/lib/tmdb';
 import { ListResponse } from '@/lib/tmdb/utils/list-response';
-
+import { useSidebar } from '@/components/ui/sidebar';
 export interface CardProps {
   item: Movie | TvSerie; // Allow both Movie and Tv for flexibility
   type: string;
@@ -23,7 +23,7 @@ export function Card({ item, type }: CardProps) {
   return (
     <Link
       href={`/${type == 'Tv' ? 'tv' : 'movie'}/${item.id}`} // Ensure the correct URL based on the item type
-      className="group relative flex max-w-xs cursor-pointer flex-col gap-2 overflow-hidden md:max-w-sm"
+      className="group relative flex max-w-xs cursor-pointer flex-col gap-2 overflow-hidden lg:max-w-sm"
     >
       <div className="bg-background/50 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border shadow-sm">
         {backdropPath ? (
@@ -59,6 +59,7 @@ export function Card({ item, type }: CardProps) {
 }
 
 export default function HeroSection() {
+  const { state } = useSidebar();
   const [movieData, setMovieData] = React.useState<ListResponse<Movie> | null>(null);
   const [tvData, setTVData] = React.useState<ListResponse<TvSerie> | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -94,24 +95,47 @@ export default function HeroSection() {
   }
 
   return (
-    <section id="showcase" className="container py-14">
-      <div className="relative flex flex-col">
+    <div id="showcase" className="container py-14">
+      <div className="relative flex flex-col items-center">
         {loading && (
           <div className="flex items-center justify-center py-14">
             <Spinner size="large" />
           </div>
         )}
-        <Marquee pauseOnHover className="max-w-screen [--duration:40s]">
-          {movieData?.results
-            .slice(0, 10)
-            .map((movie) => <Card key={movie.id} item={movie} type="Movie" />)}
-        </Marquee>
-        <Marquee reverse pauseOnHover className="mt-10 max-w-screen [--duration:40s]">
-          {tvData?.results.slice(0, 10).map((tv) => <Card key={tv.id} item={tv} type="Tv" />)}
-        </Marquee>
-        <div className="from-background pointer-events-none absolute inset-y-0 left-0 h-full w-1/12 bg-linear-to-r"></div>
-        <div className="from-background pointer-events-none absolute inset-y-0 right-0 h-full w-1/12 bg-linear-to-l"></div>
+
+        <div className="relative w-full">
+          <Marquee
+            pauseOnHover
+            className={`mx-auto ${
+              state === 'collapsed'
+                ? 'lg:max-w-4xl xl:max-w-6xl 2xl:max-w-screen'
+                : 'lg:max-w-2xl xl:max-w-4xl 2xl:max-w-6xl'
+            } [--duration:40s]`}
+          >
+            {movieData?.results
+              .slice(0, 10)
+              .map((movie) => <Card key={movie.id} item={movie} type="Movie" />)}
+          </Marquee>
+
+          <div className="from-background pointer-events-none absolute top-0 left-0 h-full w-1/12 bg-linear-to-r"></div>
+          <div className="from-background pointer-events-none absolute top-0 right-0 h-full w-1/12 bg-linear-to-l"></div>
+        </div>
+        <div className="relative mt-10 w-full">
+          <Marquee
+            reverse
+            pauseOnHover
+            className={`mx-auto ${
+              state === 'collapsed'
+                ? 'lg:max-w-4xl xl:max-w-6xl 2xl:max-w-screen'
+                : 'lg:max-w-2xl xl:max-w-4xl 2xl:max-w-6xl'
+            } [--duration:40s]`}
+          >
+            {tvData?.results.slice(0, 10).map((tv) => <Card key={tv.id} item={tv} type="Tv" />)}
+          </Marquee>
+          <div className="from-background pointer-events-none absolute top-0 left-0 h-full w-1/12 bg-linear-to-r"></div>
+          <div className="from-background pointer-events-none absolute top-0 right-0 h-full w-1/12 bg-linear-to-l"></div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

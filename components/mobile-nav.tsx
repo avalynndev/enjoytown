@@ -51,6 +51,7 @@ export const MobileNavBar = () => {
               <Link
                 key={label}
                 href={to}
+                onClick={toggleFullMenu}
                 className="flex aspect-square flex-col items-center justify-center rounded-lg bg-white p-4 dark:bg-[#181818]"
               >
                 {icon}
@@ -61,7 +62,7 @@ export const MobileNavBar = () => {
         </div>
       )}
 
-      <div className="fixed right-0 bottom-0 left-0 z-40 border-t bg-gray-100 md:hidden dark:border-gray-800 dark:bg-[#121212]">
+      <div className="fixed right-0 bottom-0 left-0 z-40 border-t bg-gray-100 lg:hidden dark:border-gray-800 dark:bg-[#121212]">
         <div className="flex items-center justify-around px-2 py-3">
           <NavItem icon={<Home size={20} />} label="Home" to="/" />
           <NavItem icon={<Search size={20} />} label="Search" to="/search" />

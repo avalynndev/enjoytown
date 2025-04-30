@@ -2,8 +2,15 @@ export default function List() {
   return (
     <div>
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="rounded-lg">
-          <h2 className="mb-4 text-2xl font-semibold">Multi Server</h2>
+        <div className="space-y-8">
+          <div className="text-center">
+            <h1 className="text-foreground text-4xl font-bold tracking-tight sm:text-5xl">
+              Movie/Tv Shows{' '}
+            </h1>
+            <p className="text-muted-foreground mt-4 text-xl">
+              A collection of free movie/tv show websites.
+            </p>
+          </div>
           <ul>
             <li>
               <a
