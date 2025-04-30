@@ -9,7 +9,6 @@ export default async function MovieInfo({ params }: { params: Promise<{ id: stri
     return (
       <div className="mx-auto max-w-6xl pb-8 md:pt-4">
         <DetailsContainer data={data} id={id} />
-
       </div>
     );
   } catch (err: any) {
