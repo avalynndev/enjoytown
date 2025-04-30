@@ -68,7 +68,7 @@ export default function RootLayout({
             <AppSidebar variant="inset" />
             <SidebarInset>
               <Toaster position="top-right" closeButton />
-              <div className="relative flex min-h-screen flex-col">
+              <div className="relative flex flex-col">
                 <div className="flex-1">{children}</div>
               </div>
               <Donate />

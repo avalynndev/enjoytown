@@ -3,22 +3,18 @@
 import * as React from 'react';
 import {
   IconCamera,
-  IconChartBar,
-  IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
-  IconSearch,
+  IconClock,
+  IconDeviceTvOld,
+  IconHeart,
   IconSettings,
-  IconUsers,
 } from '@tabler/icons-react';
-
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import {
+  SidebarGroupLabel,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+} from '@/components/ui/sidebar';
 import { NavSecondary } from '@/components/nav-secondary';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -34,7 +30,17 @@ import {
   SidebarGroup,
   SidebarGroupContent,
 } from '@/components/ui/sidebar';
-import { Clapperboard } from 'lucide-react';
+import {
+  Antenna,
+  Book,
+  ChevronRight,
+  Clapperboard,
+  Handshake,
+  List,
+  Monitor,
+  Tv,
+  Tv2,
+} from 'lucide-react';
 import Link from 'next/link';
 
 const data = {
@@ -47,109 +53,72 @@ const data = {
     {
       title: 'Movie',
       url: '/movie',
-      icon: IconDashboard,
+      icon: Tv2,
     },
     {
       title: 'Tv Shows',
       url: '/tv',
-      icon: IconListDetails,
+      icon: IconDeviceTvOld,
     },
     {
       title: 'Anime',
       url: '/anime',
-      icon: IconChartBar,
+      icon: Antenna,
     },
     {
-      title: '',
-      url: '#',
-      icon: IconFolder,
+      title: 'Drama',
+      url: '/drama',
+      icon: Tv,
     },
     {
-      title: 'Team',
-      url: '#',
-      icon: IconUsers,
+      title: 'Manga',
+      url: '/manga',
+      icon: Book,
     },
   ],
   navClouds: [
     {
-      title: 'Capture',
-      icon: IconCamera,
+      title: 'List',
+      icon: List,
       isActive: true,
-      url: '#',
       items: [
         {
-          title: 'Active Proposals',
-          url: '#',
+          title: 'Movie/TV',
+          url: '/list/mtv',
         },
         {
-          title: 'Archived',
-          url: '#',
+          title: 'Anime',
+          url: '/list/anime',
         },
       ],
     },
     {
-      title: 'Proposal',
-      icon: IconFileDescription,
-      url: '#',
+      title: 'Partners',
+      icon: Handshake,
+      isActive: true,
       items: [
         {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Prompts',
-      icon: IconFileAi,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
+          title: '1Anime',
+          url: 'https://1anime.app/',
         },
       ],
     },
   ],
   navSecondary: [
     {
+      title: 'History',
+      url: '/history',
+      icon: IconClock,
+    },
+    {
+      title: 'Watchlist',
+      url: '/watchlist',
+      icon: IconHeart,
+    },
+    {
       title: 'Settings',
-      url: '#',
+      url: '/settings',
       icon: IconSettings,
-    },
-    {
-      title: 'Get Help',
-      url: '#',
-      icon: IconHelp,
-    },
-    {
-      title: 'Search',
-      url: '#',
-      icon: IconSearch,
-    },
-  ],
-  documents: [
-    {
-      name: 'Data Library',
-      url: '#',
-      icon: IconDatabase,
-    },
-    {
-      name: 'Reports',
-      url: '#',
-      icon: IconReport,
-    },
-    {
-      name: 'Word Assistant',
-      url: '#',
-      icon: IconFileWord,
     },
   ],
 };
@@ -179,17 +148,53 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupContent className="flex flex-col gap-2">
             <SidebarMenu>
               {data.navMain.map((item) => (
-                <Link key={item.title} href={item.url}>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton tooltip={item.title}>
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild tooltip={item.title}>
+                    <Link href={item.url}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </Link>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Alternative Sources</SidebarGroupLabel>
+          <SidebarMenu>
+            {data.navClouds.map((item) => (
+              <Collapsible
+                key={item.title}
+                asChild
+                defaultOpen={item.isActive}
+                className="group/collapsible"
+              >
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton tooltip={item.title}>
+                      {item.icon && <item.icon />}
+                      <span>{item.title}</span>
+                      <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {item.items?.map((subItem) => (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SidebarMenuSubButton asChild>
+                            <a href={subItem.url}>
+                              <span>{subItem.title}</span>
+                            </a>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+            ))}
+          </SidebarMenu>
         </SidebarGroup>
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>

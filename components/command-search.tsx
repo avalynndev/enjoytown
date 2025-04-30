@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect, useState, useCallback } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { CommandIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -8,8 +8,16 @@ import { getRecentSearchesFromLocalStorage, saveSearchToLocalStorage } from '@/c
 import { Button } from '@/components/ui/button';
 import { Command, CommandDialog, CommandInput, CommandList } from '@/components/ui/command';
 import { Skeleton } from '@/components/ui/skeleton';
-import { FetchAnimeInfo, fetchDramaSearch } from '@/lib/consumet';
 import { tmdb } from '@/lib/tmdb';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 type AnimeResult = {
   id: string;
@@ -32,13 +40,6 @@ type AnimeResult = {
   currentEpisodeCount: number | null;
   type: string;
   releaseDate: number | null;
-};
-
-type DramaResult = {
-  id: string;
-  title: string;
-  url: string;
-  image: string;
 };
 
 type MovieResult = {
@@ -68,7 +69,7 @@ const CommandSearchSkeleton = () => (
 );
 
 type CommandSearchGroupProps = {
-  heading: string;
+  heading?: string;
   children: ReactNode;
 };
 
@@ -81,17 +82,22 @@ const CommandSearchGroup = ({ children, heading }: CommandSearchGroupProps) => {
   );
 };
 
+type RecentSearch = {
+  term: string;
+  category: 'movie' | 'tv' | 'anime' | 'recent';
+};
+
 export const CommandSearch = () => {
   const [open, setOpen] = useState(false);
+  const [category, setCategory] = useState<'movie' | 'tv' | 'anime' | 'recent'>('movie');
   const [search, setSearch] = useState('');
   const [result, setResults] = useState<Result | null>({
     movies: [],
     tvShows: [],
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [dramaResults, setDramaResults] = useState<DramaResult[] | null>(null);
   const [animeResults, setSearchResults] = useState<AnimeResult[] | null>(null);
-  const [recentSearches, setRecentSearches] = useState<string[]>([]); // State for recent searches
+  const [recentSearches, setRecentSearches] = useState<RecentSearch[]>([]);
 
   const debounce = (func: (...args: any[]) => void, delay: number) => {
     let debounceTimer: NodeJS.Timeout;
@@ -101,67 +107,44 @@ export const CommandSearch = () => {
     };
   };
 
-  const fetchDramaResults = async (title: string) => {
-    setIsLoading(true);
-    if (title) {
-      const data = await fetchDramaSearch(title); // Fetch drama search results
-      FetchAnimeInfo(data); // Process the fetched info if needed
-      setDramaResults(data.results); // Set the drama results
-    }
-    setIsLoading(false);
-  };
-
-  // Trigger drama search on input change
-  useEffect(() => {
-    const debouncedFetch = debounce(fetchDramaResults, 500);
-    debouncedFetch(search);
-  }, [search]);
-
-  const fetchAnimeResults = async (text: string) => {
-    setIsLoading(true);
-    if (text) {
-      const res = await fetch(`https://api-consumet-org-jet.vercel.app/meta/anilist/` + text, {
-        next: { revalidate: 21600 },
-      });
-      const data = await res.json();
-      setSearchResults(data.results);
-    }
-    setIsLoading(false);
-  };
-
-  // Trigger search on input change
-  useEffect(() => {
-    const debouncedFetch = debounce(fetchAnimeResults, 500);
-    debouncedFetch(search);
-  }, [search]);
-
   const pathName = usePathname();
   useEffect(() => {
-    // Load recent searches from local storage on mount
     const searches = getRecentSearchesFromLocalStorage();
     setRecentSearches(searches);
   }, []);
 
-  const fetchResults = useCallback(async (title: string) => {
-    setIsLoading(true);
-    if (title) {
-      const [movieData, tvData] = await Promise.all([
-        tmdb.movies.search(title, 'en-US'),
-        tmdb.tv.search(title, 'en-US'),
-      ]);
-      const combinedResults = {
-        movies: movieData.results,
-        tvShows: tvData.results,
-      };
-      setResults(combinedResults);
-    }
-    setIsLoading(false);
-  }, []);
-
   useEffect(() => {
-    const debouncedFetch = debounce(fetchResults, 500);
-    debouncedFetch(search);
-  }, [search, fetchResults]);
+    const debouncedSearch = debounce(async (text: string) => {
+      if (category === 'recent') return;
+
+      if (!text.trim()) {
+        setResults({ movies: [], tvShows: [] });
+        setSearchResults(null);
+        return;
+      }
+
+      setIsLoading(true);
+
+      if (category === 'movie') {
+        const movieData = await tmdb.movies.search(text, 'en-US');
+        setResults({ movies: movieData.results, tvShows: [] });
+      } else if (category === 'tv') {
+        const tvData = await tmdb.tv.search(text, 'en-US');
+        setResults({ movies: [], tvShows: tvData.results });
+      } else if (category === 'anime') {
+        const res = await fetch(`https://api-consumet-org-jet.vercel.app/meta/anilist/${text}`, {
+          next: { revalidate: 21600 },
+        });
+        const data = await res.json();
+        setSearchResults(data.results);
+        setResults({ movies: [], tvShows: [] });
+      }
+
+      setIsLoading(false);
+    }, 500);
+
+    debouncedSearch(search);
+  }, [search, category]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -181,12 +164,11 @@ export const CommandSearch = () => {
 
   const hasMovies = result?.movies && result?.movies?.length > 0;
   const hasTvSeries = result?.tvShows && result.tvShows.length > 0;
-  const hasDramaResults = dramaResults?.length ?? 0 > 0;
   const hasAnimeResults = animeResults?.length ?? 0 > 0;
 
   const handleSearchSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      saveSearchToLocalStorage(search);
+      saveSearchToLocalStorage(search, category);
     }
   };
 
@@ -204,6 +186,25 @@ export const CommandSearch = () => {
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
+        <div className="justify-end px-4 pt-4">
+          <Select
+            onValueChange={(value) => setCategory(value as 'movie' | 'tv' | 'anime' | 'recent')}
+            defaultValue="movie"
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select Category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Category</SelectLabel>
+                <SelectItem value="movie">Movie</SelectItem>
+                <SelectItem value="tv">TV</SelectItem>
+                <SelectItem value="anime">Anime</SelectItem>
+                <SelectItem value="recent">Recent Searches</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
         <Command>
           <CommandInput
             placeholder="Search"
@@ -213,41 +214,18 @@ export const CommandSearch = () => {
           />
 
           <CommandList>
-            {recentSearches && (
-              <CommandSearchGroup heading="Recent Searches">
-                {recentSearches.map((item, index) => (
-                  <div
-                    key={index}
-                    className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
-                    onClick={() => setSearch(item)}
-                  >
-                    <span className="truncate text-sm whitespace-nowrap">{item}</span>
-                  </div>
-                ))}
-              </CommandSearchGroup>
+            {!search && (
+              <div className={`px-4 pt-4 ${category === 'recent' ? '' : 'pb-4'}`}>
+                <div className="text-muted-foreground bg-muted/50 rounded-sm p-2 text-xs">
+                  💡 <strong>Tip:</strong> Press <kbd>Enter</kbd> after typing to save a search. It
+                  will appear in recent searches so you can quickly access it later.
+                </div>
+              </div>
             )}
 
             {isLoading && (
               <div className="space-y-8">
-                <CommandSearchGroup heading="Movies">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <CommandSearchSkeleton key={index} />
-                  ))}
-                </CommandSearchGroup>
-
-                <CommandSearchGroup heading="Tv Shows">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <CommandSearchSkeleton key={index} />
-                  ))}
-                </CommandSearchGroup>
-
-                <CommandSearchGroup heading="Drama">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <CommandSearchSkeleton key={index} />
-                  ))}
-                </CommandSearchGroup>
-
-                <CommandSearchGroup heading="Anime">
+                <CommandSearchGroup>
                   {Array.from({ length: 5 }).map((_, index) => (
                     <CommandSearchSkeleton key={index} />
                   ))}
@@ -255,10 +233,30 @@ export const CommandSearch = () => {
               </div>
             )}
 
-            {!isLoading && result ? (
+            {category === 'recent' && recentSearches.length > 0 && (
+              <CommandSearchGroup>
+                {recentSearches.map((item, index) => (
+                  <div
+                    key={index}
+                    className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
+                    onClick={() => {
+                      setCategory(item.category);
+                      setSearch(item.term);
+                    }}
+                  >
+                    <span className="truncate text-sm whitespace-nowrap">{item.term}</span>
+                    <span className="text-muted-foreground text-xs whitespace-nowrap capitalize">
+                      {item.category}
+                    </span>
+                  </div>
+                ))}
+              </CommandSearchGroup>
+            )}
+
+            {!isLoading && (hasMovies || hasTvSeries || hasAnimeResults) && category != 'recent' ? (
               <div>
                 {hasMovies && (
-                  <CommandSearchGroup heading="Movies">
+                  <CommandSearchGroup>
                     {result.movies.map((item) => (
                       <Link
                         key={item.id}
@@ -276,7 +274,7 @@ export const CommandSearch = () => {
                 )}
 
                 {hasTvSeries && (
-                  <CommandSearchGroup heading="TV Shows">
+                  <CommandSearchGroup>
                     {result.tvShows.map((item) => (
                       <Link
                         key={item.id}
@@ -293,22 +291,8 @@ export const CommandSearch = () => {
                   </CommandSearchGroup>
                 )}
 
-                {hasDramaResults && (
-                  <CommandSearchGroup heading="Drama">
-                    {dramaResults?.map((item) => (
-                      <Link
-                        key={item.id}
-                        className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
-                        href={`/drama/${item.id}`}
-                      >
-                        <span className="truncate text-sm whitespace-nowrap">{item.title}</span>
-                      </Link>
-                    ))}
-                  </CommandSearchGroup>
-                )}
-
                 {hasAnimeResults && (
-                  <CommandSearchGroup heading="Anime">
+                  <CommandSearchGroup>
                     {animeResults?.map((item) => (
                       <Link
                         key={item.id}
@@ -328,7 +312,9 @@ export const CommandSearch = () => {
                 )}
               </div>
             ) : (
-              !isLoading && <p className="p-8 text-center">No Results</p>
+              !isLoading &&
+              search &&
+              category != 'recent' && <p className="p-8 text-center">No results found.</p>
             )}
           </CommandList>
         </Command>

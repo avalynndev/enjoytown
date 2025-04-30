@@ -16,7 +16,7 @@ export default function Read() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  }, [chapter, id, lang, title]);
+  }, [chapter, lang, title]);
 
   useEffect(() => {
     fetchData();
