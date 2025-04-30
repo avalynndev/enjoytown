@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react';
-import { CommandIcon } from 'lucide-react';
+import { CommandIcon, Filter } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { getRecentSearchesFromLocalStorage, saveSearchToLocalStorage } from '@/components/storage';
@@ -192,7 +192,7 @@ export const CommandSearch = () => {
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <div className="justify-end px-4 pt-4">
+        <div className="flex items-center space-x-2 px-4 pt-4">
           <Select
             onValueChange={(value) => setCategory(value as 'movie' | 'tv' | 'anime' | 'recent')}
             defaultValue="movie"
@@ -210,7 +210,12 @@ export const CommandSearch = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
+
+          <Button disabled size="icon">
+            <Filter />
+          </Button>
         </div>
+
         <Command>
           <CommandInput
             placeholder="Search"
@@ -284,7 +289,7 @@ export const CommandSearch = () => {
                             side="top"
                             align="start"
                           >
-                            <ItemHoverCard.Banner>
+                            <ItemHoverCard.Banner className="aspect-video">
                               {item.backdrop_path && (
                                 <Image
                                   src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
@@ -342,7 +347,7 @@ export const CommandSearch = () => {
                             side="top"
                             align="start"
                           >
-                            <ItemHoverCard.Banner>
+                            <ItemHoverCard.Banner className="aspect-video">
                               {item.backdrop_path && (
                                 <Image
                                   src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
@@ -401,7 +406,7 @@ export const CommandSearch = () => {
                             side="top"
                             align="start"
                           >
-                            <ItemHoverCard.Banner>
+                            <ItemHoverCard.Banner className="aspect-[16/6]">
                               {item.cover && (
                                 <Image
                                   src={item.cover}

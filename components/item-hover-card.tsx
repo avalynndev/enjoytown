@@ -1,11 +1,16 @@
 import type { PropsWithChildren } from 'react';
+import { HTMLAttributes } from 'react';
 
-const Banner = (props: PropsWithChildren) => {
+interface BannerProps extends HTMLAttributes<HTMLElement> {}
+
+const Banner = ({ className, children, ...props }: PropsWithChildren<BannerProps>) => {
   return (
     <figure
-      className="bg-muted dark:bg-muted/25 relative aspect-[16/6] overflow-hidden"
+      className={`bg-muted dark:bg-muted/25 relative overflow-hidden ${className}`}
       {...props}
-    />
+    >
+      {children}
+    </figure>
   );
 };
 
