@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react';
-import { CommandIcon } from 'lucide-react';
+import { CommandIcon, Filter } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { getRecentSearchesFromLocalStorage, saveSearchToLocalStorage } from '@/components/storage';
@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Command, CommandDialog, CommandInput, CommandList } from '@/components/ui/command';
 import { Skeleton } from '@/components/ui/skeleton';
 import { tmdb } from '@/lib/tmdb';
+import { fetchAnimeSearch } from '@/lib/consumet';
 import {
   Select,
   SelectContent,
@@ -18,6 +19,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { ItemHoverCard } from '@/components/item-hover-card';
+import { HoverCardPortal } from '@radix-ui/react-hover-card';
+import Image from 'next/image';
 
 type AnimeResult = {
   id: string;
@@ -47,6 +52,8 @@ type MovieResult = {
   title: string;
   release_date: string;
   poster_path: string;
+  backdrop_path?: string;
+  overview: string;
 };
 
 type TvResult = {
@@ -54,6 +61,8 @@ type TvResult = {
   name: string;
   first_air_date: string;
   poster_path: string;
+  backdrop_path?: string;
+  overview: string;
 };
 
 type Result = {
@@ -132,11 +141,8 @@ export const CommandSearch = () => {
         const tvData = await tmdb.tv.search(text, 'en-US');
         setResults({ movies: [], tvShows: tvData.results });
       } else if (category === 'anime') {
-        const res = await fetch(`https://api-consumet-org-jet.vercel.app/meta/anilist/${text}`, {
-          next: { revalidate: 21600 },
-        });
-        const data = await res.json();
-        setSearchResults(data.results);
+        const animeData = await fetchAnimeSearch(text);
+        setSearchResults(animeData.results);
         setResults({ movies: [], tvShows: [] });
       }
 
@@ -186,7 +192,7 @@ export const CommandSearch = () => {
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <div className="justify-end px-4 pt-4">
+        <div className="flex items-center space-x-2 px-4 pt-4">
           <Select
             onValueChange={(value) => setCategory(value as 'movie' | 'tv' | 'anime' | 'recent')}
             defaultValue="movie"
@@ -204,7 +210,12 @@ export const CommandSearch = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
+
+          <Button disabled size="icon">
+            <Filter />
+          </Button>
         </div>
+
         <Command>
           <CommandInput
             placeholder="Search"
@@ -258,17 +269,57 @@ export const CommandSearch = () => {
                 {hasMovies && (
                   <CommandSearchGroup>
                     {result.movies.map((item) => (
-                      <Link
-                        key={item.id}
-                        href={`/movie/${item.id}`}
-                        className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
-                      >
-                        <span className="truncate text-sm whitespace-nowrap">{item.title}</span>
+                      <HoverCard key={item.id}>
+                        <HoverCardTrigger>
+                          <Link
+                            href={`/movie/${item.id}`}
+                            className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
+                          >
+                            <span className="truncate text-sm whitespace-nowrap">{item.title}</span>
 
-                        <span className="text-muted-foreground text-xs whitespace-nowrap">
-                          {item.release_date && new Date(item.release_date).getFullYear()}
-                        </span>
-                      </Link>
+                            <span className="text-muted-foreground text-xs whitespace-nowrap">
+                              {item.release_date && new Date(item.release_date).getFullYear()}
+                            </span>
+                          </Link>
+                        </HoverCardTrigger>
+
+                        <HoverCardPortal>
+                          <HoverCardContent
+                            className="w-[320px] overflow-hidden rounded-lg p-0"
+                            side="top"
+                            align="start"
+                          >
+                            <ItemHoverCard.Banner className="aspect-video">
+                              {item.backdrop_path && (
+                                <Image
+                                  src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
+                                  alt={item.title}
+                                  fill
+                                />
+                              )}
+                            </ItemHoverCard.Banner>
+
+                            <ItemHoverCard.Information>
+                              <ItemHoverCard.Poster>
+                                {item.poster_path && (
+                                  <Image
+                                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                                    alt={item.title}
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                  />
+                                )}
+                              </ItemHoverCard.Poster>
+
+                              <ItemHoverCard.Summary>
+                                <ItemHoverCard.Title>{item.title}</ItemHoverCard.Title>
+
+                                <ItemHoverCard.Overview>{item.overview}</ItemHoverCard.Overview>
+                              </ItemHoverCard.Summary>
+                            </ItemHoverCard.Information>
+                          </HoverCardContent>
+                        </HoverCardPortal>
+                      </HoverCard>
                     ))}
                   </CommandSearchGroup>
                 )}
@@ -276,17 +327,57 @@ export const CommandSearch = () => {
                 {hasTvSeries && (
                   <CommandSearchGroup>
                     {result.tvShows.map((item) => (
-                      <Link
-                        key={item.id}
-                        className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
-                        href={`/tv/${item.id}`}
-                      >
-                        <span className="truncate text-sm whitespace-nowrap">{item.name}</span>
+                      <HoverCard key={item.id}>
+                        <HoverCardTrigger>
+                          <Link
+                            className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
+                            href={`/tv/${item.id}`}
+                          >
+                            <span className="truncate text-sm whitespace-nowrap">{item.name}</span>
 
-                        <span className="text-muted-foreground text-xs whitespace-nowrap">
-                          {item.first_air_date && new Date(item.first_air_date).getFullYear()}
-                        </span>
-                      </Link>
+                            <span className="text-muted-foreground text-xs whitespace-nowrap">
+                              {item.first_air_date && new Date(item.first_air_date).getFullYear()}
+                            </span>
+                          </Link>
+                        </HoverCardTrigger>
+
+                        <HoverCardPortal>
+                          <HoverCardContent
+                            className="w-[320px] overflow-hidden rounded-lg p-0"
+                            side="top"
+                            align="start"
+                          >
+                            <ItemHoverCard.Banner className="aspect-video">
+                              {item.backdrop_path && (
+                                <Image
+                                  src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
+                                  alt={item.name}
+                                  fill
+                                />
+                              )}
+                            </ItemHoverCard.Banner>
+
+                            <ItemHoverCard.Information>
+                              <ItemHoverCard.Poster>
+                                {item.poster_path && (
+                                  <Image
+                                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                                    alt={item.name}
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                  />
+                                )}
+                              </ItemHoverCard.Poster>
+
+                              <ItemHoverCard.Summary>
+                                <ItemHoverCard.Title>{item.name}</ItemHoverCard.Title>
+
+                                <ItemHoverCard.Overview>{item.overview}</ItemHoverCard.Overview>
+                              </ItemHoverCard.Summary>
+                            </ItemHoverCard.Information>
+                          </HoverCardContent>
+                        </HoverCardPortal>
+                      </HoverCard>
                     ))}
                   </CommandSearchGroup>
                 )}
@@ -294,19 +385,70 @@ export const CommandSearch = () => {
                 {hasAnimeResults && (
                   <CommandSearchGroup>
                     {animeResults?.map((item) => (
-                      <Link
-                        key={item.id}
-                        className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
-                        href={`/anime/${item.id}`}
-                      >
-                        <span className="truncate text-sm whitespace-nowrap">
-                          {item.title.userPreferred || item.title.english || item.title.romaji}
-                        </span>
+                      <HoverCard key={item.id}>
+                        <HoverCardTrigger>
+                          <Link
+                            className="hover:bg-muted flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2"
+                            href={`/anime/${item.id}`}
+                          >
+                            <span className="truncate text-sm whitespace-nowrap">
+                              {item.title.userPreferred || item.title.english || item.title.romaji}
+                            </span>
 
-                        <span className="text-muted-foreground text-xs whitespace-nowrap">
-                          Episodes: {item.totalEpisodes}
-                        </span>
-                      </Link>
+                            <span className="text-muted-foreground text-xs whitespace-nowrap">
+                              Episodes: {item.totalEpisodes}
+                            </span>
+                          </Link>{' '}
+                        </HoverCardTrigger>
+                        <HoverCardPortal>
+                          <HoverCardContent
+                            className="w-[320px] overflow-hidden rounded-lg p-0"
+                            side="top"
+                            align="start"
+                          >
+                            <ItemHoverCard.Banner className="aspect-[16/6]">
+                              {item.cover && (
+                                <Image
+                                  src={item.cover}
+                                  alt={
+                                    item.title.userPreferred ||
+                                    item.title.english ||
+                                    item.title.romaji
+                                  }
+                                  fill
+                                />
+                              )}
+                            </ItemHoverCard.Banner>
+
+                            <ItemHoverCard.Information>
+                              <ItemHoverCard.Poster>
+                                {item.image && (
+                                  <Image
+                                    src={item.image}
+                                    alt={
+                                      item.title.userPreferred ||
+                                      item.title.english ||
+                                      item.title.romaji
+                                    }
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                  />
+                                )}
+                              </ItemHoverCard.Poster>
+
+                              <ItemHoverCard.Summary>
+                                <ItemHoverCard.Title>
+                                  {item.title.userPreferred ||
+                                    item.title.english ||
+                                    item.title.romaji}
+                                </ItemHoverCard.Title>
+
+                                <ItemHoverCard.Overview>{item.description}</ItemHoverCard.Overview>
+                              </ItemHoverCard.Summary>
+                            </ItemHoverCard.Information>
+                          </HoverCardContent>
+                        </HoverCardPortal>
+                      </HoverCard>
                     ))}
                   </CommandSearchGroup>
                 )}

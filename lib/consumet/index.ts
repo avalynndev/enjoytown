@@ -12,6 +12,14 @@ export async function FetchAnimeInfo(data: any) {
   }
 }
 
+export async function fetchAnimeSearch(text: any) {
+  const res = await fetch(`${process.env.CONSUMET_API_URL}/meta/anilist/${text}`, {
+    next: { revalidate: 21600 },
+  });
+  const data = await res.json();
+  return data;
+}
+
 export async function fetchDramaSearch(title: any) {
   const res = await fetch(`${process.env.CONSUMET_API_URL}/movies/dramacool/${title}`, {
     cache: 'force-cache',
