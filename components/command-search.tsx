@@ -204,7 +204,7 @@ export const CommandSearch = () => {
               <SelectGroup>
                 <SelectLabel>Category</SelectLabel>
                 <SelectItem value="movie">Movie</SelectItem>
-                <SelectItem value="tv">TV</SelectItem>
+                <SelectItem value="tv">TV Shows </SelectItem>
                 <SelectItem value="anime">Anime</SelectItem>
                 <SelectItem value="recent">Recent Searches</SelectItem>
               </SelectGroup>
