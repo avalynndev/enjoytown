@@ -204,16 +204,18 @@ export const CommandSearch = () => {
               <SelectGroup>
                 <SelectLabel>Category</SelectLabel>
                 <SelectItem value="movie">Movie</SelectItem>
-                <SelectItem value="tv">TV Shows </SelectItem>
+                <SelectItem value="tv">TV Shows</SelectItem>
                 <SelectItem value="anime">Anime</SelectItem>
                 <SelectItem value="recent">Recent Searches</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
 
-          <Button disabled size="icon">
-            <Filter />
-          </Button>
+          <Link href="/search">
+            <Button size="icon">
+              <Filter />
+            </Button>
+          </Link>
         </div>
 
         <Command>
