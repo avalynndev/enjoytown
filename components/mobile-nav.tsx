@@ -75,8 +75,8 @@ export const MobileNavBar = () => {
             </button>
             <span className="mt-1 text-[10px]">Menu</span>
           </div>
-          <NavItem icon={<Film size={20} />} label="History" to="/movies" />
-          <NavItem icon={<Tv size={20} />} label="Watch List" to="/tv-shows" />
+          <NavItem icon={<Film size={20} />} label="History" to="/history" />
+          <NavItem icon={<Tv size={20} />} label="Watch List" to="/watchlist" />
         </div>
       </div>
     </>
