@@ -10,9 +10,13 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/ui/select';
-import { Filter } from 'lucide-react';
+import { Filter, ImageIcon } from 'lucide-react';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Badge } from '../ui/badge';
+import { Separator } from '../ui/separator';
 
 const SearchHeader = () => {
   const [query, setQuery] = useState('');
@@ -151,20 +155,98 @@ const SearchHeader = () => {
       {/* Optional: Show Results */}
       {isLoading && <p className="text-muted-foreground text-sm">Loading...</p>}
       {results?.length > 0 && (
-        <ul className="space-y-2">
+        <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3">
           {results.map((item: any) => (
-            <Link href={`/${category}/${item.id}`} key={item.id} className="text-sm">
-              {category === 'anime'
-                ? item.title?.userPreferred ||
-                  item.title?.english ||
-                  item.title?.romaji ||
-                  'Unknown Title'
-                : category === 'movie'
-                  ? item.title || 'Unknown Title'
-                  : item.name || 'Unknown Title'}
+            <Link
+              href={`/${category}/${item.id}`}
+              key={item.id}
+              className="w-full cursor-pointer space-y-2"
+              data-testid="movie-card"
+            >
+              <div className="bg-background/50 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border shadow-sm">
+                {item.backdrop_path || item.image ? (
+                  <Image
+                    fill
+                    className="object-cover"
+                    src={
+                      category === 'anime'
+                        ? item.image
+                        : `https://image.tmdb.org/t/p/original${item.backdrop_path}`
+                    }
+                    alt={
+                      category === 'anime'
+                        ? typeof item.title === 'string'
+                          ? item.title
+                          : item.title.english ||
+                            item.title.userPreferred ||
+                            item.title.romaji ||
+                            item.title.native ||
+                            'Unknown Title'
+                        : category === 'movie'
+                          ? item.title || 'Unknown Title'
+                          : item.name || 'Unknown Title'
+                    }
+                    sizes="100%"
+                  />
+                ) : (
+                  <ImageIcon className="text-muted" />
+                )}
+              </div>
+              <div className="space-y-1.5">
+                <div className="flex items-start justify-between gap-1">
+                  {category === 'anime' ? (
+                    <>
+                      <div className="justify-start">
+                        <span className="trucate line-clamp-1">
+                          {typeof item.title === 'string'
+                            ? item.title
+                            : item.title.english ||
+                              item.title.userPreferred ||
+                              item.title.romaji ||
+                              item.title.native ||
+                              ''}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-end gap-2">
+                        {item.rating && (
+                          <Badge variant="outline">{item.rating ? item.rating / 10 : '?'}</Badge>
+                        )}
+                        <Badge variant="default">
+                          {item.episodeNumber ? item.episodeNumber : (item.totalEpisodes ?? '?')}
+                        </Badge>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <span className="">
+                        {category === 'movie'
+                          ? item.title || 'Unknown Title'
+                          : item.name || 'Unknown Title'}
+                      </span>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <Badge variant="outline">
+                              {item.vote_average ? item.vote_average.toFixed(1) : '?'}
+                            </Badge>
+                          </TooltipTrigger>
+
+                          <TooltipContent>
+                            <p>{item.vote_count} votes</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>{' '}
+                    </>
+                  )}
+                </div>
+
+                <p className="text-muted-foreground line-clamp-3 text-xs">
+                  {category === 'anime' ? item.description : item.overview}
+                </p>
+              </div>
             </Link>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

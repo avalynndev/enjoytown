@@ -1,4 +1,3 @@
-// hooks/useSearch.ts
 import { useState, useEffect } from 'react';
 import { tmdb } from '@/lib/tmdb';
 import { fetchAnimeSearch } from '@/lib/consumet';
@@ -30,7 +29,7 @@ export function useSearch(search: string, category: SearchCategory) {
       }
 
       setIsLoading(false);
-    }, 500); // 500ms debounce
+    }, 500); 
 
     return () => clearTimeout(delayDebounce);
   }, [search, category]);
