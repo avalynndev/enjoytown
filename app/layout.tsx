@@ -11,6 +11,7 @@ import Donate from '@/components/donate';
 const spaceGrotesk = SpaceGrotesk({ subsets: ['latin'] });
 import { AppSidebar } from '@/components/app-sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { Providers } from './providers';
 
 export const viewport: Viewport = {
   themeColor: [
@@ -45,37 +46,41 @@ export default function RootLayout({
       </head>
       <GoogleAnalytics gaId="G-84Z171LN4N" />
       <body className="min-h-screen bg-[#121212] font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <NextTopLoader
-            color="#2299DD"
-            initialPosition={0.08}
-            crawlSpeed={200}
-            height={3}
-            crawl={true}
-            showSpinner={true}
-            easing="ease"
-            speed={200}
-            shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-          />
-          <SidebarProvider
-            style={
-              {
-                '--sidebar-width': 'calc(var(--spacing) * 72)',
-                '--header-height': 'calc(var(--spacing) * 14)',
-              } as React.CSSProperties
-            }
-          >
-            <AppSidebar variant="inset" />
-            <SidebarInset>
-              <Toaster position="top-right" closeButton />
-              <div className="relative flex flex-col">
-                <div className="flex-1">{children}</div>
-              </div>
-              <Donate />
-              <TailwindIndicator />
-            </SidebarInset>
-          </SidebarProvider>
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <NextTopLoader
+              color="#2299DD"
+              initialPosition={0.08}
+              crawlSpeed={200}
+              height={3}
+              crawl={true}
+              showSpinner={true}
+              easing="ease"
+              speed={200}
+              shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+            />
+            <SidebarProvider
+              style={
+                {
+                  '--sidebar-width': 'calc(var(--spacing) * 72)',
+                  '--header-height': 'calc(var(--spacing) * 14)',
+                } as React.CSSProperties
+              }
+            >
+              <AppSidebar variant="inset" />
+              <SidebarInset>
+                <Toaster position="top-right" closeButton />
+
+                <div className="relative flex flex-col">
+                  <div className="flex-1">{children}</div>
+                </div>
+
+                <Donate />
+                <TailwindIndicator />
+              </SidebarInset>
+            </SidebarProvider>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

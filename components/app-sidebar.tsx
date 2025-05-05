@@ -16,7 +16,7 @@ import {
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 import { NavSecondary } from '@/components/nav-secondary';
-import { NavUser } from '@/components/nav-user';
+import { UserButton } from '@daveyplate/better-auth-ui';
 import {
   Sidebar,
   SidebarContent,
@@ -125,6 +125,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar();
+
   return (
     <Sidebar collapsible="icon" {...props} className="bg-gray-100 dark:bg-black">
       <SidebarHeader className="mr-1 mb-3 rounded-xl bg-white dark:bg-[#121212]">
@@ -199,7 +200,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter className="mr-1 rounded-xl bg-white dark:bg-[#121212]">
-        <NavUser user={data.user} />
+        <UserButton
+          size="full"
+          additionalLinks={[
+            {
+              href: '/profile',
+              label: 'Profile',
+              signedIn: true,
+            },
+          ]}
+        />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

@@ -29,7 +29,7 @@ export function useSearch(search: string, category: SearchCategory) {
       }
 
       setIsLoading(false);
-    }, 500); 
+    }, 500);
 
     return () => clearTimeout(delayDebounce);
   }, [search, category]);
