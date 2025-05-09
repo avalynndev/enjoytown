@@ -11,7 +11,7 @@ const resend = new Resend(process.env.RESEND_API_KEY || '');
 const fromEmail = 'AVALYNNDEV <noreply@auth.newtech.dev>'; // add email
 
 export const auth = betterAuth({
-  appName: "Enjoytown",
+  appName: 'Enjoytown',
   emailAndPassword: {
     enabled: true,
     sendResetPassword: async ({ user, url, token }) => {

@@ -60,7 +60,7 @@ export function Providers({ children }: { children: ReactNode }) {
           onSessionChange={() => {
             router.refresh();
           }}
-          signUpFields={[""]}
+          signUpFields={['']}
           magicLink
           nameRequired={false}
           Link={Link}

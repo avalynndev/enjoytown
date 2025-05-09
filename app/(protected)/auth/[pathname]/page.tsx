@@ -12,4 +12,3 @@ export default async function AuthPage({ params }: { params: Promise<{ pathname:
     </main>
   );
 }
-
