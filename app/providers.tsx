@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider, isServer } from '@tanstack/react-quer
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { ReactNode } from 'react';
-import { Toaster, toast } from 'sonner';
+import { toast } from 'sonner';
 
 import { authClient } from '@/lib/auth-client';
 
@@ -14,8 +14,6 @@ function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        // With SSR, we usually want to set some default staleTime
-        // above 0 to avoid refetching immediately on the client
         staleTime: 60 * 1000,
       },
     },
@@ -62,7 +60,13 @@ export function Providers({ children }: { children: ReactNode }) {
           onSessionChange={() => {
             router.refresh();
           }}
+          signUpFields={[""]}
+          magicLink
+          nameRequired={false}
           Link={Link}
+          multiSession
+          deleteUser
+          username
         >
           {children}
         </AuthUIProviderTanstack>

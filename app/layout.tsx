@@ -12,6 +12,7 @@ const spaceGrotesk = SpaceGrotesk({ subsets: ['latin'] });
 import { AppSidebar } from '@/components/app-sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { Providers } from './providers';
+import FeedbackBadge from '@/components/feedback';
 
 export const viewport: Viewport = {
   themeColor: [
@@ -74,8 +75,7 @@ export default function RootLayout({
                 <div className="relative flex flex-col">
                   <div className="flex-1">{children}</div>
                 </div>
-
-                <Donate />
+                <FeedbackBadge />
                 <TailwindIndicator />
               </SidebarInset>
             </SidebarProvider>

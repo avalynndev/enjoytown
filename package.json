@@ -10,7 +10,7 @@
     "lint:prettier": "prettier --check ."
   },
   "dependencies": {
-    "@daveyplate/better-auth-ui": "^1.5.8",
+    "@daveyplate/better-auth-ui": "^1.5.18",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",
@@ -33,6 +33,7 @@
     "@radix-ui/react-select": "^2.2.2",
     "@radix-ui/react-separator": "^1.1.4",
     "@radix-ui/react-slot": "^1.2.0",
+    "@radix-ui/react-switch": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.9",
     "@radix-ui/react-toast": "^1.2.4",
     "@radix-ui/react-toggle": "^1.1.6",
@@ -70,6 +71,7 @@
     "react-icons": "^5.5.0",
     "react-wrap-balancer": "^1.1.1",
     "recharts": "^2.15.3",
+    "resend": "^4.5.1",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.2.0",
     "tailwindcss-animate": "^1.0.7",

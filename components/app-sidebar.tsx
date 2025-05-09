@@ -1,13 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import {
-  IconCamera,
-  IconClock,
-  IconDeviceTvOld,
-  IconHeart,
-  IconSettings,
-} from '@tabler/icons-react';
+import { IconClock, IconDeviceTvOld, IconHeart, IconSettings } from '@tabler/icons-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
   SidebarGroupLabel,
@@ -42,6 +36,8 @@ import {
   Tv2,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useSession } from '@/lib/auth-client';
+import { PersonIcon } from '@radix-ui/react-icons';
 
 const data = {
   user: {
@@ -125,6 +121,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar();
+  const { data: sessionData } = useSession();
 
   return (
     <Sidebar collapsible="icon" {...props} className="bg-gray-100 dark:bg-black">
@@ -201,14 +198,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter className="mr-1 rounded-xl bg-white dark:bg-[#121212]">
         <UserButton
-          size="full"
+          size={state === 'collapsed' ? 'icon' : 'full'}
           additionalLinks={[
             {
-              href: '/profile',
+              href: `/profile/${sessionData?.user.username}`,
               label: 'Profile',
+              icon: <PersonIcon />,
               signedIn: true,
             },
           ]}
+          className="ml-1"
         />
       </SidebarFooter>
       <SidebarRail />

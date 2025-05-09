@@ -14,7 +14,7 @@ export default async function Home() {
                 Welcome to the town of enjoyment! 🏙️
               </Badge>
             </Link>
-            <h1 className="text-6xl font-bold">Explore movies, tv series, and animes!</h1>
+            <h1 className="text-6xl font-bold">Explore movies, tv series and animes!</h1>
             <p className="text-muted-foreground text-sm leading-6">
               EnjoyTown is a streaming platform for lazy people who like to
               <br />

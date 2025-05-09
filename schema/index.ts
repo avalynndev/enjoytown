@@ -1,4 +1,5 @@
 import { pgTable, text, timestamp, boolean, integer } from 'drizzle-orm/pg-core';
+import { randomUUID } from 'crypto';
 
 export const user = pgTable('user', {
   id: text('id').primaryKey(),
@@ -8,6 +9,8 @@ export const user = pgTable('user', {
   image: text('image'),
   createdAt: timestamp('created_at').notNull(),
   updatedAt: timestamp('updated_at').notNull(),
+  username: text('username').unique(),
+  displayUsername: text('display_username'),
 });
 
 export const session = pgTable('session', {
@@ -50,4 +53,17 @@ export const verification = pgTable('verification', {
   updatedAt: timestamp('updated_at'),
 });
 
-export const schema = { user, session, account, verification };
+export const feedback = pgTable('feedback', {
+  id: text('id').default(randomUUID()),
+  type: text('type').notNull(),
+  name: text('name'),
+  url: text('url'),
+  issue: text('issue'),
+  reason: text('reason'),
+  logs: text('logs'),
+  message: text('message'),
+  email: text('email'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export const schema = { user, session, account, verification, feedback };
