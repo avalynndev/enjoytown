@@ -16,7 +16,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@heroui/react": "^2.7.5",
-    "@heroui/theme": "^2.4.12",
+    "@heroui/theme": "^2.4.15",
     "@hookform/resolvers": "^5.0.1",
     "@neondatabase/serverless": "^1.0.0",
     "@next/third-parties": "^15.3.1",
