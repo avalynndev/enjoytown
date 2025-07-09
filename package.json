@@ -54,7 +54,7 @@
     "cobe": "^0.6.4",
     "date-fns": "^4.1.0",
     "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.43.1",
+    "drizzle-orm": "^0.44.2",
     "embla-carousel-react": "^8.5.1",
     "framer-motion": "^12.5.0",
     "fs": "^0.0.1-security",
