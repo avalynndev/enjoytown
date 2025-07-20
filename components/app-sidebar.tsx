@@ -198,7 +198,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter className="mr-1 rounded-xl bg-white dark:bg-[#121212]">
         <UserButton
-          size={state === 'collapsed' ? 'icon' : 'full'}
+          size={state === 'collapsed' ? 'icon' : 'default'}
           additionalLinks={[
             {
               href: `/profile/${sessionData?.user.username}`,
