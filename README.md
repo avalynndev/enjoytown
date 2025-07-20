@@ -68,9 +68,19 @@ Add a ENV FILE with:
 
 ```env
 DOWNLOAD_API_URL=https://v1.api.ani.rohi.dev/api/dramacool
-CONSUMET_API_URL=https://consumet_api_url (deploy your own with the instructions below, dont end with slash)
-TMDB_API_KEY=(get your own api key with the instructions below)
+CONSUMET_API_URL=https://consumet_api_url
+TMDB_API_KEY=
+# Find how to get your own api key on the readme
 PROXY_M3U8 = "https://yourproxy.com/fetch?url=
+# PROXY_M3U8 would be found at https://github.com/JulzOhern/Gogoanime-and-Hianime-proxy. If deploying to vercel keep . as output directory.
+BETTER_AUTH_SECRET= 
+#https://generate-secret.vercel.app/32
+NEXT_PUBLIC_API_URL=localhost:3000
+BETTER_AUTH_URL=localhost:3000
+RESEND_API_KEY=
+# check resend website to get the api key
+DATABASE_URL=
+# create a database with neon.tech website
 ```
 
 > PROXY_M3U8 would be found at <a href="https://github.com/JulzOhern/Gogoanime-and-Hianime-proxy">Hianime-proxy</a>. If deploying to vercel keep . as output directory.
