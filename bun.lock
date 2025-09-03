@@ -60,7 +60,7 @@
         "next-themes": "^0.4.6",
         "nextjs-toploader": "^3.8.16",
         "radix-ui": "^1.4.2",
-        "react": "^19.1.0",
+        "react": "^19.1.1",
         "react-dom": "^19.1.0",
         "react-hook-form": "^7.62.0",
         "react-icons": "^5.5.0",
@@ -78,7 +78,7 @@
       "devDependencies": {
         "@tailwindcss/postcss": "^4.1.7",
         "@types/node": "^24",
-        "@types/react": "^19.1.2",
+        "@types/react": "^19.1.12",
         "@types/react-dom": "^19.1.3",
         "drizzle-kit": "^0.31.1",
         "eslint": "^9",
@@ -1135,7 +1135,7 @@
 
     "@types/pg": ["@types/pg@8.11.14", "", { "dependencies": { "@types/node": "*", "pg-protocol": "*", "pg-types": "^4.0.1" } }, "sha512-qyD11E5R3u0eJmd1lB0WnWKXJGA7s015nyARWljfz5DcX83TKAIlY+QrmvzQTsbIe+hkiFtkyL2gHC6qwF6Fbg=="],
 
-    "@types/react": ["@types/react@19.1.2", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-oxLPMytKchWGbnQM9O7D67uPa9paTNxO7jVoNMXgkkErULBPhPARCfkKL9ytcIJJRGjbsVwW4ugJzyFFvm/Tiw=="],
+    "@types/react": ["@types/react@19.1.12", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-cMoR+FoAf/Jyq6+Df2/Z41jISvGZZ2eTlnsaJRptmZ76Caldwy1odD4xTr/gNV9VLj0AWgg/nmkevIyUfIIq5w=="],
 
     "@types/react-dom": ["@types/react-dom@19.1.3", "", { "peerDependencies": { "@types/react": "^19.0.0" } }, "sha512-rJXC08OG0h3W6wDMFxQrZF00Kq6qQvw0djHRdzl3U5DnIERz0MRce3WVc7IS6JYBwtaP/DwYtRRjVlvivNveKg=="],
 
@@ -2041,7 +2041,7 @@
 
     "randombytes": ["randombytes@2.1.0", "", { "dependencies": { "safe-buffer": "^5.1.0" } }, "sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ=="],
 
-    "react": ["react@19.1.0", "", {}, "sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg=="],
+    "react": ["react@19.1.1", "", {}, "sha512-w8nqGImo45dmMIfljjMwOGtbmC/mk4CMYhWIicdSflH91J9TyCyczcPFXJzrZ/ZXcgGRFeP6BU0BEJTw6tZdfQ=="],
 
     "react-async-script": ["react-async-script@1.2.0", "", { "dependencies": { "hoist-non-react-statics": "^3.3.0", "prop-types": "^15.5.0" }, "peerDependencies": { "react": ">=16.4.1" } }, "sha512-bCpkbm9JiAuMGhkqoAiC0lLkb40DJ0HOEJIku+9JDjxX3Rcs+ztEOG13wbrOskt3n2DTrjshhaQ/iay+SnGg5Q=="],
 
